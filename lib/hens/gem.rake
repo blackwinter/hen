@@ -65,11 +65,14 @@ Hen :gem => :rdoc do |hen|
     rf = RubyForge.new
     rf.login
 
+    # shorten to (at most) three digits
+    version = spec.version.to_s.split(/([.])/)[0..4].join
+
     latest_gem = Dir['pkg/*.gem'].sort_by { |gem|
       File.mtime(gem)
     }.last
 
-    rf.add_release spec.rubyforge_project, spec.name, spec.version, latest_gem
+    rf.add_release spec.rubyforge_project, spec.name, version, latest_gem
   end
 
   desc 'Upload latest gem to gem server'
