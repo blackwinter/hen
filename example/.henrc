@@ -1,0 +1,19 @@
+---
+
+:rdoc:
+  :rdoc_dir:          doc
+  :rdoc_files:        [README, COPYING, ChangeLog, lib/**/*.rb]
+  :main:              README
+  :line_numbers:      true
+  :inline_source:     true
+  :all:               true
+  :charset:           UTF-8
+
+:gem:
+  :author:            Your Name
+  :email:             your@email.address
+  :has_rdoc:          true
+  :append_svnversion: true
+  :require_path:      lib
+
+# vim: syntax=yaml

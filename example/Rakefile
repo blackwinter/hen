@@ -1,0 +1,19 @@
+require 'rubygems'
+require 'hen'
+
+require 'lib/your_prog/version'
+
+task(:doc_spec) {{
+  :title => 'your_prog Application documentation'
+}}
+
+task(:gem_spec) {{
+  :name         => 'your_prog',
+  :version      => YourProg::VERSION,
+  :summary      => 'Your super duper sample prog',
+  :files        => FileList['lib/**/*.rb', 'bin/*'].to_a,
+  :extra_files  => FileList['[A-Z]*', 'example/*'].to_a,
+  :dependencies => %w[hyper magic]
+}}
+
+Hen.lay
