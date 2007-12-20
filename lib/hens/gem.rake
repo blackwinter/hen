@@ -48,7 +48,7 @@ Hen :gem => :rdoc do |hen|
     end
 
     gem_spec.extra_rdoc_files =
-      gem_options.delete(:extra_rdoc_files) || rdoc_files
+      gem_options.delete(:extra_rdoc_files) || rdoc_files - files
 
     gem_spec.files = files + extra_files
 
