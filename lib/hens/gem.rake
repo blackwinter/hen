@@ -7,8 +7,11 @@ Hen :gem => :rdoc do |hen|
   GEM_DEFAULTS = hen[:gem] unless Object.const_defined?(:GEM_DEFAULTS)
 
   gem_options = GEM_DEFAULTS.merge(hen.call(:gem_spec))
-  gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options] \
-    if Object.const_defined?(:RDOC_OPTIONS)
+
+  if Object.const_defined?(:RDOC_OPTIONS)
+    gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
+    rdoc_files                   = RDOC_OPTIONS[:rdoc_files]
+  end
 
   spec = Gem::Specification.new { |gem_spec|
     (gem_options.delete(:dependencies) || []).each { |dependency|
@@ -45,7 +48,7 @@ Hen :gem => :rdoc do |hen|
     end
 
     gem_spec.extra_rdoc_files =
-      gem_options.delete(:extra_rdoc_files) || files - executable_files
+      gem_options.delete(:extra_rdoc_files) || rdoc_files
 
     gem_spec.files = files + extra_files
 
