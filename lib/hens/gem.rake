@@ -47,8 +47,8 @@ Hen :gem => :rdoc do |hen|
       gem_spec.bindir = File.dirname(executable_files.first)
     end
 
-    gem_spec.extra_rdoc_files =
-      gem_options.delete(:extra_rdoc_files) || rdoc_files - files
+    gem_spec.extra_rdoc_files   = gem_options.delete(:extra_rdoc_files)
+    gem_spec.extra_rdoc_files ||= rdoc_files - files if rdoc_files
 
     gem_spec.files = files + extra_files
 
