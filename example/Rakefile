@@ -1,5 +1,8 @@
-require 'rubygems'
-require 'hen'
+begin
+  require 'hen'
+rescue LoadError
+  abort "Please install the 'hen' gem first."
+end
 
 require 'lib/your_prog/version'
 
@@ -8,12 +11,13 @@ task(:doc_spec) {{
 }}
 
 task(:gem_spec) {{
-  :name         => 'your_prog',
-  :version      => YourProg::VERSION,
-  :summary      => 'Your super duper sample prog',
-  :files        => FileList['lib/**/*.rb', 'bin/*'].to_a,
-  :extra_files  => FileList['[A-Z]*', 'example/*'].to_a,
-  :dependencies => %w[hyper magic]
+  :name              => 'your_prog',
+  :version           => YourProg::VERSION,
+  :rubyforge_project => 'your_project',
+  :summary           => 'Your super duper sample prog',
+  :files             => FileList['lib/**/*.rb', 'bin/*'].to_a,
+  :extra_files       => FileList['[A-Z]*', 'example/*'].to_a,
+  :dependencies      => %w[hyper magic]
 }}
 
-Hen.lay
+Hen.lay!

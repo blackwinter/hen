@@ -28,46 +28,26 @@
 
 class Hen
 
-  # Some helper methods for use inside of a Hen definition.
-  module DSL
+  # Base class for Hen errors.
+  class HenError < StandardError
 
-    extend self
+    # Raised if a required task is missing.
+    class TaskRequired < HenError
 
-    # call-seq:
-    #   hen.requires(*tasks)
-    #
-    # Specify a list of +tasks+ the hen requires to be present in
-    # actual the Rakefile. In case one of those is not available,
-    # a HenError::TaskRequired error is raised.
-    def requires(*tasks)
-      tasks.each { |task|
-        raise HenError::TaskRequired.new(task) \
-          unless Rake::Task.task_defined?(task)
-      }
-    end
+      # call-seq:
+      #   new(task)
+      #
+      def initialize(task)
+        @task = task
+      end
 
-    # call-seq:
-    #   hen.call(task)
-    #
-    # Short-cut to call Rake task +task+.
-    def call(task)
-      Rake::Task[task].invoke.first.call
-    end
+      # call-seq:
+      #   to_s
+      #
+      def to_s
+        "Required task missing: #{@task}"
+      end
 
-    # call-seq:
-    #   hen.config
-    #
-    # The Hen configuration.
-    def config
-      Hen.config
-    end
-
-    # call-seq:
-    #   hen[key]
-    #
-    # Short-cut to the config.
-    def [](key)
-      config[key]
     end
 
   end
