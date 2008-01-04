@@ -29,6 +29,9 @@
 require 'rake'
 require 'yaml'
 
+require 'rubygems'
+require 'nuggets/proc/bind'
+
 require 'hen/dsl'
 require 'hen/errors'
 
@@ -102,14 +105,10 @@ class Hen
 
       # Execute each hen definition
       hens.each { |name, hen|
-        # Load any dependencies first
+        # Load any dependencies, in case they're not included yet
         load_hens(*hen.dependencies)
 
-        begin
-          hen.lay!
-        rescue HenError => err
-          warn "#{name}: #{err}" if verbose
-        end
+        hen.lay!
       }
     end
 
@@ -124,6 +123,14 @@ class Hen
       else
         @hens[hen.name] ||= hen
       end
+    end
+
+    # call-seq:
+    #   Hen[hen] => aHen
+    #
+    # Get hen by name.
+    def [](hen)
+      @hens[hen]
     end
 
     private
@@ -182,7 +189,16 @@ class Hen
   #
   # Runs the definition block, exposing the DSL if requested.
   def lay!
-    block.arity == 1 ? block[DSL] : block.call
+    return if laid?
+
+    # Call dependencies first
+    dependencies.each { |hen|
+      self.class[hen].lay!
+    }
+
+    block.bind(DSL).call
+  rescue HenError => err
+    warn "#{name}: #{err}" if verbose
   end
 
   # call-seq:
@@ -215,6 +231,17 @@ class Hen
     end
 
     [name.to_sym, dependencies.map { |d| d.to_sym }]
+  end
+
+  # call-seq:
+  #   laid? => true or false
+  #
+  # Keeps track of whether the block has already been executed.
+  def laid?
+    return @laid if @laid
+
+    @laid = true
+    false
   end
 
 end

@@ -33,41 +33,22 @@ class Hen
 
     extend self
 
-    # call-seq:
-    #   hen.requires(*tasks)
-    #
-    # Specify a list of +tasks+ the hen requires to be present in
-    # actual the Rakefile. In case one of those is not available,
-    # a HenError::TaskRequired error is raised.
-    def requires(*tasks)
-      tasks.each { |task|
-        raise HenError::TaskRequired.new(task) \
-          unless Rake::Task.task_defined?(task)
-      }
-    end
-
-    # call-seq:
-    #   hen.call(task)
-    #
-    # Short-cut to call Rake task +task+.
-    def call(task)
+    # Call Rake task +task+. Raises HenError::TaskRequired if task is not defined.
+    def call_task(task)
+      raise HenError::TaskRequired.new(task) unless Rake::Task.task_defined?(task)
       Rake::Task[task].invoke.first.call
     end
 
-    # call-seq:
-    #   hen.config
-    #
     # The Hen configuration.
     def config
       Hen.config
     end
 
-    # call-seq:
-    #   hen[key]
-    #
-    # Short-cut to the config.
-    def [](key)
-      config[key]
+    # Define task +t+, but overwrite any existing task of that name!
+    # (Rake usually just adds them up)
+    def task!(t, &block)
+      Rake.application.instance_variable_get(:@tasks).delete(t.to_s)
+      task(t, &block)
     end
 
   end

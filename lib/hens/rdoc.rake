@@ -1,12 +1,11 @@
-Hen :rdoc do |hen|
-  hen.requires :doc_spec
-
+Hen :rdoc do
   require 'rake/rdoctask'
 
-  RDOC_DEFAULTS = hen[:rdoc] unless Object.const_defined?(:RDOC_DEFAULTS)
+  RDOC_DEFAULTS = config[:rdoc] unless Object.const_defined?(:RDOC_DEFAULTS)
 
   unless Object.const_defined?(:RDOC_OPTIONS)
-    opts = RDOC_DEFAULTS.merge(hen.call(:doc_spec))
+    # Merge defaults with user's spec
+    opts = RDOC_DEFAULTS.merge(call_task(:doc_spec))
 
     RDOC_OPTIONS = {
       :rdoc_dir   => opts.delete(:rdoc_dir),

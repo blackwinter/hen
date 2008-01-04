@@ -1,96 +1,85 @@
 # Use RDOC_OPTIONS from 'rdoc.rake'
-Hen :gem => :rdoc do |hen|
-  hen.requires :gem_spec
-
+Hen :gem => :rdoc do
   require 'rake/gempackagetask'
 
-  GEM_DEFAULTS = hen[:gem] unless Object.const_defined?(:GEM_DEFAULTS)
+  GEM_DEFAULTS = config[:gem] unless Object.const_defined?(:GEM_DEFAULTS)
 
-  gem_options = GEM_DEFAULTS.merge(hen.call(:gem_spec))
+  # Merge defaults with user's spec
+  gem_options = GEM_DEFAULTS.merge(call_task(:gem_spec))
 
   if Object.const_defined?(:RDOC_OPTIONS)
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
     rdoc_files                   = RDOC_OPTIONS[:rdoc_files]
   end
 
-  spec = Gem::Specification.new { |gem_spec|
+  gem_spec = Gem::Specification.new { |spec|
+
+    ### dependencies
+
     (gem_options.delete(:dependencies) || []).each { |dependency|
-      gem_spec.add_dependency(*dependency)
+      spec.add_dependency(*dependency)
     }
 
-    if gem_options.has_key?(:version)
-      gem_version = gem_options.delete(:version).dup
-    else
-      abort "Gem version missing"
-    end
+    ### version
+
+    abort 'Gem version missing' unless gem_options[:version]
 
     if gem_options.delete(:append_svnversion) && svnversion = `svnversion`.chomp[/\d+/]
-      gem_version << '.' << svnversion
+      gem_options[:version] << '.' << svnversion
     end
 
-    gem_spec.version = gem_version
+    ### description
 
-    if rubyforge_project = gem_options[:rubyforge_project]
-      gem_spec.homepage = gem_options.delete(:homepage) ||
-        "#{rubyforge_project}.rubyforge.org/#{gem_options[:name]}"
+    gem_options[:description] ||= gem_options[:summary]
+
+    ### homepage
+
+    if rf_project = gem_options[:rubyforge_project]
+      gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{gem_options[:name]}"
     end
 
-    files            = gem_options.delete(:files)       || []
-    extra_files      = gem_options.delete(:extra_files) || []
-    executable_files = gem_options.delete(:executables) || files.grep(/\Abin\//)
+    ### extra_rdoc_files, files, executables, bindir
 
-    unless executable_files.empty?
-      gem_spec.executables = executable_files.map { |executable|
-        File.basename(executable)
-      }
+    gem_options[:files]            ||= []
+    gem_options[:extra_rdoc_files] ||= rdoc_files - gem_options[:files] if rdoc_files
+    gem_options[:files]             += gem_options.delete(:extra_files) || []
 
-      gem_spec.bindir = File.dirname(executable_files.first)
-    end
+    gem_options[:executables] ||= gem_options[:files].grep(/\Abin\//)
+    gem_options[:bindir]      ||= File.dirname(gem_options[:executables].first)
 
-    gem_spec.extra_rdoc_files   = gem_options.delete(:extra_rdoc_files)
-    gem_spec.extra_rdoc_files ||= rdoc_files - files if rdoc_files
+    gem_options[:executables].map! { |executable| File.basename(executable) }
 
-    gem_spec.files = files + extra_files
+    ### => set options!
 
     gem_options.each { |option, value|
-      gem_spec.send("#{option}=", value)
+      spec.send("#{option}=", value)
     }
   }
 
-  Rake::GemPackageTask.new(spec) do |pkg|
-    pkg.need_tar = true
+  desc "Display the gem specification"
+  task :debug_gem do
+    puts gem_spec.to_ruby
   end
 
-  desc 'Upload latest gem to Rubyforge'
-  task :upload_gem => :gem do
+  pkg_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
+    pkg.need_tar_gz = true
+    pkg.need_zip    = true
+  end
+
+  desc "Package and upload the release to Rubyforge"
+  task :release => :package do
     require 'rubyforge'
+
+    files = Dir[File.join('pkg', "#{pkg_task.package_name}.*")]
+    abort "Nothing to release!" if files.empty?
+
+    # shorten to (at most) three digits
+    version = pkg_task.version.to_s.split(/([.])/)[0..4].join
 
     rf = RubyForge.new
     rf.login
 
-    # shorten to (at most) three digits
-    version = spec.version.to_s.split(/([.])/)[0..4].join
-
-    latest_gem = Dir['pkg/*.gem'].sort_by { |gem|
-      File.mtime(gem)
-    }.last
-
-    rf.add_release spec.rubyforge_project, spec.name, version, latest_gem
-  end
-
-  desc 'Upload latest gem to gem server'
-  task :upload_gem_to_server => :gem do
-    host = ENV['GEM_HOST'] || 'prometheus.khi.uni-koeln.de'
-    user = ENV['GEM_USER'] || 'prometheus'
-    path = ENV['GEM_PATH'] || '/var/www/rubygems'
-    temp = ENV['GEM_TEMP'] || File.join(path, 'tmp')
-
-    latest_gem = Dir['pkg/*.gem'].sort_by { |gem|
-      File.mtime(gem)
-    }.last
-
-    sh "scp #{latest_gem} #{user}@#{host}:#{path}/gems"
-    sh "ssh #{user}@#{host} 'TMPDIR='#{temp}' gem generate_index -d #{path} -V'"
+    rf.add_release gem_spec.rubyforge_project, pkg_task.name, version, *files
   end
 
 end
