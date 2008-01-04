@@ -38,6 +38,10 @@ Hen :gem => :rdoc do
       gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{gem_options[:name]}"
     end
 
+    if gem_options[:homepage] && gem_options[:homepage] !~ /:\/\//
+      gem_options[:homepage] = 'http://' << gem_options[:homepage]
+    end
+
     ### extra_rdoc_files, files, executables, bindir
 
     gem_options[:files]            ||= []
