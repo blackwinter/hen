@@ -194,7 +194,7 @@ class Hen
   # call-seq:
   #   hen.lay!
   #
-  # Runs the definition block, exposing the DSL if requested.
+  # Runs the definition block, exposing helper methods from the DSL.
   def lay!
     return if laid?
 
@@ -264,7 +264,7 @@ end
 # call-seq:
 #   Hen!(args) { ... }
 #
-# Same as before, but overwrites any existing hen with the same name.
+# Same as above, but overwrites any existing hen with the same name.
 def Hen!(args, &block)
   Hen.new(args, true, &block)
 end
