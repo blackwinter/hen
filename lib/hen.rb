@@ -3,9 +3,9 @@
 #                                                                             #
 # hen -- Just a Rake helper                                                   #
 #                                                                             #
-# Copyright (C) 2007 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50932 Cologne, Germany                                   #
+# Copyright (C) 2007-2008 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50932 Cologne, Germany                              #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@uni-koeln.de>                                    #
@@ -34,6 +34,7 @@ require 'nuggets/proc/bind'
 
 require 'hen/dsl'
 require 'hen/errors'
+require 'hen/version'
 
 class Hen
 
@@ -76,8 +77,8 @@ class Hen
 
     # call-seq:
     #   lay!
-    #   lay! :some_hen, :some_other_hen
-    #   lay! :exclude => [:some_hen, :some_other_hen]
+    #   lay!(:some_hen, :some_other_hen)
+    #   lay!(:exclude => [:some_hen, :some_other_hen])
     #
     # Loads the hens, causing them to lay their eggs^H^H^Htasks. Either all,
     # if no restrictions are specified, or the given hens, or all but those
@@ -88,9 +89,15 @@ class Hen
 
       @verbose = options[:verbose] if options.has_key?(:verbose)
 
+      if block_given?
+        yield.each { |key, value|
+          config[key].update(value)
+        }
+      end
+
       # Handle include/exclude requirements
-      exclude = *options[:exclude]
-      args, default = args.empty? ? [exclude || [], true] : [args, false]
+      excl = options[:exclude]
+      args, default = args.empty? ? [excl ? [*excl] : [], true] : [args, false]
 
       inclexcl = Hash.new(default)
       args.each { |arg|

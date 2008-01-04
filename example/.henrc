@@ -1,5 +1,10 @@
 ---
 
+:rubyforge:
+  :username:          your_name
+  :project:           your_project
+  :rdoc_dir:          :package
+
 :rdoc:
   :rdoc_dir:          doc
   :rdoc_files:        [README, COPYING, ChangeLog, lib/**/*.rb]

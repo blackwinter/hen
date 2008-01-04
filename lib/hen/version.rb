@@ -3,9 +3,9 @@
 #                                                                             #
 # A component of hen, the Rake helper.                                        #
 #                                                                             #
-# Copyright (C) 2007 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50932 Cologne, Germany                                   #
+# Copyright (C) 2007-2008 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50932 Cologne, Germany                              #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@uni-koeln.de>                                    #
@@ -32,7 +32,7 @@ class Hen
 
     MAJOR = 0
     MINOR = 0
-    TINY  = 2
+    TINY  = 3
 
     class << self
 

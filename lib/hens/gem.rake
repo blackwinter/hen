@@ -2,10 +2,8 @@
 Hen :gem => :rdoc do
   require 'rake/gempackagetask'
 
-  GEM_DEFAULTS = config[:gem] unless Object.const_defined?(:GEM_DEFAULTS)
-
-  # Merge defaults with user's spec
-  gem_options = GEM_DEFAULTS.merge(call_task(:gem_spec))
+  gem_options = config[:gem]
+  rubyforge   = config[:rubyforge]
 
   if Object.const_defined?(:RDOC_OPTIONS)
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
@@ -14,11 +12,11 @@ Hen :gem => :rdoc do
 
   gem_spec = Gem::Specification.new { |spec|
 
-    ### dependencies
+    ### name
 
-    (gem_options.delete(:dependencies) || []).each { |dependency|
-      spec.add_dependency(*dependency)
-    }
+    gem_options[:name] ||= rubyforge[:package]
+
+    abort "Gem name missing" unless gem_options[:name]
 
     ### version
 
@@ -32,7 +30,9 @@ Hen :gem => :rdoc do
 
     gem_options[:description] ||= gem_options[:summary]
 
-    ### homepage
+    ### rubyforge project, homepage
+
+    gem_options[:rubyforge_project] ||= rubyforge[:project]
 
     if rf_project = gem_options[:rubyforge_project]
       gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{gem_options[:name]}"
@@ -48,6 +48,12 @@ Hen :gem => :rdoc do
     gem_options[:bindir]      ||= File.dirname(gem_options[:executables].first)
 
     gem_options[:executables].map! { |executable| File.basename(executable) }
+
+    ### dependencies
+
+    (gem_options.delete(:dependencies) || []).each { |dependency|
+      spec.add_dependency(*dependency)
+    }
 
     ### => set options!
 
@@ -67,8 +73,8 @@ Hen :gem => :rdoc do
   end
 
   desc "Package and upload the release to Rubyforge"
-  task :release => :package do
-    require 'rubyforge'
+  task :release => [:package, :publish_docs] do
+    rf = init_rubyforge
 
     files = Dir[File.join('pkg', "#{pkg_task.package_name}.*")]
     abort "Nothing to release!" if files.empty?
@@ -76,10 +82,7 @@ Hen :gem => :rdoc do
     # shorten to (at most) three digits
     version = pkg_task.version.to_s.split(/([.])/)[0..4].join
 
-    rf = RubyForge.new
-    rf.login
-
-    rf.add_release gem_spec.rubyforge_project, pkg_task.name, version, *files
+    rf.add_release rubyforge[:project], pkg_task.name, version, *files
   end
 
 end

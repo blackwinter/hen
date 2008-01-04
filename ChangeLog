@@ -1,5 +1,15 @@
 = Revision history for hen
 
+== 0.0.3 [2008-01-04]
+
+* More cleanup and maturing.
+* New tasks 'release' (formerly 'upload_gem'), 'publish_docs', and 'debug_gem'
+* All in all: Pretty much inspired by Hoe ;-)
+
+== 0.0.2 [2007-12-21]
+
+* Cleanup and minor improvements
+
 == 0.0.1 [2007-12-20]
 
 * Birthday :-)

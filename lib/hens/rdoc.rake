@@ -1,28 +1,53 @@
 Hen :rdoc do
   require 'rake/rdoctask'
 
-  RDOC_DEFAULTS = config[:rdoc] unless Object.const_defined?(:RDOC_DEFAULTS)
+  rdoc_options = config[:rdoc]
+  rubyforge    = config[:rubyforge]
 
-  unless Object.const_defined?(:RDOC_OPTIONS)
-    # Merge defaults with user's spec
-    opts = RDOC_DEFAULTS.merge(call_task(:doc_spec))
-
-    RDOC_OPTIONS = {
-      :rdoc_dir   => opts.delete(:rdoc_dir),
-      :rdoc_files => FileList[opts.delete(:rdoc_files)].to_a.uniq,
-      :options    => opts.map { |option, value|
-        option = '--' << option.to_s.tr('_', '-')
-        value.is_a?(String) ? [option, value] : value ? option : nil
-      }.compact.flatten
-    }
+  if rf_package = rubyforge[:package]
+    rdoc_options[:title] ||= "#{rf_package} Application documentation"
   end
 
-  Rake::RDocTask.new(:doc) { |rdoc|
-    opts = RDOC_OPTIONS
-
-    rdoc.rdoc_dir   = opts[:rdoc_dir]
-    rdoc.rdoc_files = opts[:rdoc_files]
-    rdoc.options    = opts[:options]
+  RDOC_OPTIONS = {
+    :rdoc_dir   => rdoc_options.delete(:rdoc_dir),
+    :rdoc_files => FileList[rdoc_options.delete(:rdoc_files)].to_a.uniq,
+    :options    => rdoc_options.map { |option, value|
+      option = '--' << option.to_s.tr('_', '-')
+      value.is_a?(String) ? [option, value] : value ? option : nil
+    }.compact.flatten
   }
+
+  rdoc_task = Rake::RDocTask.new(:doc) { |rdoc|
+    rdoc.rdoc_dir   = RDOC_OPTIONS[:rdoc_dir]
+    rdoc.rdoc_files = RDOC_OPTIONS[:rdoc_files]
+    rdoc.options    = RDOC_OPTIONS[:options]
+  }
+
+  desc "Publish RDoc to Rubyforge"
+  task :publish_docs => :doc do
+    rf_project = rubyforge[:project]
+    abort "Rubyforge project name missing" unless rf_project
+
+    rf_user = rubyforge[:username]
+    abort "Rubyforge user name missing" unless rf_user
+
+    user__host = "#{rf_user}@rubyforge.org"
+
+    local_dir  = rdoc_task.rdoc_dir + '/'
+    remote_dir = "/var/www/gforge-projects/#{rf_project}/"
+
+    if rdoc_dir = rubyforge[:rdoc_dir]
+      if rf_package = rubyforge[:package]
+        rdoc_dir = rf_package if rdoc_dir == :package
+      end
+
+      remote_dir += rdoc_dir + '/'
+    end
+
+    execute(
+      "rsync -av --delete #{local_dir} #{user__host}:#{remote_dir}",
+      "scp -r #{local_dir} #{user__host}:#{remote_dir}"
+    )
+  end
 
 end

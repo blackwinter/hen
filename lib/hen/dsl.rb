@@ -3,9 +3,9 @@
 #                                                                             #
 # A component of hen, the Rake helper.                                        #
 #                                                                             #
-# Copyright (C) 2007 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50932 Cologne, Germany                                   #
+# Copyright (C) 2007-2008 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50932 Cologne, Germany                              #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@uni-koeln.de>                                    #
@@ -33,15 +33,20 @@ class Hen
 
     extend self
 
-    # Call Rake task +task+. Raises HenError::TaskRequired if task is not defined.
-    def call_task(task)
-      raise HenError::TaskRequired.new(task) unless Rake::Task.task_defined?(task)
-      Rake::Task[task].invoke.first.call
-    end
-
-    # The Hen configuration.
+    # The Hen configuration. Raises HenError::ConfigRequired
+    # if a required configuration is missing.
     def config
-      Hen.config
+      config = Hen.config
+
+      # always return a duplicate for a value, hence making the
+      # configuration immutable; raise if config is missing
+      def config.[](key)
+        raise HenError::ConfigRequired.new(key) unless has_key?(key)
+
+        fetch(key).dup
+      end
+
+      config
     end
 
     # Define task +t+, but overwrite any existing task of that name!
@@ -49,6 +54,32 @@ class Hen
     def task!(t, &block)
       Rake.application.instance_variable_get(:@tasks).delete(t.to_s)
       task(t, &block)
+    end
+
+    # Execute a series of commands until one of them succeeds. Intended for
+    # platform-dependent alternatives (Command A is not available? Then try
+    # B instead).
+    #
+    # TODO: This won't detect cases where a command is actually available,
+    # but simply fails.
+    def execute(*commands)
+      commands.each { |command|
+        ok, res = sh(command) { |ok, res| [ok, res] }
+        break if ok
+
+        warn "Error while executing command (return code #{res.exitstatus})"
+      }
+    end
+
+    # Prepare the use of Rubyforge, optionally logging in right away.
+    # Returns the RubyForge object.
+    def init_rubyforge(login = true)
+      require 'rubyforge'
+
+      rf = RubyForge.new
+      rf.login if login
+
+      rf
     end
 
   end

@@ -3,9 +3,9 @@
 #                                                                             #
 # A component of hen, the Rake helper.                                        #
 #                                                                             #
-# Copyright (C) 2007 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50932 Cologne, Germany                                   #
+# Copyright (C) 2007-2008 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50932 Cologne, Germany                              #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@uni-koeln.de>                                    #
@@ -31,21 +31,21 @@ class Hen
   # Base class for Hen errors.
   class HenError < StandardError
 
-    # Raised if a required task is missing.
-    class TaskRequired < HenError
+    # Raised if a required configuration is missing.
+    class ConfigRequired < HenError
 
       # call-seq:
-      #   new(task)
+      #   new(key)
       #
-      def initialize(task)
-        @task = task
+      def initialize(key)
+        @key = key
       end
 
       # call-seq:
       #   to_s
       #
       def to_s
-        "Required task missing: #{@task}"
+        "Required configuration missing for #{@key}"
       end
 
     end
