@@ -28,6 +28,7 @@
 
 require 'rake'
 require 'yaml'
+require 'forwardable'
 
 require 'rubygems'
 require 'nuggets/proc/bind'
@@ -169,6 +170,11 @@ class Hen
 
   end
 
+  extend Forwardable
+
+  # Forward to the class
+  def_delegators self, :verbose
+
   attr_reader :name, :dependencies, :block
 
   # call-seq:
@@ -205,14 +211,6 @@ class Hen
     block.bind(DSL).call
   rescue => err
     warn "#{name}: #{err} (#{err.class})" if verbose
-  end
-
-  # call-seq:
-  #   hen.verbose
-  #
-  # Just an accessor to the class attribute.
-  def verbose
-    self.class.verbose
   end
 
   private
