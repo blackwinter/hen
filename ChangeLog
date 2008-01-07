@@ -1,5 +1,10 @@
 = Revision history for hen
 
+== 0.0.4 [2008-01-07]
+
+* Added Test::Unit and RSpec hens (tasks 'test' and 'spec')
+* Removed HenError stuff
+
 == 0.0.3 [2008-01-04]
 
 * More cleanup and maturing.

@@ -33,7 +33,6 @@ require 'rubygems'
 require 'nuggets/proc/bind'
 
 require 'hen/dsl'
-require 'hen/errors'
 require 'hen/version'
 
 class Hen
@@ -204,8 +203,8 @@ class Hen
     }
 
     block.bind(DSL).call
-  rescue HenError => err
-    warn "#{name}: #{err}" if verbose
+  rescue => err
+    warn "#{name}: #{err} (#{err.class})" if verbose
   end
 
   # call-seq:

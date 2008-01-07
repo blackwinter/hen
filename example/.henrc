@@ -21,4 +21,11 @@
   :append_svnversion: true
   :require_path:      lib
 
+:test:
+  :pattern:           test/**/*_test.rb
+
+:spec:
+  :pattern:           spec/**/*_spec.rb
+  :options:           spec.opts
+
 # vim: syntax=yaml

@@ -33,17 +33,16 @@ class Hen
 
     extend self
 
-    # The Hen configuration. Raises HenError::ConfigRequired
-    # if a required configuration is missing.
+    # The Hen configuration.
     def config
       config = Hen.config
 
       # always return a duplicate for a value, hence making the
-      # configuration immutable; raise if config is missing
+      # configuration immutable
       def config.[](key)
-        raise HenError::ConfigRequired.new(key) unless has_key?(key)
-
         fetch(key).dup
+      rescue IndexError
+        {}
       end
 
       config
