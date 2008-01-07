@@ -86,6 +86,12 @@ Hen :gem => :rdoc do
     # shorten to (at most) three digits
     version = pkg_task.version.to_s.split(/([.])/)[0..4].join
 
+    # TODO: Add release notes and changes.
+    #uc = rf.userconfig
+    #uc['release_notes']   = description if description
+    #uc['release_changes'] = changes if changes
+    #uc['preformatted']    = true
+
     rf.add_release rubyforge[:project], pkg_task.name, version, *files
   end
 
