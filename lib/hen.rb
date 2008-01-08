@@ -55,8 +55,9 @@ class Hen
     RCDIRS.find { |path|
       henrc = File.join(path, '.henrc')
       break henrc if File.readable?(henrc)
-    } or abort "No .henrc file could be found! " <<
-               "Please create one first ('hen config')."
+    } or abort %q{
+      No .henrc file could be found! Please create one first with 'hen config'.
+    }
   end
 
   # The path to the user's .henrc
@@ -226,7 +227,7 @@ class Hen
       when Hash
         raise ArgumentError, "Too many hen names: #{args.keys.join(' ')}" \
           if args.size > 1
-        raise ArgumentError, "No hen name given" \
+        raise ArgumentError, 'No hen name given' \
           if args.size < 1
 
         [args.keys.first, [*args.values.first]]

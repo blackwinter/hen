@@ -35,4 +35,5 @@ Will most probably provide the following functionality:
 
 - config: Create a fresh .henrc file
 - create: Create a new project directory tree
+- list:   List available hens with their tasks
 EOT

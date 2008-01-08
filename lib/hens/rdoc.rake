@@ -23,13 +23,13 @@ Hen :rdoc do
     rdoc.options    = RDOC_OPTIONS[:options]
   }
 
-  desc "Publish RDoc to Rubyforge"
+  desc 'Publish RDoc to Rubyforge'
   task :publish_docs => :doc do
     rf_project = rubyforge[:project]
-    abort "Rubyforge project name missing" unless rf_project
+    abort 'Rubyforge project name missing' unless rf_project
 
     rf_user = rubyforge[:username]
-    abort "Rubyforge user name missing" unless rf_user
+    abort 'Rubyforge user name missing' unless rf_user
 
     user__host = "#{rf_user}@rubyforge.org"
 

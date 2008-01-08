@@ -16,13 +16,13 @@ Hen :gem => :rdoc do
 
     gem_options[:name] ||= rubyforge[:package]
 
-    abort "Gem name missing" unless gem_options[:name]
+    abort 'Gem name missing' unless gem_options[:name]
 
     ### version
 
     abort 'Gem version missing' unless gem_options[:version]
 
-    if gem_options.delete(:append_svnversion) && svnversion = `svnversion`.chomp[/\d+/]
+    if gem_options.delete(:append_svnversion) && svnversion = `svnversion`[/\d+/]
       gem_options[:version] << '.' << svnversion
     end
 
@@ -49,9 +49,11 @@ Hen :gem => :rdoc do
     gem_options[:files]             += gem_options.delete(:extra_files) || []
 
     gem_options[:executables] ||= gem_options[:files].grep(/\Abin\//)
-    gem_options[:bindir]      ||= File.dirname(gem_options[:executables].first)
 
-    gem_options[:executables].map! { |executable| File.basename(executable) }
+    unless gem_options[:executables].empty?
+      gem_options[:bindir] ||= File.dirname(gem_options[:executables].first)
+      gem_options[:executables].map! { |executable| File.basename(executable) }
+    end
 
     ### dependencies
 
@@ -66,7 +68,7 @@ Hen :gem => :rdoc do
     }
   }
 
-  desc "Display the gem specification"
+  desc 'Display the gem specification'
   task :debug_gem do
     puts gem_spec.to_ruby
   end
@@ -76,12 +78,12 @@ Hen :gem => :rdoc do
     pkg.need_zip    = true
   end
 
-  desc "Package and upload the release to Rubyforge"
+  desc 'Package and upload the release to Rubyforge'
   task :release => [:package, :publish_docs] do
     rf = init_rubyforge
 
     files = Dir[File.join('pkg', "#{pkg_task.package_name}.*")]
-    abort "Nothing to release!" if files.empty?
+    abort 'Nothing to release!' if files.empty?
 
     # shorten to (at most) three digits
     version = pkg_task.version.to_s.split(/([.])/)[0..4].join
