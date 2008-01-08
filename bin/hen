@@ -5,9 +5,9 @@
 #                                                                             #
 # hen -- Just a Rake helper                                                   #
 #                                                                             #
-# Copyright (C) 2007 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50932 Cologne, Germany                                   #
+# Copyright (C) 2007-2008 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50932 Cologne, Germany                              #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@uni-koeln.de>                                    #
@@ -28,12 +28,64 @@
 ###############################################################################
 #++
 
-abort <<EOT
-Coming...
+# TODO: Add 'list' - List available hens with their tasks (?)
 
-Will most probably provide the following functionality:
+$: << File.join(File.dirname(__FILE__), '..', 'lib')
 
-- config: Create a fresh .henrc file
-- create: Create a new project directory tree
-- list:   List available hens with their tasks
+require 'hen'
+require 'hen/cli'
+
+include Hen::CLI
+
+ACTIONS = {
+  'config' => 'Create a fresh .henrc file',
+  'create' => 'Create a new project directory tree',
+  'list'   => 'List available hens with their tasks'
+}
+
+USAGE = <<EOT
+Usage: #{$0} {#{ACTIONS.keys.sort.join('|')}}
+       #{$0} [-h|--help]
 EOT
+
+abort USAGE if ARGV.empty?
+
+case action = ARGV.shift
+  when '-h', '--help'
+    puts USAGE
+    puts
+    puts 'Actions:'
+
+    m = ACTIONS.keys.map { |a| a.length }.max
+
+    ACTIONS.sort.each { |a, d|
+      puts "  %-#{m}s - %s" % [a, d]
+    }
+  when 'config'
+    henrc = File.join(File.dirname(__FILE__), '..', 'example', '.henrc')
+
+    # TODO: DRY up with lib/hen.rb
+    target = File.join(ENV['HOME'] || File.expand_path('~'), '.henrc')
+
+    render(henrc, target)
+
+    puts "Your .henrc has been created: #{target}. Modify to your needs."
+  when 'create'
+    path = ARGV.shift
+    abort 'Path argument missing!' unless path
+
+    abort "Target directory already exists: #{path}. Won't touch." if File.directory?(path)
+
+    rakefile = File.join(File.dirname(__FILE__), '..', 'example', 'Rakefile')
+    target   = File.join(path, 'Rakefile')
+
+    # 1. create directory
+    Dir.mkdir(path)
+
+    # 2. copy Rakefile
+    render(rakefile, target)
+  when 'list'
+    abort 'Sorry, not yet available...'
+  else
+    abort "Illegal action: #{action}\n#{USAGE}"
+end

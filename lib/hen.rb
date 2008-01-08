@@ -26,11 +26,11 @@
 ###############################################################################
 #++
 
-require 'rake'
 require 'yaml'
 require 'forwardable'
 
 require 'rubygems'
+require 'rake'
 require 'nuggets/proc/bind'
 
 require 'hen/dsl'

@@ -4,19 +4,21 @@ rescue LoadError
   abort "Please install the 'hen' gem first."
 end
 
-require 'lib/your_prog/version'
+PROGNAME = %q{<%= ask 'Program name' %>}
+
+require File.join('lib', PROGNAME, 'version')
 
 Hen.lay! {{
   :rubyforge => {
-    :project => 'your_project',
-    :package => 'your_prog'
+    :project => %q{<%= ask 'Rubyforge project name' %>},
+    :package => PROGNAME
   },
 
   :gem => {
-    :version      => YourProg::VERSION,
-    :summary      => 'Your super duper sample prog',
-    :files        => FileList['lib/**/*.rb', 'bin/*'].to_a,
-    :extra_files  => FileList['[A-Z]*', 'example/*'].to_a,
-    :dependencies => %w[hyper magic]
+    :version      => <%= ask 'Module/Class name' %>::VERSION,
+    :summary      => %q{<%= ask 'Program description summary' %>},
+    :files        => FileList['lib/**/*.rb'].to_a,
+    :extra_files  => FileList['[A-Z]*'].to_a,
+    :dependencies => %w[]
   }
 }}

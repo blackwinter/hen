@@ -1,5 +1,10 @@
 = Revision history for hen
 
+== 0.0.5 [2008-01-08]
+
+* Replaced 'hen' executable stub with something actually useful
+* Added Hen::CLI helper module
+
 == 0.0.4 [2008-01-07]
 
 * Added Test::Unit and RSpec hens (tasks 'test' and 'spec')

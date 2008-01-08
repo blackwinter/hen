@@ -1,7 +1,7 @@
 #--
 ###############################################################################
 #                                                                             #
-# A component of hen, the Rake helper.                                        #
+# hen -- Just a Rake helper                                                   #
 #                                                                             #
 # Copyright (C) 2007-2008 University of Cologne,                              #
 #                         Albertus-Magnus-Platz,                              #
@@ -26,30 +26,28 @@
 ###############################################################################
 #++
 
-class Hen
+require 'erb'
 
-  module Version
+require 'rubygems'
+require 'highline/import'
 
-    MAJOR = 0
-    MINOR = 0
-    TINY  = 5
+module Hen::CLI
 
-    class << self
-
-      # Returns array representation.
-      def to_a
-        [MAJOR, MINOR, TINY]
-      end
-
-      # Short-cut for version string.
-      def to_s
-        to_a.join('.')
-      end
-
-    end
-
+  alias_method :original_ask, :ask
+  def ask(key)
+    original_ask("Please enter your #{key}: ")
   end
 
-  VERSION = Version.to_s
+  def render(template, target)
+    abort "Sample file not found: #{template}" unless File.readable?(template)
+
+    if File.readable?(target)
+      abort unless agree("Target file already exists: #{target}. Overwrite? ")
+    end
+
+    File.open(target, 'w') { |f|
+      f.puts ERB.new(File.read(template)).result(binding)
+    }
+  end
 
 end

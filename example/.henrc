@@ -1,8 +1,7 @@
 ---
 
 :rubyforge:
-  :username:          your_name
-  :project:           your_project
+  :username:          <%= ask 'Rubyforge user name (Leave empty for none)' %>
   :rdoc_dir:          :package
 
 :rdoc:
@@ -15,8 +14,8 @@
   :charset:           UTF-8
 
 :gem:
-  :author:            Your Name
-  :email:             your@email.address
+  :author:            <%= ask 'Full name' %>
+  :email:             <%= ask 'E-mail address' %>
   :has_rdoc:          true
   :append_svnversion: true
   :require_path:      lib

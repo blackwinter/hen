@@ -86,9 +86,10 @@ class Hen
     # hash and, optionally, a proc to obtain RubyForge objects from (via
     # +call+; reaching out to init_rubyforge).
     def rubyforge(&block)
-      rf_config = config[:rubyforge]
+      rf_config  = config[:rubyforge]
+      rf_project = rf_config[:project]
 
-      raise 'Skipping Rubyforge tasks' unless rf_config[:project]
+      raise 'Skipping Rubyforge tasks' if rf_project.nil? || rf_project.empty?
       raise LocalJumpError, 'no block given' unless block
 
       require 'rubyforge'
