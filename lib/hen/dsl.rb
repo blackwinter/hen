@@ -81,6 +81,27 @@ class Hen
       rf
     end
 
+    # Encapsulates tasks targeting at Rubyforge, skipping those if no
+    # Rubyforge project is defined. Yields the Rubyforge configuration
+    # hash and, optionally, a proc to obtain RubyForge objects from (via
+    # +call+; reaching out to init_rubyforge).
+    def rubyforge(&block)
+      rf_config = config[:rubyforge]
+
+      raise 'Skipping Rubyforge tasks' unless rf_config[:project]
+      raise LocalJumpError, 'no block given' unless block
+
+      require 'rubyforge'
+
+      block_args = [rf_config]
+
+      block_args << lambda { |*args|
+        init_rubyforge(args.empty? || args.first)
+      } if block.arity > 1
+
+      block[*block_args]
+    end
+
   end
 
 end

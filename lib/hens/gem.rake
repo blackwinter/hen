@@ -3,7 +3,6 @@ Hen :gem => :rdoc do
   require 'rake/gempackagetask'
 
   gem_options = config[:gem]
-  rubyforge   = config[:rubyforge]
 
   if Object.const_defined?(:RDOC_OPTIONS)
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
@@ -14,7 +13,7 @@ Hen :gem => :rdoc do
 
     ### name
 
-    gem_options[:name] ||= rubyforge[:package]
+    gem_options[:name] ||= config[:rubyforge][:package]
 
     abort 'Gem name missing' unless gem_options[:name]
 
@@ -32,7 +31,7 @@ Hen :gem => :rdoc do
 
     ### rubyforge project, homepage
 
-    gem_options[:rubyforge_project] ||= rubyforge[:project]
+    gem_options[:rubyforge_project] ||= config[:rubyforge][:project]
 
     if rf_project = gem_options[:rubyforge_project]
       gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{gem_options[:name]}"
@@ -78,23 +77,27 @@ Hen :gem => :rdoc do
     pkg.need_zip    = true
   end
 
-  desc 'Package and upload the release to Rubyforge'
-  task :release => [:package, :publish_docs] do
-    rf = init_rubyforge
+  rubyforge do |rf_config, rf_pool|
 
-    files = Dir[File.join('pkg', "#{pkg_task.package_name}.*")]
-    abort 'Nothing to release!' if files.empty?
+    desc 'Package and upload the release to Rubyforge'
+    task :release => [:package, :publish_docs] do
+      rf = rf_pool.call
 
-    # shorten to (at most) three digits
-    version = pkg_task.version.to_s.split(/([.])/)[0..4].join
+      files = Dir[File.join('pkg', "#{pkg_task.package_name}.*")]
+      abort 'Nothing to release!' if files.empty?
 
-    # TODO: Add release notes and changes.
-    #uc = rf.userconfig
-    #uc['release_notes']   = description if description
-    #uc['release_changes'] = changes if changes
-    #uc['preformatted']    = true
+      # shorten to (at most) three digits
+      version = pkg_task.version.to_s.split(/([.])/)[0..4].join
 
-    rf.add_release rubyforge[:project], pkg_task.name, version, *files
+      # TODO: Add release notes and changes.
+      #uc = rf.userconfig
+      #uc['release_notes']   = description if description
+      #uc['release_changes'] = changes if changes
+      #uc['preformatted']    = true
+
+      rf.add_release rf_config[:project], pkg_task.name, version, *files
+    end
+
   end
 
 end

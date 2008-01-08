@@ -2,9 +2,8 @@ Hen :rdoc do
   require 'rake/rdoctask'
 
   rdoc_options = config[:rdoc]
-  rubyforge    = config[:rubyforge]
 
-  if rf_package = rubyforge[:package]
+  if rf_package = config[:rubyforge][:package]
     rdoc_options[:title] ||= "#{rf_package} Application documentation"
   end
 
@@ -23,31 +22,35 @@ Hen :rdoc do
     rdoc.options    = RDOC_OPTIONS[:options]
   }
 
-  desc 'Publish RDoc to Rubyforge'
-  task :publish_docs => :doc do
-    rf_project = rubyforge[:project]
-    abort 'Rubyforge project name missing' unless rf_project
+  rubyforge do |rf_config|
 
-    rf_user = rubyforge[:username]
-    abort 'Rubyforge user name missing' unless rf_user
+    desc 'Publish RDoc to Rubyforge'
+    task :publish_docs => :doc do
+      rf_project = rf_config[:project]
+      abort 'Rubyforge project name missing' unless rf_project
 
-    user__host = "#{rf_user}@rubyforge.org"
+      rf_user = rf_config[:username]
+      abort 'Rubyforge user name missing' unless rf_user
 
-    local_dir  = rdoc_task.rdoc_dir + '/'
-    remote_dir = "/var/www/gforge-projects/#{rf_project}/"
+      user__host = "#{rf_user}@rubyforge.org"
 
-    if rdoc_dir = rubyforge[:rdoc_dir]
-      if rf_package = rubyforge[:package]
-        rdoc_dir = rf_package if rdoc_dir == :package
+      local_dir  = rdoc_task.rdoc_dir + '/'
+      remote_dir = "/var/www/gforge-projects/#{rf_project}/"
+
+      if rdoc_dir = rf_config[:rdoc_dir]
+        if rf_package = rf_config[:package]
+          rdoc_dir = rf_package if rdoc_dir == :package
+        end
+
+        remote_dir += rdoc_dir + '/'
       end
 
-      remote_dir += rdoc_dir + '/'
+      execute(
+        "rsync -av --delete #{local_dir} #{user__host}:#{remote_dir}",
+        "scp -r #{local_dir} #{user__host}:#{remote_dir}"
+      )
     end
 
-    execute(
-      "rsync -av --delete #{local_dir} #{user__host}:#{remote_dir}",
-      "scp -r #{local_dir} #{user__host}:#{remote_dir}"
-    )
   end
 
 end
