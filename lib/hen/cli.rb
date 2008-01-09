@@ -33,9 +33,12 @@ require 'highline/import'
 
 module Hen::CLI
 
+  # Collect user's answers by key, so we don't have to ask again.
+  @@values = {}
+
   alias_method :original_ask, :ask
   def ask(key)
-    original_ask("Please enter your #{key}: ")
+    @@values[key] ||= original_ask("Please enter your #{key}: ")
   end
 
   def render(template, target)
