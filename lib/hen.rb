@@ -45,36 +45,15 @@ class Hen
   # Directories to search for .henrc
   RCDIRS = ['.', ENV['HOME'], File.expand_path('~')]
 
-  find_henrc = if henrc = ENV['HENRC']
-    if File.readable?(henrc)
-      henrc
-    else
-      abort "The specified .henrc file could not be found: #{henrc}"
-    end
-  else
-    RCDIRS.find { |path|
-      henrc = File.join(path, '.henrc')
-      break henrc if File.readable?(henrc)
-    } or abort %q{
-      No .henrc file could be found! Please create one first with 'hen config'.
-    }
-  end
-
-  # The path to the user's .henrc
-  HENRC = find_henrc
-
   # A container for all loaded hens
   @hens = {}
-
-  # The configuration resulting from the user's .henrc
-  @config = YAML.load_file(HENRC)
 
   # The verbosity concerning errors and warnings
   @verbose = true
 
   class << self
 
-    attr_reader :hens, :config, :verbose
+    attr_reader :hens, :verbose
 
     # call-seq:
     #   lay!
@@ -139,6 +118,46 @@ class Hen
     # Get hen by name.
     def [](hen)
       @hens[hen]
+    end
+
+    # call-seq:
+    #   henrc => aString
+    #
+    # The path to the user's .henrc
+    def henrc
+      @henrc ||= if henrc = ENV['HENRC']
+        abort "The specified .henrc file could not be found: #{henrc}" \
+          unless File.readable?(henrc)
+
+        henrc
+      else
+        RCDIRS.find { |path|
+          henrc = File.join(path, '.henrc')
+          break henrc if File.readable?(henrc)
+        } or abort "No .henrc file could be found! Please " <<
+                   "create one first by running 'hen config'."
+      end
+    end
+
+    # call-seq:
+    #   config => aHash
+    #   config(key) => aValue
+    #
+    # The configuration resulting from the user's .henrc. Takes optional
+    # +key+ argument as "path" into the config hash, returning the thusly
+    # retrieved value.
+    #
+    # Example:
+    #   config('a/b/c')  #=> @config[:a][:b][:c]
+    def config(key = default = Object.new)
+      @config ||= YAML.load_file(henrc)
+
+      return @config if key == default
+
+      key.split('/').inject(@config) { |value, k|
+        value.fetch(k.to_sym)
+      }
+    rescue IndexError, NoMethodError
     end
 
     private

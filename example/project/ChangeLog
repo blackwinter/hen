@@ -1,0 +1,5 @@
+= Revision history for <%= ask! "Program's name" %>
+
+== 0.0.1 [<%= Time.now.strftime('%Y-%m-%d') %>]
+
+* Birthday :-)

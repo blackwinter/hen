@@ -1,5 +1,11 @@
 = Revision history for hen
 
+== 0.0.6 [2008-01-09]
+
+* Added basic sample project tree (skeleton for 'hen create')
+* Lazily find and load .henrc
+* Some polishing and fixes
+
 == 0.0.5 [2008-01-08]
 
 * Replaced 'hen' executable stub with something actually useful
@@ -12,7 +18,7 @@
 
 == 0.0.3 [2008-01-04]
 
-* More cleanup and maturing.
+* More cleanup and maturing
 * New tasks 'release' (formerly 'upload_gem'), 'publish_docs', and 'debug_gem'
 * All in all: Pretty much inspired by Hoe ;-)
 

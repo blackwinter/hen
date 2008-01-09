@@ -37,20 +37,49 @@ module Hen::CLI
   @@values = {}
 
   alias_method :original_ask, :ask
-  def ask(key)
-    @@values[key] ||= original_ask("Please enter your #{key}: ")
+
+  # Ask the user to enter an appropriate value for +key+. Uses
+  # already stored answer if present, unless +cached+ is false.
+  def ask(key, config_key = false, cached = true)
+    @@values[key] = nil unless cached
+
+    @@values[key] ||=
+      Hen.config(config_key) || original_ask("Please enter your #{key}: ")
+  rescue Interrupt
+    abort ''
   end
 
-  def render(template, target)
-    abort "Sample file not found: #{template}" unless File.readable?(template)
+  # Same as ask, but requires a non-empty value to be entered.
+  def ask!(key, config_key = false)
+    msg = "#{key} is required! Please enter a non-empty value."
+    max = 3
+
+    (0...max).each { |i|
+      value = ask(key, config_key, i.zero?)
+      return value unless value.empty?
+
+      puts msg
+    }
+
+    abort "You had #{max} tries -- now be gone!"
+  end
+
+  # Renders the contents of +sample+ as an ERb template,
+  # storing the result in +target+. Returns the content.
+  def render(sample, target)
+    abort "Sample file not found: #{sample}" unless File.readable?(sample)
 
     if File.readable?(target)
       abort unless agree("Target file already exists: #{target}. Overwrite? ")
     end
 
+    content = ERB.new(File.read(sample)).result(binding)
+
     File.open(target, 'w') { |f|
-      f.puts ERB.new(File.read(template)).result(binding)
+      f.puts content unless content.empty?
     }
+
+    content
   end
 
 end

@@ -50,6 +50,8 @@ EOT
 
 abort USAGE if ARGV.empty?
 
+EXAMPLE = File.join(File.dirname(__FILE__), '..', 'example')
+
 case action = ARGV.shift
   when '-h', '--help'
     puts USAGE
@@ -62,28 +64,73 @@ case action = ARGV.shift
       puts "  %-#{m}s - %s" % [a, d]
     }
   when 'config'
-    henrc = File.join(File.dirname(__FILE__), '..', 'example', '.henrc')
+    henrc = File.join(EXAMPLE, '.henrc')
 
     # TODO: DRY up with lib/hen.rb
     target = File.join(ENV['HOME'] || File.expand_path('~'), '.henrc')
 
     render(henrc, target)
 
+    puts
     puts "Your .henrc has been created: #{target}. Modify to your needs."
   when 'create'
-    path = ARGV.shift
+    path = File.expand_path(ARGV.shift)
     abort 'Path argument missing!' unless path
 
-    abort "Target directory already exists: #{path}. Won't touch." if File.directory?(path)
+    template = File.join(EXAMPLE, 'project')
+    abort "Sample project tree not found: #{template}" unless File.directory?(template)
 
-    rakefile = File.join(File.dirname(__FILE__), '..', 'example', 'Rakefile')
-    target   = File.join(path, 'Rakefile')
+    if File.directory?(path)
+      abort "Target directory already exists: #{path}. Won't touch."
+    else
+      Dir.mkdir(path)
+    end
 
-    # 1. create directory
-    Dir.mkdir(path)
+    # Parts to be replaced by the user
+    replacements = {}
 
-    # 2. copy Rakefile
-    render(rakefile, target)
+    begin
+      # Keep track of what's been created
+      created = [path]
+
+      progname = ask!("Program's name")
+
+      Dir.chdir(template) {
+        Dir['**/*'].each { |sample|
+          target = File.join(path, sample.gsub(/__progname__/, progname))
+          created << target
+
+          if File.directory?(sample)
+            Dir.mkdir(target)
+          else
+            content = render(sample, target)
+            replacements[target] = content.scan(/### .* ###/)
+          end
+        }
+      }
+
+      # If we got here, everything went fine...
+      created.clear
+    ensure
+      # In case of an exception or premature program exit: Clean up!
+      created.reverse.each { |target|
+        (File.directory?(target) ? Dir : File).unlink(target)
+      }
+    end
+
+    puts
+    puts "Your new project directory has been created: #{path}"
+
+    replacements.each { |target, parts|
+      next if parts.empty?
+
+      puts
+      puts "#{target}:"
+
+      parts.each { |part|
+        puts "  #{part}"
+      }
+    }
   when 'list'
     abort 'Sorry, not yet available...'
   else

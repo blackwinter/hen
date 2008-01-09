@@ -1,0 +1,20 @@
+= <%= ask! "Program's name" %> - <%= ask "Program's description summary" %>
+
+== VERSION
+
+This documentation refers to <%= ask! "Program's name" %> version 0.0.1
+
+
+== DESCRIPTION
+
+### PLACE YOUR DESCRIPTION HERE ###
+
+
+== AUTHORS
+
+* <%= ask "Full name", 'gem/author' %> <mailto:<%= ask "E-mail address", 'gem/email' %>>
+
+
+== LICENSE AND COPYRIGHT
+
+### PLACE YOUR COPYRIGHT NOTICE HERE ###
