@@ -73,7 +73,7 @@ class Hen
     # Prepare the use of Rubyforge, optionally logging in right away.
     # Returns the RubyForge object.
     def init_rubyforge(login = true)
-      require 'rubyforge'
+      require_rubyforge
 
       rf = RubyForge.new
       rf.login if login
@@ -90,17 +90,29 @@ class Hen
       rf_project = rf_config[:project]
 
       raise 'Skipping Rubyforge tasks' if rf_project.nil? || rf_project.empty?
+
+      require_rubyforge
+
       raise LocalJumpError, 'no block given' unless block
 
-      require 'rubyforge'
-
       block_args = [rf_config]
-
       block_args << lambda { |*args|
         init_rubyforge(args.empty? || args.first)
       } if block.arity > 1
 
       block[*block_args]
+    end
+
+    private
+
+    # Loads the Rubyforge library, giving a
+    # nicer error message if it's not found.
+    def require_rubyforge
+      begin
+        require 'rubyforge'
+      rescue LoadError
+        raise "Please install the 'rubyforge' gem first."
+      end
     end
 
   end
