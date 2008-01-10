@@ -1,5 +1,6 @@
 # Use RDOC_OPTIONS from 'rdoc.rake'
 Hen :gem => :rdoc do
+
   require 'rake/gempackagetask'
 
   gem_options = config[:gem]
@@ -68,7 +69,7 @@ Hen :gem => :rdoc do
   }
 
   desc 'Display the gem specification'
-  task :debug_gem do
+  task :gemspec do
     puts gem_spec.to_ruby
   end
 

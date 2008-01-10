@@ -1,4 +1,5 @@
 Hen :rdoc do
+
   require 'rake/rdoctask'
 
   rdoc_options = config[:rdoc]

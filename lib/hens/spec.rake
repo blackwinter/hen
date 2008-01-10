@@ -1,4 +1,5 @@
 Hen :spec do
+
   require 'spec/rake/spectask'
 
   spec_options = config[:spec]
@@ -15,4 +16,5 @@ Hen :spec do
       }.compact.flatten
     }
   end
+
 end
