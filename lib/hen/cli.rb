@@ -40,17 +40,17 @@ module Hen::CLI
 
   # Ask the user to enter an appropriate value for +key+. Uses
   # already stored answer if present, unless +cached+ is false.
-  def ask(key, config_key = false, cached = true)
+  def ask(key, config_key = nil, cached = true)
     @@values[key] = nil unless cached
 
-    @@values[key] ||=
-      Hen.config(config_key) || original_ask("Please enter your #{key}: ")
+    @@values[key] ||= config_key && Hen.config(config_key) ||
+      original_ask("Please enter your #{key}: ")
   rescue Interrupt
     abort ''
   end
 
-  # Same as ask, but requires a non-empty value to be entered.
-  def ask!(key, config_key = false)
+  # Same as #ask, but requires a non-empty value to be entered.
+  def ask!(key, config_key = nil)
     msg = "#{key} is required! Please enter a non-empty value."
     max = 3
 

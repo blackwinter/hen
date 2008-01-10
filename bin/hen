@@ -28,7 +28,10 @@
 ###############################################################################
 #++
 
-# TODO: Add 'list' - List available hens with their tasks (?)
+# TODO: Implement 'list' action -- List available hens with their tasks (?)
+
+require 'rubygems'
+require 'nuggets/enumerable/minmax'
 
 $: << File.join(File.dirname(__FILE__), '..', 'lib')
 
@@ -39,12 +42,15 @@ include Hen::CLI
 
 ACTIONS = {
   'config' => 'Create a fresh .henrc file',
-  'create' => 'Create a new project directory tree',
+  'create' => [
+    'Create a new project directory tree',
+    'Arguments: path [sample-skeleton]'
+  ],
   'list'   => 'List available hens with their tasks'
 }
 
 USAGE = <<EOT
-Usage: #{$0} {#{ACTIONS.keys.sort.join('|')}}
+Usage: #{$0} {#{ACTIONS.keys.sort.join('|')}} [action-arguments]
        #{$0} [-h|--help]
 EOT
 
@@ -58,27 +64,27 @@ case action = ARGV.shift
     puts
     puts 'Actions:'
 
-    m = ACTIONS.keys.map { |a| a.length }.max
+    max = ACTIONS.keys.max(:length)
 
-    ACTIONS.sort.each { |a, d|
-      puts "  %-#{m}s - %s" % [a, d]
+    ACTIONS.sort.each { |act, desc|
+      desc = [*desc]
+      puts "  %-#{max}s - %s" % [act, desc.shift]
+
+      desc.each { |extra|
+        puts "  %#{max}s   + %s" % [' ', extra]
+      }
     }
   when 'config'
-    henrc = File.join(EXAMPLE, '.henrc')
-
-    # TODO: DRY up with lib/hen.rb
-    target = File.join(ENV['HOME'] || File.expand_path('~'), '.henrc')
-
-    render(henrc, target)
+    render(File.join(EXAMPLE, '.henrc'), henrc = Hen.henrc(false))
 
     puts
-    puts "Your .henrc has been created: #{target}. Modify to your needs."
+    puts "Your .henrc has been created: #{henrc}. Now modify it to your needs."
   when 'create'
     path = File.expand_path(ARGV.shift)
     abort 'Path argument missing!' unless path
 
-    template = File.join(EXAMPLE, 'project')
-    abort "Sample project tree not found: #{template}" unless File.directory?(template)
+    skel = ARGV.shift || File.join(EXAMPLE, 'project')
+    abort "Sample project tree not found: #{skel}" unless File.directory?(skel)
 
     if File.directory?(path)
       abort "Target directory already exists: #{path}. Won't touch."
@@ -87,15 +93,17 @@ case action = ARGV.shift
     end
 
     # Parts to be replaced by the user
-    replacements = {}
+    replace = {}
 
     begin
       # Keep track of what's been created
       created = [path]
 
-      progname = ask!("Program's name")
+      # We need the name here so ask for it already. Additionally, it's
+      # a good opportunity to make sure the user's .henrc is available.
+      progname = ask!("Program's name", true)
 
-      Dir.chdir(template) {
+      Dir.chdir(skel) {
         Dir['**/*'].each { |sample|
           target = File.join(path, sample.gsub(/__progname__/, progname))
           created << target
@@ -103,8 +111,7 @@ case action = ARGV.shift
           if File.directory?(sample)
             Dir.mkdir(target)
           else
-            content = render(sample, target)
-            replacements[target] = content.scan(/### .* ###/)
+            replace[target] = render(sample, target).scan(/### .* ###/)
           end
         }
       }
@@ -113,25 +120,28 @@ case action = ARGV.shift
       created.clear
     ensure
       # In case of an exception or premature program exit: Clean up!
-      created.reverse.each { |target|
-        (File.directory?(target) ? Dir : File).unlink(target)
+      created.reverse.each { |p|
+        (File.directory?(p) ? Dir : File).unlink(p) if File.readable?(p)
       }
     end
 
     puts
-    puts "Your new project directory has been created: #{path}"
+    puts "Your new project directory has been created: #{path}. Have fun!"
 
-    replacements.each { |target, parts|
-      next if parts.empty?
+    replace.each { |target, details|
+      next if details.empty?
 
       puts
       puts "#{target}:"
 
-      parts.each { |part|
-        puts "  #{part}"
+      details.each { |detail|
+        puts "  #{detail}"
       }
     }
   when 'list'
+    # How to achieve? Has to list *all* hens and tasks made available therein,
+    # *regardless* of any missing prerequisites (preferably indicating whether
+    # a particular hen/task is currently available).
     abort 'Sorry, not yet available...'
   else
     abort "Illegal action: #{action}\n#{USAGE}"

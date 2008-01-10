@@ -124,19 +124,8 @@ class Hen
     #   henrc => aString
     #
     # The path to the user's .henrc
-    def henrc
-      @henrc ||= if henrc = ENV['HENRC']
-        abort "The specified .henrc file could not be found: #{henrc}" \
-          unless File.readable?(henrc)
-
-        henrc
-      else
-        RCDIRS.find { |path|
-          henrc = File.join(path, '.henrc')
-          break henrc if File.readable?(henrc)
-        } or abort "No .henrc file could be found! Please " <<
-                   "create one first by running 'hen config'."
-      end
+    def henrc(must_exist = true)
+      @henrc ||= find_henrc(must_exist)
     end
 
     # call-seq:
@@ -149,10 +138,9 @@ class Hen
     #
     # Example:
     #   config('a/b/c')  #=> @config[:a][:b][:c]
-    def config(key = default = Object.new)
+    def config(key = nil)
       @config ||= YAML.load_file(henrc)
-
-      return @config if key == default
+      return @config unless key
 
       key.split('/').inject(@config) { |value, k|
         value.fetch(k.to_sym)
@@ -161,6 +149,29 @@ class Hen
     end
 
     private
+
+    # call-seq:
+    #   find_henrc(must_exist = true) => aString
+    #
+    # Search for a readable .henrc, or, if +must_exist+ is false, just return a
+    # suitable default location.
+    def find_henrc(must_exist = true)
+      return ENV['HENRC'] || File.join(RCDIRS.last, '.henrc') unless must_exist
+
+      if    henrc = ENV['HENRC']
+        abort "The specified .henrc file could not be found: #{henrc}" \
+          unless File.readable?(henrc)
+      elsif henrc = RCDIRS.find { |p|
+        h = File.join(p, '.henrc')
+        break h if File.readable?(h)
+      }
+      else
+        abort "No .henrc file could be found! Please " <<
+              "create one first by running 'hen config'."
+      end
+
+      henrc
+    end
 
     # call-seq:
     #   load_hens(*hens)
