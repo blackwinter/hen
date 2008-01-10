@@ -1,5 +1,6 @@
-# Use RDOC_OPTIONS from 'rdoc.rake'
 Hen :gem => :rdoc do
+  # Dependencies:
+  # * rdoc -- Uses RDOC_OPTIONS and 'publish_docs' task
 
   require 'rake/gempackagetask'
 

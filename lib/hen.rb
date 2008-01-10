@@ -93,7 +93,13 @@ class Hen
       # Execute each hen definition
       hens.each { |name, hen|
         # Load any dependencies, in case they're not included yet
-        load_hens(*hen.dependencies)
+        begin
+          load_hens(*hen.dependencies)
+        rescue LoadError => err
+          warn "#{name}: Required dependency missing: " <<
+               File.basename(err.to_s, '.rake') if verbose
+          next
+        end
 
         hen.lay!
       }
