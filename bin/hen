@@ -41,12 +41,13 @@ require 'hen/cli'
 include Hen::CLI
 
 ACTIONS = {
-  'config' => 'Create a fresh .henrc file',
-  'create' => [
+  'config'  => 'Create a fresh .henrc file',
+  'create'  => [
     'Create a new project directory tree',
     'Arguments: path [sample-skeleton]'
   ],
-  'list'   => 'List available hens with their tasks'
+  'list'    => 'List available hens with their tasks',
+  'version' => 'Display version number'
 }
 
 USAGE = <<EOT
@@ -74,6 +75,8 @@ case action = ARGV.shift
         puts "  %#{max}s   + %s" % [' ', extra]
       }
     }
+  when 'version', '--version'
+    puts "hen v#{Hen::VERSION}"
   when 'config'
     render(File.join(EXAMPLE, '.henrc'), henrc = Hen.henrc(false))
 
