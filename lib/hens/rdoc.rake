@@ -8,20 +8,42 @@ Hen :rdoc do
     rdoc_options[:title] ||= "#{rf_package} Application documentation"
   end
 
+  ### rdoc_dir
+
+  rdoc_dir = rdoc_options.delete(:rdoc_dir)
+
+  ### rdoc_files
+
+  rdoc_files = FileList[rdoc_options.delete(:rdoc_files)].
+    sort.uniq.select { |file| File.exists?(file) }
+
+  ### rdoc_options
+
+  rdoc_options.delete(:main) unless rdoc_files.include?(rdoc_options[:main])
+
+  rdoc_options = rdoc_options.map { |option, value|
+    option = '--' << option.to_s.tr('_', '-')
+    value.is_a?(String) ? [option, value] : value ? option : nil
+  }.compact.flatten
+
+  # Make settings available to other hens
   RDOC_OPTIONS = {
-    :rdoc_dir   => rdoc_options.delete(:rdoc_dir),
-    :rdoc_files => FileList[rdoc_options.delete(:rdoc_files)].to_a.uniq,
-    :options    => rdoc_options.map { |option, value|
-      option = '--' << option.to_s.tr('_', '-')
-      value.is_a?(String) ? [option, value] : value ? option : nil
-    }.compact.flatten
+    :rdoc_dir   => rdoc_dir,
+    :rdoc_files => rdoc_files,
+    :options    => rdoc_options
   }
 
-  rdoc_task = Rake::RDocTask.new(:doc) { |rdoc|
-    rdoc.rdoc_dir   = RDOC_OPTIONS[:rdoc_dir]
-    rdoc.rdoc_files = RDOC_OPTIONS[:rdoc_files]
-    rdoc.options    = RDOC_OPTIONS[:options]
-  }
+  unless rdoc_files.empty?
+    rdoc_task = Rake::RDocTask.new(:doc) { |rdoc|
+      rdoc.rdoc_dir   = rdoc_dir
+      rdoc.rdoc_files = rdoc_files
+      rdoc.options    = rdoc_options
+    }
+  else
+    task :doc do
+      warn 'No files to generate documentation for!'
+    end
+  end
 
   rubyforge do |rf_config|
 

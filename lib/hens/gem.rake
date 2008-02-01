@@ -51,6 +51,10 @@ Hen :gem => :rdoc do
 
     gem_options[:executables] ||= gem_options[:files].grep(/\Abin\//)
 
+    [:extra_rdoc_files, :files, :executables].each { |files|
+      gem_options[files].delete_if { |file| !File.exists?(file) }
+    }
+
     unless gem_options[:executables].empty?
       gem_options[:bindir] ||= File.dirname(gem_options[:executables].first)
       gem_options[:executables].map! { |executable| File.basename(executable) }
