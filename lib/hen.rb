@@ -38,9 +38,16 @@ require 'hen/version'
 
 class Hen
 
-  # The directory (directories?) with the hen files
-  # TODO: Replace/extend with HENPATH
-  HENS = File.join(File.dirname(__FILE__), 'hens')
+  # The directories which contain the hen files
+  HENDIRS = [File.join(File.dirname(__FILE__), 'hens')] +
+            (ENV['HENPATH'] || '').split(File::PATH_SEPARATOR)
+
+  # All hens found, mapped by their name
+  HENS = Dir[*HENDIRS.map { |d| "#{d}/*.rake" }].uniq.inject(
+    Hash.new { |h, k| h[k] = [] }
+  ) { |hash, hen|
+    hash[File.basename(hen, '.rake')] << hen; hash
+  }
 
   # Directories to search for .henrc
   RCDIRS = ['.', ENV['HOME'], File.expand_path('~')]
@@ -130,8 +137,8 @@ class Hen
     #   henrc => aString
     #
     # The path to the user's .henrc
-    def henrc(must_exist = true)
-      @henrc ||= find_henrc(must_exist)
+    def henrc(location_only = false)
+      @henrc ||= find_henrc(location_only)
     end
 
     # call-seq:
@@ -157,18 +164,18 @@ class Hen
     private
 
     # call-seq:
-    #   find_henrc(must_exist = true) => aString
+    #   find_henrc(location_only = false) => aString
     #
-    # Search for a readable .henrc, or, if +must_exist+ is false, just return a
-    # suitable default location.
-    def find_henrc(must_exist = true)
-      return ENV['HENRC'] || File.join(RCDIRS.last, '.henrc') unless must_exist
+    # Search for a readable .henrc, or, if +location_only+ is true, just return
+    # a suitable default location.
+    def find_henrc(location_only = false)
+      return ENV['HENRC'] || File.join(RCDIRS.last, '.henrc') if location_only
 
       if    henrc = ENV['HENRC']
         abort "The specified .henrc file could not be found: #{henrc}" \
           unless File.readable?(henrc)
-      elsif henrc = RCDIRS.find { |p|
-        h = File.join(p, '.henrc')
+      elsif henrc = RCDIRS.find { |dir|
+        h = File.join(dir, '.henrc')
         break h if File.readable?(h)
       }
       else
@@ -190,18 +197,11 @@ class Hen
       # By default, include all
       block ||= lambda { true }
 
-      # No hens given means get 'em all
-      if hens.empty?
-        # TODO: Search HENPATH for available hens
-        hens = Dir[File.join(HENS, '*.rake')].map { |hen|
-          File.basename(hen, '.rake')  # This is kind of awkward, but
-                                       # simplifies condition checking
-        }
-      end
+      (hens.empty? ? HENS.keys : hens).each { |hen|
+        hen = hen.to_s
+        next unless block[hen]
 
-      hens.each { |hen|
-        # TODO: Search HENPATH for hen
-        load File.join(HENS, "#{hen}.rake") if block[hen.to_s]
+        HENS[hen].each { |h| load h }
       }
     end
 

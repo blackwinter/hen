@@ -1,5 +1,12 @@
 = Revision history for hen
 
+== 0.0.7 [2008-02-01]
+
+* Search HENPATH for available hens, allowing to easily add custom hens
+* Added sample custom hen file ('example/hens/sample.rake')
+* Refined 'gem' and 'rdoc' hens
+* Added 'hen version' command
+
 == 0.0.6 [2008-01-09]
 
 * Added basic sample project tree (skeleton for 'hen create')
