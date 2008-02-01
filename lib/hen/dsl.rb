@@ -26,6 +26,8 @@
 ###############################################################################
 #++
 
+require 'nuggets/file/which'
+
 class Hen
 
   # Some helper methods for use inside of a Hen definition.
@@ -55,19 +57,18 @@ class Hen
       task(t, &block)
     end
 
-    # Execute a series of commands until one of them succeeds. Intended for
-    # platform-dependent alternatives (Command A is not available? Then try
-    # B instead).
-    #
-    # TODO: This won't detect cases where a command is actually available,
-    # but simply fails.
+    # Find a command that is executable and run it. Intended for
+    # platform-dependent alternatives (Command A is not available?
+    # Then try B instead).
     def execute(*commands)
-      commands.each { |command|
-        ok, res = sh(command) { |ok, res| [ok, res] }
-        break if ok
-
-        warn "Error while executing command (return code #{res.exitstatus})"
-      }
+      if command = File.which_command(commands)
+        sh(command) { |ok, res|
+          warn "Error while executing command: #{command} " <<
+               "(return code #{res.exitstatus})" unless ok
+        }
+      else
+        warn "Command not found: #{commands.join('; ')}"
+      end
     end
 
     # Prepare the use of Rubyforge, optionally logging in right away.
