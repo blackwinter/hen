@@ -27,6 +27,12 @@ Hen :gem => :rdoc do
       gem_options[:version] << '.' << svnversion
     end
 
+    ### author(s)
+
+    if author = gem_options.delete(:author)
+      gem_options[:authors] ||= [author]
+    end
+
     ### description
 
     gem_options[:description] ||= gem_options[:summary]

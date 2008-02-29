@@ -1,5 +1,13 @@
 = Revision history for hen
 
+== 0.0.9 [2008-02-29]
+
+* Handle author vs. authors in Gem hen
+
+== 0.0.8 [2008-02-15]
+
+* Fixed Gem spec (include whole example sub-tree)
+
 == 0.0.7 [2008-02-01]
 
 * Search HENPATH for available hens, allowing to easily add custom hens
