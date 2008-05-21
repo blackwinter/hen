@@ -76,7 +76,7 @@ class Hen
     def init_rubyforge(login = true)
       require_rubyforge
 
-      rf = RubyForge.new
+      rf = RubyForge.new.configure
       rf.login if login
 
       rf
