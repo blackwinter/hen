@@ -1,5 +1,9 @@
 = Revision history for hen
 
+== 0.1.2 [2008-08-12]
+
+* Added task to update/create gemspec file (e.g., for github)
+
 == 0.1.1 [2008-07-29]
 
 * Added task to run specs with RCov

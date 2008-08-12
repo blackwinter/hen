@@ -84,6 +84,13 @@ Hen :gem => :rdoc do
     puts gem_spec.to_ruby
   end
 
+  desc "Update (or create) the project's gemspec file"
+  task 'gemspec:update' do
+    File.open("#{gem_spec.name}.gemspec", 'w') { |f|
+      f.puts gem_spec.to_ruby
+    }
+  end
+
   pkg_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
     pkg.need_tar_gz = true
     pkg.need_zip    = true
