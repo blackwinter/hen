@@ -87,7 +87,7 @@ Hen :gem => :rdoc do
   desc "Update (or create) the project's gemspec file"
   task 'gemspec:update' do
     file = "#{gem_spec.name}.gemspec"
-    action = File.exists?(file) ? 'Created' : 'Updated'
+    action = File.exists?(file) ? 'Updated' : 'Created'
 
     File.open(file, 'w') { |f| f.puts gem_spec.to_ruby }
 
