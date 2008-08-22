@@ -4,8 +4,7 @@ Hen :test do
 
   test_options = config[:test]
 
-  test_files =
-    test_options.delete(:files) || FileList[test_options.delete(:pattern)]
+  test_files = test_options.delete(:files) || FileList[test_options.delete(:pattern)]
 
   if test_files && !test_files.empty?
     Rake::TestTask.new { |t|

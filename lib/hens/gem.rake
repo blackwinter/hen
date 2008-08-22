@@ -45,7 +45,7 @@ Hen :gem => :rdoc do
       gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{gem_options[:name]}"
     end
 
-    if gem_options[:homepage] && gem_options[:homepage] !~ /:\/\//
+    if gem_options[:homepage] && gem_options[:homepage] !~ %r{://}
       gem_options[:homepage] = 'http://' << gem_options[:homepage]
     end
 
@@ -103,13 +103,13 @@ Hen :gem => :rdoc do
 
     desc 'Package and upload the release to Rubyforge'
     task :release => [:package, :publish_docs] do
-      rf = rf_pool.call
-
       files = Dir[File.join('pkg', "#{pkg_task.package_name}.*")]
       abort 'Nothing to release!' if files.empty?
 
       # shorten to (at most) three digits
       version = pkg_task.version.to_s.split(/([.])/)[0..4].join
+
+      rf = rf_pool.call
 
       # TODO: Add release notes and changes.
       #uc = rf.userconfig

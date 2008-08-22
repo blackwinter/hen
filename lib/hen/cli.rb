@@ -54,7 +54,7 @@ module Hen::CLI
     msg = "#{key} is required! Please enter a non-empty value."
     max = 3
 
-    (0...max).each { |i|
+    max.times { |i|
       value = ask(key, config_key, i.zero?)
       return value unless value.empty?
 
