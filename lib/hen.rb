@@ -31,6 +31,7 @@ require 'forwardable'
 
 require 'rubygems'
 require 'rake'
+require 'nuggets/env/user_home'
 require 'nuggets/proc/bind'
 
 require 'hen/dsl'
@@ -50,7 +51,7 @@ class Hen
   }
 
   # Directories to search for .henrc
-  RCDIRS = ['.', ENV['HOME'], File.expand_path('~')]
+  RCDIRS = ['.', ENV.user_home]
 
   # A container for all loaded hens
   @hens = {}
