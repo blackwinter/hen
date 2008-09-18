@@ -55,22 +55,22 @@ Hen :rdoc do
       rf_user = rf_config[:username]
       abort 'Rubyforge user name missing' unless rf_user
 
-      user__host = "#{rf_user}@rubyforge.org"
+      rf_host = "#{rf_user}@rubyforge.org"
 
-      local_dir  = rdoc_task.rdoc_dir + '/'
-      remote_dir = "/var/www/gforge-projects/#{rf_project}/"
+      local_dir  = rdoc_task.rdoc_dir
+      remote_dir = "/var/www/gforge-projects/#{rf_project}"
 
       if rdoc_dir = rf_config[:rdoc_dir]
         if rf_package = rf_config[:package]
           rdoc_dir = rf_package if rdoc_dir == :package
         end
 
-        remote_dir += rdoc_dir + '/'
+        remote_dir = File.join(remote_dir, rdoc_dir)
       end
 
       execute(
-        "rsync -av --delete #{local_dir} #{user__host}:#{remote_dir}",
-        "scp -r #{local_dir} #{user__host}:#{remote_dir}"
+        "rsync -av --delete #{local_dir}/ #{rf_host}:#{remote_dir}/",
+        "scp -r #{local_dir}/ #{rf_host}:#{remote_dir}/"
       )
     end
 
