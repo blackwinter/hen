@@ -5,6 +5,7 @@ Hen :gem => :rdoc do
   require 'rake/gempackagetask'
 
   gem_options = config[:gem]
+  rf_config   = config[:rubyforge]
 
   if Object.const_defined?(:RDOC_OPTIONS)
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
@@ -15,7 +16,7 @@ Hen :gem => :rdoc do
 
     ### name
 
-    gem_options[:name] ||= config[:rubyforge][:package]
+    gem_options[:name] ||= rf_config[:package]
 
     abort 'Gem name missing' unless gem_options[:name]
 
@@ -39,10 +40,13 @@ Hen :gem => :rdoc do
 
     ### rubyforge project, homepage
 
-    gem_options[:rubyforge_project] ||= config[:rubyforge][:project]
+    gem_options[:rubyforge_project] ||= rf_config[:project]
 
     if rf_project = gem_options[:rubyforge_project]
-      gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{gem_options[:name]}"
+      rdoc_dir = RDOC_OPTIONS[:rdoc_dir]
+      rdoc_dir = rf_config[:package] || gem_options[:name] if rdoc_dir == :package
+
+      gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{rdoc_dir}"
     end
 
     if gem_options[:homepage] && gem_options[:homepage] !~ %r{://}
