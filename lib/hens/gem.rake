@@ -43,8 +43,8 @@ Hen :gem => :rdoc do
     gem_options[:rubyforge_project] ||= rf_config[:project]
 
     if rf_project = gem_options[:rubyforge_project]
-      rdoc_dir = RDOC_OPTIONS[:rdoc_dir]
-      rdoc_dir = rf_config[:package] || gem_options[:name] if rdoc_dir == :package
+      rdoc_dir = rf_config[:rdoc_dir] == :package ?
+        rf_config[:package] || gem_options[:name] : RDOC_OPTIONS[:rdoc_dir]
 
       gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{rdoc_dir}"
     end
