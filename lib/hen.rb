@@ -196,7 +196,7 @@ class Hen
     # which the block evaluates to true.
     def load_hens(*hens, &block)
       # By default, include all
-      block ||= lambda { true }
+      block ||= lambda { |_| true }
 
       (hens.empty? ? HENS.keys : hens).each { |hen|
         hen = hen.to_s
