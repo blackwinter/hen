@@ -12,6 +12,8 @@ Hen :spec do
       spec_files.unshift(spec_helper)
     end
 
+    spec_options.delete(:options) unless File.readable?(spec_options[:options])
+
     spec_opts = spec_options.map { |option, value|
       option = '--' << option.to_s.tr('_', '-')
       value.is_a?(String) ? [option, value] : value ? option : nil

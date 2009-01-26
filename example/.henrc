@@ -25,6 +25,7 @@
 
 :spec:
   :pattern:           spec/**/*_spec.rb
-  :options:           spec.opts
+  :helper:            spec/spec_helper.rb
+  :options:           spec/spec.opts
 
 # vim: syntax=yaml
