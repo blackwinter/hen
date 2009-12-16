@@ -5,7 +5,7 @@
 #                                                                             #
 # hen -- Just a Rake helper                                                   #
 #                                                                             #
-# Copyright (C) 2007-2008 University of Cologne,                              #
+# Copyright (C) 2007-2009 University of Cologne,                              #
 #                         Albertus-Magnus-Platz,                              #
 #                         50932 Cologne, Germany                              #
 #                                                                             #
@@ -30,6 +30,7 @@
 
 # TODO: Implement 'list' action -- List available hens with their tasks (?)
 
+require 'fileutils'
 require 'rubygems'
 require 'nuggets/enumerable/minmax'
 
@@ -44,15 +45,17 @@ ACTIONS = {
   'config'  => 'Create a fresh .henrc file',
   'create'  => [
     'Create a new project directory tree',
-    'Arguments: path [sample-skeleton]'
+    'Arguments: path [sample-skeleton]',
+    'Options: -g, --git [[remote=]url]'
   ],
+  'help'    => 'Print this help and exit',
   'list'    => 'List available hens with their tasks',
   'version' => 'Display version number'
 }
 
 USAGE = <<EOT
-Usage: #{$0} {#{ACTIONS.keys.sort.join('|')}} [action-arguments]
-       #{$0} [-h|--help]
+Usage: #{$0} {#{ACTIONS.keys.sort.join('|')}} [arguments] [options]
+       #{$0} [-h|--help] [--version]
 EOT
 
 abort USAGE if ARGV.empty?
@@ -60,7 +63,7 @@ abort USAGE if ARGV.empty?
 EXAMPLE = File.join(File.dirname(__FILE__), '..', 'example')
 
 case action = ARGV.shift
-  when '-h', '--help'
+  when 'help', '-h', '--help'
     puts USAGE
     puts
     puts 'Actions:'
@@ -86,25 +89,44 @@ case action = ARGV.shift
     path = File.expand_path(ARGV.shift)
     abort 'Path argument missing!' unless path
 
-    skel = ARGV.shift || File.join(EXAMPLE, 'project')
+    skel = ARGV.first !~ /\A-/ && ARGV.shift || File.join(EXAMPLE, 'project')
     abort "Sample project tree not found: #{skel}" unless File.directory?(skel)
+
+    # Keep track of what's been created
+    created = []
 
     if File.directory?(path)
       abort "Target directory already exists: #{path}. Won't touch."
     else
       Dir.mkdir(path)
+      created << path
+    end
+
+    if git = ARGV.index('-g') || ARGV.index('--git')
+      ARGV.delete_at(git)
+      remote = ARGV.delete_at(git)
+
+      Dir.chdir(path) {
+        if system('git', 'init')
+          created << File.join(path, '.git')
+
+          if remote
+            url, label = remote.split('=', 2).reverse
+            system('git', 'remote', 'add', label || 'origin', url)
+          end
+        end
+      }
     end
 
     # Parts to be replaced by the user
     replace = {}
 
     begin
-      # Keep track of what's been created
-      created = [path]
-
       # We need the name here so ask for it already. Additionally, it's
       # a good opportunity to make sure the user's .henrc is available.
-      progname = ask!("Program's name", true)
+      progname = ask!("Program's name", true) { |q|
+        q.default = File.basename(path)
+      }
 
       Dir.chdir(skel) {
         Dir['**/*'].each { |sample|
@@ -124,7 +146,15 @@ case action = ARGV.shift
     ensure
       # In case of an exception or premature program exit: Clean up!
       created.reverse.each { |p|
-        (File.directory?(p) ? Dir : File).unlink(p) if File.readable?(p)
+        begin
+          (File.directory?(p) ? Dir : File).unlink(p) if File.readable?(p)
+        rescue Errno::ENOTEMPTY => err
+          if File.basename(p) == '.git'
+            FileUtils.rm_rf(p)
+          else
+            raise err
+          end
+        end
       }
     end
 
