@@ -3,8 +3,12 @@ $:.unshift('lib')
 require 'hen'
 
 Hen.lay! {{
+  :rubyforge => {
+    :project => %q{prometheus},
+    :package => %q{hen}
+  },
+
   :gem => {
-    :name         => 'hen',
     :version      => Hen::VERSION,
     :summary      => "Hoe or Echoe? No, thanks! Just a Rake " <<
                      "helper that fits my own personal style.",

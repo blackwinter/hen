@@ -78,9 +78,7 @@ class Hen
       @verbose = options[:verbose] if options.has_key?(:verbose)
 
       if block_given?
-        yield.each { |key, value|
-          config[key].update(value)
-        }
+        yield.each { |key, value| (config[key] ||= {}).update(value) }
       end
 
       # Handle include/exclude requirements
