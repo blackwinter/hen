@@ -104,6 +104,36 @@ class Hen
       block[*block_args]
     end
 
+    # Prepare the use of Gemcutter. Returns the Gemcutter (pseudo-)object.
+    def init_gemcutter
+      require_gemcutter(false)
+
+      gc = Object.new
+
+      def gc.push(gem)
+        Gem::CommandManager.instance.run(['push', gem])
+      end
+
+      gc
+    end
+
+    # Encapsulates tasks targeting at Gemcutter, skipping those if
+    # Gemcutter's 'push' command is not available. Yields an optional
+    # proc to obtain Gemcutter objects from (via +call+; reaching out
+    # to init_gemcutter).
+    def gemcutter(&block)
+      raise 'Skipping Gemcutter tasks' unless require_gemcutter
+
+      raise LocalJumpError, 'no block given' unless block
+
+      block_args = []
+      block_args << lambda { |*args|
+        init_gemcutter
+      } if block.arity > 0
+
+      block[*block_args]
+    end
+
     private
 
     # Loads the Rubyforge library, giving a
@@ -114,6 +144,19 @@ class Hen
       rescue LoadError
         raise "Please install the 'rubyforge' gem first."
       end
+    end
+
+    # Loads the Gemcutter 'push' command, giving
+    # a nicer error message if it's not found.
+    def require_gemcutter(relax = true)
+      require 'rubygems/command_manager'
+
+      require 'commands/abstract_command'
+      require 'commands/push'
+
+      Gem::Commands::PushCommand
+    rescue LoadError, NameError
+      raise "Please install the 'gemcutter' gem first." unless relax
     end
 
   end

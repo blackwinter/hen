@@ -4,8 +4,8 @@ Hen :rdoc do
 
   rdoc_options = config[:rdoc]
 
-  if rf_package = config[:rubyforge][:package]
-    rdoc_options[:title] ||= "#{rf_package} Application documentation"
+  if gem_name = config[:gem][:name] or rf_package = config[:rubyforge][:package]
+    rdoc_options[:title] ||= "#{gem_name || rf_package} Application documentation"
   end
 
   ### rdoc_dir
@@ -45,6 +45,7 @@ Hen :rdoc do
     end
   end
 
+begin
   rubyforge do |rf_config|
 
     desc 'Publish RDoc to Rubyforge'
@@ -75,5 +76,8 @@ Hen :rdoc do
     end
 
   end
+rescue RuntimeError => err
+  raise unless err.to_s == 'Skipping Rubyforge tasks'
+end
 
 end

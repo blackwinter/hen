@@ -42,7 +42,7 @@ Hen :gem => :rdoc do
 
     gem_options[:rubyforge_project] ||= rf_config[:project]
 
-    if rf_project = gem_options[:rubyforge_project]
+    if rf_project = gem_options[:rubyforge_project] and !rf_project.empty?
       rdoc_dir = rf_config[:rdoc_dir] == :package ?
         rf_config[:package] || gem_options[:name] : RDOC_OPTIONS[:rdoc_dir]
 
@@ -103,11 +103,12 @@ Hen :gem => :rdoc do
     pkg.need_zip    = true
   end
 
+begin
   rubyforge do |rf_config, rf_pool|
 
     desc 'Package and upload the release to Rubyforge'
     task :release => [:package, :publish_docs] do
-      files = Dir[File.join('pkg', "#{pkg_task.package_name}.*")]
+      files = Dir[File.join(pkg_task.package_dir, "#{pkg_task.package_name}.*")]
       abort 'Nothing to release!' if files.empty?
 
       # shorten to (at most) three digits
@@ -121,9 +122,22 @@ Hen :gem => :rdoc do
       #uc['release_changes'] = changes if changes
       #uc['preformatted']    = true
 
-      rf.add_release rf_config[:project], pkg_task.name, version, *files
+      rf.add_release(rf_config[:project], pkg_task.name, version, *files)
     end
 
   end
+rescue RuntimeError => err
+  raise unless err.to_s == 'Skipping Rubyforge tasks'
+
+  gemcutter do |gc_pool|
+
+    desc 'Create the gem and upload it to Gemcutter'
+    task :release => [:gem] do
+      gc = gc_pool.call
+      gc.push(File.join(pkg_task.package_dir, pkg_task.gem_file))
+    end
+
+  end
+end
 
 end

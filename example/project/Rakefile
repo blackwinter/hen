@@ -4,12 +4,8 @@ begin
   require 'hen'
 
   Hen.lay! {{
-    :rubyforge => {
-      :project => %q{<%= ask "Rubyforge project's name (Leave empty for none)" %>},
-      :package => %q{<%= ask! "Program's name" %>}
-    },
-
     :gem => {
+      :name         => %q{<%= ask! "Program's name" %>},
       :version      => <%= ask! "Module's/Class' name" %>::VERSION,
       :summary      => %q{<%= ask "Program's description summary" %>},
       :files        => FileList['lib/**/*.rb'].to_a,
