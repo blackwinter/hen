@@ -1,9 +1,5 @@
 ---
 
-:rubyforge:
-  :username:          <%= ask 'Rubyforge user name (Leave empty for none)' %>
-  :rdoc_dir:          :package
-
 :rdoc:
   :rdoc_dir:          doc
   :rdoc_files:        [README, COPYING, ChangeLog, lib/**/*.rb]
