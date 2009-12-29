@@ -143,6 +143,10 @@ class Hen
     def init_git
       class << git = Object.new
 
+        instance_methods.each { |method|
+          undef_method(method) unless method =~ /\A__/
+        }
+
         def method_missing(cmd, *args)
           sh 'git', cmd.to_s.tr('_', '-'), *args
         end
