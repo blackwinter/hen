@@ -134,6 +134,55 @@ class Hen
       block[*block_args]
     end
 
+    def git
+      raise 'Skipping Git tasks' unless File.directory?('.git')
+
+      yield init_git
+    end
+
+    def init_git
+      class << git = Object.new
+
+        def method_missing(cmd, *args)
+          sh 'git', cmd.to_s.tr('_', '-'), *args
+        end
+
+        #alias_method :sh, :system
+
+        def run(*args)
+          %x{#{args.unshift('git').join(' ')}}
+        end
+
+        def remote_for_branch(branch)
+          run(:branch, '-r')[/(\S+)\/#{Regexp.escape(branch)}$/, 1]
+        end
+
+        def url_for_remote(remote)
+          run(:remote, '-v')[/\A#{Regexp.escape(remote)}\s+(.*)/, 1]
+        end
+
+        def find_remote(regexp)
+          run(:remote, '-v').split($/).grep(regexp).first
+        end
+
+        def easy_clone(url, dir = '.', remote = 'origin')
+          clone '-n', '-o', remote, url, dir
+        end
+
+        def checkout_remote_branch(remote, branch = 'master')
+          checkout '-b', branch, "#{remote}/#{branch}"
+        end
+
+        def add_and_commit(msg)
+          add '.'
+          commit '-m', msg
+        end
+
+      end
+
+      git
+    end
+
     private
 
     # Loads the Rubyforge library, giving a

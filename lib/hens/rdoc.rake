@@ -78,6 +78,63 @@ begin
   end
 rescue RuntimeError => err
   raise unless err.to_s == 'Skipping Rubyforge tasks'
+
+  git do |git|
+
+    git_branch = 'gh-pages'
+
+    if git_remote = git.remote_for_branch(git_branch)
+      pages_url = git.url_for_remote(git_remote)
+      clone_dir = ".#{git_branch}"
+    elsif git_remote = git.find_remote(/git@github\.com:/)
+      git_remote, clone_url = git_remote.split(nil, 2)
+      clone_dir = ".clone-#{$$}-#{rand(100)}"
+    end
+
+    if pages_url  # inside git repo and found gh-pages branch
+
+      desc "Publish RDoc to GitHub pages"
+      task :publish_docs => :doc do
+        rm_rf clone_dir
+
+        git.easy_clone pages_url, clone_dir, git_remote
+
+        Dir.chdir(clone_dir) {
+          git.checkout_remote_branch git_remote, git_branch
+
+          cp_r Dir["../#{rdoc_task.rdoc_dir}/*"], '.'
+
+          git.add_and_commit 'Updated documentation.'
+          git.push git_remote, git_branch
+        }
+      end
+
+    elsif clone_url  # still git repo, but no gh-pages branch
+
+      desc "Create #{git_branch} branch on #{git_remote}"
+      task :make_ghpages do
+        git.easy_clone clone_url, clone_dir, git_remote
+
+        Dir.chdir(clone_dir) {
+          git.symbolic_ref 'HEAD', "refs/heads/#{git_branch}"
+
+          rm_f '.git/index'
+          git.clean '-fdx'
+
+          File.open('index.html', 'w') { |f| f.puts 'My GitHub Page' }
+
+          git.add_and_commit 'First pages commit.'
+          git.push git_remote, git_branch
+        }
+
+        rm_rf clone_dir
+
+        git.fetch git_remote
+      end
+
+    end
+
+  end
 end
 
 end
