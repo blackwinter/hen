@@ -202,10 +202,16 @@ class Hen
     # Loads the Gemcutter 'push' command, giving
     # a nicer error message if it's not found.
     def require_gemcutter(relax = true)
-      require 'rubygems/command_manager'
+      begin
+        require 'rubygems/commands/push_command'
+      rescue LoadError
+        # rubygems < 1.3.6, gemcutter < 0.4.0
 
-      require 'commands/abstract_command'
-      require 'commands/push'
+        require 'rubygems/command_manager'
+
+        require 'commands/abstract_command'
+        require 'commands/push'
+      end
 
       Gem::Commands::PushCommand
     rescue LoadError, NameError
