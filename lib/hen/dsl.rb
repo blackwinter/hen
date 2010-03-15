@@ -162,7 +162,7 @@ class Hen
         end
 
         def url_for_remote(remote)
-          run(:remote, '-v')[/\A#{Regexp.escape(remote)}\s+(.*)/, 1]
+          run(:remote, '-v')[/\A#{Regexp.escape(remote)}\s+(\S+)/, 1]
         end
 
         def find_remote(regexp)
