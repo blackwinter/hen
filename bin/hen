@@ -114,8 +114,8 @@ case action = ARGV.shift
             url, label = remote.split('=', 2).reverse
             system('git', 'remote', 'add', label ||= 'origin', url)
 
-            system('git', 'config', 'branch.master.remote', label
-            system('git', 'config', 'branch.master.merge', 'refs/heads/master'
+            system('git', 'config', 'branch.master.remote', label)
+            system('git', 'config', 'branch.master.merge', 'refs/heads/master')
           end
         end
       }
