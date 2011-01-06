@@ -1,6 +1,10 @@
 Hen :spec do
 
-  require 'spec/rake/spectask'
+  begin
+    require 'rspec/core/rake_task'
+  rescue LoadError
+    require 'spec/rake/spectask'
+  end
 
   spec_options = config[:spec]
 
@@ -12,22 +16,33 @@ Hen :spec do
       spec_files.unshift(spec_helper)
     end
 
-    spec_options.delete(:options) unless File.readable?(spec_options[:options])
+    opts_file = spec_options.delete(:options)
 
     spec_opts = spec_options.map { |option, value|
       option = '--' << option.to_s.tr('_', '-')
       value.is_a?(String) ? [option, value] : value ? option : nil
     }.compact.flatten
 
-    spec_task = lambda { |t|
-      t.spec_files = spec_files
-      t.spec_opts  = spec_opts
-    }
+    if opts_file && File.readable?(opts_file)
+      File.readlines(opts_file).each { |l| spec_opts << l.chomp }
+    end
 
-    Spec::Rake::SpecTask.new(&spec_task)
+    klass, spec_task = if defined?(RSpec::Core::RakeTask)
+      [RSpec::Core::RakeTask, lambda { |t|
+        t.pattern    = spec_files
+        t.rspec_opts = spec_opts
+      }]
+    else
+      [Spec::Rake::SpecTask, lambda { |t|
+        t.spec_files = spec_files
+        t.spec_opts  = spec_opts
+      }]
+    end
+
+    klass.new(&spec_task)
 
     #desc "Run specs with RCov"
-    Spec::Rake::SpecTask.new('spec:rcov') do |t|
+    klass.new('spec:rcov') do |t|
       spec_task[t]
 
       t.rcov = true
