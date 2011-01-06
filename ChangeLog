@@ -1,5 +1,57 @@
 = Revision history for hen
 
+== 0.2.4 [2011-01-06]
+
+* Added support for RSpec 2
+* Updated sample Rakefile to only warn about missing gem instead of bailing
+  out
+
+== 0.2.3 [2010-07-01]
+
+* Fixed syntax error
+
+== 0.2.2 [2010-07-01]
+
+* Set upstream branch when creating a Git-backed project from a remote repo
+* Ignore Git remote fetch/push indicator (2)
+
+== 0.2.1 [2010-03-15]
+
+* Ignore Git remote fetch/push indicator
+
+== 0.2.0 [2010-02-22]
+
+* RubyGems/Gemcutter merge
+
+== 0.1.9 [2009-12-29]
+
+* Fixed Git proxy object
+
+== 0.1.8 [2009-12-29]
+
+* Added support for publishing documentation on GitHub's gh-pages
+
+== 0.1.7 [2009-12-16]
+
+* Added Gemcutter support
+* Added Git support
+
+== 0.1.6 [2009-01-26]
+
+* Ignore nonexistent spec.opts file
+
+== 0.1.5 [2009-01-22]
+
+* Ruby 1.9 compatibility
+
+== 0.1.4 [2008-12-19]
+
+* Housekeeping
+
+== 0.1.3 [2008-12-09]
+
+* Moved to Git
+
 == 0.1.2 [2008-08-12]
 
 * Added task to update/create gemspec file (e.g., for github)

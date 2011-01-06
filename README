@@ -2,7 +2,7 @@
 
 == VERSION
 
-This documentation refers to hen version 0.2.3
+This documentation refers to hen version 0.2.4
 
 
 == DESCRIPTION
@@ -17,7 +17,7 @@ Documentation::     <http://prometheus.rubyforge.org/hen>
 Source code (old):: <http://prometheus.rubyforge.org/svn/scratch/hen>
 Source code::       <http://github.com/blackwinter/hen>
 Rubyforge project:: <http://rubyforge.org/projects/prometheus>
-Gemcutter::         <http://gemcutter.org/gems/hen>
+RubyGem::           <http://rubygems.org/gems/hen>
 
 
 == AUTHORS
@@ -27,7 +27,7 @@ Gemcutter::         <http://gemcutter.org/gems/hen>
 
 == LICENSE AND COPYRIGHT
 
-Copyright (C) 2007-2010 University of Cologne,
+Copyright (C) 2007-2011 University of Cologne,
 Albertus-Magnus-Platz, 50923 Cologne, Germany
 
 hen is free software: you can redistribute it and/or modify it under the
