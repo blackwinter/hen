@@ -41,12 +41,19 @@ Hen :spec do
 
     klass.new(&spec_task)
 
+    rcov_opts = ['--exclude', spec_files.join(',')]
+    rcov_file = File.join(spec_files.first[/[^\/.]+/], 'rcov.opts')
+
+    if rcov_file && File.readable?(rcov_file)
+      File.readlines(rcov_file).each { |l| rcov_opts << l.chomp }
+    end
+
     #desc "Run specs with RCov"
     klass.new('spec:rcov') do |t|
       spec_task[t]
 
       t.rcov = true
-      t.rcov_opts = ['--exclude', spec_files.join(',')]
+      t.rcov_opts = rcov_opts
     end
   end
 
