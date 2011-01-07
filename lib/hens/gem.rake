@@ -101,6 +101,11 @@ Hen :gem => :rdoc do
   pkg_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
     pkg.need_tar_gz = true
     pkg.need_zip    = true
+
+    if defined?(ZIP_COMMANDS)
+      require 'nuggets/file/which'
+      pkg.zip_command = File.which_command(ZIP_COMMANDS) || ZIP_COMMANDS.first
+    end
   end
 
 begin
