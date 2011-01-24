@@ -3,7 +3,7 @@
 #                                                                             #
 # A component of hen, the Rake helper.                                        #
 #                                                                             #
-# Copyright (C) 2007-2010 University of Cologne,                              #
+# Copyright (C) 2007-2011 University of Cologne,                              #
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
@@ -195,7 +195,7 @@ class Hen
       begin
         require 'rubyforge'
       rescue LoadError
-        raise "Please install the 'rubyforge' gem first."
+        raise "Please install the `rubyforge' gem first."
       end
     end
 
@@ -203,19 +203,17 @@ class Hen
     # a nicer error message if it's not found.
     def require_gemcutter(relax = true)
       begin
+        require 'rubygems/command_manager'
         require 'rubygems/commands/push_command'
       rescue LoadError
         # rubygems < 1.3.6, gemcutter < 0.4.0
-
-        require 'rubygems/command_manager'
-
         require 'commands/abstract_command'
         require 'commands/push'
       end
 
       Gem::Commands::PushCommand
     rescue LoadError, NameError
-      raise "Please install the 'gemcutter' gem first." unless relax
+      raise "Please install the `gemcutter' gem first." unless relax
     end
 
   end
