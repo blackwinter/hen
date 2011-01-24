@@ -4,8 +4,18 @@ Hen :rdoc do
 
   rdoc_options = config[:rdoc]
 
-  if gem_name = config[:gem][:name] or rf_package = config[:rubyforge][:package]
-    rdoc_options[:title] ||= "#{gem_name || rf_package} Application documentation"
+  rdoc_options[:title] ||= begin
+    title = 'Application documentation'
+
+    if name = config[:gem][:name] || config[:rubyforge][:package]
+      title.insert(0, "#{name} ")
+    end
+
+    if version = config[:gem][:version]
+      title << " (v#{version})"
+    end
+
+    title
   end
 
   ### rdoc_dir
