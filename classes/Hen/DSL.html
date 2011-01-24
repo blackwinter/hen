@@ -479,20 +479,18 @@ message if it&#8216;s not found.
      <span class="ruby-comment cmt"># File lib/hen/dsl.rb, line 204</span>
 204:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">require_gemcutter</span>(<span class="ruby-identifier">relax</span> = <span class="ruby-keyword kw">true</span>)
 205:       <span class="ruby-keyword kw">begin</span>
-206:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems/commands/push_command'</span>
-207:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span>
-208:         <span class="ruby-comment cmt"># rubygems &lt; 1.3.6, gemcutter &lt; 0.4.0</span>
-209: 
-210:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems/command_manager'</span>
-211: 
-212:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'commands/abstract_command'</span>
-213:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'commands/push'</span>
-214:       <span class="ruby-keyword kw">end</span>
-215: 
-216:       <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Commands</span><span class="ruby-operator">::</span><span class="ruby-constant">PushCommand</span>
-217:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span>, <span class="ruby-constant">NameError</span>
-218:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Please install the 'gemcutter' gem first.&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">relax</span>
-219:     <span class="ruby-keyword kw">end</span>
+206:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems/command_manager'</span>
+207:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubygems/commands/push_command'</span>
+208:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span>
+209:         <span class="ruby-comment cmt"># rubygems &lt; 1.3.6, gemcutter &lt; 0.4.0</span>
+210:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'commands/abstract_command'</span>
+211:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'commands/push'</span>
+212:       <span class="ruby-keyword kw">end</span>
+213: 
+214:       <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Commands</span><span class="ruby-operator">::</span><span class="ruby-constant">PushCommand</span>
+215:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span>, <span class="ruby-constant">NameError</span>
+216:       <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Please install the `gemcutter' gem first.&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">relax</span>
+217:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -521,7 +519,7 @@ found.
 195:       <span class="ruby-keyword kw">begin</span>
 196:         <span class="ruby-identifier">require</span> <span class="ruby-value str">'rubyforge'</span>
 197:       <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span>
-198:         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Please install the 'rubyforge' gem first.&quot;</span>
+198:         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;Please install the `rubyforge' gem first.&quot;</span>
 199:       <span class="ruby-keyword kw">end</span>
 200:     <span class="ruby-keyword kw">end</span>
 </pre>
