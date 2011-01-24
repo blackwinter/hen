@@ -1,5 +1,14 @@
 = Revision history for hen
 
+== 0.2.7 [2011-01-24]
+
+* RubyGems compatibility (Gem::CommandManager)
+* Include Gem version in RDoc title
+
+== 0.2.6 [2011-01-24]
+
+* (Botched release...)
+
 == 0.2.5 [2011-01-07]
 
 * Handle rcov.opts file for RSpec 2
