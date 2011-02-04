@@ -71,12 +71,12 @@ begin
       local_dir  = rdoc_task.rdoc_dir
       remote_dir = "/var/www/gforge-projects/#{rf_project}"
 
-      if rdoc_dir = rf_config[:rdoc_dir]
+      if remote_rdoc_dir = rf_config[:rdoc_dir]
         if rf_package = rf_config[:package]
-          rdoc_dir = rf_package if rdoc_dir == :package
+          remote_rdoc_dir = rf_package if remote_rdoc_dir == :package
         end
 
-        remote_dir = File.join(remote_dir, rdoc_dir)
+        remote_dir = File.join(remote_dir, remote_rdoc_dir)
       end
 
       execute(
