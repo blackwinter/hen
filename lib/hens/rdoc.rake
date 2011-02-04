@@ -58,13 +58,13 @@ Hen :rdoc do
 begin
   rubyforge do |rf_config|
 
-    desc 'Publish RDoc to Rubyforge'
+    desc 'Publish RDoc to RubyForge'
     task :publish_docs => :doc do
       rf_project = rf_config[:project]
-      abort 'Rubyforge project name missing' unless rf_project
+      abort 'RubyForge project name missing' unless rf_project
 
       rf_user = rf_config[:username]
-      abort 'Rubyforge user name missing' unless rf_user
+      abort 'RubyForge user name missing' unless rf_user
 
       rf_host = "#{rf_user}@rubyforge.org"
 
@@ -87,7 +87,7 @@ begin
 
   end
 rescue RuntimeError => err
-  raise unless err.to_s == 'Skipping Rubyforge tasks'
+  raise unless err.to_s == 'Skipping RubyForge tasks'
 
   git do |git|
 

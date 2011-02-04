@@ -71,7 +71,7 @@ class Hen
       end
     end
 
-    # Prepare the use of Rubyforge, optionally logging in right away.
+    # Prepare the use of RubyForge, optionally logging in right away.
     # Returns the RubyForge object.
     def init_rubyforge(login = true)
       require_rubyforge
@@ -82,15 +82,15 @@ class Hen
       rf
     end
 
-    # Encapsulates tasks targeting at Rubyforge, skipping those if no
-    # Rubyforge project is defined. Yields the Rubyforge configuration
+    # Encapsulates tasks targeting at RubyForge, skipping those if no
+    # RubyForge project is defined. Yields the RubyForge configuration
     # hash and, optionally, a proc to obtain RubyForge objects from (via
     # +call+; reaching out to init_rubyforge).
     def rubyforge(&block)
       rf_config  = config[:rubyforge]
       rf_project = rf_config[:project]
 
-      raise 'Skipping Rubyforge tasks' if rf_project.nil? || rf_project.empty?
+      raise 'Skipping RubyForge tasks' if rf_project.nil? || rf_project.empty?
 
       require_rubyforge
 
@@ -189,7 +189,7 @@ class Hen
 
     private
 
-    # Loads the Rubyforge library, giving a
+    # Loads the RubyForge library, giving a
     # nicer error message if it's not found.
     def require_rubyforge
       begin

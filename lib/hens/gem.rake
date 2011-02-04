@@ -111,7 +111,7 @@ Hen :gem => :rdoc do
 begin
   rubyforge do |rf_config, rf_pool|
 
-    desc 'Package and upload the release to Rubyforge'
+    desc 'Package and upload the release to RubyForge'
     task :release => [:package, :publish_docs] do
       files = Dir[File.join(pkg_task.package_dir, "#{pkg_task.package_name}.*")]
       abort 'Nothing to release!' if files.empty?
@@ -132,11 +132,11 @@ begin
 
   end
 rescue RuntimeError => err
-  raise unless err.to_s == 'Skipping Rubyforge tasks'
+  raise unless err.to_s == 'Skipping RubyForge tasks'
 
   gemcutter do |gc_pool|
 
-    desc 'Create the gem and upload it to Gemcutter'
+    desc 'Create the gem and upload it to RubyGems.org'
     task :release => [:gem] do
       gc = gc_pool.call
       gc.push(File.join(pkg_task.package_dir, pkg_task.gem_file))
