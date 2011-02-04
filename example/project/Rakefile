@@ -1,4 +1,4 @@
-require %q{lib/<%= ask! "Program's name" %>/version}
+require File.expand_path(%q{../lib/<%= ask! "Program's name" %>/version}, __FILE__)
 
 begin
   require 'hen'
