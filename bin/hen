@@ -76,7 +76,7 @@ case action = ARGV.shift
   when 'version', '--version'
     puts "hen v#{Hen::VERSION}"
   when 'config'
-    render(File.join(EXAMPLE, '.henrc'), henrc = Hen.henrc(true))
+    render(File.join(EXAMPLE, '_henrc'), henrc = Hen.henrc(true))
 
     puts
     puts "Your .henrc has been created: #{henrc}. Now adjust it to your needs."

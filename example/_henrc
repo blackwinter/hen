@@ -1,0 +1,7 @@
+---
+
+:gem:
+  :author: <%= fullname %>
+  :email:  <%= emailaddress %>
+
+# vim: syntax=yaml

@@ -8,8 +8,8 @@ begin
       :name         => %q{<%= progname %>},
       :version      => <%= classname %>::VERSION,
       :summary      => %q{<%= progdesc %>},
-      :files        => FileList['lib/**/*.rb'].to_a,
-      :extra_files  => FileList['[A-Z]*'].to_a,
+      :author       => %q{<%= fullname %>},
+      :email        => %q{<%= emailaddress %>},
       :dependencies => %w[]
     }
   }}
