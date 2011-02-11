@@ -120,11 +120,8 @@ case action = ARGV.shift
     replace = {}
 
     begin
-      # We need the name here so ask for it already. Additionally, it's
-      # a good opportunity to make sure the user's .henrc is available.
-      progname = ask!("Program's name", true) { |q|
-        q.default = File.basename(path)
-      }
+      # We need the name here, so ask for it already.
+      progname = progname(File.basename(path))
 
       Dir.chdir(skel) {
         Dir['**/*'].each { |sample|

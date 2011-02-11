@@ -1,2 +1,2 @@
-class <%= ask! "Module's/Class' name" %>
+module <%= classname %>
 end

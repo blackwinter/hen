@@ -1,4 +1,4 @@
-= License for <%= ask! "Program's name" %>
+= License for <%= progname %>
   
                       GNU GENERAL PUBLIC LICENSE
                          Version 3, 29 June 2007

@@ -1,4 +1,4 @@
-class <%= ask! "Module's/Class' name" %>
+module <%= classname %>
 
   module Version
 
