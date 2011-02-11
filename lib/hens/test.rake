@@ -2,11 +2,16 @@ Hen :test do
 
   require 'rake/testtask'
 
-  test_options = config[:test]
+  test_options = config[:test].merge(
+    :pattern => 'test/**/*_test.rb'
+  )
 
-  test_files = test_options.delete(:files) || FileList[test_options.delete(:pattern)]
+  test_files = test_options.delete(:files) ||
+      FileList[test_options.delete(:pattern)]
 
-  if test_files && !test_files.empty?
+  mangle_files!(test_files, :managed => false)
+
+  unless test_files.empty?
     Rake::TestTask.new { |t|
       t.test_files = test_files
 
