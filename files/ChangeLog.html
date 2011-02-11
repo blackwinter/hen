@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Mon Jan 24 20:31:34 +0100 2011</td>
+      <td>Sat Feb 12 00:05:58 +0100 2011</td>
     </tr>
     </table>
   </div>
@@ -70,6 +70,84 @@
 
     <div id="description">
       <h1>Revision history for hen</h1>
+<h2>0.3.2 [2011-02-11]</h2>
+<ul>
+<li>Fixed the (pseudo-)object eval stuff. So there&#8216;s hope we finally have
+a working release&#8230; <b>fingerscrossed</b>
+
+</li>
+</ul>
+<h2>0.3.1 [2011-02-11]</h2>
+<ul>
+<li>Fixed the RubyForge release task name in the prerequisite list for the
+<tt>:release</tt> task.
+
+</li>
+</ul>
+<h2>0.3.0 [2011-02-11]</h2>
+<ul>
+<li>Implementations for <tt>doc:publish</tt> and <tt>:release</tt> are now
+cumulative.
+
+</li>
+<li>The configuration (through the user&#8216;s <tt>.henrc</tt> files) is now
+cumulative.
+
+</li>
+<li>It&#8216;s no longer required to have a <tt>.henrc</tt> file.
+
+</li>
+<li>Changed default namespace in sample skeleton from class to module.
+
+</li>
+<li>Ignoring untracked files when building the official documentation and when
+building the Gem.
+
+<ul>
+<li>Added new task <tt>doc:local</tt> for the previous <tt>doc</tt> behaviour.
+
+</li>
+</ul>
+</li>
+<li>Renamed <tt>:gemspec</tt> -&gt; <tt>gem:spec</tt>, <tt>gemspec:update</tt>
+-&gt; <tt>gem:spec:update</tt>.
+
+</li>
+<li>New task <tt>gem:install</tt> to install the current Gem locally.
+
+</li>
+<li>Added support for RDoc 2/3.
+
+</li>
+<li>Recognize <tt>:legacy</tt> option in <tt>:spec</tt> options to force RSpec
+1 even when RSpec 2 is available. Same for RDoc 2 vs. 3.
+
+</li>
+<li>Added support for easy GitHub homepage by setting <tt>:homepage</tt> option
+to a symbol that identifies the GitHub user name.
+
+</li>
+<li>Better defaults for <tt>hen create/config</tt>.
+
+</li>
+<li>Hen::CLI#render makes a backup before overwriting an existing file.
+
+</li>
+<li>The RubyGems (pseudo-)object can now execute arbitrary commands.
+
+</li>
+<li>The <tt>gemcutter</tt> helper has been deprecated; use <tt>rubygems</tt>
+instead.
+
+</li>
+<li>Some defaults are set in <a href="../classes/Hen.html">Hen</a> files rather
+than relying on <tt>.henrc</tt> file.
+
+</li>
+<li>No longer messing with RubyGems/$LOAD_PATH.
+
+</li>
+</ul>
 <h2>0.2.7 [2011-01-24]</h2>
 <ul>
 <li>RubyGems compatibility (Gem::CommandManager)
