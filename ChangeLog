@@ -1,5 +1,42 @@
 = Revision history for hen
 
+== 0.3.2 [2011-02-11]
+
+* Fixed the (pseudo-)object eval stuff. So there's hope we finally have a
+  working release... *fingerscrossed*
+
+== 0.3.1 [2011-02-11]
+
+* Fixed the RubyForge release task name in the prerequisite list for the
+  <tt>:release</tt> task.
+
+== 0.3.0 [2011-02-11]
+
+* Implementations for <tt>doc:publish</tt> and <tt>:release</tt> are
+  now cumulative.
+* The configuration (through the user's <tt>.henrc</tt> files) is now
+  cumulative.
+* It's no longer required to have a <tt>.henrc</tt> file.
+* Changed default namespace in sample skeleton from class to module.
+* Ignoring untracked files when building the official documentation and
+  when building the Gem.
+  * Added new task <tt>doc:local</tt> for the previous +doc+ behaviour.
+* Renamed <tt>:gemspec</tt> -> <tt>gem:spec</tt>, <tt>gemspec:update</tt>
+  -> <tt>gem:spec:update</tt>.
+* New task <tt>gem:install</tt> to install the current Gem locally.
+* Added support for RDoc 2/3.
+* Recognize <tt>:legacy</tt> option in <tt>:spec</tt> options to force
+  RSpec 1 even when RSpec 2 is available. Same for RDoc 2 vs. 3.
+* Added support for easy GitHub homepage by setting <tt>:homepage</tt>
+  option to a symbol that identifies the GitHub user name.
+* Better defaults for <tt>hen create/config</tt>.
+* Hen::CLI#render makes a backup before overwriting an existing file.
+* The RubyGems (pseudo-)object can now execute arbitrary commands.
+* The +gemcutter+ helper has been deprecated; use +rubygems+ instead.
+* Some defaults are set in Hen files rather than relying on <tt>.henrc</tt>
+  file.
+* No longer messing with RubyGems/$LOAD_PATH.
+
 == 0.2.7 [2011-01-24]
 
 * RubyGems compatibility (Gem::CommandManager)
