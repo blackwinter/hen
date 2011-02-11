@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Tue Mar 02 17:55:27 +0100 2010</td>
+      <td>Fri Feb 11 23:06:16 +0100 2011</td>
     </tr>
     </table>
   </div>
@@ -73,11 +73,10 @@
       <h3 class="section-bar">Required files</h3>
 
       <div class="name-list">
-      yaml&nbsp;&nbsp;
-      forwardable&nbsp;&nbsp;
-      rubygems&nbsp;&nbsp;
       rake&nbsp;&nbsp;
+      yaml&nbsp;&nbsp;
       nuggets/env/user_home&nbsp;&nbsp;
+      nuggets/hash/deep_merge&nbsp;&nbsp;
       nuggets/proc/bind&nbsp;&nbsp;
       hen/dsl&nbsp;&nbsp;
       hen/version&nbsp;&nbsp;
@@ -125,16 +124,16 @@
       
         <div class="method-description">
           <p>
-Just forwards to <a href="../../classes/Hen.html#M000010">Hen.new</a>.
+Delegates to <a href="../../classes/Hen.html#M000012">Hen.new</a>.
 </p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000001-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000001-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 293</span>
-293: <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Hen</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-294:   <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-295: <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 326</span>
+326: <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Hen</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+327:   <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+328: <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -152,16 +151,17 @@ Just forwards to <a href="../../classes/Hen.html#M000010">Hen.new</a>.
       
         <div class="method-description">
           <p>
-Same as above, but overwrites any existing hen with the same name.
+Delegates to <a href="../../classes/Hen.html#M000012">Hen.new</a>, but
+overwrites any existing hen with the same name.
 </p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000002-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 301</span>
-301: <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Hen!</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-302:   <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">args</span>, <span class="ruby-keyword kw">true</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-303: <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 335</span>
+335: <span class="ruby-keyword kw">def</span> <span class="ruby-constant">Hen!</span>(<span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+336:   <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">args</span>, <span class="ruby-keyword kw">true</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+337: <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

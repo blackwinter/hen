@@ -55,16 +55,20 @@
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../files/lib/hen_rb.html">
-                lib/hen.rb
-                </a>
-        <br />
                 <a href="../files/lib/hen/dsl_rb.html">
                 lib/hen/dsl.rb
                 </a>
         <br />
                 <a href="../files/lib/hen/version_rb.html">
                 lib/hen/version.rb
+                </a>
+        <br />
+                <a href="../files/lib/hen/cli_rb.html">
+                lib/hen/cli.rb
+                </a>
+        <br />
+                <a href="../files/lib/hen_rb.html">
+                lib/hen.rb
                 </a>
         <br />
             </td>
@@ -86,6 +90,13 @@
 
   <div id="contextContent">
 
+    <div id="description">
+      <p>
+The class handling the program logic. This is what you use in your
+Rakefile. See the README for more information.
+</p>
+
+    </div>
 
 
    </div>
@@ -96,15 +107,18 @@
       <div class="name-list">
       <a href="#M000005">[]</a>&nbsp;&nbsp;
       <a href="#M000004">add_hen</a>&nbsp;&nbsp;
-      <a href="#M000007">config</a>&nbsp;&nbsp;
-      <a href="#M000008">find_henrc</a>&nbsp;&nbsp;
+      <a href="#M000008">config</a>&nbsp;&nbsp;
+      <a href="#M000007">default_henrc</a>&nbsp;&nbsp;
+      <a href="#M000010">find_henrc</a>&nbsp;&nbsp;
       <a href="#M000006">henrc</a>&nbsp;&nbsp;
-      <a href="#M000013">laid?</a>&nbsp;&nbsp;
+      <a href="#M000016">laid?</a>&nbsp;&nbsp;
       <a href="#M000003">lay!</a>&nbsp;&nbsp;
-      <a href="#M000011">lay!</a>&nbsp;&nbsp;
-      <a href="#M000009">load_hens</a>&nbsp;&nbsp;
-      <a href="#M000010">new</a>&nbsp;&nbsp;
-      <a href="#M000012">resolve_args</a>&nbsp;&nbsp;
+      <a href="#M000013">lay!</a>&nbsp;&nbsp;
+      <a href="#M000009">load_config</a>&nbsp;&nbsp;
+      <a href="#M000011">load_hens</a>&nbsp;&nbsp;
+      <a href="#M000012">new</a>&nbsp;&nbsp;
+      <a href="#M000015">resolve_args</a>&nbsp;&nbsp;
+      <a href="#M000014">verbose</a>&nbsp;&nbsp;
       </div>
     </div>
 
@@ -130,39 +144,51 @@ Module <a href="Hen/Version.html" class="link">Hen::Version</a><br />
       <div class="name-list">
         <table summary="Constants">
         <tr class="top-aligned-row context-row">
+          <td class="context-item-name">VERSION</td>
+          <td>=</td>
+          <td class="context-item-value">Version.to_s</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
           <td class="context-item-name">HENDIRS</td>
           <td>=</td>
-          <td class="context-item-value">[File.join(File.dirname(__FILE__), 'hens')] +             (ENV['HENPATH'] || '').split(File::PATH_SEPARATOR)</td>
+          <td class="context-item-value">[File.expand_path('../hens', __FILE__)]</td>
           <td width="3em">&nbsp;</td>
           <td class="context-item-desc">
-The directories which contain the hen files
+The directories to search for hen files. Set environment variable
+<tt>HENPATH</tt> to add more.
 
 </td>
         </tr>
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">HENS</td>
           <td>=</td>
-          <td class="context-item-value">Dir[*HENDIRS.map { |d| &quot;#{d}/*.rake&quot; }].uniq.inject(     Hash.new { |h, k| h[k] = [] }</td>
+          <td class="context-item-value">Hash.new { |h, k| h[k] = [] }</td>
           <td width="3em">&nbsp;</td>
           <td class="context-item-desc">
-All hens found, mapped by their name
+All hens found, mapped by their name.
 
 </td>
         </tr>
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">RCDIRS</td>
           <td>=</td>
-          <td class="context-item-value">['.', ENV.user_home]</td>
+          <td class="context-item-value">[ENV.user_home, '.']</td>
           <td width="3em">&nbsp;</td>
           <td class="context-item-desc">
-Directories to search for .<a href="Hen.html#M000006">henrc</a>
+Directories to search for <tt>.<a href="Hen.html#M000006">henrc</a></tt>
+files.
 
 </td>
         </tr>
         <tr class="top-aligned-row context-row">
-          <td class="context-item-name">VERSION</td>
+          <td class="context-item-name">HENRC_NAME</td>
           <td>=</td>
-          <td class="context-item-value">Version.to_s</td>
+          <td class="context-item-value">'.henrc'</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+The name of the <tt>.<a href="Hen.html#M000006">henrc</a></tt> file.
+
+</td>
         </tr>
         </table>
       </div>
@@ -178,27 +204,42 @@ Directories to search for .<a href="Hen.html#M000006">henrc</a>
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">block</td>
           <td class="context-item-value">&nbsp;[R]&nbsp;</td>
-          <td class="context-item-desc"></td>
+          <td class="context-item-desc">
+The hen&#8216;s definition block.
+
+</td>
         </tr>
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">dependencies</td>
           <td class="context-item-value">&nbsp;[R]&nbsp;</td>
-          <td class="context-item-desc"></td>
+          <td class="context-item-desc">
+The list of the hen&#8216;s dependencies.
+
+</td>
         </tr>
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">hens</td>
           <td class="context-item-value">&nbsp;[R]&nbsp;</td>
-          <td class="context-item-desc"></td>
+          <td class="context-item-desc">
+The global container for all loaded hens.
+
+</td>
         </tr>
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">name</td>
           <td class="context-item-value">&nbsp;[R]&nbsp;</td>
-          <td class="context-item-desc"></td>
+          <td class="context-item-desc">
+The hen&#8216;s name.
+
+</td>
         </tr>
         <tr class="top-aligned-row context-row">
           <td class="context-item-name">verbose</td>
           <td class="context-item-value">&nbsp;[R]&nbsp;</td>
-          <td class="context-item-desc"></td>
+          <td class="context-item-desc">
+The verbosity concerning errors and warnings.
+
+</td>
         </tr>
         </table>
       </div>
@@ -222,16 +263,16 @@ Directories to search for .<a href="Hen.html#M000006">henrc</a>
       
         <div class="method-description">
           <p>
-Get hen by name.
+Get <tt>hen</tt> by name.
 </p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000005-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 131</span>
-131:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">hen</span>)
-132:       <span class="ruby-ivar">@hens</span>[<span class="ruby-identifier">hen</span>]
-133:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 135</span>
+135:     <span class="ruby-keyword kw">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">hen</span>)
+136:       <span class="ruby-ivar">@hens</span>[<span class="ruby-identifier">hen</span>]
+137:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -256,14 +297,55 @@ if <tt>overwrite</tt> is true.
             onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000004-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 119</span>
-119:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_hen</span>(<span class="ruby-identifier">hen</span>, <span class="ruby-identifier">overwrite</span> = <span class="ruby-keyword kw">false</span>)
-120:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">overwrite</span>
-121:         <span class="ruby-ivar">@hens</span>[<span class="ruby-identifier">hen</span>.<span class="ruby-identifier">name</span>]   = <span class="ruby-identifier">hen</span>
-122:       <span class="ruby-keyword kw">else</span>
-123:         <span class="ruby-ivar">@hens</span>[<span class="ruby-identifier">hen</span>.<span class="ruby-identifier">name</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">hen</span>
-124:       <span class="ruby-keyword kw">end</span>
-125:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 123</span>
+123:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_hen</span>(<span class="ruby-identifier">hen</span>, <span class="ruby-identifier">overwrite</span> = <span class="ruby-keyword kw">false</span>)
+124:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">overwrite</span>
+125:         <span class="ruby-ivar">@hens</span>[<span class="ruby-identifier">hen</span>.<span class="ruby-identifier">name</span>]   = <span class="ruby-identifier">hen</span>
+126:       <span class="ruby-keyword kw">else</span>
+127:         <span class="ruby-ivar">@hens</span>[<span class="ruby-identifier">hen</span>.<span class="ruby-identifier">name</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">hen</span>
+128:       <span class="ruby-keyword kw">end</span>
+129:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="#M000008" class="method-signature">
+          <span class="method-name">config => aHash<br />
+config(key) => anObject<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The configuration resulting from the user&#8216;s <tt>.<a
+href="Hen.html#M000006">henrc</a></tt>. Takes optional <tt>key</tt>
+argument as &quot;path&quot; into the <a href="Hen.html#M000008">config</a>
+hash, returning the thusly retrieved value.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  config('a/b/c')  #=&gt; @config[:a][:b][:c]
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 165</span>
+165:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">config</span>(<span class="ruby-identifier">key</span> = <span class="ruby-keyword kw">nil</span>)
+166:       <span class="ruby-ivar">@config</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">load_config</span>
+167:       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@config</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">key</span>
+168: 
+169:       <span class="ruby-identifier">key</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'/'</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-ivar">@config</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span>) }
+170:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-constant">NoMethodError</span>
+171:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -274,39 +356,24 @@ if <tt>overwrite</tt> is true.
 
         <div class="method-heading">
           <a href="#M000007" class="method-signature">
-          <span class="method-name">config => aHash<br />
-config(key) => aValue<br />
+          <span class="method-name">default_henrc => aString<br />
 </span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-The configuration resulting from the user&#8216;s .<a
-href="Hen.html#M000006">henrc</a>. Takes optional <tt>key</tt> argument as
-&quot;path&quot; into the <a href="Hen.html#M000007">config</a> hash,
-returning the thusly retrieved value.
+The path to a suitable default <tt>.<a
+href="Hen.html#M000006">henrc</a></tt> location.
 </p>
-<p>
-Example:
-</p>
-<pre>
-  config('a/b/c')  #=&gt; @config[:a][:b][:c]
-</pre>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000007-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 153</span>
-153:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">config</span>(<span class="ruby-identifier">key</span> = <span class="ruby-keyword kw">nil</span>)
-154:       <span class="ruby-ivar">@config</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">henrc</span>)
-155:       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@config</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">key</span>
-156: 
-157:       <span class="ruby-identifier">key</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'/'</span>).<span class="ruby-identifier">inject</span>(<span class="ruby-ivar">@config</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-158:         <span class="ruby-identifier">value</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_sym</span>)
-159:       }
-160:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-constant">NoMethodError</span>
-161:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 151</span>
+151:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_henrc</span>
+152:       <span class="ruby-identifier">find_henrc</span>(<span class="ruby-keyword kw">false</span>).<span class="ruby-identifier">first</span>
+153:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -317,23 +384,24 @@ Example:
 
         <div class="method-heading">
           <a href="#M000006" class="method-signature">
-          <span class="method-name">henrc => aString<br />
+          <span class="method-name">henrc => anArray<br />
 </span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-The path to the user&#8216;s .<a href="Hen.html#M000006">henrc</a>
+The paths to the user&#8216;s <tt>.<a
+href="Hen.html#M000006">henrc</a></tt> files.
 </p>
           <p><a class="source-toggle" href="#"
             onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000006-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 139</span>
-139:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">henrc</span>(<span class="ruby-identifier">location_only</span> = <span class="ruby-keyword kw">false</span>)
-140:       <span class="ruby-ivar">@henrc</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">find_henrc</span>(<span class="ruby-identifier">location_only</span>)
-141:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 143</span>
+143:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">henrc</span>
+144:       <span class="ruby-ivar">@henrc</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">find_henrc</span>
+145:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -361,56 +429,50 @@ the <tt>:exclude</tt> option.
             onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000003-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 74</span>
- 74:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lay!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
- 75:       <span class="ruby-comment cmt"># Extract potential options hash</span>
- 76:       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
- 77: 
- 78:       <span class="ruby-ivar">@verbose</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:verbose</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:verbose</span>)
- 79: 
- 80:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
- 81:         <span class="ruby-keyword kw">yield</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">||=</span> {}).<span class="ruby-identifier">update</span>(<span class="ruby-identifier">value</span>) }
- 82:       <span class="ruby-keyword kw">end</span>
- 83: 
- 84:       <span class="ruby-comment cmt"># Handle include/exclude requirements</span>
- 85:       <span class="ruby-identifier">excl</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:exclude</span>]
- 86:       <span class="ruby-identifier">args</span>, <span class="ruby-identifier">default</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span>[<span class="ruby-identifier">excl</span> <span class="ruby-value">? </span>[<span class="ruby-operator">*</span><span class="ruby-identifier">excl</span>] <span class="ruby-operator">:</span> [], <span class="ruby-keyword kw">true</span>] <span class="ruby-operator">:</span> [<span class="ruby-identifier">args</span>, <span class="ruby-keyword kw">false</span>]
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 84</span>
+ 84:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lay!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+ 85:       <span class="ruby-comment cmt"># Extract potential options hash</span>
+ 86:       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
  87: 
- 88:       <span class="ruby-identifier">inclexcl</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">default</span>)
- 89:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span>
- 90:         <span class="ruby-identifier">inclexcl</span>[<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-operator">!</span><span class="ruby-identifier">default</span>
- 91:       }
- 92: 
- 93:       <span class="ruby-comment cmt"># Load all available hens (as far as the</span>
- 94:       <span class="ruby-comment cmt"># include/exclude conditions are met)</span>
- 95:       <span class="ruby-identifier">load_hens</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span>
- 96:         <span class="ruby-identifier">inclexcl</span>[<span class="ruby-identifier">hen</span>]
- 97:       }
+ 88:       <span class="ruby-ivar">@verbose</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:verbose</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">:verbose</span>)
+ 89: 
+ 90:       <span class="ruby-keyword kw">yield</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">update</span>(<span class="ruby-identifier">value</span>) } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+ 91: 
+ 92:       <span class="ruby-comment cmt"># Handle include/exclude requirements</span>
+ 93:       <span class="ruby-identifier">excl</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:exclude</span>]
+ 94:       <span class="ruby-identifier">args</span>, <span class="ruby-identifier">default</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span>[<span class="ruby-identifier">excl</span> <span class="ruby-value">? </span>[<span class="ruby-operator">*</span><span class="ruby-identifier">excl</span>] <span class="ruby-operator">:</span> [], <span class="ruby-keyword kw">true</span>] <span class="ruby-operator">:</span> [<span class="ruby-identifier">args</span>, <span class="ruby-keyword kw">false</span>]
+ 95: 
+ 96:       <span class="ruby-identifier">inclexcl</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">default</span>)
+ 97:       <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">inclexcl</span>[<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-operator">!</span><span class="ruby-identifier">default</span> }
  98: 
- 99:       <span class="ruby-comment cmt"># Execute each hen definition</span>
-100:       <span class="ruby-identifier">hens</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">hen</span><span class="ruby-operator">|</span>
-101:         <span class="ruby-comment cmt"># Load any dependencies, in case they're not included yet</span>
-102:         <span class="ruby-keyword kw">begin</span>
-103:           <span class="ruby-identifier">load_hens</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hen</span>.<span class="ruby-identifier">dependencies</span>)
-104:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
-105:           <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{name}: Required dependency missing: &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
-106:                <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">err</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value str">'.rake'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
-107:           <span class="ruby-keyword kw">next</span>
-108:         <span class="ruby-keyword kw">end</span>
-109: 
-110:         <span class="ruby-identifier">hen</span>.<span class="ruby-identifier">lay!</span>
-111:       }
-112:     <span class="ruby-keyword kw">end</span>
+ 99:       <span class="ruby-comment cmt"># Load all available hens (as far as the</span>
+100:       <span class="ruby-comment cmt"># include/exclude conditions are met)</span>
+101:       <span class="ruby-identifier">load_hens</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span> <span class="ruby-identifier">inclexcl</span>[<span class="ruby-identifier">hen</span>] }
+102: 
+103:       <span class="ruby-comment cmt"># Execute each hen definition</span>
+104:       <span class="ruby-identifier">hens</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">hen</span><span class="ruby-operator">|</span>
+105:         <span class="ruby-comment cmt"># Load any dependencies, in case they're not included yet</span>
+106:         <span class="ruby-keyword kw">begin</span>
+107:           <span class="ruby-identifier">load_hens</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hen</span>.<span class="ruby-identifier">dependencies</span>)
+108:         <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+109:           <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{name}: Required dependency missing: &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
+110:                <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">err</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-value str">'.rake'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
+111:           <span class="ruby-keyword kw">next</span>
+112:         <span class="ruby-keyword kw">end</span>
+113: 
+114:         <span class="ruby-identifier">hen</span>.<span class="ruby-identifier">lay!</span>
+115:       }
+116:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000010" class="method-detail">
-        <a name="M000010"></a>
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
 
         <div class="method-heading">
-          <a href="#M000010" class="method-signature">
+          <a href="#M000012" class="method-signature">
           <span class="method-name">new(args, overwrite = false) { ... }<br />
 </span>
           </a>
@@ -418,9 +480,9 @@ the <tt>:exclude</tt> option.
       
         <div class="method-description">
           <p>
-Creates a <a href="Hen.html#M000010">new</a> <a href="Hen.html">Hen</a>
+Creates a <a href="Hen.html#M000012">new</a> <a href="Hen.html">Hen</a>
 instance of a certain name and optional dependencies; see <a
-href="Hen.html#M000012">resolve_args</a> for details on the <tt>args</tt>
+href="Hen.html#M000015">resolve_args</a> for details on the <tt>args</tt>
 argument. Requires a definition block; see lay! for details.
 </p>
 <p>
@@ -428,20 +490,22 @@ Adds itself to the global hen container via <a
 href="Hen.html#M000004">add_hen</a>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000010-source">
+            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000012-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 224</span>
-224:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">overwrite</span> = <span class="ruby-keyword kw">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-225:     <span class="ruby-ivar">@name</span>, <span class="ruby-ivar">@dependencies</span> = <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
-226: 
-227:     <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@block</span> = <span class="ruby-identifier">block</span>
-228:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">LocalJumpError</span>, <span class="ruby-node">&quot;#{@name}: no block given&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
-229:       <span class="ruby-keyword kw">return</span>
-230:     <span class="ruby-keyword kw">end</span>
-231: 
-232:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">add_hen</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">overwrite</span>)
-233:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 247</span>
+247:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">overwrite</span> = <span class="ruby-keyword kw">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+248:     <span class="ruby-ivar">@name</span>, <span class="ruby-ivar">@dependencies</span> = <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
+249: 
+250:     <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@block</span> = <span class="ruby-identifier">block</span>
+251:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">LocalJumpError</span>, <span class="ruby-node">&quot;#{@name}: no block given&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
+252:       <span class="ruby-keyword kw">return</span>
+253:     <span class="ruby-keyword kw">end</span>
+254: 
+255:     <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword kw">false</span>
+256: 
+257:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">add_hen</span>(<span class="ruby-keyword kw">self</span>, <span class="ruby-identifier">overwrite</span>)
+258:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -449,43 +513,42 @@ href="Hen.html#M000004">add_hen</a>.
 
       <h3 class="section-bar">Private Class methods</h3>
 
-      <div id="method-M000008" class="method-detail">
-        <a name="M000008"></a>
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
 
         <div class="method-heading">
-          <a href="#M000008" class="method-signature">
-          <span class="method-name">find_henrc(location_only = false) => aString<br />
+          <a href="#M000010" class="method-signature">
+          <span class="method-name">find_henrc(must_exist = true) => anArray<br />
 </span>
           </a>
         </div>
       
         <div class="method-description">
           <p>
-Search for a readable .<a href="Hen.html#M000006">henrc</a>, or, if
-<tt>location_only</tt> is true, just return a suitable default location.
+Returns all readable <tt>.<a href="Hen.html#M000006">henrc</a></tt> files
+found in the (optional) environment variable <tt>HENRC</tt> and in each
+directory named in RCDIRS. If <tt>must_exist</tt> is false, no readability
+checks will be performed.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000008-source">
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 170</span>
-170:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_henrc</span>(<span class="ruby-identifier">location_only</span> = <span class="ruby-keyword kw">false</span>)
-171:       <span class="ruby-keyword kw">return</span> <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HENRC'</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">RCDIRS</span>.<span class="ruby-identifier">last</span>, <span class="ruby-value str">'.henrc'</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">location_only</span>
-172: 
-173:       <span class="ruby-keyword kw">if</span>    <span class="ruby-identifier">henrc</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HENRC'</span>]
-174:         <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;The specified .henrc file could not be found: #{henrc}&quot;</span> \
-175:           <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">henrc</span>)
-176:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">henrc</span> = <span class="ruby-constant">RCDIRS</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
-177:         <span class="ruby-identifier">h</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-value str">'.henrc'</span>)
-178:         <span class="ruby-keyword kw">break</span> <span class="ruby-identifier">h</span> <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">h</span>)
-179:       }
-180:       <span class="ruby-keyword kw">else</span>
-181:         <span class="ruby-identifier">abort</span> <span class="ruby-value str">&quot;No .henrc file could be found! Please &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
-182:               <span class="ruby-value str">&quot;create one first by running 'hen config'.&quot;</span>
-183:       <span class="ruby-keyword kw">end</span>
-184: 
-185:       <span class="ruby-identifier">henrc</span>
-186:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 196</span>
+196:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">find_henrc</span>(<span class="ruby-identifier">must_exist</span> = <span class="ruby-keyword kw">true</span>)
+197:       <span class="ruby-identifier">found</span> = []
+198: 
+199:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">env_henrc</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-value str">'HENRC'</span>]
+200:         <span class="ruby-identifier">found</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">env_henrc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">must_exist</span> <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">env_henrc</span>)
+201:       <span class="ruby-keyword kw">end</span>
+202: 
+203:       <span class="ruby-constant">RCDIRS</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
+204:         <span class="ruby-identifier">dir_henrc</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-constant">HENRC_NAME</span>)
+205:         <span class="ruby-identifier">found</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dir_henrc</span> <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">must_exist</span> <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">dir_henrc</span>)
+206:       }
+207: 
+208:       <span class="ruby-identifier">found</span>
+209:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -496,6 +559,41 @@ Search for a readable .<a href="Hen.html#M000006">henrc</a>, or, if
 
         <div class="method-heading">
           <a href="#M000009" class="method-signature">
+          <span class="method-name">load_config => aHash<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Load the configuration from the user&#8216;s <tt>.<a
+href="Hen.html#M000006">henrc</a></tt> files.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 179</span>
+179:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_config</span>
+180:       <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = {} }
+181: 
+182:       <span class="ruby-identifier">henrc</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+183:         <span class="ruby-identifier">yaml</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">path</span>)
+184:         <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">deep_update</span>(<span class="ruby-identifier">yaml</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">yaml</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+185:       }
+186: 
+187:       <span class="ruby-identifier">hash</span>
+188:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="#M000011" class="method-signature">
           <span class="method-name">load_hens(*hens)<br />
 load_hens(*hens) { |hen_name| ... }<br />
 </span>
@@ -509,21 +607,19 @@ are specified. If a block is given, only those hen files are loaded for
 which the block evaluates to true.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000009-source">
+            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000011-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 195</span>
-195:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_hens</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hens</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-196:       <span class="ruby-comment cmt"># By default, include all</span>
-197:       <span class="ruby-identifier">block</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">true</span> }
-198: 
-199:       (<span class="ruby-identifier">hens</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-constant">HENS</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">hens</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span>
-200:         <span class="ruby-identifier">hen</span> = <span class="ruby-identifier">hen</span>.<span class="ruby-identifier">to_s</span>
-201:         <span class="ruby-keyword kw">next</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">block</span>[<span class="ruby-identifier">hen</span>]
-202: 
-203:         <span class="ruby-constant">HENS</span>[<span class="ruby-identifier">hen</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">h</span> }
-204:       }
-205:     <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 218</span>
+218:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_hens</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">hens</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+219:       <span class="ruby-comment cmt"># By default, include all</span>
+220:       <span class="ruby-identifier">block</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">true</span> }
+221: 
+222:       (<span class="ruby-identifier">hens</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-value">? </span><span class="ruby-constant">HENS</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">hens</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span>
+223:         <span class="ruby-identifier">hen</span> = <span class="ruby-identifier">hen</span>.<span class="ruby-identifier">to_s</span>
+224:         <span class="ruby-constant">HENS</span>[<span class="ruby-identifier">hen</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">load</span> <span class="ruby-identifier">h</span> } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>[<span class="ruby-identifier">hen</span>]
+225:       }
+226:     <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -531,11 +627,11 @@ which the block evaluates to true.
 
       <h3 class="section-bar">Public Instance methods</h3>
 
-      <div id="method-M000011" class="method-detail">
-        <a name="M000011"></a>
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
 
         <div class="method-heading">
-          <a href="#M000011" class="method-signature">
+          <a href="#M000013" class="method-signature">
           <span class="method-name">hen.lay!<br />
 </span>
           </a>
@@ -547,22 +643,21 @@ Runs the definition block, exposing helper methods from the <a
 href="Hen/DSL.html">DSL</a>.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000011-source">
+            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000013-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 239</span>
-239:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lay!</span>
-240:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">laid?</span>
-241: 
-242:     <span class="ruby-comment cmt"># Call dependencies first</span>
-243:     <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span>
-244:       <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>[<span class="ruby-identifier">hen</span>].<span class="ruby-identifier">lay!</span>
-245:     }
-246: 
-247:     <span class="ruby-identifier">block</span>.<span class="ruby-identifier">bind</span>(<span class="ruby-constant">DSL</span>).<span class="ruby-identifier">call</span>
-248:   <span class="ruby-keyword kw">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
-249:     <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{name}: #{err} (#{err.class})&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">verbose</span>
-250:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 264</span>
+264:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">lay!</span>
+265:     <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">laid?</span>
+266: 
+267:     <span class="ruby-comment cmt"># Call dependencies first</span>
+268:     <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>[<span class="ruby-identifier">hen</span>].<span class="ruby-identifier">lay!</span>  }
+269: 
+270:     <span class="ruby-identifier">block</span>.<span class="ruby-identifier">bind</span>(<span class="ruby-constant">DSL</span>).<span class="ruby-identifier">call</span>
+271:   <span class="ruby-keyword kw">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+272:     <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{name}: #{err} (#{err.class})&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$DEBUG</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">verbose</span>
+273:     <span class="ruby-identifier">warn</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot;\n  &quot;</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">$DEBUG</span>
+274:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
@@ -570,11 +665,11 @@ href="Hen/DSL.html">DSL</a>.
 
       <h3 class="section-bar">Private Instance methods</h3>
 
-      <div id="method-M000013" class="method-detail">
-        <a name="M000013"></a>
+      <div id="method-M000016" class="method-detail">
+        <a name="M000016"></a>
 
         <div class="method-heading">
-          <a href="#M000013" class="method-signature">
+          <a href="#M000016" class="method-signature">
           <span class="method-name">laid? => true or false<br />
 </span>
           </a>
@@ -585,26 +680,26 @@ href="Hen/DSL.html">DSL</a>.
 Keeps track of whether the block has already been executed.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000013-source">
+            onclick="toggleCode('M000016-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000016-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 280</span>
-280:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">laid?</span>
-281:     <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@laid</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@laid</span>
-282: 
-283:     <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword kw">true</span>
-284:     <span class="ruby-keyword kw">false</span>
-285:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 313</span>
+313:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">laid?</span>
+314:     <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@laid</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@laid</span>
+315: 
+316:     <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword kw">true</span>
+317:     <span class="ruby-keyword kw">false</span>
+318:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>
       </div>
 
-      <div id="method-M000012" class="method-detail">
-        <a name="M000012"></a>
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
 
         <div class="method-heading">
-          <a href="#M000012" class="method-signature">
+          <a href="#M000015" class="method-signature">
           <span class="method-name">resolve_args(args) => [name, dependencies]<br />
 </span>
           </a>
@@ -617,25 +712,53 @@ single symbol (or string), or a hash with a single key pointing to a list
 of hens this one depends upon.
 </p>
           <p><a class="source-toggle" href="#"
-            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
-          <div class="method-source-code" id="M000012-source">
+            onclick="toggleCode('M000015-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000015-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/hen.rb, line 260</span>
-260:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
-261:     <span class="ruby-identifier">name</span>, <span class="ruby-identifier">dependencies</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">args</span>
-262:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Hash</span>
-263:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Too many hen names: #{args.keys.join(' ')}&quot;</span> \
-264:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
-265:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">'No hen name given'</span> \
-266:           <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
-267: 
-268:         [<span class="ruby-identifier">args</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>, [<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>]]
-269:       <span class="ruby-keyword kw">else</span>
-270:         [<span class="ruby-identifier">args</span>, []]
-271:     <span class="ruby-keyword kw">end</span>
-272: 
-273:     [<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">d</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">to_sym</span> }]
-274:   <span class="ruby-keyword kw">end</span>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 292</span>
+292:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
+293:     <span class="ruby-identifier">name</span>, <span class="ruby-identifier">dependencies</span> = <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">args</span>
+294:       <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Hash</span>
+295:         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+296:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-value str">'No hen name given'</span>
+297:         <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+298:           <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Too many hen names: #{args.keys.join(' ')}&quot;</span>
+299:         <span class="ruby-keyword kw">end</span>
+300: 
+301:         [<span class="ruby-identifier">args</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>, [<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>]]
+302:       <span class="ruby-keyword kw">else</span>
+303:         [<span class="ruby-identifier">args</span>, []]
+304:     <span class="ruby-keyword kw">end</span>
+305: 
+306:     [<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dependency</span><span class="ruby-operator">|</span> <span class="ruby-identifier">dependency</span>.<span class="ruby-identifier">to_sym</span> }]
+307:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="#M000014" class="method-signature">
+          <span class="method-name">verbose => true or false<br />
+</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Delegates to <a href="Hen.html#M000014">Hen.verbose</a>.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000014-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000014-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen.rb, line 282</span>
+282:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">verbose</span>
+283:     <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">verbose</span>
+284:   <span class="ruby-keyword kw">end</span>
 </pre>
           </div>
         </div>

@@ -56,7 +56,7 @@
     </tr>
     <tr class="top-aligned-row">
       <td><strong>Last Update:</strong></td>
-      <td>Mon Jan 24 15:09:27 +0100 2011</td>
+      <td>Fri Feb 11 23:06:16 +0100 2011</td>
     </tr>
     </table>
   </div>
@@ -72,11 +72,71 @@
       <h1>hen - Just a Rake helper</h1>
 <h2>VERSION</h2>
 <p>
-This documentation refers to hen version 0.2.7
+This documentation refers to hen version 0.3.1
 </p>
 <h2>DESCRIPTION</h2>
 <p>
-TODO: well, the description&#8230; ;-)
+<a href="../classes/Hen.html">Hen</a> is a Rake helper framework, similar
+to <a href="http://seattlerb.rubyforge.org/hoe/">Hoe</a> or <a
+href="http://fauna.github.com/fauna/echoe/">Echoe</a>. It provides you with
+a set of common Rake tasks by placing a little snippet like the following
+in your Rakefile:
+</p>
+<pre>
+  require 'hen'
+  require 'your/lib/version'
+
+  Hen.lay! {{
+    :gem =&gt; {
+      :name    =&gt; 'gem_name',
+      :version =&gt; Your::Lib::VERSION,
+      :summary =&gt; 'Project summary',
+      :author  =&gt; 'Your Name',
+      :email   =&gt; 'you@e.mail'
+    }
+  }}
+</pre>
+<h3>Generate a global configuration file</h3>
+<p>
+<a href="../classes/Hen.html">Hen</a> will read configuration options from
+your global configuration file if it&#8216;s present. You can generate a
+minimal <tt>.henrc</tt> with the <tt>hen</tt> script:
+</p>
+<pre>
+  hen config
+</pre>
+<p>
+This will create a new <tt>.henrc</tt> file in your home directory.
+</p>
+<h3>Create a new project</h3>
+<p>
+For new projects, you can also use the <tt>hen</tt> script to create an
+initial project directory for you that comes with default files and
+configuration:
+</p>
+<pre>
+  hen create path/to/your/lib
+</pre>
+<p>
+You can even provide a project template of your own:
+</p>
+<pre>
+  hen create path/to/your/lib path/to/your/template
+</pre>
+<p>
+In addition to that, <tt>hen</tt> can setup your new project with Git
+support:
+</p>
+<pre>
+  hen create path/to/your/lib -g
+</pre>
+<p>
+See <tt>hen help</tt> for further information.
+</p>
+<h3>Extending <a href="../classes/Hen.html">Hen</a></h3>
+<p>
+You can even extend <a href="../classes/Hen.html">Hen</a> with your own
+tasks. More on that later. (TODO)
 </p>
 <h2>LINKS</h2>
 <p>
