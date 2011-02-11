@@ -7,7 +7,7 @@ Hen :test do
   )
 
   test_files = test_options.delete(:files) ||
-      FileList[test_options.delete(:pattern)]
+      FileList[test_options.delete(:pattern)].to_a
 
   mangle_files!(test_files, :managed => false)
 

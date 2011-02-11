@@ -17,7 +17,7 @@ Hen :spec do
   end
 
   spec_files = spec_options.delete(:files) ||
-      FileList[spec_options.delete(:pattern)]
+      FileList[spec_options.delete(:pattern)].to_a
 
   mangle_files!(spec_files, :managed => false)
 
