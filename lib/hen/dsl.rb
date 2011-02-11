@@ -26,35 +26,35 @@
 ###############################################################################
 #++
 
+require 'hen'
 require 'nuggets/file/which'
 
 class Hen
 
   # Some helper methods for use inside of a Hen definition.
+
   module DSL
 
     extend self
 
     # The Hen configuration.
     def config
-      config = Hen.config
-
-      # always return a duplicate for a value, hence making the
-      # configuration immutable
-      def config.[](key)
-        fetch(key).dup
-      rescue IndexError
-        {}
-      end
-
-      config
+      extend_object(Hen.config.dup) {
+        # Always return a duplicate for a value,
+        # hence making the configuration immutable
+        def [](key)  # :nodoc:
+          fetch(key).dup
+        rescue IndexError
+          {}
+        end
+      }
     end
 
     # Define task +t+, but overwrite any existing task of that name!
-    # (Rake usually just adds them up)
-    def task!(t, &block)
+    # (Rake usually just adds them up.)
+    def task!(t, *args)
       Rake.application.instance_variable_get(:@tasks).delete(t.to_s)
-      task(t, &block)
+      task(t, *args, &block_given? ? Proc.new : nil)
     end
 
     # Find a command that is executable and run it. Intended for
@@ -71,137 +71,111 @@ class Hen
       end
     end
 
-    # Prepare the use of RubyForge, optionally logging in right away.
-    # Returns the RubyForge object.
-    def init_rubyforge(login = true)
-      require_rubyforge
+    # Clean up the file lists in +args+ by removing duplicates and either
+    # deleting any files that are not managed by the source code management
+    # system (untracked files) or, if the project is not version-controlled
+    # or the SCM is not recognized, deleting any files that don't exist.
+    #
+    # The return value indicates whether source control is in effect.
+    #
+    # Currently supported SCM's (in that order): Git[http://git-scm.com],
+    # SVN[http://subversion.tigris.org].
+    def mangle_files!(*args)
+      options = args.last.is_a?(Hash) ? args.pop : {}
 
-      rf = RubyForge.new.configure
-      rf.login if login
+      managed_files = [:git, :svn].find { |scm|
+        res = send(scm) { |scm_obj| scm_obj.managed_files }
+        break res if res
+      } if !options.has_key?(:managed) || options[:managed]
 
-      rf
+      args.each { |files|
+        files ? files.uniq! : next
+
+        if managed_files
+          files.replace(files & managed_files)
+        else
+          files.delete_if { |file| !File.readable?(file) }
+        end
+      }
+
+      !!managed_files
     end
 
     # Encapsulates tasks targeting at RubyForge, skipping those if no
     # RubyForge project is defined. Yields the RubyForge configuration
     # hash and, optionally, a proc to obtain RubyForge objects from (via
-    # +call+; reaching out to init_rubyforge).
-    def rubyforge(&block)
+    # +call+; reaching out to #init_rubyforge).
+    def rubyforge
       rf_config  = config[:rubyforge]
       rf_project = rf_config[:project]
 
-      raise 'Skipping RubyForge tasks' if rf_project.nil? || rf_project.empty?
+      if rf_project && !rf_project.empty? && have_rubyforge?
+        rf_config[:package] ||= rf_project
 
-      require_rubyforge
-
-      raise LocalJumpError, 'no block given' unless block
-
-      block_args = [rf_config]
-      block_args << lambda { |*args|
-        init_rubyforge(args.empty? || args.first)
-      } if block.arity > 1
-
-      block[*block_args]
-    end
-
-    # Prepare the use of Gemcutter. Returns the Gemcutter (pseudo-)object.
-    def init_gemcutter
-      require_gemcutter(false)
-
-      gc = Object.new
-
-      def gc.push(gem)
-        Gem::CommandManager.instance.run(['push', gem])
-      end
-
-      gc
-    end
-
-    # Encapsulates tasks targeting at Gemcutter, skipping those if
-    # Gemcutter's 'push' command is not available. Yields an optional
-    # proc to obtain Gemcutter objects from (via +call+; reaching out
-    # to init_gemcutter).
-    def gemcutter(&block)
-      raise 'Skipping Gemcutter tasks' unless require_gemcutter
-
-      raise LocalJumpError, 'no block given' unless block
-
-      block_args = []
-      block_args << lambda { |*args|
-        init_gemcutter
-      } if block.arity > 0
-
-      block[*block_args]
-    end
-
-    def git
-      raise 'Skipping Git tasks' unless File.directory?('.git')
-
-      yield init_git
-    end
-
-    def init_git
-      class << git = Object.new
-
-        instance_methods.each { |method|
-          undef_method(method) unless method =~ /\A__/
+        call_block(Proc.new, rf_config) { |*args|
+          init_rubyforge(args.empty? || args.first)
         }
-
-        def method_missing(cmd, *args)
-          sh 'git', cmd.to_s.tr('_', '-'), *args
-        end
-
-        #alias_method :sh, :system
-
-        def run(*args)
-          %x{#{args.unshift('git').join(' ')}}
-        end
-
-        def remote_for_branch(branch)
-          run(:branch, '-r')[/(\S+)\/#{Regexp.escape(branch)}$/, 1]
-        end
-
-        def url_for_remote(remote)
-          run(:remote, '-v')[/\A#{Regexp.escape(remote)}\s+(\S+)/, 1]
-        end
-
-        def find_remote(regexp)
-          run(:remote, '-v').split($/).grep(regexp).first
-        end
-
-        def easy_clone(url, dir = '.', remote = 'origin')
-          clone '-n', '-o', remote, url, dir
-        end
-
-        def checkout_remote_branch(remote, branch = 'master')
-          checkout '-b', branch, "#{remote}/#{branch}"
-        end
-
-        def add_and_commit(msg)
-          add '.'
-          commit '-m', msg
-        end
-
+      else
+        skipping 'RubyForge'
       end
+    end
 
-      git
+    # Encapsulates tasks targeting at RubyGems.org, skipping those if
+    # RubyGem's 'push' command is not available. Yields an optional
+    # proc to obtain RubyGems (pseudo-)objects from (via +call+;
+    # reaching out to #init_rubygems).
+    def rubygems
+      if have_rubygems?
+        call_block(Proc.new) { |*args| init_rubygems }
+      else
+        skipping 'RubyGems'
+      end
+    end
+
+    # DEPRECATED: Use #rubygems instead.
+    def gemcutter
+      warn "#{self}#gemcutter is deprecated; use `rubygems' instead."
+      rubygems(&block_given? ? Proc.new : nil)
+    end
+
+    # Encapsulates tasks targeting at Git, skipping those if the current
+    # project us not controlled by Git. Yields a Git object via #init_git.
+    def git
+      have_git? ? yield(init_git) : skipping('Git')
+    end
+
+    # Encapsulates tasks targeting at SVN, skipping those if the current
+    # project us not controlled by SVN. Yields an SVN object via #init_svn.
+    def svn
+      have_svn? ? yield(init_svn) : skipping('SVN')
     end
 
     private
 
-    # Loads the RubyForge library, giving a
-    # nicer error message if it's not found.
-    def require_rubyforge
-      begin
-        require 'rubyforge'
-      rescue LoadError
-        raise "Please install the `rubyforge' gem first."
-      end
+    # Warn about skipping tasks for +name+ (if +do_warn+ is true) and return nil.
+    def skipping(name, do_warn = Hen.verbose)
+      warn "Skipping #{name} tasks." if do_warn
+      nil
     end
 
-    # Loads the Gemcutter 'push' command, giving
+    # Warn about missing library +lib+ (if +do_warn+ is true) and return false.
+    def missing_lib(lib, do_warn = $DEBUG)
+      warn "Please install the `#{lib}' library for additional tasks." if do_warn
+      false
+    end
+
+    # Loads the RubyForge library, giving a
+    # nicer error message if it's not found.
+    def have_rubyforge?
+      require 'rubyforge'
+      true
+    rescue LoadError
+      missing_lib 'rubyforge'
+    end
+
+    # Loads the RubyGems +push+ command, giving
     # a nicer error message if it's not found.
-    def require_gemcutter(relax = true)
+    def have_rubygems?
       begin
         require 'rubygems/command_manager'
         require 'rubygems/commands/push_command'
@@ -213,7 +187,136 @@ class Hen
 
       Gem::Commands::PushCommand
     rescue LoadError, NameError
-      raise "Please install the `gemcutter' gem first." unless relax
+      missing_lib 'gemcutter'
+    end
+
+    # Checks whether the current project is managed by Git.
+    def have_git?
+      File.directory?('.git')
+    end
+
+    # Checks whether the current project is managed by SVN.
+    def have_svn?
+      File.directory?('.svn')
+    end
+
+    # Prepare the use of RubyForge, optionally logging
+    # in right away. Returns the RubyForge object.
+    def init_rubyforge(login = true)
+      return unless have_rubyforge?
+
+      rf = RubyForge.new.configure
+      rf.login if login
+
+      rf
+    end
+
+    # Prepare the use of RubyGems.org. Returns the RubyGems
+    # (pseudo-)object.
+    def init_rubygems
+      pseudo_object {
+        def method_missing(cmd, *args)  # :nodoc:
+          run(cmd, *args)
+        end
+
+        def run(cmd, *args)  # :nodoc:
+          Gem::CommandManager.instance.run([cmd.to_s.tr('_', '-'), *args])
+        end
+      } if have_rubygems?
+    end
+
+    # Prepare the use of Git. Returns the Git (pseudo-)object.
+    def init_git
+      pseudo_object {
+        def method_missing(cmd, *args)  # :nodoc:
+          options = args.last.is_a?(Hash) ? args.pop : {}
+          options[:verbose] = Hen.verbose unless options.has_key?(:verbose)
+
+          sh('git', cmd.to_s.tr('_', '-'), *args << options)
+        end
+
+        def run(cmd, *args)  # :nodoc:
+          %x{git #{args.unshift(cmd.to_s.tr('_', '-')).join(' ')}}
+        end
+
+        def remote_for_branch(branch)  # :nodoc:
+          run(:branch, '-r')[%r{(\S+)/#{Regexp.escape(branch)}$}, 1]
+        end
+
+        def url_for_remote(remote)  # :nodoc:
+          run(:remote, '-v')[%r{\A#{Regexp.escape(remote)}\s+(\S+)}, 1]
+        end
+
+        def find_remote(regexp)  # :nodoc:
+          run(:remote, '-v').split($/).grep(regexp).first
+        end
+
+        def easy_clone(url, dir = '.', remote = 'origin')  # :nodoc:
+          clone '-n', '-o', remote, url, dir
+        end
+
+        def checkout_remote_branch(remote, branch = 'master')  # :nodoc:
+          checkout '-b', branch, "#{remote}/#{branch}"
+        end
+
+        def add_and_commit(msg)  # :nodoc:
+          add '.'
+          commit '-m', msg
+        end
+
+        def managed_files  # :nodoc:
+          run(:ls_files).split($/)
+        end
+      } if have_git?
+    end
+
+    # Prepare the use of SVN. Returns the SVN (pseudo-)object.
+    def init_svn
+      pseudo_object {
+        def method_missing(cmd, *args)  # :nodoc:
+          options = args.last.is_a?(Hash) ? args.pop : {}
+          options[:verbose] = Hen.verbose unless options.has_key?(:verbose)
+
+          sh('svn', cmd.to_s.tr('_', '-'), *args << options)
+        end
+
+        def run(cmd, *args)  # :nodoc:
+          %x{svn #{args.unshift(cmd.to_s.tr('_', '-')).join(' ')}}
+        end
+
+        def version  # :nodoc:
+          %x{svnversion}[/\d+/]
+        end
+
+        def managed_files  # :nodoc:
+          run(:list, '--recursive').split($/)
+        end
+      } if have_svn?
+    end
+
+    # Extend +obj+ with given block.
+    def extend_object(obj)
+      obj.extend(Module.new {
+        class_eval(&Proc.new)
+      })
+    end
+
+    # Create a (pseudo-)object.
+    def pseudo_object
+      extend_object(Object.new) {
+        instance_methods.each { |method|
+          undef_method(method) unless method =~ /\A__/
+        }
+
+        class_eval(&Proc.new) if block_given?
+      }
+    end
+
+    # Calls block +block+ with +args+, appending an
+    # optional passed block if requested by +block+.
+    def call_block(block, *args)
+      args << Proc.new if block.arity > args.size
+      block[*args]
     end
 
   end
