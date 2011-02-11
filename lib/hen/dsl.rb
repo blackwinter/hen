@@ -294,21 +294,25 @@ class Hen
       } if have_svn?
     end
 
-    # Extend +obj+ with given block.
-    def extend_object(obj)
-      obj.extend(Module.new {
-        class_eval(&Proc.new)
-      })
+    # Extend +object+ with given +blocks+.
+    def extend_object(object, *blocks)
+      blocks << Proc.new if block_given?
+
+      singleton_class = class << object; self; end
+
+      blocks.compact.reverse_each { |block|
+        singleton_class.class_eval(&block)
+      }
+
+      object
     end
 
     # Create a (pseudo-)object.
     def pseudo_object
-      extend_object(Object.new) {
+      extend_object(Object.new, block_given? ? Proc.new : nil) {
         instance_methods.each { |method|
           undef_method(method) unless method =~ /\A__/
         }
-
-        class_eval(&Proc.new) if block_given?
       }
     end
 
