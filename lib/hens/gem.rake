@@ -88,7 +88,7 @@ Hen :gem => :rdoc do
 
     gem_options[:executables] ||= gem_options[:files].grep(%r{\Abin/})
 
-    mangle_files!(gem_options.values_at(
+    mangle_files!(*gem_options.values_at(
       :extra_rdoc_files, :files, :executables, :extensions
     ))
 
