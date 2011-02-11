@@ -5,7 +5,7 @@
 #                                                                             #
 # hen -- Just a Rake helper                                                   #
 #                                                                             #
-# Copyright (C) 2007-2009 University of Cologne,                              #
+# Copyright (C) 2007-2011 University of Cologne,                              #
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
@@ -30,14 +30,9 @@
 
 # TODO: Implement 'list' action -- List available hens with their tasks (?)
 
-require 'fileutils'
-require 'rubygems'
-require 'nuggets/enumerable/minmax'
-
-$: << File.join(File.dirname(__FILE__), '..', 'lib')
-
-require 'hen'
 require 'hen/cli'
+require 'fileutils'
+require 'nuggets/enumerable/minmax'
 
 include Hen::CLI
 
@@ -60,7 +55,7 @@ EOT
 
 abort USAGE if ARGV.empty?
 
-EXAMPLE = File.join(File.dirname(__FILE__), '..', 'example')
+EXAMPLE = File.expand_path('../../example', __FILE__)
 
 case action = ARGV.shift
   when 'help', '-h', '--help'
@@ -70,11 +65,11 @@ case action = ARGV.shift
 
     max = ACTIONS.keys.max(:length)
 
-    ACTIONS.sort.each { |act, desc|
-      desc = [*desc]
-      puts "  %-#{max}s - %s" % [act, desc.shift]
+    ACTIONS.sort.each { |action, description|
+      description = [*description]
+      puts "  %-#{max}s - %s" % [action, description.shift]
 
-      desc.each { |extra|
+      description.each { |extra|
         puts "  %#{max}s   + %s" % [' ', extra]
       }
     }
@@ -84,7 +79,7 @@ case action = ARGV.shift
     render(File.join(EXAMPLE, '.henrc'), henrc = Hen.henrc(true))
 
     puts
-    puts "Your .henrc has been created: #{henrc}. Now modify it to your needs."
+    puts "Your .henrc has been created: #{henrc}. Now adjust it to your needs."
   when 'create'
     path = File.expand_path(ARGV.shift)
     abort 'Path argument missing!' unless path
@@ -134,12 +129,15 @@ case action = ARGV.shift
       Dir.chdir(skel) {
         Dir['**/*'].each { |sample|
           target = File.join(path, sample.gsub(/__progname__/, progname))
+
+          next if target.sub!(%r{(\A|/)[._](git[^/]+)\z}, '\1.\2') && !git
+
           created << target
 
           if File.directory?(sample)
-            Dir.mkdir(target)
+            FileUtils.mkdir_p(target)
           else
-            replace[target] = render(sample, target).scan(/### .* ###/)
+            replace[target] = render(sample, target).scan(/### .+ ###/)
           end
         }
       }
@@ -148,15 +146,13 @@ case action = ARGV.shift
       created.clear
     ensure
       # In case of an exception or premature program exit: Clean up!
-      created.reverse.each { |p|
+      created.reverse.each { |item|
+        next unless File.exist?(item)
+
         begin
-          (File.directory?(p) ? Dir : File).unlink(p) if File.readable?(p)
+          (File.directory?(item) ? Dir : File).unlink(item)
         rescue Errno::ENOTEMPTY => err
-          if File.basename(p) == '.git'
-            FileUtils.rm_rf(p)
-          else
-            raise err
-          end
+          File.basename(item) == '.git' ? FileUtils.rm_rf(item) : raise(err)
         end
       }
     end
