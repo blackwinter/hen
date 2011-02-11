@@ -1,38 +1,58 @@
 Hen :gem => :rdoc do
   # Dependencies:
-  # * rdoc -- Uses RDOC_OPTIONS and 'publish_docs' task
+  # * rdoc -- Uses RDOC_OPTIONS and 'doc:publish' task
 
   require 'rake/gempackagetask'
 
-  gem_options = config[:gem]
-  rf_config   = config[:rubyforge]
+  gem_options = config[:gem].merge(
+    :files => FileList[
+      'lib/**/*.rb',
+      'bin/*'
+    ].to_a,
+    :default_extra_files => FileList[
+      '[A-Z]*',
+      'example/**/*',
+      'ext/**/*',
+      'spec/**/*', '.rspec',
+      'test/**/*', '.autotest'
+    ].to_a,
+    :extensions => FileList[
+      'ext/**/extconf.rb'
+    ].to_a,
+    :require_path => 'lib'
+  )
+
+  rf_config = config[:rubyforge]
 
   if Object.const_defined?(:RDOC_OPTIONS)
+    rdoc_files = RDOC_OPTIONS[:rdoc_files]
+    gem_options[:has_rdoc] = !rdoc_files.empty?
+
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
-    rdoc_files                   = RDOC_OPTIONS[:rdoc_files]
   end
 
   gem_spec = Gem::Specification.new { |spec|
 
     ### name
 
-    gem_options[:name] ||= rf_config[:package]
+    gem_name = gem_options[:name] ||= rf_config[:package]
 
-    abort 'Gem name missing' unless gem_options[:name]
+    abort 'Gem name missing' unless gem_name
 
     ### version
 
     abort 'Gem version missing' unless gem_options[:version]
 
-    if gem_options.delete(:append_svnversion) && svnversion = `svnversion`[/\d+/]
-      gem_options[:version] << '.' << svnversion
-    end
+    svn { |svn|
+      gem_options[:version] << '.' << svn.version
+    } if gem_options.delete(:append_svnversion)
 
     ### author(s)
 
-    if author = gem_options.delete(:author)
-      gem_options[:authors] ||= [author]
-    end
+    authors = gem_options[:authors] ||= []
+    authors.concat(Array(gem_options.delete(:author))).uniq!
+
+    warn 'Gem author(s) missing' if authors.empty?
 
     ### description
 
@@ -43,27 +63,34 @@ Hen :gem => :rdoc do
     gem_options[:rubyforge_project] ||= rf_config[:project]
 
     if rf_project = gem_options[:rubyforge_project] and !rf_project.empty?
-      rdoc_dir = rf_config[:rdoc_dir] == :package ?
-        rf_config[:package] || gem_options[:name] : RDOC_OPTIONS[:rdoc_dir]
-
-      gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{rdoc_dir}"
+      rf_rdoc_dir = RDOC_OPTIONS[:rf_rdoc_dir] if Object.const_defined?(:RDOC_OPTIONS)
+      gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{rf_rdoc_dir}"
     end
 
-    if gem_options[:homepage] && gem_options[:homepage] !~ %r{://}
-      gem_options[:homepage] = 'http://' << gem_options[:homepage]
+    if homepage = gem_options[:homepage]
+      homepage = "github.com/#{homepage}/#{gem_name}" if homepage.is_a?(Symbol)
+      homepage.insert(0, 'http://') unless homepage.empty? || homepage =~ %r{://}
     end
 
-    ### extra_rdoc_files, files, executables, bindir
+    ### extra_rdoc_files, files, extensions, executables, bindir
 
     gem_options[:files]            ||= []
+    gem_options[:extensions]       ||= []
     gem_options[:extra_rdoc_files] ||= rdoc_files - gem_options[:files] if rdoc_files
-    gem_options[:files]             += gem_options.delete(:extra_files) || []
 
-    gem_options[:executables] ||= gem_options[:files].grep(/\Abin\//)
-
-    [:extra_rdoc_files, :files, :executables].each { |files|
-      gem_options[files].delete_if { |file| !File.exists?(file) }
+    [:extra_files, :default_extra_files].each { |files|
+      gem_options[:files].concat(gem_options.delete(files) || [])
     }
+
+    if exclude_files = gem_options.delete(:exclude_files)
+      gem_options[:files] -= exclude_files
+    end
+
+    gem_options[:executables] ||= gem_options[:files].grep(%r{\Abin/})
+
+    mangle_files!(gem_options.values_at(
+      :extra_rdoc_files, :files, :executables, :extensions
+    ))
 
     unless gem_options[:executables].empty?
       gem_options[:bindir] ||= File.dirname(gem_options[:executables].first)
@@ -76,20 +103,22 @@ Hen :gem => :rdoc do
       spec.add_dependency(*dependency)
     }
 
+    (gem_options.delete(:development_dependencies) || []).each { |dependency|
+      spec.add_development_dependency(*dependency)
+    }
+
     ### => set options!
 
-    gem_options.each { |option, value|
-      spec.send("#{option}=", value)
-    }
+    gem_options.each { |option, value| spec.send("#{option}=", value) }
   }
 
   desc 'Display the gem specification'
-  task :gemspec do
+  task 'gem:spec' do
     puts gem_spec.to_ruby
   end
 
   desc "Update (or create) the project's gemspec file"
-  task 'gemspec:update' do
+  task 'gem:spec:update' do
     file = "#{gem_spec.name}.gemspec"
     action = File.exists?(file) ? 'Updated' : 'Created'
 
@@ -98,7 +127,7 @@ Hen :gem => :rdoc do
     puts "#{action} #{file}"
   end
 
-  pkg_task = Rake::GemPackageTask.new(gem_spec) do |pkg|
+  pkg_task = Rake::GemPackageTask.new(gem_spec) { |pkg|
     pkg.need_tar_gz = true
     pkg.need_zip    = true
 
@@ -106,13 +135,33 @@ Hen :gem => :rdoc do
       require 'nuggets/file/which'
       pkg.zip_command = File.which_command(ZIP_COMMANDS) || ZIP_COMMANDS.first
     end
+  }
+
+  release_desc = "Release #{pkg_task.name} version #{pkg_task.version}"
+
+  rubygems do |rg_pool|
+
+    gem_path = File.join(pkg_task.package_dir, pkg_task.gem_file)
+
+    desc "Create the gem and install it"
+    task 'gem:install' => :gem do
+      rg_pool.call.install(gem_path)
+    end
+
+    desc 'Create the gem and upload it to RubyGems.org'
+    task 'gem:push' => :gem do
+      rg_pool.call.push(gem_path)
+    end
+
+    desc release_desc; release_desc = nil
+    task :release => 'gem:push'
+
   end
 
-begin
   rubyforge do |rf_config, rf_pool|
 
     desc 'Package and upload the release to RubyForge'
-    task :release => [:package, :publish_docs] do
+    task 'release:rubyforge' => [:package, 'doc:publish'] do
       files = Dir[File.join(pkg_task.package_dir, "#{pkg_task.package_name}.*")]
       abort 'Nothing to release!' if files.empty?
 
@@ -130,19 +179,9 @@ begin
       rf.add_release(rf_config[:project], pkg_task.name, version, *files)
     end
 
-  end
-rescue RuntimeError => err
-  raise unless err.to_s == 'Skipping RubyForge tasks'
-
-  gemcutter do |gc_pool|
-
-    desc 'Create the gem and upload it to RubyGems.org'
-    task :release => [:gem] do
-      gc = gc_pool.call
-      gc.push(File.join(pkg_task.package_dir, pkg_task.gem_file))
-    end
+    desc release_desc
+    task :release => 'rubyforge:release'
 
   end
-end
 
 end
