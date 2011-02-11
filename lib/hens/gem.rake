@@ -180,7 +180,7 @@ Hen :gem => :rdoc do
     end
 
     desc release_desc
-    task :release => 'rubyforge:release'
+    task :release => 'release:rubyforge'
 
   end
 
