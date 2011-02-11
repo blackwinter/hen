@@ -3,7 +3,7 @@
 #                                                                             #
 # hen -- Just a Rake helper                                                   #
 #                                                                             #
-# Copyright (C) 2007-2008 University of Cologne,                              #
+# Copyright (C) 2007-2011 University of Cologne,                              #
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
@@ -26,42 +26,52 @@
 ###############################################################################
 #++
 
-require 'yaml'
-require 'forwardable'
-
-require 'rubygems'
 require 'rake'
+require 'yaml'
 require 'nuggets/env/user_home'
+require 'nuggets/hash/deep_merge'
 require 'nuggets/proc/bind'
 
 require 'hen/dsl'
 require 'hen/version'
 
+# The class handling the program logic. This is what you use in your Rakefile.
+# See the README for more information.
+
 class Hen
 
-  # The directories which contain the hen files
-  HENDIRS = [File.join(File.dirname(__FILE__), 'hens')] +
-            (ENV['HENPATH'] || '').split(File::PATH_SEPARATOR)
+  # The directories to search for hen files. Set
+  # environment variable +HENPATH+ to add more.
+  HENDIRS = [File.expand_path('../hens', __FILE__)]
 
-  # All hens found, mapped by their name
-  HENS = Dir[*HENDIRS.map { |d| "#{d}/*.rake" }].uniq.inject(
-    Hash.new { |h, k| h[k] = [] }
-  ) { |hash, hen|
-    hash[File.basename(hen, '.rake')] << hen; hash
-  }
+  ENV['HENPATH'].split(File::PATH_SEPARATOR).each { |dir|
+    HENDIRS << File.expand_path(dir)
+  } if ENV['HENPATH']
 
-  # Directories to search for .henrc
-  RCDIRS = ['.', ENV.user_home]
+  HENDIRS.uniq!
 
-  # A container for all loaded hens
-  @hens = {}
+  # All hens found, mapped by their name.
+  HENS = Hash.new { |h, k| h[k] = [] }
 
-  # The verbosity concerning errors and warnings
-  @verbose = true
+  HENDIRS.each { |dir| Dir["#{dir}/*.rake"].each { |hen|
+    HENS[File.basename(hen, '.rake')] << hen
+  } }
+
+  # Directories to search for <tt>.henrc</tt> files.
+  RCDIRS = [ENV.user_home, '.']
+
+  # The name of the <tt>.henrc</tt> file.
+  HENRC_NAME = '.henrc'
+
+  @hens, @verbose = {}, $VERBOSE
 
   class << self
 
-    attr_reader :hens, :verbose
+    # The global container for all loaded hens.
+    attr_reader :hens
+
+    # The verbosity concerning errors and warnings.
+    attr_reader :verbose
 
     # call-seq:
     #   lay!
@@ -77,24 +87,18 @@ class Hen
 
       @verbose = options[:verbose] if options.has_key?(:verbose)
 
-      if block_given?
-        yield.each { |key, value| (config[key] ||= {}).update(value) }
-      end
+      yield.each { |key, value| config[key].update(value) } if block_given?
 
       # Handle include/exclude requirements
       excl = options[:exclude]
       args, default = args.empty? ? [excl ? [*excl] : [], true] : [args, false]
 
       inclexcl = Hash.new(default)
-      args.each { |arg|
-        inclexcl[arg.to_s] = !default
-      }
+      args.each { |arg| inclexcl[arg.to_s] = !default }
 
       # Load all available hens (as far as the
       # include/exclude conditions are met)
-      load_hens { |hen|
-        inclexcl[hen]
-      }
+      load_hens { |hen| inclexcl[hen] }
 
       # Execute each hen definition
       hens.each { |name, hen|
@@ -127,62 +131,81 @@ class Hen
     # call-seq:
     #   Hen[hen] => aHen
     #
-    # Get hen by name.
+    # Get +hen+ by name.
     def [](hen)
       @hens[hen]
     end
 
     # call-seq:
-    #   henrc => aString
+    #   henrc => anArray
     #
-    # The path to the user's .henrc
-    def henrc(location_only = false)
-      @henrc ||= find_henrc(location_only)
+    # The paths to the user's <tt>.henrc</tt> files.
+    def henrc
+      @henrc ||= find_henrc
+    end
+
+    # call-seq:
+    #   default_henrc => aString
+    #
+    # The path to a suitable default <tt>.henrc</tt> location.
+    def default_henrc
+      find_henrc(false).first
     end
 
     # call-seq:
     #   config => aHash
-    #   config(key) => aValue
+    #   config(key) => anObject
     #
-    # The configuration resulting from the user's .henrc. Takes optional
-    # +key+ argument as "path" into the config hash, returning the thusly
-    # retrieved value.
+    # The configuration resulting from the user's <tt>.henrc</tt>. Takes
+    # optional +key+ argument as "path" into the config hash, returning
+    # the thusly retrieved value.
     #
     # Example:
     #   config('a/b/c')  #=> @config[:a][:b][:c]
     def config(key = nil)
-      @config ||= YAML.load_file(henrc)
+      @config ||= load_config
       return @config unless key
 
-      key.split('/').inject(@config) { |value, k|
-        value.fetch(k.to_sym)
-      }
+      key.split('/').inject(@config) { |value, k| value.fetch(k.to_sym) }
     rescue IndexError, NoMethodError
     end
 
     private
 
     # call-seq:
-    #   find_henrc(location_only = false) => aString
+    #   load_config => aHash
     #
-    # Search for a readable .henrc, or, if +location_only+ is true, just return
-    # a suitable default location.
-    def find_henrc(location_only = false)
-      return ENV['HENRC'] || File.join(RCDIRS.last, '.henrc') if location_only
+    # Load the configuration from the user's <tt>.henrc</tt> files.
+    def load_config
+      hash = Hash.new { |h, k| h[k] = {} }
 
-      if    henrc = ENV['HENRC']
-        abort "The specified .henrc file could not be found: #{henrc}" \
-          unless File.readable?(henrc)
-      elsif henrc = RCDIRS.find { |dir|
-        h = File.join(dir, '.henrc')
-        break h if File.readable?(h)
+      henrc.each { |path|
+        yaml = YAML.load_file(path)
+        hash.deep_update(yaml) if yaml.is_a?(Hash)
       }
-      else
-        abort "No .henrc file could be found! Please " <<
-              "create one first by running 'hen config'."
+
+      hash
+    end
+
+    # call-seq:
+    #   find_henrc(must_exist = true) => anArray
+    #
+    # Returns all readable <tt>.henrc</tt> files found in the (optional)
+    # environment variable +HENRC+ and in each directory named in RCDIRS.
+    # If +must_exist+ is false, no readability checks will be performed.
+    def find_henrc(must_exist = true)
+      found = []
+
+      if env_henrc = ENV['HENRC']
+        found << env_henrc if !must_exist || File.readable?(env_henrc)
       end
 
-      henrc
+      RCDIRS.each { |dir|
+        dir_henrc = File.join(dir, HENRC_NAME)
+        found << dir_henrc if !must_exist || File.readable?(dir_henrc)
+      }
+
+      found
     end
 
     # call-seq:
@@ -198,20 +221,20 @@ class Hen
 
       (hens.empty? ? HENS.keys : hens).each { |hen|
         hen = hen.to_s
-        next unless block[hen]
-
-        HENS[hen].each { |h| load h }
+        HENS[hen].each { |h| load h } if block[hen]
       }
     end
 
   end
 
-  extend Forwardable
+  # The hen's name.
+  attr_reader :name
 
-  # Forward to the class
-  def_delegators self, :verbose
+  # The list of the hen's dependencies.
+  attr_reader :dependencies
 
-  attr_reader :name, :dependencies, :block
+  # The hen's definition block.
+  attr_reader :block
 
   # call-seq:
   #   new(args, overwrite = false) { ... }
@@ -229,6 +252,8 @@ class Hen
       return
     end
 
+    @laid = false
+
     self.class.add_hen(self, overwrite)
   end
 
@@ -240,16 +265,23 @@ class Hen
     return if laid?
 
     # Call dependencies first
-    dependencies.each { |hen|
-      self.class[hen].lay!
-    }
+    dependencies.each { |hen| self.class[hen].lay!  }
 
     block.bind(DSL).call
   rescue => err
-    warn "#{name}: #{err} (#{err.class})" if verbose
+    warn "#{name}: #{err} (#{err.class})" if $DEBUG || verbose
+    warn err.backtrace.join("\n  ") if $DEBUG
   end
 
   private
+
+  # call-seq:
+  #   verbose => true or false
+  #
+  # Delegates to Hen.verbose.
+  def verbose
+    self.class.verbose
+  end
 
   # call-seq:
   #   resolve_args(args) => [name, dependencies]
@@ -260,17 +292,18 @@ class Hen
   def resolve_args(args)
     name, dependencies = case args
       when Hash
-        raise ArgumentError, "Too many hen names: #{args.keys.join(' ')}" \
-          if args.size > 1
-        raise ArgumentError, 'No hen name given' \
-          if args.size < 1
+        if args.empty?
+          raise ArgumentError, 'No hen name given'
+        elsif args.size > 1
+          raise ArgumentError, "Too many hen names: #{args.keys.join(' ')}"
+        end
 
         [args.keys.first, [*args.values.first]]
       else
         [args, []]
     end
 
-    [name.to_sym, dependencies.map { |d| d.to_sym }]
+    [name.to_sym, dependencies.map { |dependency| dependency.to_sym }]
   end
 
   # call-seq:
@@ -289,7 +322,7 @@ end
 # call-seq:
 #   Hen(args) { ... }
 #
-# Just forwards to Hen.new.
+# Delegates to Hen.new.
 def Hen(args, &block)
   Hen.new(args, &block)
 end
@@ -297,7 +330,8 @@ end
 # call-seq:
 #   Hen!(args) { ... }
 #
-# Same as above, but overwrites any existing hen with the same name.
+# Delegates to Hen.new, but overwrites
+# any existing hen with the same name.
 def Hen!(args, &block)
   Hen.new(args, true, &block)
 end
