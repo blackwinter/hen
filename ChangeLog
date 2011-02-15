@@ -1,5 +1,10 @@
 = Revision history for hen
 
+== 0.3.3 [2011-02-15]
+
+* Added <tt>release:tag</tt> task.
+* Better default project name handling.
+
 == 0.3.2 [2011-02-11]
 
 * Fixed the (pseudo-)object eval stuff. So there's hope we finally have a
