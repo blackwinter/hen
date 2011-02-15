@@ -63,6 +63,11 @@ class Hen
       task(t, *args, &block_given? ? Proc.new : nil)
     end
 
+    # Return true if task +t+ is defined, false otherwise.
+    def have_task?(t)
+      Rake.application.instance_variable_get(:@tasks).has_key?(t.to_s)
+    end
+
     # Find a command that is executable and run it. Intended for
     # platform-dependent alternatives (Command A is not available?
     # Then try B instead).

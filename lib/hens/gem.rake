@@ -138,6 +138,7 @@ Hen :gem => :rdoc do
   }
 
   release_desc = "Release #{pkg_task.name} version #{pkg_task.version}"
+  tag_desc     = "Tag the #{pkg_task.name} release version #{pkg_task.version}"
 
   rubygems do |rg_pool|
 
@@ -183,5 +184,25 @@ Hen :gem => :rdoc do
     task :release => 'release:rubyforge'
 
   end
+
+  git do |git|
+
+    desc "#{tag_desc} (Git)"
+    task! 'release:tag' do
+      git.tag '-f', "v#{pkg_task.version}"
+    end
+
+  end
+
+  svn do |svn|
+
+    desc "#{tag_desc} (SVN)"
+    task! 'release:tag' do
+      svn.cp '-m', "v#{pkg_task.version}", '^/trunk', "^/tags/#{pkg_task.version}"
+    end
+
+  end
+
+  task :release => 'release:tag' if have_task?('release:tag')
 
 end
