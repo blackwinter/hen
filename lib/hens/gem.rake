@@ -35,7 +35,7 @@ Hen :gem => :rdoc do
 
     ### name
 
-    gem_name = gem_options[:name] ||= rf_config[:package]
+    gem_name = gem_options[:name] ||= project_name(rf_config)
 
     abort 'Gem name missing' unless gem_name
 

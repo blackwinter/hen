@@ -50,6 +50,12 @@ class Hen
       }
     end
 
+    # Determine the project name from +gem_config+'s <tt>:name</tt>,
+    # or +rf_config+'s <tt>:package</tt> or <tt>:project</tt>.
+    def project_name(rf_config = {}, gem_config = {})
+      gem_config[:name] || rf_config[:package] || rf_config[:project]
+    end
+
     # Define task +t+, but overwrite any existing task of that name!
     # (Rake usually just adds them up.)
     def task!(t, *args)

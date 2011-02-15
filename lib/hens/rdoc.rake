@@ -24,7 +24,7 @@ Hen :rdoc do
   rdoc_options[:title] ||= begin
     title = 'Application documentation'
 
-    if name = config[:gem][:name] || config[:rubyforge][:package]
+    if name = project_name(*config.values_at(:rubyforge, :gem))
       title.insert(0, "#{name} ")
     end
 
