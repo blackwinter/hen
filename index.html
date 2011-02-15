@@ -1,24 +1,287 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html 
-     PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!--
-
-    hen Application documentation (v0.3.2)
-
-  -->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-  <title>hen Application documentation (v0.3.2)</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+
+  <title>hen Application documentation (v0.3.3)</title>
+
+  <link type="text/css" media="screen" href="rdoc.css" rel="stylesheet" />
+
+  <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
 </head>
-<frameset rows="20%, 80%">
-    <frameset cols="25%,35%,45%">
-        <frame src="fr_file_index.html"   title="Files" name="Files" />
-        <frame src="fr_class_index.html"  name="Classes" />
-        <frame src="fr_method_index.html" name="Methods" />
-    </frameset>
-    <frame src="files/README.html" name="docwin" />
-</frameset>
+<body class="indexpage">
+
+  
+  <h1>hen Application documentation (v0.3.3)</h1>
+
+  
+  <div id="main">
+    
+
+<h2>VERSION</h2>
+
+<p>This documentation refers to hen version 0.3.3</p>
+
+<h2>DESCRIPTION</h2>
+
+<p><a href="Hen.html">Hen</a> is a Rake helper framework, similar to <a
+href="http://seattlerb.rubyforge.org/hoe/">Hoe</a> or <a
+href="http://fauna.github.com/fauna/echoe/">Echoe</a>. It provides you with
+a set of common Rake tasks by placing a little snippet like the following
+in your Rakefile:</p>
+
+<pre>require 'hen'
+require 'your/lib/version'
+
+Hen.lay! {{
+  :gem =&gt; {
+    :name    =&gt; 'gem_name',
+    :version =&gt; Your::Lib::VERSION,
+    :summary =&gt; 'Project summary',
+    :author  =&gt; 'Your Name',
+    :email   =&gt; 'you@e.mail'
+  }
+}}</pre>
+
+<h3>Generate a global configuration file</h3>
+
+<p><a href="Hen.html">Hen</a> will read configuration options from your global
+configuration file if it’s present. You can generate a minimal
+<tt>.henrc</tt> with the <tt>hen</tt> script:</p>
+
+<pre>hen config</pre>
+
+<p>This will create a new <tt>.henrc</tt> file in your home directory.</p>
+
+<h3>Create a new project</h3>
+
+<p>For new projects, you can also use the <tt>hen</tt> script to create an
+initial project directory for you that comes with default files and
+configuration:</p>
+
+<pre>hen create path/to/your/lib</pre>
+
+<p>You can even provide a project template of your own:</p>
+
+<pre>hen create path/to/your/lib path/to/your/template</pre>
+
+<p>In addition to that, <tt>hen</tt> can setup your new project with Git
+support:</p>
+
+<pre>hen create path/to/your/lib -g</pre>
+
+<p>See <tt>hen help</tt> for further information.</p>
+
+<h3>Extending <a href="Hen.html">Hen</a></h3>
+
+<p>You can even extend <a href="Hen.html">Hen</a> with your own tasks. More on
+that later. (TODO)</p>
+
+<h2>LINKS</h2>
+
+<p></p>
+<table class="rdoc-list"><tr><td class="rdoc-term"><p>Documentation</p></td>
+<td>
+<p>&lt;<a
+href="http://prometheus.rubyforge.org/hen">prometheus.rubyforge.org/hen</a>&gt;</p>
+</td></tr><tr><td class="rdoc-term"><p>Source code (old)</p></td>
+<td>
+<p>&lt;<a
+href="http://prometheus.rubyforge.org/svn/scratch/hen">prometheus.rubyforge.org/svn/scratch/hen</a>&gt;</p>
+</td></tr><tr><td class="rdoc-term"><p>Source code</p></td>
+<td>
+<p>&lt;<a
+href="http://github.com/blackwinter/hen">github.com/blackwinter/hen</a>&gt;</p>
+</td></tr><tr><td class="rdoc-term"><p>Rubyforge project</p></td>
+<td>
+<p>&lt;<a
+href="http://rubyforge.org/projects/prometheus">rubyforge.org/projects/prometheus</a>&gt;</p>
+</td></tr><tr><td class="rdoc-term"><p>RubyGem</p></td>
+<td>
+<p>&lt;<a href="http://rubygems.org/gems/hen">rubygems.org/gems/hen</a>&gt;</p>
+</td></tr></table>
+
+<h2>AUTHORS</h2>
+<ul><li>
+<p>Jens Wille &lt;<a
+href="mailto:jens.wille@uni-koeln.de">jens.wille@uni-koeln.de</a>&gt;</p>
+</li></ul>
+
+<h2>LICENSE AND COPYRIGHT</h2>
+
+<p>Copyright (C) 2007-2011 University of Cologne, Albertus-Magnus-Platz, 50923
+Cologne, Germany</p>
+
+<p>hen is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.</p>
+
+<p>hen is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+details.</p>
+
+<p>You should have received a copy of the GNU General Public License along
+with hen. If not, see &lt;<a
+href="http://www.gnu.org/licenses/">www.gnu.org/licenses/</a>&gt;.</p>
+
+  </div>
+  
+
+  
+  
+  <h2>Files</h2>
+  <ul>
+    
+      <li class="file"><a href="COPYING.html">COPYING</a></li>
+    
+      <li class="file"><a href="ChangeLog.html">ChangeLog</a></li>
+    
+      <li class="file"><a href="README.html">README</a></li>
+    
+  </ul>
+  
+
+  <h2 id="classes">Classes/Modules</h2>
+  <ul>
+    
+    <li class="class"><a href="Hen.html">Hen</a></li>
+    
+    <li class="module"><a href="Hen/CLI.html">Hen::CLI</a></li>
+    
+    <li class="module"><a href="Hen/DSL.html">Hen::DSL</a></li>
+    
+    <li class="module"><a href="Hen/Version.html">Hen::Version</a></li>
+    
+    <li class="class"><a href="Object.html">Object</a></li>
+    
+  </ul>
+
+  <h2 id="methods">Methods</h2>
+  <ul>
+    
+      <li><a href="Hen.html#method-c-5B-5D">::[] &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-add_hen">::add_hen &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-config">::config &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-default_henrc">::default_henrc &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-find_henrc">::find_henrc &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-henrc">::henrc &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-lay-21">::lay! &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-load_config">::load_config &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-load_hens">::load_hens &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-c-new">::new &mdash; Hen</a></li>
+    
+      <li><a href="Hen/Version.html#method-c-to_a">::to_a &mdash; Hen::Version</a></li>
+    
+      <li><a href="Hen/Version.html#method-c-to_s">::to_s &mdash; Hen::Version</a></li>
+    
+      <li><a href="Object.html#method-i-Hen">#Hen &mdash; Object</a></li>
+    
+      <li><a href="Object.html#method-i-Hen-21">#Hen! &mdash; Object</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-_hen_original_ask">#_hen_original_ask &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-ask">#ask &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-ask-21">#ask! &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-call_block">#call_block &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-classname">#classname &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-config">#config &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-default_classname">#default_classname &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-default_emailaddress">#default_emailaddress &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-default_fullname">#default_fullname &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-emailaddress">#emailaddress &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-execute">#execute &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-extend_object">#extend_object &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-fullname">#fullname &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-gemcutter">#gemcutter &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-git">#git &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-have_git-3F">#have_git? &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-have_rubyforge-3F">#have_rubyforge? &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-have_rubygems-3F">#have_rubygems? &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-have_svn-3F">#have_svn? &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-have_task-3F">#have_task? &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-init_git">#init_git &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-init_rubyforge">#init_rubyforge &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-init_rubygems">#init_rubygems &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-init_svn">#init_svn &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen.html#method-i-laid-3F">#laid? &mdash; Hen</a></li>
+    
+      <li><a href="Hen.html#method-i-lay-21">#lay! &mdash; Hen</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-mangle_files-21">#mangle_files! &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-missing_lib">#missing_lib &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-progdesc">#progdesc &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-progname">#progname &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-project_name">#project_name &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-pseudo_object">#pseudo_object &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/CLI.html#method-i-render">#render &mdash; Hen::CLI</a></li>
+    
+      <li><a href="Hen.html#method-i-resolve_args">#resolve_args &mdash; Hen</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-rubyforge">#rubyforge &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-rubygems">#rubygems &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-skipping">#skipping &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-svn">#svn &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen/DSL.html#method-i-task-21">#task! &mdash; Hen::DSL</a></li>
+    
+      <li><a href="Hen.html#method-i-verbose">#verbose &mdash; Hen</a></li>
+    
+  </ul>
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
+</body>
 </html>
