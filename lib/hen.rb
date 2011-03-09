@@ -194,18 +194,11 @@ class Hen
     # environment variable +HENRC+ and in each directory named in RCDIRS.
     # If +must_exist+ is false, no readability checks will be performed.
     def find_henrc(must_exist = true)
-      found = []
-
-      if env_henrc = ENV['HENRC']
-        found << env_henrc if !must_exist || File.readable?(env_henrc)
-      end
-
-      RCDIRS.each { |dir|
-        dir_henrc = File.join(dir, HENRC_NAME)
-        found << dir_henrc if !must_exist || File.readable?(dir_henrc)
-      }
-
-      found
+      RCDIRS.map { |dir|
+        File.join(dir, HENRC_NAME)
+      }.unshift(ENV['HENRC']).compact.map { |file|
+        File.expand_path(file) if !must_exist || File.readable?(file)
+      }.compact.uniq
     end
 
     # call-seq:

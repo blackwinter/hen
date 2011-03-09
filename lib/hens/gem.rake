@@ -70,6 +70,7 @@ Hen :gem => :rdoc do
     if homepage = gem_options[:homepage]
       homepage = "github.com/#{homepage}/#{gem_name}" if homepage.is_a?(Symbol)
       homepage.insert(0, 'http://') unless homepage.empty? || homepage =~ %r{://}
+      gem_options[:homepage] = homepage
     end
 
     ### extra_rdoc_files, files, extensions, executables, bindir

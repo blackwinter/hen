@@ -255,7 +255,7 @@ class Hen
         end
 
         def url_for_remote(remote)  # :nodoc:
-          run(:remote, '-v')[%r{\A#{Regexp.escape(remote)}\s+(\S+)}, 1]
+          run(:remote, '-v')[%r{^#{Regexp.escape(remote)}\s+(\S+)}, 1]
         end
 
         def find_remote(regexp)  # :nodoc:
