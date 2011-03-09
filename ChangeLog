@@ -1,5 +1,9 @@
 = Revision history for hen
 
+== 0.3.4 [2011-03-09]
+
+* Some minor changes/fixes.
+
 == 0.3.3 [2011-02-15]
 
 * Added <tt>release:tag</tt> task.
