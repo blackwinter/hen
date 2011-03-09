@@ -892,7 +892,7 @@ it’s not found.</p>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">url_for_remote</span>(<span class="ruby-identifier">remote</span>)  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">'-v'</span>)[<span class="ruby-node">%{\A#{Regexp.escape(remote)}\s+(\S+)}</span>, <span class="ruby-value">1</span>]
+      <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">'-v'</span>)[<span class="ruby-node">%{^#{Regexp.escape(remote)}\s+(\S+)}</span>, <span class="ruby-value">1</span>]
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_remote</span>(<span class="ruby-identifier">regexp</span>)  <span class="ruby-comment"># :nodoc:</span>

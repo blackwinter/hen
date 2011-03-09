@@ -621,7 +621,7 @@ href="Hen.html#method-i-lay-21">lay!</a> for details.</p>
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/hen.rb, line 247</span>
+<span class="ruby-comment"># File lib/hen.rb, line 240</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">overwrite</span> = <span class="ruby-keyword">false</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@name</span>, <span class="ruby-ivar">@dependencies</span> = <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
 
@@ -677,18 +677,11 @@ readability checks will be performed.</p>
 <pre>
 <span class="ruby-comment"># File lib/hen.rb, line 196</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_henrc</span>(<span class="ruby-identifier">must_exist</span> = <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">found</span> = []
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">env_henrc</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">'HENRC'</span>]
-    <span class="ruby-identifier">found</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">env_henrc</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">must_exist</span> <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">env_henrc</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-constant">RCDIRS</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">dir_henrc</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-constant">HENRC_NAME</span>)
-    <span class="ruby-identifier">found</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dir_henrc</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">must_exist</span> <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">dir_henrc</span>)
-  }
-
-  <span class="ruby-identifier">found</span>
+  <span class="ruby-constant">RCDIRS</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dir</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-constant">HENRC_NAME</span>)
+  }.<span class="ruby-identifier">unshift</span>(<span class="ruby-constant">ENV</span>[<span class="ruby-string">'HENRC'</span>]).<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">file</span>) <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">must_exist</span> <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">file</span>)
+  }.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">uniq</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- find_henrc-source -->
             
@@ -772,7 +765,7 @@ which the block evaluates to true.</p>
             
             <div class="method-source-code" id="load_hens-source">
 <pre>
-<span class="ruby-comment"># File lib/hen.rb, line 218</span>
+<span class="ruby-comment"># File lib/hen.rb, line 211</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load_hens</span>(*<span class="ruby-identifier">hens</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-comment"># By default, include all</span>
   <span class="ruby-identifier">block</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-keyword">true</span> }
@@ -821,7 +814,7 @@ href="Hen/DSL.html">DSL</a>.</p>
             
             <div class="method-source-code" id="lay-21-source">
 <pre>
-<span class="ruby-comment"># File lib/hen.rb, line 264</span>
+<span class="ruby-comment"># File lib/hen.rb, line 257</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">lay!</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">laid?</span>
 
@@ -871,7 +864,7 @@ href="Hen/DSL.html">DSL</a>.</p>
             
             <div class="method-source-code" id="laid-3F-source">
 <pre>
-<span class="ruby-comment"># File lib/hen.rb, line 313</span>
+<span class="ruby-comment"># File lib/hen.rb, line 306</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">laid?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@laid</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@laid</span>
 
@@ -912,7 +905,7 @@ of hens this one depends upon.</p>
             
             <div class="method-source-code" id="resolve_args-source">
 <pre>
-<span class="ruby-comment"># File lib/hen.rb, line 292</span>
+<span class="ruby-comment"># File lib/hen.rb, line 285</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">name</span>, <span class="ruby-identifier">dependencies</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">args</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
@@ -961,7 +954,7 @@ of hens this one depends upon.</p>
             
             <div class="method-source-code" id="verbose-source">
 <pre>
-<span class="ruby-comment"># File lib/hen.rb, line 282</span>
+<span class="ruby-comment"># File lib/hen.rb, line 275</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verbose</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">verbose</span>
 <span class="ruby-keyword">end</span></pre>
