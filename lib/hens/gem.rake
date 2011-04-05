@@ -26,7 +26,7 @@ Hen :gem => :rdoc do
 
   if Object.const_defined?(:RDOC_OPTIONS)
     rdoc_files = RDOC_OPTIONS[:rdoc_files]
-    gem_options[:has_rdoc] = !rdoc_files.empty?
+    gem_options[:has_rdoc] = !rdoc_files.empty? if Gem::VERSION < '1.7'
 
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
   end
@@ -110,7 +110,13 @@ Hen :gem => :rdoc do
 
     ### => set options!
 
-    gem_options.each { |option, value| spec.send("#{option}=", value) }
+    gem_options.each { |option, value|
+      if spec.respond_to?(setter = "#{option}=")
+        spec.send(setter, value)
+      else
+        warn "Unknown Gem option: #{option}"
+      end
+    }
   }
 
   desc 'Display the gem specification'
