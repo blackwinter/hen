@@ -1,5 +1,9 @@
 = Revision history for hen
 
+== 0.3.5 [2011-04-05]
+
+* RubyGems 1.7.0 deprecated Gem::Specification#has_rdoc=.
+
 == 0.3.4 [2011-03-09]
 
 * Some minor changes/fixes.
