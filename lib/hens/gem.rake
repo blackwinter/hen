@@ -152,8 +152,8 @@ Hen :gem => :rdoc do
     end
   }
 
-  release_desc = "Release #{pkg_task.name} version #{pkg_task.version}"
-  tag_desc     = "Tag the #{pkg_task.name} release version #{pkg_task.version}"
+  release_desc = "Release #{gem_spec.name} version #{gem_spec.version}"
+  tag_desc     = "Tag the #{gem_spec.name} release version #{gem_spec.version}"
 
   rubygems do |rg_pool|
 
@@ -182,7 +182,7 @@ Hen :gem => :rdoc do
       abort 'Nothing to release!' if files.empty?
 
       # shorten to (at most) three digits
-      version = pkg_task.version.to_s.split(/([.])/)[0..4].join
+      version = gem_spec.version.to_s.split(/([.])/)[0..4].join
 
       rf = rf_pool.call
 
@@ -192,7 +192,7 @@ Hen :gem => :rdoc do
       #uc['release_changes'] = changes if changes
       #uc['preformatted']    = true
 
-      rf.add_release(rf_config[:project], pkg_task.name, version, *files)
+      rf.add_release(rf_config[:project], gem_spec.name, version, *files)
     end
 
     desc release_desc
@@ -204,7 +204,7 @@ Hen :gem => :rdoc do
 
     desc "#{tag_desc} (Git)"
     task! 'release:tag' do
-      git.tag '-f', "v#{pkg_task.version}"
+      git.tag '-f', "v#{gem_spec.version}"
     end
 
   end
@@ -213,7 +213,7 @@ Hen :gem => :rdoc do
 
     desc "#{tag_desc} (SVN)"
     task! 'release:tag' do
-      svn.cp '-m', "v#{pkg_task.version}", '^/trunk', "^/tags/#{pkg_task.version}"
+      svn.cp '-m', "v#{gem_spec.version}", '^/trunk', "^/tags/#{gem_spec.version}"
     end
 
   end
