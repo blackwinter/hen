@@ -244,7 +244,7 @@ class Hen
           options = args.last.is_a?(Hash) ? args.pop : {}
           options[:verbose] = Hen.verbose unless options.has_key?(:verbose)
 
-          sh('git', cmd.to_s.tr('_', '-'), *args << options)
+          DSL.send(:sh, 'git', cmd.to_s.tr('_', '-'), *args << options)
         end
 
         def run(cmd, *args)  # :nodoc:
@@ -289,7 +289,7 @@ class Hen
           options = args.last.is_a?(Hash) ? args.pop : {}
           options[:verbose] = Hen.verbose unless options.has_key?(:verbose)
 
-          sh('svn', cmd.to_s.tr('_', '-'), *args << options)
+          DSL.send(:sh, 'svn', cmd.to_s.tr('_', '-'), *args << options)
         end
 
         def run(cmd, *args)  # :nodoc:
