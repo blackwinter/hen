@@ -2,8 +2,6 @@ Hen :gem => :rdoc do
   # Dependencies:
   # * rdoc -- Uses RDOC_OPTIONS and 'doc:publish' task
 
-  require 'rake/gempackagetask'
-
   gem_options = config[:gem].merge(
     :files => FileList[
       'lib/**/*.rb',
@@ -21,6 +19,16 @@ Hen :gem => :rdoc do
     ].to_a,
     :require_path => 'lib'
   )
+
+  gem_klass = begin
+    raise LoadError if gem_options.delete(:legacy)
+
+    require 'rubygems/package_task'
+    Gem::PackageTask
+  rescue LoadError
+    require 'rake/gempackagetask'
+    Rake::GemPackageTask
+  end
 
   rf_config = config[:rubyforge]
 
@@ -134,7 +142,7 @@ Hen :gem => :rdoc do
     puts "#{action} #{file}"
   end
 
-  pkg_task = Rake::GemPackageTask.new(gem_spec) { |pkg|
+  pkg_task = gem_klass.new(gem_spec) { |pkg|
     pkg.need_tar_gz = true
     pkg.need_zip    = true
 
@@ -149,7 +157,7 @@ Hen :gem => :rdoc do
 
   rubygems do |rg_pool|
 
-    gem_path = File.join(pkg_task.package_dir, pkg_task.gem_file)
+    gem_path = File.join(pkg_task.package_dir, gem_spec.file_name)
 
     desc "Create the gem and install it"
     task 'gem:install' => :gem do

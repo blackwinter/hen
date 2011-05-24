@@ -36,6 +36,7 @@ class Hen
   module DSL
 
     extend self
+    extend Rake::DSL if Rake.const_defined?(:DSL)
 
     # The Hen configuration.
     def config
