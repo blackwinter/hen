@@ -2,21 +2,21 @@
 
 Gem::Specification.new do |s|
   s.name = %q{hen}
-  s.version = "0.3.6"
+  s.version = "0.3.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jens Wille"]
-  s.date = %q{2011-04-29}
+  s.authors = [%q{Jens Wille}]
+  s.date = %q{2011-05-24}
   s.description = %q{Hoe or Echoe? No, thanks! Just a Rake helper that fits my own personal style.}
   s.email = %q{jens.wille@uni-koeln.de}
-  s.executables = ["hen"]
-  s.extra_rdoc_files = ["README", "COPYING", "ChangeLog"]
-  s.files = ["lib/hen/cli.rb", "lib/hen/version.rb", "lib/hen/dsl.rb", "lib/hen.rb", "bin/hen", "lib/hens/rdoc.rake", "lib/hens/gem.rake", "lib/hens/test.rake", "lib/hens/spec.rake", "README", "ChangeLog", "Rakefile", "COPYING", "example/hens/sample.rake", "example/_henrc", "example/project/README", "example/project/ChangeLog", "example/project/Rakefile", "example/project/lib/__progname__/version.rb", "example/project/lib/__progname__.rb", "example/project/_gitignore", "example/project/COPYING"]
+  s.executables = [%q{hen}]
+  s.extra_rdoc_files = [%q{README}, %q{COPYING}, %q{ChangeLog}]
+  s.files = [%q{lib/hen/cli.rb}, %q{lib/hen/version.rb}, %q{lib/hen/dsl.rb}, %q{lib/hen.rb}, %q{bin/hen}, %q{lib/hens/rdoc.rake}, %q{lib/hens/gem.rake}, %q{lib/hens/test.rake}, %q{lib/hens/spec.rake}, %q{README}, %q{ChangeLog}, %q{Rakefile}, %q{COPYING}, %q{example/hens/sample.rake}, %q{example/_henrc}, %q{example/project/README}, %q{example/project/ChangeLog}, %q{example/project/Rakefile}, %q{example/project/lib/__progname__/version.rb}, %q{example/project/lib/__progname__.rb}, %q{example/project/_gitignore}, %q{example/project/COPYING}]
   s.homepage = %q{http://prometheus.rubyforge.org/hen}
-  s.rdoc_options = ["--main", "README", "--charset", "UTF-8", "--title", "hen Application documentation (v0.3.6)", "--line-numbers", "--all"]
-  s.require_paths = ["lib"]
+  s.rdoc_options = [%q{--charset}, %q{UTF-8}, %q{--title}, %q{hen Application documentation (v0.3.7)}, %q{--main}, %q{README}, %q{--line-numbers}, %q{--all}]
+  s.require_paths = [%q{lib}]
   s.rubyforge_project = %q{prometheus}
-  s.rubygems_version = %q{1.7.2}
+  s.rubygems_version = %q{1.8.3}
   s.summary = %q{Hoe or Echoe? No, thanks! Just a Rake helper that fits my own personal style.}
 
   if s.respond_to? :specification_version then
