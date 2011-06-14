@@ -14,10 +14,7 @@ Hen :test do
   unless test_files.empty?
     Rake::TestTask.new { |t|
       t.test_files = test_files
-
-      test_options.each { |option, value|
-        t.send("#{option}=", value)
-      }
+      set_options(t, test_options, 'Test')
     }
   end
 

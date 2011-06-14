@@ -113,6 +113,19 @@ class Hen
       !!managed_files
     end
 
+    # Set +options+ on +object+ by calling the corresponding setter method
+    # for each option; warns about illegal options. Optionally, use +type+
+    # to describe +object+ (defaults to its class).
+    def set_options(object, options, type = object.class)
+      options.each { |option, value|
+        if object.respond_to?(setter = "#{option}=")
+          object.send(setter, value)
+        else
+          warn "Unknown #{type} option: #{option}"
+        end
+      }
+    end
+
     # Encapsulates tasks targeting at RubyForge, skipping those if no
     # RubyForge project is defined. Yields the RubyForge configuration
     # hash and, optionally, a proc to obtain RubyForge objects from (via

@@ -118,13 +118,8 @@ Hen :gem => :rdoc do
 
     ### => set options!
 
-    gem_options.each { |option, value|
-      if spec.respond_to?(setter = "#{option}=")
-        spec.send(setter, value)
-      else
-        warn "Unknown Gem option: #{option}"
-      end
-    }
+    set_options(spec, gem_options, 'Gem')
+
   }
 
   desc 'Display the gem specification'
