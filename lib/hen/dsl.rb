@@ -336,7 +336,7 @@ class Hen
     def pseudo_object
       extend_object(Object.new, block_given? ? Proc.new : nil) {
         instance_methods.each { |method|
-          undef_method(method) unless method =~ /\A__/
+          undef_method(method) unless method =~ /\A__|\Aobject_id\z/
         }
       }
     end
