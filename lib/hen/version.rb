@@ -3,8 +3,8 @@ class Hen
   module Version
 
     MAJOR = 0
-    MINOR = 3
-    TINY  = 9
+    MINOR = 4
+    TINY  = 0
 
     class << self
 
