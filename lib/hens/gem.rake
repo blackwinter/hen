@@ -122,6 +122,34 @@ Hen :gem => :rdoc do
 
   }
 
+  desc 'Check the gem dependencies'
+  task 'gem:dependencies' do
+    errors, $stdout.sync = [], true
+
+    gem_spec.dependencies.each { |dependency|
+      print 'Checking for %s dependency %s (%s)... ' % [
+        dependency.type, dependency.name, dependency.requirement
+      ]
+
+      sleep(0.2 + rand / 2)  # ;)
+
+      begin
+        spec = dependency.to_spec
+        spec.activate
+
+        puts "found (#{spec.version})"
+      rescue Exception => err
+        errors << err
+
+        puts "not found (#{err.class})"
+      end
+    }
+
+    errors.each { |err| warn "\n#{err}" } if $VERBOSE || Rake.verbose
+
+    exit 1 unless errors.empty?
+  end
+
   desc 'Display the gem specification'
   task 'gem:spec' do
     puts gem_spec.to_ruby
