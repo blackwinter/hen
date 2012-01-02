@@ -1,217 +1,205 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+
+<html>
 <head>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-  <title>Module: Hen::DSL</title>
+<title>module Hen::DSL - hen Application documentation (v0.4.1)</title>
 
-  <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
-  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
 
-</head>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
 <body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
 
-  <div id="metadata">
-    <div id="home-metadata">
-      <div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="../index.html">Home</a>
-          <a href="../index.html#classes">Classes</a>
-          <a href="../index.html#methods">Methods</a>
-        </h3>
-      </div>
-    </div>
 
-    <div id="file-metadata">
-      <div id="file-list-section" class="section">
-        <h3 class="section-header">In Files</h3>
-        <div class="section-body">
-          <ul>
-          
-            <li><a href="../lib/hen/dsl_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/hen/dsl.rb">lib/hen/dsl.rb</a></li>
-          
-          </ul>
-        </div>
-      </div>
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
 
-      
-    </div>
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
 
-    <div id="class-metadata">
-      
 
-      
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/hen/dsl.rb
+  </ul>
+</nav>
 
-      
-
-      
-      <!-- Method Quickref -->
-      <div id="method-list-section" class="section">
-        <h3 class="section-header">Methods</h3>
-        <ul class="link-list">
-          
-          <li><a href="#method-i-call_block">#call_block</a></li>
-          
-          <li><a href="#method-i-config">#config</a></li>
-          
-          <li><a href="#method-i-execute">#execute</a></li>
-          
-          <li><a href="#method-i-extend_object">#extend_object</a></li>
-          
-          <li><a href="#method-i-gemcutter">#gemcutter</a></li>
-          
-          <li><a href="#method-i-git">#git</a></li>
-          
-          <li><a href="#method-i-have_git-3F">#have_git?</a></li>
-          
-          <li><a href="#method-i-have_rubyforge-3F">#have_rubyforge?</a></li>
-          
-          <li><a href="#method-i-have_rubygems-3F">#have_rubygems?</a></li>
-          
-          <li><a href="#method-i-have_svn-3F">#have_svn?</a></li>
-          
-          <li><a href="#method-i-have_task-3F">#have_task?</a></li>
-          
-          <li><a href="#method-i-init_git">#init_git</a></li>
-          
-          <li><a href="#method-i-init_rubyforge">#init_rubyforge</a></li>
-          
-          <li><a href="#method-i-init_rubygems">#init_rubygems</a></li>
-          
-          <li><a href="#method-i-init_svn">#init_svn</a></li>
-          
-          <li><a href="#method-i-mangle_files-21">#mangle_files!</a></li>
-          
-          <li><a href="#method-i-missing_lib">#missing_lib</a></li>
-          
-          <li><a href="#method-i-project_name">#project_name</a></li>
-          
-          <li><a href="#method-i-pseudo_object">#pseudo_object</a></li>
-          
-          <li><a href="#method-i-rubyforge">#rubyforge</a></li>
-          
-          <li><a href="#method-i-rubygems">#rubygems</a></li>
-          
-          <li><a href="#method-i-set_options">#set_options</a></li>
-          
-          <li><a href="#method-i-skipping">#skipping</a></li>
-          
-          <li><a href="#method-i-svn">#svn</a></li>
-          
-          <li><a href="#method-i-task-21">#task!</a></li>
-          
-        </ul>
-      </div>
-      
-
-      
-    </div>
-
-    <div id="project-metadata">
-      
-      
-      <div id="fileindex-section" class="section project-section">
-        <h3 class="section-header">Files</h3>
-        <ul>
-        
-          <li class="file"><a href="../COPYING.html">COPYING</a></li>
-        
-          <li class="file"><a href="../ChangeLog.html">ChangeLog</a></li>
-        
-          <li class="file"><a href="../README.html">README</a></li>
-        
-        </ul>
-      </div>
-      
-
-      <div id="classindex-section" class="section project-section">
-        <h3 class="section-header">Class/Module Index
-          <span class="search-toggle"><img src="../images/find.png"
-            height="16" width="16" alt="[+]"
-            title="show/hide quicksearch" /></span></h3>
-        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-        <fieldset>
-          <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
-        </fieldset>
-        </form>
-
-        <ul class="link-list">
-        
-          <li><a href="../Hen.html">Hen</a></li>
-        
-          <li><a href="../Hen/CLI.html">Hen::CLI</a></li>
-        
-          <li><a href="../Hen/DSL.html">Hen::DSL</a></li>
-        
-          <li><a href="../Hen/Version.html">Hen::Version</a></li>
-        
-          <li><a href="../Object.html">Object</a></li>
-        
-        </ul>
-        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
-      </div>
-
-      
-    </div>
+    
   </div>
 
-  <div id="documentation">
-    <h1 class="module">Hen::DSL</h1>
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
 
-    <div id="description" class="description">
-      
+  <ul class="link-list">
+    
+    <li><a href="#method-i-call_block">#call_block</a>
+    
+    <li><a href="#method-i-config">#config</a>
+    
+    <li><a href="#method-i-execute">#execute</a>
+    
+    <li><a href="#method-i-extend_object">#extend_object</a>
+    
+    <li><a href="#method-i-gemcutter">#gemcutter</a>
+    
+    <li><a href="#method-i-git">#git</a>
+    
+    <li><a href="#method-i-have_git-3F">#have_git?</a>
+    
+    <li><a href="#method-i-have_rubyforge-3F">#have_rubyforge?</a>
+    
+    <li><a href="#method-i-have_rubygems-3F">#have_rubygems?</a>
+    
+    <li><a href="#method-i-have_svn-3F">#have_svn?</a>
+    
+    <li><a href="#method-i-have_task-3F">#have_task?</a>
+    
+    <li><a href="#method-i-init_git">#init_git</a>
+    
+    <li><a href="#method-i-init_rubyforge">#init_rubyforge</a>
+    
+    <li><a href="#method-i-init_rubygems">#init_rubygems</a>
+    
+    <li><a href="#method-i-init_svn">#init_svn</a>
+    
+    <li><a href="#method-i-mangle_files-21">#mangle_files!</a>
+    
+    <li><a href="#method-i-missing_lib">#missing_lib</a>
+    
+    <li><a href="#method-i-project_name">#project_name</a>
+    
+    <li><a href="#method-i-pseudo_object">#pseudo_object</a>
+    
+    <li><a href="#method-i-rubyforge">#rubyforge</a>
+    
+    <li><a href="#method-i-rubygems">#rubygems</a>
+    
+    <li><a href="#method-i-set_options">#set_options</a>
+    
+    <li><a href="#method-i-skipping">#skipping</a>
+    
+    <li><a href="#method-i-svn">#svn</a>
+    
+    <li><a href="#method-i-task-21">#task!</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Hen.html">Hen</a>
+  
+    <li><a href="../Hen/CLI.html">Hen::CLI</a>
+  
+    <li><a href="../Hen/DSL.html">Hen::DSL</a>
+  
+    <li><a href="../Hen/Version.html">Hen::Version</a>
+  
+    <li><a href="../Object.html">Object</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Hen::DSL</h1>
+
+  <div id="description" class="description">
+    
 <p>Some helper methods for use inside of a <a href="../Hen.html">Hen</a>
 definition.</p>
 
-    </div><!-- description -->
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
 
     
+
     
+
     
-    <div id="5Buntitled-5D" class="documentation-section">
-      
 
-      
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
 
-      
+    
+      <div id="method-i-config" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">config</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
 
-      
-
-      <!-- Methods -->
-      
-      <div id="public-instance-method-details" class="method-section section">
-        <h3 class="section-header">Public Instance Methods</h3>
-
-      
-        <div id="config-method" class="method-detail ">
-          <a name="method-i-config"></a>
+        <div class="method-description">
+          
+          <p>The <a href="../Hen.html">Hen</a> configuration.</p>
+          
 
           
-          <div class="method-heading">
-            <span class="method-name">config</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>The <a href="../Hen.html">Hen</a> configuration.</p>
-            
-
-            
-            <div class="method-source-code" id="config-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 42</span>
+          <div class="method-source-code" id="config-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">config</span>
   <span class="ruby-identifier">extend_object</span>(<span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">dup</span>) {
     <span class="ruby-comment"># Always return a duplicate for a value,</span>
@@ -223,38 +211,35 @@ definition.</p>
     <span class="ruby-keyword">end</span>
   }
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- config-source -->
-            
-          </div>
-
+          </div><!-- config-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- config-method -->
+
+    
+      <div id="method-i-execute" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">execute</span><span
+            class="method-args">(*commands)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- config-method -->
-
-      
-        <div id="execute-method" class="method-detail ">
-          <a name="method-i-execute"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">execute</span><span
-              class="method-args">(*commands)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Find a command that is executable and run it. Intended for
+          <p>Find a command that is executable and run it. Intended for
 platform-dependent alternatives (Command A is not available? Then try B
 instead).</p>
-            
+          
 
-            
-            <div class="method-source-code" id="execute-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 75</span>
+          
+          <div class="method-source-code" id="execute-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">execute</span>(*<span class="ruby-identifier">commands</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">command</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">which_command</span>(<span class="ruby-identifier">commands</span>)
     <span class="ruby-identifier">sh</span>(<span class="ruby-identifier">command</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">ok</span>, <span class="ruby-identifier">res</span><span class="ruby-operator">|</span>
@@ -265,147 +250,136 @@ instead).</p>
     <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Command not found: #{commands.join('; ')}&quot;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- execute-source -->
-            
-          </div>
+          </div><!-- execute-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- execute-method -->
+
+    
+      <div id="method-i-gemcutter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gemcutter</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>DEPRECATED: Use <a href="DSL.html#method-i-rubygems">rubygems</a> instead.</p>
           
 
           
-        </div><!-- execute-method -->
-
-      
-        <div id="gemcutter-method" class="method-detail ">
-          <a name="method-i-gemcutter"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">gemcutter</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>DEPRECATED: Use <a href="DSL.html#method-i-rubygems">rubygems</a> instead.</p>
-            
-
-            
-            <div class="method-source-code" id="gemcutter-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 161</span>
+          <div class="method-source-code" id="gemcutter-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 161</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">gemcutter</span>
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{self}#gemcutter is deprecated; use `rubygems' instead.&quot;</span>
   <span class="ruby-identifier">rubygems</span>(&amp;<span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- gemcutter-source -->
-            
-          </div>
-
+          </div><!-- gemcutter-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- gemcutter-method -->
+
+    
+      <div id="method-i-git" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">git</span><span
+            class="method-args">() { |init_git| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- gemcutter-method -->
-
-      
-        <div id="git-method" class="method-detail ">
-          <a name="method-i-git"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">git</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Encapsulates tasks targeting at Git, skipping those if the current project
+          <p>Encapsulates tasks targeting at Git, skipping those if the current project
 us not controlled by Git. Yields a Git object via <a
 href="DSL.html#method-i-init_git">init_git</a>.</p>
-            
+          
 
-            
-            <div class="method-source-code" id="git-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 168</span>
+          
+          <div class="method-source-code" id="git-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">git</span>
   <span class="ruby-identifier">have_git?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">init_git</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-string">'Git'</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- git-source -->
-            
-          </div>
+          </div><!-- git-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- git-method -->
+
+    
+      <div id="method-i-have_task-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">have_task?</span><span
+            class="method-args">(t)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return true if task <code>t</code> is defined, false otherwise.</p>
           
 
           
-        </div><!-- git-method -->
-
-      
-        <div id="have_task-3F-method" class="method-detail ">
-          <a name="method-i-have_task-3F"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">have_task?</span><span
-              class="method-args">(t)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Return true if task <tt>t</tt> is defined, false otherwise.</p>
-            
-
-            
-            <div class="method-source-code" id="have_task-3F-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 68</span>
+          <div class="method-source-code" id="have_task-3F-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">have_task?</span>(<span class="ruby-identifier">t</span>)
   <span class="ruby-constant">Rake</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@tasks</span>).<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">t</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- have_task-3F-source -->
-            
-          </div>
-
+          </div><!-- have_task-3F-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- have_task-3F-method -->
+
+    
+      <div id="method-i-mangle_files-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">mangle_files!</span><span
+            class="method-args">(*args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- have_task-3F-method -->
-
-      
-        <div id="mangle_files-21-method" class="method-detail ">
-          <a name="method-i-mangle_files-21"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">mangle_files!</span><span
-              class="method-args">(*args)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Clean up the file lists in <tt>args</tt> by removing duplicates and either
-deleting any files that are not managed by the source code management
-system (untracked files) or, if the project is not version-controlled or
-the SCM is not recognized, deleting any files that don’t exist.</p>
+          <p>Clean up the file lists in <code>args</code> by removing duplicates and
+either deleting any files that are not managed by the source code
+management system (untracked files) or, if the project is not
+version-controlled or the SCM is not recognized, deleting any files that
+don’t exist.</p>
 
 <p>The return value indicates whether source control is in effect.</p>
 
 <p>Currently supported SCM’s (in that order): <a
 href="http://git-scm.com">Git</a>, <a
 href="http://subversion.tigris.org">SVN</a>.</p>
-            
+          
 
-            
-            <div class="method-source-code" id="mangle_files-21-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 95</span>
+          
+          <div class="method-source-code" id="mangle_files-21-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">mangle_files!</span>(*<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
 
@@ -426,74 +400,69 @@ href="http://subversion.tigris.org">SVN</a>.</p>
 
   <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">managed_files</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- mangle_files-21-source -->
-            
-          </div>
+          </div><!-- mangle_files-21-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- mangle_files-21-method -->
+
+    
+      <div id="method-i-project_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">project_name</span><span
+            class="method-args">(rf_config = {}, gem_config = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Determine the project name from <code>gem_config</code>‘s
+<code>:name</code>, or <code>rf_config</code>’s <code>:package</code> or
+<code>:project</code>.</p>
           
 
           
-        </div><!-- mangle_files-21-method -->
-
-      
-        <div id="project_name-method" class="method-detail ">
-          <a name="method-i-project_name"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">project_name</span><span
-              class="method-args">(rf_config = {}, gem_config = {})</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Determine the project name from <tt>gem_config</tt>‘s <tt>:name</tt>, or
-<tt>rf_config</tt>’s <tt>:package</tt> or <tt>:project</tt>.</p>
-            
-
-            
-            <div class="method-source-code" id="project_name-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 56</span>
+          <div class="method-source-code" id="project_name-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">project_name</span>(<span class="ruby-identifier">rf_config</span> = {}, <span class="ruby-identifier">gem_config</span> = {})
   <span class="ruby-identifier">gem_config</span>[<span class="ruby-value">:name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">rf_config</span>[<span class="ruby-value">:package</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">rf_config</span>[<span class="ruby-value">:project</span>]
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- project_name-source -->
-            
-          </div>
-
+          </div><!-- project_name-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- project_name-method -->
+
+    
+      <div id="method-i-rubyforge" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rubyforge</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- project_name-method -->
-
-      
-        <div id="rubyforge-method" class="method-detail ">
-          <a name="method-i-rubyforge"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">rubyforge</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Encapsulates tasks targeting at RubyForge, skipping those if no RubyForge
+          <p>Encapsulates tasks targeting at RubyForge, skipping those if no RubyForge
 project is defined. Yields the RubyForge configuration hash and,
-optionally, a proc to obtain RubyForge objects from (via <tt>call</tt>;
+optionally, a proc to obtain RubyForge objects from (via <code>call</code>;
 reaching out to <a
 href="DSL.html#method-i-init_rubyforge">init_rubyforge</a>).</p>
-            
+          
 
-            
-            <div class="method-source-code" id="rubyforge-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 133</span>
+          
+          <div class="method-source-code" id="rubyforge-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rubyforge</span>
   <span class="ruby-identifier">rf_config</span>  = <span class="ruby-identifier">config</span>[<span class="ruby-value">:rubyforge</span>]
   <span class="ruby-identifier">rf_project</span> = <span class="ruby-identifier">rf_config</span>[<span class="ruby-value">:project</span>]
@@ -508,39 +477,36 @@ href="DSL.html#method-i-init_rubyforge">init_rubyforge</a>).</p>
     <span class="ruby-identifier">skipping</span> <span class="ruby-string">'RubyForge'</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- rubyforge-source -->
-            
-          </div>
-
+          </div><!-- rubyforge-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- rubyforge-method -->
+
+    
+      <div id="method-i-rubygems" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rubygems</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- rubyforge-method -->
-
-      
-        <div id="rubygems-method" class="method-detail ">
-          <a name="method-i-rubygems"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">rubygems</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Encapsulates tasks targeting at RubyGems.org, skipping those if RubyGem’s
+          <p>Encapsulates tasks targeting at RubyGems.org, skipping those if RubyGem’s
 ‘push’ command is not available. Yields an optional proc to obtain
-RubyGems (pseudo-)objects from (via <tt>call</tt>; reaching out to <a
+RubyGems (pseudo-)objects from (via <code>call</code>; reaching out to <a
 href="DSL.html#method-i-init_rubygems">init_rubygems</a>).</p>
-            
+          
 
-            
-            <div class="method-source-code" id="rubygems-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 152</span>
+          
+          <div class="method-source-code" id="rubygems-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 152</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">rubygems</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">have_rubygems?</span>
     <span class="ruby-identifier">call_block</span>(<span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span>) { <span class="ruby-operator">|</span>*<span class="ruby-identifier">args</span><span class="ruby-operator">|</span> <span class="ruby-identifier">init_rubygems</span> }
@@ -548,38 +514,36 @@ href="DSL.html#method-i-init_rubygems">init_rubygems</a>).</p>
     <span class="ruby-identifier">skipping</span> <span class="ruby-string">'RubyGems'</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- rubygems-source -->
-            
-          </div>
+          </div><!-- rubygems-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- rubygems-method -->
+
+    
+      <div id="method-i-set_options" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_options</span><span
+            class="method-args">(object, options, type = object.class)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set <code>options</code> on <code>object</code> by calling the
+corresponding setter method for each option; warns about illegal options.
+Optionally, use <code>type</code> to describe <code>object</code> (defaults
+to its class).</p>
           
 
           
-        </div><!-- rubygems-method -->
-
-      
-        <div id="set_options-method" class="method-detail ">
-          <a name="method-i-set_options"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">set_options</span><span
-              class="method-args">(object, options, type = object.class)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Set <tt>options</tt> on <tt>object</tt> by calling the corresponding setter
-method for each option; warns about illegal options. Optionally, use
-<tt>type</tt> to describe <tt>object</tt> (defaults to its class).</p>
-            
-
-            
-            <div class="method-source-code" id="set_options-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 119</span>
+          <div class="method-source-code" id="set_options-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_options</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">type</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">class</span>)
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">option</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">setter</span> = <span class="ruby-node">&quot;#{option}=&quot;</span>)
@@ -589,147 +553,135 @@ method for each option; warns about illegal options. Optionally, use
     <span class="ruby-keyword">end</span>
   }
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- set_options-source -->
-            
-          </div>
-
+          </div><!-- set_options-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- set_options-method -->
+
+    
+      <div id="method-i-svn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">svn</span><span
+            class="method-args">() { |init_svn| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- set_options-method -->
-
-      
-        <div id="svn-method" class="method-detail ">
-          <a name="method-i-svn"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">svn</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Encapsulates tasks targeting at SVN, skipping those if the current project
+          <p>Encapsulates tasks targeting at SVN, skipping those if the current project
 us not controlled by SVN. Yields an SVN object via <a
 href="DSL.html#method-i-init_svn">init_svn</a>.</p>
-            
+          
 
-            
-            <div class="method-source-code" id="svn-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 174</span>
+          
+          <div class="method-source-code" id="svn-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 174</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">svn</span>
   <span class="ruby-identifier">have_svn?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">init_svn</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-string">'SVN'</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- svn-source -->
-            
-          </div>
+          </div><!-- svn-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- svn-method -->
+
+    
+      <div id="method-i-task-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">task!</span><span
+            class="method-args">(t, *args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Define task <code>t</code>, but overwrite any existing task of that name!
+(Rake usually just adds them up.)</p>
           
 
           
-        </div><!-- svn-method -->
-
-      
-        <div id="task-21-method" class="method-detail ">
-          <a name="method-i-task-21"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">task!</span><span
-              class="method-args">(t, *args)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Define task <tt>t</tt>, but overwrite any existing task of that name! (Rake
-usually just adds them up.)</p>
-            
-
-            
-            <div class="method-source-code" id="task-21-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 62</span>
+          <div class="method-source-code" id="task-21-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">task!</span>(<span class="ruby-identifier">t</span>, *<span class="ruby-identifier">args</span>)
   <span class="ruby-constant">Rake</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@tasks</span>).<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">t</span>.<span class="ruby-identifier">to_s</span>)
   <span class="ruby-identifier">task</span>(<span class="ruby-identifier">t</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- task-21-source -->
-            
-          </div>
-
+          </div><!-- task-21-source -->
           
+        </div>
 
-          
-        </div><!-- task-21-method -->
+        
 
-      
-      </div><!-- public-instance-method-details -->
+        
+      </div><!-- task-21-method -->
+
     
-      <div id="private-instance-method-details" class="method-section section">
-        <h3 class="section-header">Private Instance Methods</h3>
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
 
-      
-        <div id="call_block-method" class="method-detail ">
-          <a name="method-i-call_block"></a>
+    
+      <div id="method-i-call_block" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">call_block</span><span
+            class="method-args">(block, *args)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Calls block <code>block</code> with <code>args</code>, appending an
+optional passed block if requested by <code>block</code>.</p>
+          
 
           
-          <div class="method-heading">
-            <span class="method-name">call_block</span><span
-              class="method-args">(block, *args)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Calls block <tt>block</tt> with <tt>args</tt>, appending an optional passed
-block if requested by <tt>block</tt>.</p>
-            
-
-            
-            <div class="method-source-code" id="call_block-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 346</span>
+          <div class="method-source-code" id="call_block-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 346</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">call_block</span>(<span class="ruby-identifier">block</span>, *<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span>
   <span class="ruby-identifier">block</span>[*<span class="ruby-identifier">args</span>]
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- call_block-source -->
-            
-          </div>
+          </div><!-- call_block-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- call_block-method -->
+
+    
+      <div id="method-i-extend_object" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">extend_object</span><span
+            class="method-args">(object, *blocks)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Extend <code>object</code> with given <code>blocks</code>.</p>
           
 
           
-        </div><!-- call_block-method -->
-
-      
-        <div id="extend_object-method" class="method-detail ">
-          <a name="method-i-extend_object"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">extend_object</span><span
-              class="method-args">(object, *blocks)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Extend <tt>object</tt> with given <tt>blocks</tt>.</p>
-            
-
-            
-            <div class="method-source-code" id="extend_object-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 323</span>
+          <div class="method-source-code" id="extend_object-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 323</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">extend_object</span>(<span class="ruby-identifier">object</span>, *<span class="ruby-identifier">blocks</span>)
   <span class="ruby-identifier">blocks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
 
@@ -741,107 +693,98 @@ block if requested by <tt>block</tt>.</p>
 
   <span class="ruby-identifier">object</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- extend_object-source -->
-            
-          </div>
+          </div><!-- extend_object-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- extend_object-method -->
+
+    
+      <div id="method-i-have_git-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">have_git?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Checks whether the current project is managed by Git.</p>
           
 
           
-        </div><!-- extend_object-method -->
-
-      
-        <div id="have_git-3F-method" class="method-detail ">
-          <a name="method-i-have_git-3F"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">have_git?</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Checks whether the current project is managed by Git.</p>
-            
-
-            
-            <div class="method-source-code" id="have_git-3F-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 219</span>
+          <div class="method-source-code" id="have_git-3F-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 219</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">have_git?</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-string">'.git'</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- have_git-3F-source -->
-            
-          </div>
-
+          </div><!-- have_git-3F-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- have_git-3F-method -->
+
+    
+      <div id="method-i-have_rubyforge-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">have_rubyforge?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- have_git-3F-method -->
-
-      
-        <div id="have_rubyforge-3F-method" class="method-detail ">
-          <a name="method-i-have_rubyforge-3F"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">have_rubyforge?</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Loads the RubyForge library, giving a nicer error message if it’s not
+          <p>Loads the RubyForge library, giving a nicer error message if it’s not
 found.</p>
-            
+          
 
-            
-            <div class="method-source-code" id="have_rubyforge-3F-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 194</span>
+          
+          <div class="method-source-code" id="have_rubyforge-3F-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">have_rubyforge?</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'rubyforge'</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
   <span class="ruby-identifier">missing_lib</span> <span class="ruby-string">'rubyforge'</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- have_rubyforge-3F-source -->
-            
-          </div>
+          </div><!-- have_rubyforge-3F-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- have_rubyforge-3F-method -->
+
+    
+      <div id="method-i-have_rubygems-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">have_rubygems?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Loads the RubyGems <code>push</code> command, giving a nicer error message
+if it’s not found.</p>
           
 
           
-        </div><!-- have_rubyforge-3F-method -->
-
-      
-        <div id="have_rubygems-3F-method" class="method-detail ">
-          <a name="method-i-have_rubygems-3F"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">have_rubygems?</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Loads the RubyGems <tt>push</tt> command, giving a nicer error message if
-it’s not found.</p>
-            
-
-            
-            <div class="method-source-code" id="have_rubygems-3F-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 203</span>
+          <div class="method-source-code" id="have_rubygems-3F-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 203</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">have_rubygems?</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">require</span> <span class="ruby-string">'rubygems/command_manager'</span>
@@ -856,69 +799,63 @@ it’s not found.</p>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>, <span class="ruby-constant">NameError</span>
   <span class="ruby-identifier">missing_lib</span> <span class="ruby-string">'gemcutter'</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- have_rubygems-3F-source -->
-            
-          </div>
+          </div><!-- have_rubygems-3F-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- have_rubygems-3F-method -->
+
+    
+      <div id="method-i-have_svn-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">have_svn?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Checks whether the current project is managed by SVN.</p>
           
 
           
-        </div><!-- have_rubygems-3F-method -->
-
-      
-        <div id="have_svn-3F-method" class="method-detail ">
-          <a name="method-i-have_svn-3F"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">have_svn?</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Checks whether the current project is managed by SVN.</p>
-            
-
-            
-            <div class="method-source-code" id="have_svn-3F-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 224</span>
+          <div class="method-source-code" id="have_svn-3F-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 224</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">have_svn?</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-string">'.svn'</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- have_svn-3F-source -->
-            
-          </div>
+          </div><!-- have_svn-3F-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- have_svn-3F-method -->
+
+    
+      <div id="method-i-init_git" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init_git</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prepare the use of Git. Returns the Git (pseudo-)object.</p>
           
 
           
-        </div><!-- have_svn-3F-method -->
-
-      
-        <div id="init_git-method" class="method-detail ">
-          <a name="method-i-init_git"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">init_git</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Prepare the use of Git. Returns the Git (pseudo-)object.</p>
-            
-
-            
-            <div class="method-source-code" id="init_git-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 254</span>
+          <div class="method-source-code" id="init_git-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 254</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_git</span>
   <span class="ruby-identifier">pseudo_object</span> {
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">cmd</span>, *<span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
@@ -929,15 +866,15 @@ it’s not found.</p>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">cmd</span>, *<span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-node">%{git #{args.unshift(cmd.to_s.tr('_', '-')).join(' ')}}</span>
+      <span class="ruby-node">%x{git #{args.unshift(cmd.to_s.tr('_', '-')).join(' ')}}</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">remote_for_branch</span>(<span class="ruby-identifier">branch</span>)  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-identifier">run</span>(<span class="ruby-value">:branch</span>, <span class="ruby-string">'-r'</span>)[<span class="ruby-node">%{(\S+)/#{Regexp.escape(branch)}$}</span>, <span class="ruby-value">1</span>]
+      <span class="ruby-identifier">run</span>(<span class="ruby-value">:branch</span>, <span class="ruby-string">'-r'</span>)[<span class="ruby-node">%r{(\S+)/#{Regexp.escape(branch)}$}</span>, <span class="ruby-value">1</span>]
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">url_for_remote</span>(<span class="ruby-identifier">remote</span>)  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">'-v'</span>)[<span class="ruby-node">%{^#{Regexp.escape(remote)}\s+(\S+)}</span>, <span class="ruby-value">1</span>]
+      <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">'-v'</span>)[<span class="ruby-node">%r{^#{Regexp.escape(remote)}\s+(\S+)}</span>, <span class="ruby-value">1</span>]
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_remote</span>(<span class="ruby-identifier">regexp</span>)  <span class="ruby-comment"># :nodoc:</span>
@@ -962,37 +899,34 @@ it’s not found.</p>
     <span class="ruby-keyword">end</span>
   } <span class="ruby-keyword">if</span> <span class="ruby-identifier">have_git?</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- init_git-source -->
-            
-          </div>
-
+          </div><!-- init_git-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- init_git-method -->
+
+    
+      <div id="method-i-init_rubyforge" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init_rubyforge</span><span
+            class="method-args">(login = true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- init_git-method -->
-
-      
-        <div id="init_rubyforge-method" class="method-detail ">
-          <a name="method-i-init_rubyforge"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">init_rubyforge</span><span
-              class="method-args">(login = true)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Prepare the use of RubyForge, optionally logging in right away. Returns the
+          <p>Prepare the use of RubyForge, optionally logging in right away. Returns the
 RubyForge object.</p>
-            
+          
 
-            
-            <div class="method-source-code" id="init_rubyforge-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 230</span>
+          
+          <div class="method-source-code" id="init_rubyforge-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 230</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_rubyforge</span>(<span class="ruby-identifier">login</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">have_rubyforge?</span>
 
@@ -1001,36 +935,33 @@ RubyForge object.</p>
 
   <span class="ruby-identifier">rf</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- init_rubyforge-source -->
-            
-          </div>
+          </div><!-- init_rubyforge-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- init_rubyforge-method -->
+
+    
+      <div id="method-i-init_rubygems" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init_rubygems</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prepare the use of RubyGems.org. Returns the RubyGems (pseudo-)object.</p>
           
 
           
-        </div><!-- init_rubyforge-method -->
-
-      
-        <div id="init_rubygems-method" class="method-detail ">
-          <a name="method-i-init_rubygems"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">init_rubygems</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Prepare the use of RubyGems.org. Returns the RubyGems (pseudo-)object.</p>
-            
-
-            
-            <div class="method-source-code" id="init_rubygems-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 241</span>
+          <div class="method-source-code" id="init_rubygems-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 241</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_rubygems</span>
   <span class="ruby-identifier">pseudo_object</span> {
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">cmd</span>, *<span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
@@ -1042,36 +973,33 @@ RubyForge object.</p>
     <span class="ruby-keyword">end</span>
   } <span class="ruby-keyword">if</span> <span class="ruby-identifier">have_rubygems?</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- init_rubygems-source -->
-            
-          </div>
+          </div><!-- init_rubygems-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- init_rubygems-method -->
+
+    
+      <div id="method-i-init_svn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init_svn</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Prepare the use of SVN. Returns the SVN (pseudo-)object.</p>
           
 
           
-        </div><!-- init_rubygems-method -->
-
-      
-        <div id="init_svn-method" class="method-detail ">
-          <a name="method-i-init_svn"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">init_svn</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Prepare the use of SVN. Returns the SVN (pseudo-)object.</p>
-            
-
-            
-            <div class="method-source-code" id="init_svn-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 299</span>
+          <div class="method-source-code" id="init_svn-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 299</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_svn</span>
   <span class="ruby-identifier">pseudo_object</span> {
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">cmd</span>, *<span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
@@ -1082,11 +1010,11 @@ RubyForge object.</p>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">cmd</span>, *<span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-node">%{svn #{args.unshift(cmd.to_s.tr('_', '-')).join(' ')}}</span>
+      <span class="ruby-node">%x{svn #{args.unshift(cmd.to_s.tr('_', '-')).join(' ')}}</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span>  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-value">%{svnversion}</span>[<span class="ruby-regexp">/\d+/</span>]
+      <span class="ruby-value">%x{svnversion}</span>[<span class="ruby-regexp">%r\d+/</span>]
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_files</span>  <span class="ruby-comment"># :nodoc:</span>
@@ -1094,136 +1022,124 @@ RubyForge object.</p>
     <span class="ruby-keyword">end</span>
   } <span class="ruby-keyword">if</span> <span class="ruby-identifier">have_svn?</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- init_svn-source -->
-            
-          </div>
+          </div><!-- init_svn-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- init_svn-method -->
+
+    
+      <div id="method-i-missing_lib" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">missing_lib</span><span
+            class="method-args">(lib, do_warn = $DEBUG)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Warn about missing library <code>lib</code> (if <code>do_warn</code> is
+true) and return false.</p>
           
 
           
-        </div><!-- init_svn-method -->
-
-      
-        <div id="missing_lib-method" class="method-detail ">
-          <a name="method-i-missing_lib"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">missing_lib</span><span
-              class="method-args">(lib, do_warn = $DEBUG)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Warn about missing library <tt>lib</tt> (if <tt>do_warn</tt> is true) and
-return false.</p>
-            
-
-            
-            <div class="method-source-code" id="missing_lib-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 187</span>
+          <div class="method-source-code" id="missing_lib-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 187</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">missing_lib</span>(<span class="ruby-identifier">lib</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-identifier">$DEBUG</span>)
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Please install the `#{lib}' library for additional tasks.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">do_warn</span>
   <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- missing_lib-source -->
-            
-          </div>
+          </div><!-- missing_lib-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- missing_lib-method -->
+
+    
+      <div id="method-i-pseudo_object" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pseudo_object</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create a (pseudo-)object.</p>
           
 
           
-        </div><!-- missing_lib-method -->
-
-      
-        <div id="pseudo_object-method" class="method-detail ">
-          <a name="method-i-pseudo_object"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">pseudo_object</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Create a (pseudo-)object.</p>
-            
-
-            
-            <div class="method-source-code" id="pseudo_object-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 336</span>
+          <div class="method-source-code" id="pseudo_object-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 336</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pseudo_object</span>
   <span class="ruby-identifier">extend_object</span>(<span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>, <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>) {
     <span class="ruby-identifier">instance_methods</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">method</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">undef_method</span>(<span class="ruby-identifier">method</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A__|\Aobject_id\z/</span>
+      <span class="ruby-identifier">undef_method</span>(<span class="ruby-identifier">method</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r\A__|\Aobject_id\z/</span>
     }
   }
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- pseudo_object-source -->
-            
-          </div>
+          </div><!-- pseudo_object-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- pseudo_object-method -->
+
+    
+      <div id="method-i-skipping" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">skipping</span><span
+            class="method-args">(name, do_warn = Hen.verbose)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Warn about skipping tasks for <code>name</code> (if <code>do_warn</code> is
+true) and return nil.</p>
           
 
           
-        </div><!-- pseudo_object-method -->
-
-      
-        <div id="skipping-method" class="method-detail ">
-          <a name="method-i-skipping"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">skipping</span><span
-              class="method-args">(name, do_warn = Hen.verbose)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Warn about skipping tasks for <tt>name</tt> (if <tt>do_warn</tt> is true)
-and return nil.</p>
-            
-
-            
-            <div class="method-source-code" id="skipping-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/dsl.rb, line 181</span>
+          <div class="method-source-code" id="skipping-source">
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 181</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">verbose</span>)
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Skipping #{name} tasks.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">do_warn</span>
   <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- skipping-source -->
-            
-          </div>
-
+          </div><!-- skipping-source -->
           
+        </div>
 
-          
-        </div><!-- skipping-method -->
+        
 
-      
-      </div><!-- private-instance-method-details -->
+        
+      </div><!-- skipping-method -->
+
     
-    </div><!-- 5Buntitled-5D -->
+    </section><!-- private-instance-method-details -->
   
+  </section><!-- 5Buntitled-5D -->
 
-  </div><!-- documentation -->
+</div><!-- documentation -->
 
-  <div id="validator-badges">
-    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-      Rdoc Generator</a> 2</small>.</p>
-  </div>
 
-</body>
-</html>
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
 

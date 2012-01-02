@@ -1,8 +1,8 @@
-Wed, 21 Sep 2011 10:34:32 +0200
+Mon, 02 Jan 2012 13:43:24 +0100
 lib/hen/dsl.rb	Wed, 17 Aug 2011 09:16:24 +0200
 lib/hen.rb	Tue, 24 May 2011 10:34:58 +0200
 COPYING	Fri, 29 Apr 2011 12:15:57 +0200
-lib/hen/version.rb	Wed, 21 Sep 2011 10:33:48 +0200
-README	Wed, 21 Sep 2011 10:33:38 +0200
+lib/hen/version.rb	Mon, 02 Jan 2012 13:42:47 +0100
+README	Mon, 02 Jan 2012 13:42:26 +0100
 lib/hen/cli.rb	Wed, 27 Apr 2011 18:50:02 +0200
-ChangeLog	Wed, 21 Sep 2011 10:33:22 +0200
+ChangeLog	Mon, 02 Jan 2012 13:41:50 +0100

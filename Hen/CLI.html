@@ -1,341 +1,316 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+
+<html>
 <head>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-  <title>Module: Hen::CLI</title>
+<title>module Hen::CLI - hen Application documentation (v0.4.1)</title>
 
-  <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
-  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
-  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
 
-</head>
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
 <body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
 
-  <div id="metadata">
-    <div id="home-metadata">
-      <div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="../index.html">Home</a>
-          <a href="../index.html#classes">Classes</a>
-          <a href="../index.html#methods">Methods</a>
-        </h3>
-      </div>
-    </div>
 
-    <div id="file-metadata">
-      <div id="file-list-section" class="section">
-        <h3 class="section-header">In Files</h3>
-        <div class="section-body">
-          <ul>
-          
-            <li><a href="../lib/hen/cli_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/hen/cli.rb">lib/hen/cli.rb</a></li>
-          
-          </ul>
-        </div>
-      </div>
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
 
-      
-    </div>
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
 
-    <div id="class-metadata">
-      
 
-      
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/hen/cli.rb
+  </ul>
+</nav>
 
-      
-
-      
-      <!-- Method Quickref -->
-      <div id="method-list-section" class="section">
-        <h3 class="section-header">Methods</h3>
-        <ul class="link-list">
-          
-          <li><a href="#method-i-_hen_original_ask">#_hen_original_ask</a></li>
-          
-          <li><a href="#method-i-ask">#ask</a></li>
-          
-          <li><a href="#method-i-ask-21">#ask!</a></li>
-          
-          <li><a href="#method-i-classname">#classname</a></li>
-          
-          <li><a href="#method-i-default_classname">#default_classname</a></li>
-          
-          <li><a href="#method-i-default_emailaddress">#default_emailaddress</a></li>
-          
-          <li><a href="#method-i-default_fullname">#default_fullname</a></li>
-          
-          <li><a href="#method-i-emailaddress">#emailaddress</a></li>
-          
-          <li><a href="#method-i-fullname">#fullname</a></li>
-          
-          <li><a href="#method-i-progdesc">#progdesc</a></li>
-          
-          <li><a href="#method-i-progname">#progname</a></li>
-          
-          <li><a href="#method-i-render">#render</a></li>
-          
-        </ul>
-      </div>
-      
-
-      
-    </div>
-
-    <div id="project-metadata">
-      
-      
-      <div id="fileindex-section" class="section project-section">
-        <h3 class="section-header">Files</h3>
-        <ul>
-        
-          <li class="file"><a href="../COPYING.html">COPYING</a></li>
-        
-          <li class="file"><a href="../ChangeLog.html">ChangeLog</a></li>
-        
-          <li class="file"><a href="../README.html">README</a></li>
-        
-        </ul>
-      </div>
-      
-
-      <div id="classindex-section" class="section project-section">
-        <h3 class="section-header">Class/Module Index
-          <span class="search-toggle"><img src="../images/find.png"
-            height="16" width="16" alt="[+]"
-            title="show/hide quicksearch" /></span></h3>
-        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-        <fieldset>
-          <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
-        </fieldset>
-        </form>
-
-        <ul class="link-list">
-        
-          <li><a href="../Hen.html">Hen</a></li>
-        
-          <li><a href="../Hen/CLI.html">Hen::CLI</a></li>
-        
-          <li><a href="../Hen/DSL.html">Hen::DSL</a></li>
-        
-          <li><a href="../Hen/Version.html">Hen::Version</a></li>
-        
-          <li><a href="../Object.html">Object</a></li>
-        
-        </ul>
-        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
-      </div>
-
-      
-    </div>
+    
   </div>
 
-  <div id="documentation">
-    <h1 class="module">Hen::CLI</h1>
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
 
-    <div id="description" class="description">
-      
+  <ul class="link-list">
+    
+    <li><a href="#method-i-_hen_original_ask">#_hen_original_ask</a>
+    
+    <li><a href="#method-i-ask">#ask</a>
+    
+    <li><a href="#method-i-ask-21">#ask!</a>
+    
+    <li><a href="#method-i-classname">#classname</a>
+    
+    <li><a href="#method-i-default_classname">#default_classname</a>
+    
+    <li><a href="#method-i-default_emailaddress">#default_emailaddress</a>
+    
+    <li><a href="#method-i-default_fullname">#default_fullname</a>
+    
+    <li><a href="#method-i-emailaddress">#emailaddress</a>
+    
+    <li><a href="#method-i-fullname">#fullname</a>
+    
+    <li><a href="#method-i-progdesc">#progdesc</a>
+    
+    <li><a href="#method-i-progname">#progname</a>
+    
+    <li><a href="#method-i-render">#render</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Hen.html">Hen</a>
+  
+    <li><a href="../Hen/CLI.html">Hen::CLI</a>
+  
+    <li><a href="../Hen/DSL.html">Hen::DSL</a>
+  
+    <li><a href="../Hen/Version.html">Hen::Version</a>
+  
+    <li><a href="../Object.html">Object</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Hen::CLI</h1>
+
+  <div id="description" class="description">
+    
 <p>Some helper methods used by the <a href="../Hen.html">Hen</a> executable.
 Also available for use in custom project skeletons.</p>
 
-    </div><!-- description -->
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
 
     
+
     
+
     
-    <div id="5Buntitled-5D" class="documentation-section">
-      
+    <!-- Attributes -->
+    <section id="attribute-method-details" class="method-section section">
+      <h3 class="section-header">Attributes</h3>
 
       
+      <div id="attribute-c-answers" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">answers</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
 
-      
-
-      
-      <!-- Attributes -->
-      <div id="attribute-method-details" class="method-section section">
-        <h3 class="section-header">Attributes</h3>
-
+        <div class="method-description">
         
-        <div id="answers-attribute-method" class="method-detail">
-          <a name="answers"></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">answers</span><span
-              class="attribute-access-type">[R]</span>
-          </div>
+        <p>Collect user’s answers by key, so we don’t have to ask again.</p>
+        
+        </div>
+      </div>
+      
+    </section><!-- attribute-method-details -->
+    
 
-          <div class="method-description">
-          
-          <p>Collect user’s answers by key, so we don’t have to ask again.</p>
-          
-          </div>
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-classname" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">classname</span><span
+            class="method-args">(default = default_classname)</span>
+          <span class="method-click-advice">click to toggle source</span>
         </div>
         
-      </div><!-- attribute-method-details -->
-      
 
-      <!-- Methods -->
-      
-      <div id="public-instance-method-details" class="method-section section">
-        <h3 class="section-header">Public Instance Methods</h3>
-
-      
-        <div id="classname-method" class="method-detail ">
-          <a name="method-i-classname"></a>
-
+        <div class="method-description">
           
-          <div class="method-heading">
-            <span class="method-name">classname</span><span
-              class="method-args">(default = default_classname)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>The project’s namespace. (Required)</p>
+          <p>The project’s namespace. (Required)</p>
 
 <p>Namespaces SHOULD match the project name in SnakeCase.</p>
-            
+          
 
-            
-            <div class="method-source-code" id="classname-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 84</span>
+          
+          <div class="method-source-code" id="classname-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">classname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_classname</span>)
   <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Module's/Class's name&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- classname-source -->
-            
-          </div>
+          </div><!-- classname-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- classname-method -->
+
+    
+      <div id="method-i-emailaddress" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">emailaddress</span><span
+            class="method-args">(default = default_emailaddress)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The author’s e-mail address. (Optional, but highly recommended)</p>
           
 
           
-        </div><!-- classname-method -->
-
-      
-        <div id="emailaddress-method" class="method-detail ">
-          <a name="method-i-emailaddress"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">emailaddress</span><span
-              class="method-args">(default = default_emailaddress)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>The author’s e-mail address. (Optional, but highly recommended)</p>
-            
-
-            
-            <div class="method-source-code" id="emailaddress-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 94</span>
+          <div class="method-source-code" id="emailaddress-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emailaddress</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_emailaddress</span>)
   <span class="ruby-identifier">ask</span>(<span class="ruby-string">'E-mail address'</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- emailaddress-source -->
-            
-          </div>
+          </div><!-- emailaddress-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- emailaddress-method -->
+
+    
+      <div id="method-i-fullname" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fullname</span><span
+            class="method-args">(default = default_fullname)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The author’s full name. (Required)</p>
           
 
           
-        </div><!-- emailaddress-method -->
-
-      
-        <div id="fullname-method" class="method-detail ">
-          <a name="method-i-fullname"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">fullname</span><span
-              class="method-args">(default = default_fullname)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>The author’s full name. (Required)</p>
-            
-
-            
-            <div class="method-source-code" id="fullname-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 89</span>
+          <div class="method-source-code" id="fullname-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fullname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_fullname</span>)
   <span class="ruby-identifier">ask!</span>(<span class="ruby-string">'Full name'</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- fullname-source -->
-            
-          </div>
+          </div><!-- fullname-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- fullname-method -->
+
+    
+      <div id="method-i-progdesc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">progdesc</span><span
+            class="method-args">(default = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A short one-line summary of the project’s description. (Required)</p>
           
 
           
-        </div><!-- fullname-method -->
-
-      
-        <div id="progdesc-method" class="method-detail ">
-          <a name="method-i-progdesc"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">progdesc</span><span
-              class="method-args">(default = nil)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>A short one-line summary of the project’s description. (Required)</p>
-            
-
-            
-            <div class="method-source-code" id="progdesc-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 99</span>
+          <div class="method-source-code" id="progdesc-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">progdesc</span>(<span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Program's description summary&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- progdesc-source -->
-            
-          </div>
-
+          </div><!-- progdesc-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- progdesc-method -->
+
+    
+      <div id="method-i-progname" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">progname</span><span
+            class="method-args">(default = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- progdesc-method -->
-
-      
-        <div id="progname-method" class="method-detail ">
-          <a name="method-i-progname"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">progname</span><span
-              class="method-args">(default = nil)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>The project name. (Required)</p>
+          <p>The project name. (Required)</p>
 
 <p>Quoting the <a href="http://chneukirchen.github.com/rps/">Ruby Packaging
 Standard</a>:</p>
@@ -345,46 +320,42 @@ Standard</a>:</p>
 <p>If a project is an enhancement, plugin, extension, etc. for some other
 project it SHOULD contain a dash in the name between the original name and
 the project’s name.</p>
-            
+          
 
-            
-            <div class="method-source-code" id="progname-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 77</span>
+          
+          <div class="method-source-code" id="progname-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">progname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Project's name&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- progname-source -->
-            
-          </div>
+          </div><!-- progname-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- progname-method -->
+
+    
+      <div id="method-i-render" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">render</span><span
+            class="method-args">(sample, target)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Renders the contents of <code>sample</code> as an ERb template, storing the
+result in <code>target</code>. Returns the content.</p>
           
 
           
-        </div><!-- progname-method -->
-
-      
-        <div id="render-method" class="method-detail ">
-          <a name="method-i-render"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">render</span><span
-              class="method-args">(sample, target)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Renders the contents of <tt>sample</tt> as an ERb template, storing the
-result in <tt>target</tt>. Returns the content.</p>
-            
-
-            
-            <div class="method-source-code" id="render-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 52</span>
+          <div class="method-source-code" id="render-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">sample</span>, <span class="ruby-identifier">target</span>)
   <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Sample file not found: #{sample}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">sample</span>)
 
@@ -399,72 +370,67 @@ result in <tt>target</tt>. Returns the content.</p>
 
   <span class="ruby-identifier">content</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- render-source -->
-            
-          </div>
-
+          </div><!-- render-source -->
           
+        </div>
 
-          
-        </div><!-- render-method -->
+        
 
-      
-      </div><!-- public-instance-method-details -->
+        
+      </div><!-- render-method -->
+
     
-      <div id="private-instance-method-details" class="method-section section">
-        <h3 class="section-header">Private Instance Methods</h3>
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
 
-      
-        <div id="_hen_original_ask-method" class="method-detail method-alias">
-          <a name="method-i-_hen_original_ask"></a>
+    
+      <div id="method-i-_hen_original_ask" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">_hen_original_ask</span><span
+            class="method-args">(key, default = nil, cached = true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
 
+        <div class="method-description">
           
-          <div class="method-heading">
-            <span class="method-name">_hen_original_ask</span><span
-              class="method-args">(key, default = nil, cached = true)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
           
-
-          <div class="method-description">
-            
-            
-            
-
-            
-          </div>
-
           
 
           
-          <div class="aliases">
-            Alias for: <a href="CLI.html#method-i-ask">ask</a>
-          </div>
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="CLI.html#method-i-ask">ask</a>
+        </div>
+        
+      </div><!-- _hen_original_ask-method -->
+
+    
+      <div id="method-i-ask" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ask</span><span
+            class="method-args">(key, default = nil, cached = true)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- _hen_original_ask-method -->
-
-      
-        <div id="ask-method" class="method-detail ">
-          <a name="method-i-ask"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">ask</span><span
-              class="method-args">(key, default = nil, cached = true)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
+          <p>Ask the user to enter an appropriate value for <code>key</code>. Uses
+already stored answer if present, unless <code>cached</code> is false.</p>
           
 
-          <div class="method-description">
-            
-            <p>Ask the user to enter an appropriate value for <tt>key</tt>. Uses already
-stored answer if present, unless <tt>cached</tt> is false.</p>
-            
-
-            
-            <div class="method-source-code" id="ask-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 133</span>
+          
+          <div class="method-source-code" id="ask-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">cached</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-constant">CLI</span>.<span class="ruby-identifier">answers</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cached</span>
 
@@ -474,41 +440,38 @@ stored answer if present, unless <tt>cached</tt> is false.</p>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Interrupt</span>
   <span class="ruby-identifier">abort</span> <span class="ruby-string">''</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- ask-source -->
-            
-          </div>
-
+          </div><!-- ask-source -->
           
-          <div class="aliases">
-            Also aliased as: <a href="CLI.html#method-i-_hen_original_ask">_hen_original_ask</a>
-          </div>
-          
+        </div>
 
-          
-        </div><!-- ask-method -->
+        
+        <div class="aliases">
+          Also aliased as: <a href="CLI.html#method-i-_hen_original_ask">_hen_original_ask</a>
+        </div>
+        
 
-      
-        <div id="ask-21-method" class="method-detail ">
-          <a name="method-i-ask-21"></a>
+        
+      </div><!-- ask-method -->
 
-          
-          <div class="method-heading">
-            <span class="method-name">ask!</span><span
-              class="method-args">(key, default = nil, max = 3)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
+    
+      <div id="method-i-ask-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ask!</span><span
+            class="method-args">(key, default = nil, max = 3)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
 
-          <div class="method-description">
-            
-            <p>Same as <a href="CLI.html#method-i-ask">ask</a>, but requires a non-empty
+        <div class="method-description">
+          
+          <p>Same as <a href="CLI.html#method-i-ask">ask</a>, but requires a non-empty
 value to be entered.</p>
-            
+          
 
-            
-            <div class="method-source-code" id="ask-21-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 144</span>
+          
+          <div class="method-source-code" id="ask-21-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ask!</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span> = <span class="ruby-value">3</span>)
   <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;#{key} is required! Please enter a non-empty value.&quot;</span>
 
@@ -522,137 +485,125 @@ value to be entered.</p>
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;You had #{max} tries now -- giving up...&quot;</span>
   <span class="ruby-string">''</span>  <span class="ruby-comment"># default value</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- ask-21-source -->
-            
-          </div>
+          </div><!-- ask-21-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- ask-21-method -->
+
+    
+      <div id="method-i-default_classname" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">default_classname</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Determine a suitable default namespace from the project name.</p>
           
 
           
-        </div><!-- ask-21-method -->
-
-      
-        <div id="default_classname-method" class="method-detail ">
-          <a name="method-i-default_classname"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">default_classname</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Determine a suitable default namespace from the project name.</p>
-            
-
-            
-            <div class="method-source-code" id="default_classname-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 106</span>
+          <div class="method-source-code" id="default_classname-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_classname</span>
   <span class="ruby-identifier">pname</span> = <span class="ruby-identifier">progname</span>
-  <span class="ruby-identifier">pname</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/(?:\A|_)(.)/</span>) { <span class="ruby-node">$1</span>.<span class="ruby-identifier">upcase</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">pname</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pname</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">pname</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r(?:\A|_)(.)/</span>) { <span class="ruby-node">$1</span>.<span class="ruby-identifier">upcase</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">pname</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pname</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- default_classname-source -->
-            
-          </div>
+          </div><!-- default_classname-source -->
+          
+        </div>
 
+        
+
+        
+      </div><!-- default_classname-method -->
+
+    
+      <div id="method-i-default_emailaddress" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">default_emailaddress</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Determine a default e-mail address from the global config.</p>
           
 
           
-        </div><!-- default_classname-method -->
-
-      
-        <div id="default_emailaddress-method" class="method-detail ">
-          <a name="method-i-default_emailaddress"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">default_emailaddress</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Determine a default e-mail address from the global config.</p>
-            
-
-            
-            <div class="method-source-code" id="default_emailaddress-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 124</span>
+          <div class="method-source-code" id="default_emailaddress-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_emailaddress</span>
   <span class="ruby-identifier">email</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-string">'gem/email'</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">email</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">email</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- default_emailaddress-source -->
-            
-          </div>
-
+          </div><!-- default_emailaddress-source -->
           
+        </div>
 
+        
+
+        
+      </div><!-- default_emailaddress-method -->
+
+    
+      <div id="method-i-default_fullname" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">default_fullname</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
           
-        </div><!-- default_emailaddress-method -->
-
-      
-        <div id="default_fullname-method" class="method-detail ">
-          <a name="method-i-default_fullname"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">default_fullname</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>Determine a default name from the global config or, if available, from the
+          <p>Determine a default name from the global config or, if available, from the
 <a href="http://en.wikipedia.org/wiki/Gecos_field">GECOS field</a> in the
-<tt>/etc/passwd</tt> file.</p>
-            
+<code>/etc/passwd</code> file.</p>
+          
 
-            
-            <div class="method-source-code" id="default_fullname-source">
-<pre>
-<span class="ruby-comment"># File lib/hen/cli.rb, line 114</span>
+          
+          <div class="method-source-code" id="default_fullname-source">
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_fullname</span>
   <span class="ruby-identifier">author</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-string">'gem/author'</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">author</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">author</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">author</span>.<span class="ruby-identifier">empty?</span>
 
   <span class="ruby-identifier">pwent</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getpwuid</span>(<span class="ruby-constant">Process</span>.<span class="ruby-identifier">euid</span>)
   <span class="ruby-identifier">gecos</span> = <span class="ruby-identifier">pwent</span>.<span class="ruby-identifier">gecos</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pwent</span>
-  <span class="ruby-identifier">gecos</span>[<span class="ruby-regexp">/[^,]*/</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">gecos</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">gecos</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">gecos</span>[<span class="ruby-regexp">%r[^,]*/</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">gecos</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">gecos</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- default_fullname-source -->
-            
-          </div>
-
+          </div><!-- default_fullname-source -->
           
+        </div>
 
-          
-        </div><!-- default_fullname-method -->
+        
 
-      
-      </div><!-- private-instance-method-details -->
+        
+      </div><!-- default_fullname-method -->
+
     
-    </div><!-- 5Buntitled-5D -->
+    </section><!-- private-instance-method-details -->
   
+  </section><!-- 5Buntitled-5D -->
 
-  </div><!-- documentation -->
+</div><!-- documentation -->
 
-  <div id="validator-badges">
-    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-      Rdoc Generator</a> 2</small>.</p>
-  </div>
 
-</body>
-</html>
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
 

@@ -1,92 +1,94 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
 <head>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-  <title>File: ChangeLog [hen Application documentation (v0.4.0)]</title>
+<title>ChangeLog - hen Application documentation (v0.4.1)</title>
 
-  <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
-  <script src="./js/jquery.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/thickbox-compressed.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/quicksearch.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/darkfish.js" type="text/javascript"
-    charset="utf-8"></script>
-</head>
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
 
 <body class="file">
-  <div id="metadata">
-    <div id="home-metadata">
-      <div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="./index.html">Home</a>
-          <a href="./index.html#classes">Classes</a>
-          <a href="./index.html#methods">Methods</a>
-        </h3>
-      </div>
-    </div>
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
 
-    <div id="project-metadata">
-      
-      
-      <div id="fileindex-section" class="section project-section">
-        <h3 class="section-header">Files</h3>
-        <ul>
-        
-          <li class="file"><a href="./COPYING.html">COPYING</a></li>
-        
-          <li class="file"><a href="./ChangeLog.html">ChangeLog</a></li>
-        
-          <li class="file"><a href="./README.html">README</a></li>
-        
-        </ul>
-      </div>
-      
 
-      <div id="classindex-section" class="section project-section">
-        <h3 class="section-header">Class Index
-          <span class="search-toggle"><img src="./images/find.png"
-            height="16" width="16" alt="[+]"
-            title="show/hide quicksearch" /></span></h3>
-        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-        <fieldset>
-          <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
-        </fieldset>
-        </form>
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
 
-        <ul class="link-list">
-        
-          <li><a href="./Hen.html">Hen</a></li>
-        
-          <li><a href="./Hen/CLI.html">Hen::CLI</a></li>
-        
-          <li><a href="./Hen/DSL.html">Hen::DSL</a></li>
-        
-          <li><a href="./Hen/Version.html">Hen::Version</a></li>
-        
-          <li><a href="./Object.html">Object</a></li>
-        
-        </ul>
-        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
-      </div>
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
 
-      
-    </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="./ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="./README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Hen.html">Hen</a>
+  
+    <li><a href="./Hen/CLI.html">Hen::CLI</a>
+  
+    <li><a href="./Hen/DSL.html">Hen::DSL</a>
+  
+    <li><a href="./Hen/Version.html">Hen::Version</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+  </ul>
+</nav>
+
   </div>
+</nav>
 
-  <div id="documentation">
-    
-<h1>Revision history for hen</h1>
+<div id="documentation" class="description">
+  
+<h1 id="label-Revision+history+for+hen">Revision history for hen</h1>
 
-<h2>0.4.0 [2011-09-21]</h2>
+<h2 id="label-0.4.1+%5B2012-01-02%5D">0.4.1 [2012-01-02]</h2>
+<ul><li>
+<p>Make ‘release’ depend on ‘doc:publish’.</p>
+</li></ul>
+
+<h2 id="label-0.4.0+%5B2011-09-21%5D">0.4.0 [2011-09-21]</h2>
 <ul><li>
 <p>Use env ruby.</p>
 </li><li>
@@ -95,122 +97,123 @@
 <p>Don’t undefine `object_id’ for (pseudo-)objects.</p>
 </li></ul>
 
-<h2>0.3.9 [2011-05-24]</h2>
+<h2 id="label-0.3.9+%5B2011-05-24%5D">0.3.9 [2011-05-24]</h2>
 <ul><li>
 <p>Even more Rake 0.9.0/RubyGems 1.8.3 compatibility.</p>
 </li></ul>
 
-<h2>0.3.8 [2011-05-24]</h2>
+<h2 id="label-0.3.8+%5B2011-05-24%5D">0.3.8 [2011-05-24]</h2>
 <ul><li>
 <p>More Rake 0.9.0 compatibility.</p>
 </li></ul>
 
-<h2>0.3.7 [2011-05-24]</h2>
+<h2 id="label-0.3.7+%5B2011-05-24%5D">0.3.7 [2011-05-24]</h2>
 <ul><li>
 <p>Rake 0.9.0 compatibility.</p>
 </li></ul>
 
-<h2>0.3.6 [2011-04-29]</h2>
+<h2 id="label-0.3.6+%5B2011-04-29%5D">0.3.6 [2011-04-29]</h2>
 <ul><li>
 <p>Switched project and template license to Affero GPL.</p>
 </li></ul>
 
-<h2>0.3.5 [2011-04-05]</h2>
+<h2 id="label-0.3.5+%5B2011-04-05%5D">0.3.5 [2011-04-05]</h2>
 <ul><li>
 <p>RubyGems 1.7.0 deprecated Gem::Specification#has_rdoc=.</p>
 </li></ul>
 
-<h2>0.3.4 [2011-03-09]</h2>
+<h2 id="label-0.3.4+%5B2011-03-09%5D">0.3.4 [2011-03-09]</h2>
 <ul><li>
 <p>Some minor changes/fixes.</p>
 </li></ul>
 
-<h2>0.3.3 [2011-02-15]</h2>
+<h2 id="label-0.3.3+%5B2011-02-15%5D">0.3.3 [2011-02-15]</h2>
 <ul><li>
-<p>Added <tt>release:tag</tt> task.</p>
+<p>Added <code>release:tag</code> task.</p>
 </li><li>
 <p>Better default project name handling.</p>
 </li></ul>
 
-<h2>0.3.2 [2011-02-11]</h2>
+<h2 id="label-0.3.2+%5B2011-02-11%5D">0.3.2 [2011-02-11]</h2>
 <ul><li>
 <p>Fixed the (pseudo-)object eval stuff. So there’s hope we finally have a
-working release… <b>fingerscrossed</b></p>
+working release… <strong>fingerscrossed</strong></p>
 </li></ul>
 
-<h2>0.3.1 [2011-02-11]</h2>
+<h2 id="label-0.3.1+%5B2011-02-11%5D">0.3.1 [2011-02-11]</h2>
 <ul><li>
 <p>Fixed the RubyForge release task name in the prerequisite list for the
-<tt>:release</tt> task.</p>
+<code>:release</code> task.</p>
 </li></ul>
 
-<h2>0.3.0 [2011-02-11]</h2>
+<h2 id="label-0.3.0+%5B2011-02-11%5D">0.3.0 [2011-02-11]</h2>
 <ul><li>
-<p>Implementations for <tt>doc:publish</tt> and <tt>:release</tt> are now
+<p>Implementations for <code>doc:publish</code> and <code>:release</code> are
+now cumulative.</p>
+</li><li>
+<p>The configuration (through the user’s <code>.henrc</code> files) is now
 cumulative.</p>
 </li><li>
-<p>The configuration (through the user’s <tt>.henrc</tt> files) is now
-cumulative.</p>
-</li><li>
-<p>It’s no longer required to have a <tt>.henrc</tt> file.</p>
+<p>It’s no longer required to have a <code>.henrc</code> file.</p>
 </li><li>
 <p>Changed default namespace in sample skeleton from class to module.</p>
 </li><li>
 <p>Ignoring untracked files when building the official documentation and when
 building the Gem.</p>
 <ul><li>
-<p>Added new task <tt>doc:local</tt> for the previous <tt>doc</tt> behaviour.</p>
+<p>Added new task <code>doc:local</code> for the previous <code>doc</code>
+behaviour.</p>
 </li></ul>
 </li><li>
-<p>Renamed <tt>:gemspec</tt> -&gt; <tt>gem:spec</tt>, <tt>gemspec:update</tt>
--&gt; <tt>gem:spec:update</tt>.</p>
+<p>Renamed <code>:gemspec</code> -&gt; <code>gem:spec</code>,
+<code>gemspec:update</code> -&gt; <code>gem:spec:update</code>.</p>
 </li><li>
-<p>New task <tt>gem:install</tt> to install the current Gem locally.</p>
+<p>New task <code>gem:install</code> to install the current Gem locally.</p>
 </li><li>
 <p>Added support for RDoc 2/3.</p>
 </li><li>
-<p>Recognize <tt>:legacy</tt> option in <tt>:spec</tt> options to force RSpec
-1 even when RSpec 2 is available. Same for RDoc 2 vs. 3.</p>
+<p>Recognize <code>:legacy</code> option in <code>:spec</code> options to
+force RSpec 1 even when RSpec 2 is available. Same for RDoc 2 vs. 3.</p>
 </li><li>
-<p>Added support for easy GitHub homepage by setting <tt>:homepage</tt> option
-to a symbol that identifies the GitHub user name.</p>
+<p>Added support for easy GitHub homepage by setting <code>:homepage</code>
+option to a symbol that identifies the GitHub user name.</p>
 </li><li>
-<p>Better defaults for <tt>hen create/config</tt>.</p>
+<p>Better defaults for <code>hen create/config</code>.</p>
 </li><li>
 <p><a href="Hen/CLI.html#method-i-render">Hen::CLI#render</a> makes a backup
 before overwriting an existing file.</p>
 </li><li>
 <p>The RubyGems (pseudo-)object can now execute arbitrary commands.</p>
 </li><li>
-<p>The <tt>gemcutter</tt> helper has been deprecated; use <tt>rubygems</tt>
-instead.</p>
+<p>The <code>gemcutter</code> helper has been deprecated; use
+<code>rubygems</code> instead.</p>
 </li><li>
 <p>Some defaults are set in <a href="Hen.html">Hen</a> files rather than
-relying on <tt>.henrc</tt> file.</p>
+relying on <code>.henrc</code> file.</p>
 </li><li>
 <p>No longer messing with RubyGems/$LOAD_PATH.</p>
 </li></ul>
 
-<h2>0.2.7 [2011-01-24]</h2>
+<h2 id="label-0.2.7+%5B2011-01-24%5D">0.2.7 [2011-01-24]</h2>
 <ul><li>
 <p>RubyGems compatibility (Gem::CommandManager)</p>
 </li><li>
 <p>Include Gem version in RDoc title</p>
 </li></ul>
 
-<h2>0.2.6 [2011-01-24]</h2>
+<h2 id="label-0.2.6+%5B2011-01-24%5D">0.2.6 [2011-01-24]</h2>
 <ul><li>
 <p>(Botched release…)</p>
 </li></ul>
 
-<h2>0.2.5 [2011-01-07]</h2>
+<h2 id="label-0.2.5+%5B2011-01-07%5D">0.2.5 [2011-01-07]</h2>
 <ul><li>
 <p>Handle rcov.opts file for RSpec 2</p>
 </li><li>
 <p>Optionally set custom zip command for package task</p>
 </li></ul>
 
-<h2>0.2.4 [2011-01-06]</h2>
+<h2 id="label-0.2.4+%5B2011-01-06%5D">0.2.4 [2011-01-06]</h2>
 <ul><li>
 <p>Added support for RSpec 2</p>
 </li><li>
@@ -218,93 +221,93 @@ relying on <tt>.henrc</tt> file.</p>
 out</p>
 </li></ul>
 
-<h2>0.2.3 [2010-07-01]</h2>
+<h2 id="label-0.2.3+%5B2010-07-01%5D">0.2.3 [2010-07-01]</h2>
 <ul><li>
 <p>Fixed syntax error</p>
 </li></ul>
 
-<h2>0.2.2 [2010-07-01]</h2>
+<h2 id="label-0.2.2+%5B2010-07-01%5D">0.2.2 [2010-07-01]</h2>
 <ul><li>
 <p>Set upstream branch when creating a Git-backed project from a remote repo</p>
 </li><li>
 <p>Ignore Git remote fetch/push indicator (2)</p>
 </li></ul>
 
-<h2>0.2.1 [2010-03-15]</h2>
+<h2 id="label-0.2.1+%5B2010-03-15%5D">0.2.1 [2010-03-15]</h2>
 <ul><li>
 <p>Ignore Git remote fetch/push indicator</p>
 </li></ul>
 
-<h2>0.2.0 [2010-02-22]</h2>
+<h2 id="label-0.2.0+%5B2010-02-22%5D">0.2.0 [2010-02-22]</h2>
 <ul><li>
 <p>RubyGems/Gemcutter merge</p>
 </li></ul>
 
-<h2>0.1.9 [2009-12-29]</h2>
+<h2 id="label-0.1.9+%5B2009-12-29%5D">0.1.9 [2009-12-29]</h2>
 <ul><li>
 <p>Fixed Git proxy object</p>
 </li></ul>
 
-<h2>0.1.8 [2009-12-29]</h2>
+<h2 id="label-0.1.8+%5B2009-12-29%5D">0.1.8 [2009-12-29]</h2>
 <ul><li>
 <p>Added support for publishing documentation on GitHub’s gh-pages</p>
 </li></ul>
 
-<h2>0.1.7 [2009-12-16]</h2>
+<h2 id="label-0.1.7+%5B2009-12-16%5D">0.1.7 [2009-12-16]</h2>
 <ul><li>
 <p>Added Gemcutter support</p>
 </li><li>
 <p>Added Git support</p>
 </li></ul>
 
-<h2>0.1.6 [2009-01-26]</h2>
+<h2 id="label-0.1.6+%5B2009-01-26%5D">0.1.6 [2009-01-26]</h2>
 <ul><li>
 <p>Ignore nonexistent spec.opts file</p>
 </li></ul>
 
-<h2>0.1.5 [2009-01-22]</h2>
+<h2 id="label-0.1.5+%5B2009-01-22%5D">0.1.5 [2009-01-22]</h2>
 <ul><li>
 <p>Ruby 1.9 compatibility</p>
 </li></ul>
 
-<h2>0.1.4 [2008-12-19]</h2>
+<h2 id="label-0.1.4+%5B2008-12-19%5D">0.1.4 [2008-12-19]</h2>
 <ul><li>
 <p>Housekeeping</p>
 </li></ul>
 
-<h2>0.1.3 [2008-12-09]</h2>
+<h2 id="label-0.1.3+%5B2008-12-09%5D">0.1.3 [2008-12-09]</h2>
 <ul><li>
 <p>Moved to Git</p>
 </li></ul>
 
-<h2>0.1.2 [2008-08-12]</h2>
+<h2 id="label-0.1.2+%5B2008-08-12%5D">0.1.2 [2008-08-12]</h2>
 <ul><li>
 <p>Added task to update/create gemspec file (e.g., for github)</p>
 </li></ul>
 
-<h2>0.1.1 [2008-07-29]</h2>
+<h2 id="label-0.1.1+%5B2008-07-29%5D">0.1.1 [2008-07-29]</h2>
 <ul><li>
 <p>Added task to run specs with RCov</p>
 </li><li>
 <p>Added option to specify spec_helper which will be loaded first</p>
 </li></ul>
 
-<h2>0.1.0 [2008-05-21]</h2>
+<h2 id="label-0.1.0+%5B2008-05-21%5D">0.1.0 [2008-05-21]</h2>
 <ul><li>
 <p>Adjust for API change in Rubyforge 1.0.0</p>
 </li></ul>
 
-<h2>0.0.9 [2008-02-29]</h2>
+<h2 id="label-0.0.9+%5B2008-02-29%5D">0.0.9 [2008-02-29]</h2>
 <ul><li>
 <p>Handle author vs. authors in Gem hen</p>
 </li></ul>
 
-<h2>0.0.8 [2008-02-15]</h2>
+<h2 id="label-0.0.8+%5B2008-02-15%5D">0.0.8 [2008-02-15]</h2>
 <ul><li>
 <p>Fixed Gem spec (include whole example sub-tree)</p>
 </li></ul>
 
-<h2>0.0.7 [2008-02-01]</h2>
+<h2 id="label-0.0.7+%5B2008-02-01%5D">0.0.7 [2008-02-01]</h2>
 <ul><li>
 <p>Search HENPATH for available hens, allowing to easily add custom hens</p>
 </li><li>
@@ -315,7 +318,7 @@ out</p>
 <p>Added ‘hen version’ command</p>
 </li></ul>
 
-<h2>0.0.6 [2008-01-09]</h2>
+<h2 id="label-0.0.6+%5B2008-01-09%5D">0.0.6 [2008-01-09]</h2>
 <ul><li>
 <p>Added basic sample project tree (skeleton for ‘hen create’)</p>
 </li><li>
@@ -324,21 +327,21 @@ out</p>
 <p>Some polishing and fixes</p>
 </li></ul>
 
-<h2>0.0.5 [2008-01-08]</h2>
+<h2 id="label-0.0.5+%5B2008-01-08%5D">0.0.5 [2008-01-08]</h2>
 <ul><li>
 <p>Replaced ‘hen’ executable stub with something actually useful</p>
 </li><li>
 <p>Added <a href="Hen/CLI.html">Hen::CLI</a> helper module</p>
 </li></ul>
 
-<h2>0.0.4 [2008-01-07]</h2>
+<h2 id="label-0.0.4+%5B2008-01-07%5D">0.0.4 [2008-01-07]</h2>
 <ul><li>
 <p>Added Test::Unit and RSpec hens (tasks ‘test’ and ‘spec’)</p>
 </li><li>
 <p>Removed HenError stuff</p>
 </li></ul>
 
-<h2>0.0.3 [2008-01-04]</h2>
+<h2 id="label-0.0.3+%5B2008-01-04%5D">0.0.3 [2008-01-04]</h2>
 <ul><li>
 <p>More cleanup and maturing</p>
 </li><li>
@@ -348,23 +351,23 @@ and ‘debug_gem’</p>
 <p>All in all: Pretty much inspired by Hoe ;-)</p>
 </li></ul>
 
-<h2>0.0.2 [2007-12-21]</h2>
+<h2 id="label-0.0.2+%5B2007-12-21%5D">0.0.2 [2007-12-21]</h2>
 <ul><li>
 <p>Cleanup and minor improvements</p>
 </li></ul>
 
-<h2>0.0.1 [2007-12-20]</h2>
+<h2 id="label-0.0.1+%5B2007-12-20%5D">0.0.1 [2007-12-20]</h2>
 <ul><li>
 <p>Birthday :-)</p>
 </li></ul>
 
-  </div>
+</div>
 
-  <div id="validator-badges">
-    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-      Rdoc Generator</a> 2</small>.</p>
-  </div>
-</body>
-</html>
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
 

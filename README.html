@@ -1,96 +1,93 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
 <head>
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-  <title>File: README [hen Application documentation (v0.4.0)]</title>
+<title>README - hen Application documentation (v0.4.1)</title>
 
-  <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
-  <script src="./js/jquery.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/thickbox-compressed.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/quicksearch.js" type="text/javascript"
-    charset="utf-8"></script>
-  <script src="./js/darkfish.js" type="text/javascript"
-    charset="utf-8"></script>
-</head>
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
 
 <body class="file">
-  <div id="metadata">
-    <div id="home-metadata">
-      <div id="home-section" class="section">
-        <h3 class="section-header">
-          <a href="./index.html">Home</a>
-          <a href="./index.html#classes">Classes</a>
-          <a href="./index.html#methods">Methods</a>
-        </h3>
-      </div>
-    </div>
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
 
-    <div id="project-metadata">
-      
-      
-      <div id="fileindex-section" class="section project-section">
-        <h3 class="section-header">Files</h3>
-        <ul>
-        
-          <li class="file"><a href="./COPYING.html">COPYING</a></li>
-        
-          <li class="file"><a href="./ChangeLog.html">ChangeLog</a></li>
-        
-          <li class="file"><a href="./README.html">README</a></li>
-        
-        </ul>
-      </div>
-      
 
-      <div id="classindex-section" class="section project-section">
-        <h3 class="section-header">Class Index
-          <span class="search-toggle"><img src="./images/find.png"
-            height="16" width="16" alt="[+]"
-            title="show/hide quicksearch" /></span></h3>
-        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-        <fieldset>
-          <legend>Quicksearch</legend>
-          <input type="text" name="quicksearch" value=""
-            class="quicksearch-field" />
-        </fieldset>
-        </form>
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
 
-        <ul class="link-list">
-        
-          <li><a href="./Hen.html">Hen</a></li>
-        
-          <li><a href="./Hen/CLI.html">Hen::CLI</a></li>
-        
-          <li><a href="./Hen/DSL.html">Hen::DSL</a></li>
-        
-          <li><a href="./Hen/Version.html">Hen::Version</a></li>
-        
-          <li><a href="./Object.html">Object</a></li>
-        
-        </ul>
-        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
-      </div>
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
 
-      
-    </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./COPYING.html">COPYING</a>
+  
+    <li class="file"><a href="./ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="./README.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Hen.html">Hen</a>
+  
+    <li><a href="./Hen/CLI.html">Hen::CLI</a>
+  
+    <li><a href="./Hen/DSL.html">Hen::DSL</a>
+  
+    <li><a href="./Hen/Version.html">Hen::Version</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+  </ul>
+</nav>
+
   </div>
+</nav>
 
-  <div id="documentation">
-    
-<h1>hen - Just a Rake helper</h1>
+<div id="documentation" class="description">
+  
+<h1 id="label-hen+-+Just+a+Rake+helper">hen - Just a Rake helper</h1>
 
-<h2>VERSION</h2>
+<h2 id="label-VERSION">VERSION</h2>
 
-<p>This documentation refers to hen version 0.4.0</p>
+<p>This documentation refers to hen version 0.4.1</p>
 
-<h2>DESCRIPTION</h2>
+<h2 id="label-DESCRIPTION">DESCRIPTION</h2>
 
 <p><a href="Hen.html">Hen</a> is a Rake helper framework, similar to <a
 href="http://seattlerb.rubyforge.org/hoe/">Hoe</a> or <a
@@ -98,32 +95,33 @@ href="http://fauna.github.com/fauna/echoe/">Echoe</a>. It provides you with
 a set of common Rake tasks by placing a little snippet like the following
 in your Rakefile:</p>
 
-<pre>require 'hen'
-require 'your/lib/version'
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">'hen'</span>
+<span class="ruby-identifier">require</span> <span class="ruby-string">'your/lib/version'</span>
 
-Hen.lay! {{
-  :gem =&gt; {
-    :name    =&gt; 'gem_name',
-    :version =&gt; Your::Lib::VERSION,
-    :summary =&gt; 'Project summary',
-    :author  =&gt; 'Your Name',
-    :email   =&gt; 'you@e.mail'
+<span class="ruby-constant">Hen</span>.<span class="ruby-identifier">lay!</span> {{
+  :<span class="ruby-identifier">gem</span> =<span class="ruby-operator">&gt;</span> {
+    :<span class="ruby-identifier">name</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'gem_name'</span>,
+    :<span class="ruby-identifier">version</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Your</span><span class="ruby-operator">::</span><span class="ruby-constant">Lib</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span>,
+    :<span class="ruby-identifier">summary</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Project summary'</span>,
+    :<span class="ruby-identifier">author</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'Your Name'</span>,
+    :<span class="ruby-identifier">email</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'you@e.mail'</span>
   }
-}}</pre>
+}}
+</pre>
 
-<h3>Generate a global configuration file</h3>
+<h3 id="label-Generate+a+global+configuration+file">Generate a global configuration file</h3>
 
 <p><a href="Hen.html">Hen</a> will read configuration options from your global
 configuration file if it’s present. You can generate a minimal
-<tt>.henrc</tt> with the <tt>hen</tt> script:</p>
+<code>.henrc</code> with the <code>hen</code> script:</p>
 
 <pre>hen config</pre>
 
-<p>This will create a new <tt>.henrc</tt> file in your home directory.</p>
+<p>This will create a new <code>.henrc</code> file in your home directory.</p>
 
-<h3>Create a new project</h3>
+<h3 id="label-Create+a+new+project">Create a new project</h3>
 
-<p>For new projects, you can also use the <tt>hen</tt> script to create an
+<p>For new projects, you can also use the <code>hen</code> script to create an
 initial project directory for you that comes with default files and
 configuration:</p>
 
@@ -133,47 +131,47 @@ configuration:</p>
 
 <pre>hen create path/to/your/lib path/to/your/template</pre>
 
-<p>In addition to that, <tt>hen</tt> can setup your new project with Git
+<p>In addition to that, <code>hen</code> can setup your new project with Git
 support:</p>
 
 <pre>hen create path/to/your/lib -g</pre>
 
-<p>See <tt>hen help</tt> for further information.</p>
+<p>See <code>hen help</code> for further information.</p>
 
-<h3>Extending <a href="Hen.html">Hen</a></h3>
+<h3 id="label-Extending+Hen">Extending <a href="Hen.html">Hen</a></h3>
 
 <p>You can even extend <a href="Hen.html">Hen</a> with your own tasks. More on
 that later. (TODO)</p>
 
-<h2>LINKS</h2>
+<h2 id="label-LINKS">LINKS</h2>
 
 <p></p>
-<table class="rdoc-list"><tr><td class="rdoc-term"><p>Documentation</p></td>
-<td>
+<dl class="rdoc-list note-list"><dt>Documentation
+<dd>
 <p>&lt;<a
 href="http://prometheus.rubyforge.org/hen">prometheus.rubyforge.org/hen</a>&gt;</p>
-</td></tr><tr><td class="rdoc-term"><p>Source code</p></td>
-<td>
+</dd><dt>Source code
+<dd>
 <p>&lt;<a
 href="http://github.com/blackwinter/hen">github.com/blackwinter/hen</a>&gt;</p>
-</td></tr><tr><td class="rdoc-term"><p>RubyForge project</p></td>
-<td>
+</dd><dt>RubyForge project
+<dd>
 <p>&lt;<a
 href="http://rubyforge.org/projects/prometheus">rubyforge.org/projects/prometheus</a>&gt;</p>
-</td></tr><tr><td class="rdoc-term"><p>RubyGem</p></td>
-<td>
+</dd><dt>RubyGem
+<dd>
 <p>&lt;<a href="http://rubygems.org/gems/hen">rubygems.org/gems/hen</a>&gt;</p>
-</td></tr></table>
+</dd></dl>
 
-<h2>AUTHORS</h2>
+<h2 id="label-AUTHORS">AUTHORS</h2>
 <ul><li>
 <p>Jens Wille &lt;<a
 href="mailto:jens.wille@uni-koeln.de">jens.wille@uni-koeln.de</a>&gt;</p>
 </li></ul>
 
-<h2>LICENSE AND COPYRIGHT</h2>
+<h2 id="label-LICENSE+AND+COPYRIGHT">LICENSE AND COPYRIGHT</h2>
 
-<p>Copyright (C) 2007-2011 University of Cologne, Albertus-Magnus-Platz, 50923
+<p>Copyright (C) 2007-2012 University of Cologne, Albertus-Magnus-Platz, 50923
 Cologne, Germany</p>
 
 <p>hen is free software: you can redistribute it and/or modify it under the
@@ -190,13 +188,13 @@ more details.</p>
 along with hen. If not, see &lt;<a
 href="http://www.gnu.org/licenses/">www.gnu.org/licenses/</a>&gt;.</p>
 
-  </div>
+</div>
 
-  <div id="validator-badges">
-    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-      Rdoc Generator</a> 2</small>.</p>
-  </div>
-</body>
-</html>
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
 
