@@ -200,7 +200,7 @@ Hen :gem => :rdoc do
   rubyforge do |rf_config, rf_pool|
 
     desc 'Package and upload the release to RubyForge'
-    task 'release:rubyforge' => [:package, 'doc:publish'] do
+    task 'release:rubyforge' => [:package, 'doc:publish:rubyforge'] do
       files = Dir[File.join(pkg_task.package_dir, "#{pkg_task.package_name}.*")]
       abort 'Nothing to release!' if files.empty?
 
@@ -241,6 +241,6 @@ Hen :gem => :rdoc do
 
   end
 
-  task :release => 'release:tag' if have_task?('release:tag')
+  %w[doc:publish release:tag].each { |t| task :release => t if have_task?(t) }
 
 end
