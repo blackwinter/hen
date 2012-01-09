@@ -1,5 +1,14 @@
 = Revision history for hen
 
+== 0.4.3 [2012-01-09]
+
+* Integrate with rake-compiler.
+* Reverse merge config.
+
+== 0.4.2 [2012-01-09]
+
+* New option 'meta' to build meta-gems.
+
 == 0.4.1 [2012-01-02]
 
 * Make 'release' depend on 'doc:publish'.
