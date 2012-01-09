@@ -39,6 +39,8 @@ Hen :gem => :rdoc do
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
   end
 
+  meta_gems = Array(gem_options.delete(:meta))
+
   gem_spec = Gem::Specification.new { |spec|
 
     ### name
@@ -157,13 +159,63 @@ Hen :gem => :rdoc do
 
   desc "Update (or create) the project's gemspec file"
   task 'gem:spec:update' do
-    file = "#{gem_spec.name}.gemspec"
-    action = File.exists?(file) ? 'Updated' : 'Created'
-
-    File.open(file, 'w') { |f| f.puts gem_spec.to_ruby }
-
-    puts "#{action} #{file}"
+    write_gemspec(gem_spec)
   end
+
+  meta_gems.each { |meta_gem_options|
+
+    noauto = meta_gem_options.delete(:noauto)
+
+    meta_gem_spec = Gem::Specification.new { |spec|
+
+      ### inherit from original spec
+
+      %w[
+        name version authors email summary description
+        rubyforge_project homepage
+      ].each { |key|
+        meta_gem_options[key = key.to_sym] ||= gem_options[key]
+      }
+
+      ### name + summary suffixes
+
+      if suffix = meta_gem_options.delete(:suffix)
+        meta_gem_options[:name] += "-#{suffix}"
+      end
+
+      summary_suffix = meta_gem_options.delete(:summary_suffix) || 'virtual package'
+      meta_gem_options[:summary] += " (#{summary_suffix})" unless summary_suffix.empty?
+
+      ### dependencies
+
+      [
+        [gem_options[:name], gem_options[:version]],
+        *Array(meta_gem_options.delete(:extras))
+      ].each { |dependency|
+        spec.add_dependency(*dependency)
+      }
+
+      ### => set options!
+
+      set_options(spec, meta_gem_options, 'Gem')
+
+    }
+
+    meta_prefix = "gem:meta:#{meta_gem_spec.name}"
+
+    desc "Display the #{meta_gem_spec.name} gem specification"
+    task "#{meta_prefix}:spec" do
+      puts meta_gem_spec.to_ruby
+    end
+
+    desc "Update (or create) the project's #{meta_gem_spec.name} gemspec file"
+    task "#{meta_prefix}:spec:update" do
+      write_gemspec(meta_gem_spec)
+    end
+
+    task 'gem:spec:update' => "#{meta_prefix}:spec:update" unless noauto
+
+  }
 
   pkg_task = gem_klass.new(gem_spec) { |pkg|
     pkg.need_tar_gz = true
@@ -242,5 +294,14 @@ Hen :gem => :rdoc do
   end
 
   %w[doc:publish release:tag].each { |t| task :release => t if have_task?(t) }
+
+  def write_gemspec(gem_spec)
+    file = "#{gem_spec.name}.gemspec"
+    action = File.exists?(file) ? 'Updated' : 'Created'
+
+    File.open(file, 'w') { |f| f.puts gem_spec.to_ruby }
+
+    puts "#{action} #{file}"
+  end
 
 end
