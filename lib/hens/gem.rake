@@ -2,7 +2,7 @@ Hen :gem => :rdoc do
   # Dependencies:
   # * rdoc -- Uses RDOC_OPTIONS and 'doc:publish' task
 
-  gem_options = config[:gem].merge(
+  gem_options = {
     :files => FileList[
       'lib/**/*.rb',
       'bin/*'
@@ -18,7 +18,7 @@ Hen :gem => :rdoc do
       'ext/**/extconf.rb'
     ].to_a,
     :require_path => 'lib'
-  )
+  }.update(config[:gem])
 
   gem_klass = begin
     raise LoadError if gem_options.delete(:legacy)
@@ -234,7 +234,7 @@ Hen :gem => :rdoc do
 
     gem_path = File.join(pkg_task.package_dir, gem_spec.file_name)
 
-    desc "Create the gem and install it"
+    desc 'Create the gem and install it'
     task 'gem:install' => :gem do
       rg_pool.call.install(gem_path)
     end

@@ -1,13 +1,13 @@
 Hen :rdoc do
 
-  rdoc_options = config[:rdoc].merge(
+  rdoc_options = {
     :rdoc_dir       => 'doc',
     :rdoc_files     => %w[README COPYING ChangeLog lib/**/*.rb],
     :charset        => 'UTF-8',
     :inline_source  => true,
     :line_numbers   => true,
     :all            => true
-  )
+  }.update(config[:rdoc])
 
   rdoc_klass = begin
     raise LoadError if rdoc_options.delete(:legacy)

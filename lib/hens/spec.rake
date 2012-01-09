@@ -1,10 +1,10 @@
 Hen :spec do
 
-  spec_options = config[:spec].merge(
+  spec_options = {
     :pattern => 'spec/**/*_spec.rb',
     :helper  => 'spec/spec_helper.rb',
     :options => 'spec/spec.opts'
-  )
+  }.update(config[:spec])
 
   spec_klass = begin
     raise LoadError if spec_options.delete(:legacy)

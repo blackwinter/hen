@@ -2,9 +2,9 @@ Hen :test do
 
   require 'rake/testtask'
 
-  test_options = config[:test].merge(
+  test_options = {
     :pattern => 'test/**/*_test.rb'
-  )
+  }.update(config[:test])
 
   test_files = test_options.delete(:files) ||
       FileList[test_options.delete(:pattern)].to_a
