@@ -66,6 +66,8 @@ Hen :spec do
       t.rcov = true
       t.rcov_opts = rcov_opts
     end
+
+    task :spec => :compile if have_task?(:compile)
   end
 
 end

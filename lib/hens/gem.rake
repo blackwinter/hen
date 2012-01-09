@@ -39,6 +39,8 @@ Hen :gem => :rdoc do
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
   end
 
+  extension_options = gem_options.delete(:extension) || {}
+
   meta_gems = Array(gem_options.delete(:meta))
 
   gem_spec = Gem::Specification.new { |spec|
@@ -226,6 +228,38 @@ Hen :gem => :rdoc do
       pkg.zip_command = File.which_command(ZIP_COMMANDS) || ZIP_COMMANDS.first
     end
   }
+
+  unless gem_spec.extensions.empty?
+    require 'rake/extensiontask'
+    require 'nuggets/util/ruby'
+
+    extension_options[:name] ||= "#{gem_spec.name}_native"
+
+    extension_options[:lib_dir] ||= File.join(['lib', gem_spec.name, ENV['FAT_DIR']].compact)
+    extension_options[:ext_dir] ||= File.join(['ext', gem_spec.name])
+
+    unless extension_options.has_key?(:cross_compile)
+      extension_options[:cross_compile] = true
+    end
+
+    if extension_options[:cross_compile]
+      extension_options[:cross_platform] ||= %w[x86-mswin32-60 x86-mingw32]
+    end
+
+    ruby_versions = extension_options.delete(:ruby_versions)
+
+    Rake::ExtensionTask.new(nil, gem_spec) { |ext|
+      set_options(ext, extension_options, 'Extension')
+    }
+
+    desc 'Build native gems'
+    task 'gem:native' do
+      ENV['RUBY_CC_VERSION'] ||= Array(ruby_versions).join(':') if ruby_versions
+
+      sh(Util::Ruby.rake_command, *%w[cross compile])
+      sh(Util::Ruby.rake_command, *%w[cross native gem])
+    end
+  end
 
   release_desc = "Release #{gem_spec.name} version #{gem_spec.version}"
   tag_desc     = "Tag the #{gem_spec.name} release version #{gem_spec.version}"

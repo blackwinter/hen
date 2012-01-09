@@ -15,6 +15,6 @@ Hen.lay! {{
     :author       => %q{Jens Wille},
     :email        => %q{jens.wille@uni-koeln.de},
     :extra_files  => FileList['lib/hens/*.rake'].to_a,
-    :dependencies => [['ruby-nuggets', '>= 0.6.9'], 'highline']
+    :dependencies => [['ruby-nuggets', '>= 0.8.4'], 'highline']
   }
 }}
