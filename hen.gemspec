@@ -2,18 +2,18 @@
 
 Gem::Specification.new do |s|
   s.name = "hen"
-  s.version = "0.4.3"
+  s.version = "0.4.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jens Wille"]
-  s.date = "2012-01-09"
+  s.date = "2012-01-18"
   s.description = "Hoe or Echoe? No, thanks! Just a Rake helper that fits my own personal style."
   s.email = "jens.wille@uni-koeln.de"
   s.executables = ["hen"]
   s.extra_rdoc_files = ["README", "COPYING", "ChangeLog"]
   s.files = ["lib/hen/dsl.rb", "lib/hen/version.rb", "lib/hen/cli.rb", "lib/hen.rb", "bin/hen", "lib/hens/rdoc.rake", "lib/hens/test.rake", "lib/hens/gem.rake", "lib/hens/spec.rake", "ChangeLog", "COPYING", "README", "Rakefile", "example/hens/sample.rake", "example/_henrc", "example/project/ChangeLog", "example/project/_gitignore", "example/project/COPYING", "example/project/lib/__progname__/version.rb", "example/project/lib/__progname__.rb", "example/project/README", "example/project/Rakefile"]
   s.homepage = "http://prometheus.rubyforge.org/hen"
-  s.rdoc_options = ["--main", "README", "--charset", "UTF-8", "--title", "hen Application documentation (v0.4.3)", "--all", "--line-numbers"]
+  s.rdoc_options = ["--charset", "UTF-8", "--title", "hen Application documentation (v0.4.4)", "--main", "README", "--all", "--line-numbers"]
   s.require_paths = ["lib"]
   s.rubyforge_project = "prometheus"
   s.rubygems_version = "1.8.15"
