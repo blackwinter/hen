@@ -2,7 +2,7 @@ Hen :rdoc do
 
   rdoc_options = {
     :rdoc_dir       => 'doc',
-    :rdoc_files     => %w[README COPYING ChangeLog lib/**/*.rb],
+    :rdoc_files     => %w[README COPYING ChangeLog lib/**/*.rb ext/**/*.c],
     :charset        => 'UTF-8',
     :inline_source  => true,
     :line_numbers   => true,
@@ -41,7 +41,10 @@ Hen :rdoc do
 
   ### rdoc_files, main
 
-  rdoc_files = FileList[rdoc_options.delete(:rdoc_files)].to_a
+  rdoc_files = FileList[rdoc_options.delete(:rdoc_files)].sort_by { |file|
+    [file.length, file]
+  }
+
   rdoc_files_local = rdoc_files.dup
 
   if mangle_files!(rdoc_files)
