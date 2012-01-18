@@ -43,13 +43,10 @@ Hen :gem => :rdoc do
 
   meta_gems = Array(gem_options.delete(:meta))
 
+  gem_name = gem_options[:name] ||= project_name(rf_config)
+  abort 'Gem name missing' unless gem_name
+
   gem_spec = Gem::Specification.new { |spec|
-
-    ### name
-
-    gem_name = gem_options[:name] ||= project_name(rf_config)
-
-    abort 'Gem name missing' unless gem_name
 
     ### version
 
@@ -203,14 +200,14 @@ Hen :gem => :rdoc do
 
     }
 
-    meta_prefix = "gem:meta:#{meta_gem_spec.name}"
+    meta_prefix = "gem:meta:#{meta_gem_name = meta_gem_spec.name}"
 
-    desc "Display the #{meta_gem_spec.name} gem specification"
+    desc "Display the #{meta_gem_name} gem specification"
     task "#{meta_prefix}:spec" do
       puts meta_gem_spec.to_ruby
     end
 
-    desc "Update (or create) the project's #{meta_gem_spec.name} gemspec file"
+    desc "Update (or create) the project's #{meta_gem_name} gemspec file"
     task "#{meta_prefix}:spec:update" do
       write_gemspec(meta_gem_spec)
     end
@@ -224,19 +221,27 @@ Hen :gem => :rdoc do
     pkg.need_zip    = true
 
     if defined?(ZIP_COMMANDS)
-      require 'nuggets/file/which'
-      pkg.zip_command = File.which_command(ZIP_COMMANDS) || ZIP_COMMANDS.first
+      pkg.zip_command = begin
+        require 'nuggets/file/which'
+        File.which_command(ZIP_COMMANDS)
+      rescue LoadError
+      end || ZIP_COMMANDS.first
     end
   }
 
-  unless gem_spec.extensions.empty?
-    require 'rake/extensiontask'
-    require 'nuggets/util/ruby'
+  begin
+    require 'rake/extensiontask' unless gem_spec.extensions.empty?
+  rescue LoadError
+  end
 
-    extension_options[:name] ||= "#{gem_spec.name}_native"
+  if Rake.const_defined?(:ExtensionTask)
+    extension_options[:name] ||= gem_name.include?('-') ?
+      gem_name.tr('-', '_') : "#{gem_name}_native"
 
-    extension_options[:lib_dir] ||= File.join(['lib', gem_spec.name, ENV['FAT_DIR']].compact)
-    extension_options[:ext_dir] ||= File.join(['ext', gem_spec.name])
+    ext_name = gem_name.include?('-') ? gem_name.split('-').first : gem_name
+
+    extension_options[:lib_dir] ||= File.join(['lib', ext_name, ENV['FAT_DIR']].compact)
+    extension_options[:ext_dir] ||= File.join(['ext', ext_name])
 
     unless extension_options.has_key?(:cross_compile)
       extension_options[:cross_compile] = true
@@ -246,23 +251,22 @@ Hen :gem => :rdoc do
       extension_options[:cross_platform] ||= %w[x86-mswin32-60 x86-mingw32]
     end
 
-    ruby_versions = extension_options.delete(:ruby_versions)
+    if ruby_versions = extension_options.delete(:ruby_versions)
+      ENV['RUBY_CC_VERSION'] ||= Array(ruby_versions).join(':')
+    end
 
     Rake::ExtensionTask.new(nil, gem_spec) { |ext|
       set_options(ext, extension_options, 'Extension')
     }
 
     desc 'Build native gems'
-    task 'gem:native' do
-      ENV['RUBY_CC_VERSION'] ||= Array(ruby_versions).join(':') if ruby_versions
+    task 'gem:native' => %w[cross compile native gem]
 
-      sh(Util::Ruby.rake_command, *%w[cross compile])
-      sh(Util::Ruby.rake_command, *%w[cross native gem])
-    end
+    %w[spec test].each { |t| task t => :compile }
   end
 
-  release_desc = "Release #{gem_spec.name} version #{gem_spec.version}"
-  tag_desc     = "Tag the #{gem_spec.name} release version #{gem_spec.version}"
+  release_desc = "Release #{gem_name} version #{gem_spec.version}"
+  tag_desc     = "Tag the #{gem_name} release version #{gem_spec.version}"
 
   rubygems do |rg_pool|
 
@@ -301,7 +305,7 @@ Hen :gem => :rdoc do
       #uc['release_changes'] = changes if changes
       #uc['preformatted']    = true
 
-      rf.add_release(rf_config[:project], gem_spec.name, version, *files)
+      rf.add_release(rf_config[:project], gem_name, version, *files)
     end
 
     desc release_desc

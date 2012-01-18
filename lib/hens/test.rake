@@ -16,8 +16,6 @@ Hen :test do
       t.test_files = test_files
       set_options(t, test_options, 'Test')
     }
-
-    task :test => :compile if have_task?(:compile)
   end
 
 end
