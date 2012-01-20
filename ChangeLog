@@ -1,5 +1,12 @@
 = Revision history for hen
 
+== 0.4.5 [2012-01-20]
+
+* Publish native Gems.
+* Build and publish Meta-Gems.
+* Renamed Meta-Gem option 'extras' to 'dependencies'.
+* Fixed Ruby warnings.
+
 == 0.4.4 [2012-01-18]
 
 * Some extension task improvements.
