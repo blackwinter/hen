@@ -41,7 +41,7 @@ Hen :gem => :rdoc do
 
   extension_options = gem_options.delete(:extension) || {}
 
-  meta_gems = Array(gem_options.delete(:meta))
+  meta_gems, meta_gem_specs = Array(gem_options.delete(:meta)), []
 
   gem_name = gem_options[:name] ||= project_name(rf_config)
   abort 'Gem name missing' unless gem_name
@@ -165,7 +165,7 @@ Hen :gem => :rdoc do
 
     noauto = meta_gem_options.delete(:noauto)
 
-    meta_gem_spec = Gem::Specification.new { |spec|
+    meta_gem_specs << meta_gem_spec = Gem::Specification.new { |spec|
 
       ### inherit from original spec
 
@@ -201,6 +201,10 @@ Hen :gem => :rdoc do
     }
 
     meta_prefix = "gem:meta:#{meta_gem_name = meta_gem_spec.name}"
+    meta_class  = meta_gem_spec.singleton_class
+
+    meta_class.send(:define_method, :auto?)    { !noauto }
+    meta_class.send(:define_method, :taskname) { meta_prefix }
 
     desc "Display the #{meta_gem_name} gem specification"
     task "#{meta_prefix}:spec" do
@@ -227,6 +231,31 @@ Hen :gem => :rdoc do
       rescue LoadError
       end || ZIP_COMMANDS.first
     end
+  }
+
+  meta_gem_specs.each { |meta_gem_spec|
+
+    meta_pkg_task = gem_klass.new(meta_gem_spec)
+
+    taskname = meta_gem_spec.taskname
+
+    gem_file = File.basename(meta_gem_spec.cache_file)
+    gem_path = File.join(package_dir = meta_pkg_task.package_dir, gem_file)
+
+    desc "Build the meta gem file #{gem_file}"
+    task taskname => gem_path
+
+    Gem.configuration.verbose = trace = Rake.application.options.trace
+
+    file gem_path => package_dir do
+      when_writing "Creating #{meta_gem_spec.file_name}" do
+        Gem::Builder.new(meta_gem_spec).build
+        verbose(trace) { mv gem_file, package_dir }
+      end
+    end
+
+    %w[package gem].each { |t| task t => taskname } if meta_gem_spec.auto?
+
   }
 
   begin
@@ -270,7 +299,8 @@ Hen :gem => :rdoc do
 
   rubygems do |rg_pool|
 
-    gem_path = File.join(pkg_task.package_dir, gem_spec.file_name)
+    gem_base = pkg_task.package_dir
+    gem_path = File.join(gem_base, gem_spec.file_name)
 
     desc 'Create the gem and install it'
     task 'gem:install' => :gem do
@@ -280,6 +310,24 @@ Hen :gem => :rdoc do
     desc 'Create the gem and upload it to RubyGems.org'
     task 'gem:push' => :gem do
       rg_pool.call.push(gem_path)
+    end
+
+    meta_gem_specs.each { |meta_gem_spec|
+      taskname = meta_gem_spec.taskname
+
+      desc "Create the meta gem #{meta_gem_spec.name} and upload it to RubyGems.org"
+      task "#{taskname}:push" => taskname do
+        rg_pool.call.push(File.join(gem_base, meta_gem_spec.file_name))
+      end
+
+      task 'gem:push:meta' => "#{taskname}:push" if meta_gem_spec.auto?
+    }
+
+    if have_task?('gem:push:meta')
+      desc 'Create the meta gems and upload them to RubyGems.org'
+      task 'gem:push:meta'
+
+      task 'gem:push' => 'gem:push:meta'
     end
 
     desc release_desc; release_desc = nil
