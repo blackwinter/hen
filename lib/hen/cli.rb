@@ -3,7 +3,7 @@
 #                                                                             #
 # hen -- Just a Rake helper                                                   #
 #                                                                             #
-# Copyright (C) 2007-2011 University of Cologne,                              #
+# Copyright (C) 2007-2012 University of Cologne,                              #
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
@@ -26,7 +26,6 @@
 ###############################################################################
 #++
 
-require 'hen'
 require 'etc'
 require 'erb'
 require 'highline/import'

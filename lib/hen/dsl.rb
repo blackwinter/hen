@@ -3,7 +3,7 @@
 #                                                                             #
 # A component of hen, the Rake helper.                                        #
 #                                                                             #
-# Copyright (C) 2007-2011 University of Cologne,                              #
+# Copyright (C) 2007-2012 University of Cologne,                              #
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
@@ -26,8 +26,8 @@
 ###############################################################################
 #++
 
-require 'hen'
 require 'nuggets/file/which'
+require 'nuggets/object/singleton_class'
 
 class Hen
 
@@ -323,7 +323,7 @@ class Hen
     def extend_object(object, *blocks)
       blocks << Proc.new if block_given?
 
-      singleton_class = class << object; self; end
+      singleton_class = object.singleton_class
 
       blocks.compact.reverse_each { |block|
         singleton_class.class_eval(&block)
