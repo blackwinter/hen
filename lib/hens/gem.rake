@@ -189,7 +189,7 @@ Hen :gem => :rdoc do
 
       [
         [gem_options[:name], gem_options[:version]],
-        *Array(meta_gem_options.delete(:extras))
+        *Array(meta_gem_options.delete(:dependencies))
       ].each { |dependency|
         spec.add_dependency(*dependency)
       }
