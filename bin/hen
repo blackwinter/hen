@@ -57,7 +57,7 @@ abort USAGE if ARGV.empty?
 
 EXAMPLE = File.expand_path('../../example', __FILE__)
 
-case action = ARGV.shift
+case arg = ARGV.shift
   when 'help', '-h', '--help'
     puts USAGE
     puts
@@ -173,5 +173,5 @@ case action = ARGV.shift
     # a particular hen/task is currently available).
     abort 'Sorry, not yet available...'
   else
-    abort "Illegal action: #{action}\n#{USAGE}"
+    abort "Illegal action: #{arg}\n#{USAGE}"
 end

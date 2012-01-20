@@ -287,7 +287,7 @@ Hen :gem => :rdoc do
 
   end
 
-  rubyforge do |rf_config, rf_pool|
+  rubyforge do |_, rf_pool|
 
     desc 'Package and upload the release to RubyForge'
     task 'release:rubyforge' => [:package, 'doc:publish:rubyforge'] do
