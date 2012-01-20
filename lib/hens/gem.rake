@@ -284,7 +284,7 @@ Hen :gem => :rdoc do
       ENV['RUBY_CC_VERSION'] ||= Array(ruby_versions).join(':')
     end
 
-    Rake::ExtensionTask.new(nil, gem_spec) { |ext|
+    extension_task = Rake::ExtensionTask.new(nil, gem_spec) { |ext|
       set_options(ext, extension_options, 'Extension')
     }
 
@@ -328,6 +328,19 @@ Hen :gem => :rdoc do
       task 'gem:push:meta'
 
       task 'gem:push' => 'gem:push:meta'
+    end
+
+    if extension_task
+      platforms = Array(extension_task.cross_platform).join(',')
+      gems_glob = gem_path.sub(/(?=\.gem\z)/, "-{#{platforms}}")
+
+      desc 'Create the native gems and upload them to RubyGems.org'
+      task 'gem:push:native' => 'gem:native' do
+        rg = rg_pool.call
+        Dir[gems_glob].each { |native_gem| rg.push(native_gem) }
+      end
+
+      task 'gem:push' => 'gem:push:native'
     end
 
     desc release_desc; release_desc = nil
