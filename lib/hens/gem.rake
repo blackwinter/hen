@@ -261,6 +261,7 @@ Hen :gem => :rdoc do
   begin
     require 'rake/extensiontask' unless gem_spec.extensions.empty?
   rescue LoadError
+    missing_lib 'rake/extensiontask'
   end
 
   if Rake.const_defined?(:ExtensionTask)
@@ -292,6 +293,8 @@ Hen :gem => :rdoc do
     task 'gem:native' => %w[cross compile native gem]
 
     %w[spec test].each { |t| task t => :compile }
+  else
+    skipping 'Extension'
   end
 
   release_desc = "Release #{gem_name} version #{gem_spec.version}"
