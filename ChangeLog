@@ -1,5 +1,10 @@
 = Revision history for hen
 
+== 0.4.6 [2012-04-05]
+
+* Fixed `hen version`.
+* Added debug info for extension tasks.
+
 == 0.4.5 [2012-01-20]
 
 * Publish native Gems.
