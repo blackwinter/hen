@@ -30,9 +30,11 @@
 
 # TODO: Implement 'list' action -- List available hens with their tasks (?)
 
-require 'hen/cli'
 require 'fileutils'
 require 'nuggets/enumerable/minmax'
+
+require 'hen/cli'
+require 'hen/version'
 
 include Hen::CLI
 
