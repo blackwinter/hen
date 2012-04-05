@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Hen - hen Application documentation (v0.4.5)</title>
+<title>class Hen - hen Application documentation (v0.4.6)</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -272,6 +272,185 @@ Rakefile. See the <a href="README.html">README</a> for more information.</p>
 
     <!-- Methods -->
     
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-lay-21" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            lay!
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Runs the definition block, exposing helper methods from the <a
+href="Hen/DSL.html">DSL</a>.</p>
+          
+
+          
+          <div class="method-source-code" id="lay-21-source">
+            <pre><span class="ruby-comment"># File lib/hen.rb, line 257</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lay!</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">laid?</span>
+
+  <span class="ruby-comment"># Call dependencies first</span>
+  <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>[<span class="ruby-identifier">hen</span>].<span class="ruby-identifier">lay!</span>  }
+
+  <span class="ruby-identifier">block</span>.<span class="ruby-identifier">bind</span>(<span class="ruby-constant">DSL</span>).<span class="ruby-identifier">call</span>
+<span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
+  <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{name}: #{err} (#{err.class})&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">verbose</span>
+  <span class="ruby-identifier">warn</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n  &quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- lay-21-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- lay-21-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Private Instance Methods</h3>
+
+    
+      <div id="method-i-laid-3F" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            laid? &rarr; true or false
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Keeps track of whether the block has already been executed.</p>
+          
+
+          
+          <div class="method-source-code" id="laid-3F-source">
+            <pre><span class="ruby-comment"># File lib/hen.rb, line 306</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">laid?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@laid</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@laid</span>
+
+  <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- laid-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- laid-3F-method -->
+
+    
+      <div id="method-i-resolve_args" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            resolve_args(args) &rarr; [name, dependencies]
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Splits into hen name and optional dependencies: <code>args</code> may be a
+single symbol (or string), or a hash with a single key pointing to a list
+of hens this one depends upon.</p>
+          
+
+          
+          <div class="method-source-code" id="resolve_args-source">
+            <pre><span class="ruby-comment"># File lib/hen.rb, line 285</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">name</span>, <span class="ruby-identifier">dependencies</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">args</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">'No hen name given'</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Too many hen names: #{args.keys.join(' ')}&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+      [<span class="ruby-identifier">args</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>, [*<span class="ruby-identifier">args</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>]]
+    <span class="ruby-keyword">else</span>
+      [<span class="ruby-identifier">args</span>, []]
+  <span class="ruby-keyword">end</span>
+
+  [<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dependency</span><span class="ruby-operator">|</span> <span class="ruby-identifier">dependency</span>.<span class="ruby-identifier">to_sym</span> }]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- resolve_args-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- resolve_args-method -->
+
+    
+      <div id="method-i-verbose" class="method-detail ">
+        
+        
+        <div class="method-heading">
+          <span class="method-callseq">
+            verbose &rarr; true or false
+          </span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+        
+
+        <div class="method-description">
+          
+          <p>Delegates to <a href="Hen.html#method-i-verbose">#verbose</a>.</p>
+          
+
+          
+          <div class="method-source-code" id="verbose-source">
+            <pre><span class="ruby-comment"># File lib/hen.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">verbose</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">verbose</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- verbose-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- verbose-method -->
+
+    
+    </section><!-- private-instance-method-details -->
+  
      <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Class Methods</h3>
 
@@ -746,185 +925,6 @@ for which the block evaluates to true.</p>
 
     
     </section><!-- private-class-method-details -->
-  
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Instance Methods</h3>
-
-    
-      <div id="method-i-lay-21" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            lay!
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>Runs the definition block, exposing helper methods from the <a
-href="Hen/DSL.html">DSL</a>.</p>
-          
-
-          
-          <div class="method-source-code" id="lay-21-source">
-            <pre><span class="ruby-comment"># File lib/hen.rb, line 257</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">lay!</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">laid?</span>
-
-  <span class="ruby-comment"># Call dependencies first</span>
-  <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>[<span class="ruby-identifier">hen</span>].<span class="ruby-identifier">lay!</span>  }
-
-  <span class="ruby-identifier">block</span>.<span class="ruby-identifier">bind</span>(<span class="ruby-constant">DSL</span>).<span class="ruby-identifier">call</span>
-<span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{name}: #{err} (#{err.class})&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">verbose</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-identifier">err</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n  &quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- lay-21-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- lay-21-method -->
-
-    
-    </section><!-- public-instance-method-details -->
-  
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Private Instance Methods</h3>
-
-    
-      <div id="method-i-laid-3F" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            laid? &rarr; true or false
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>Keeps track of whether the block has already been executed.</p>
-          
-
-          
-          <div class="method-source-code" id="laid-3F-source">
-            <pre><span class="ruby-comment"># File lib/hen.rb, line 306</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">laid?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@laid</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@laid</span>
-
-  <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">false</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- laid-3F-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- laid-3F-method -->
-
-    
-      <div id="method-i-resolve_args" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            resolve_args(args) &rarr; [name, dependencies]
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>Splits into hen name and optional dependencies: <code>args</code> may be a
-single symbol (or string), or a hash with a single key pointing to a list
-of hens this one depends upon.</p>
-          
-
-          
-          <div class="method-source-code" id="resolve_args-source">
-            <pre><span class="ruby-comment"># File lib/hen.rb, line 285</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
-  <span class="ruby-identifier">name</span>, <span class="ruby-identifier">dependencies</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">args</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
-        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">'No hen name given'</span>
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
-        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Too many hen names: #{args.keys.join(' ')}&quot;</span>
-      <span class="ruby-keyword">end</span>
-
-      [<span class="ruby-identifier">args</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">first</span>, [*<span class="ruby-identifier">args</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>]]
-    <span class="ruby-keyword">else</span>
-      [<span class="ruby-identifier">args</span>, []]
-  <span class="ruby-keyword">end</span>
-
-  [<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dependency</span><span class="ruby-operator">|</span> <span class="ruby-identifier">dependency</span>.<span class="ruby-identifier">to_sym</span> }]
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- resolve_args-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- resolve_args-method -->
-
-    
-      <div id="method-i-verbose" class="method-detail ">
-        
-        
-        <div class="method-heading">
-          <span class="method-callseq">
-            verbose &rarr; true or false
-          </span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-        
-
-        <div class="method-description">
-          
-          <p>Delegates to <a href="Hen.html#method-i-verbose">#verbose</a>.</p>
-          
-
-          
-          <div class="method-source-code" id="verbose-source">
-            <pre><span class="ruby-comment"># File lib/hen.rb, line 275</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">verbose</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">verbose</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- verbose-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- verbose-method -->
-
-    
-    </section><!-- private-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 
