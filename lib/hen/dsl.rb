@@ -264,16 +264,30 @@ class Hen
           %x{git #{args.unshift(cmd.to_s.tr('_', '-')).join(' ')}}
         end
 
-        def remote_for_branch(branch)  # :nodoc:
-          run(:branch, '-r')[%r{(\S+)/#{Regexp.escape(branch)}$}, 1]
+        def remote_for_branch(branch, default = 'origin')  # :nodoc:
+          remotes = run(:branch, '-r').scan(%r{(\S+)/#{Regexp.escape(branch)}$})
+          remotes.flatten!
+
+          if env_remote = ENV['HEN_REMOTE']
+            env_remote if remotes.include?(env_remote)
+          else
+            remotes.include?(default) ? default : remotes.first
+          end
         end
 
         def url_for_remote(remote)  # :nodoc:
           run(:remote, '-v')[%r{^#{Regexp.escape(remote)}\s+(\S+)}, 1]
         end
 
-        def find_remote(regexp)  # :nodoc:
-          run(:remote, '-v').split($/).grep(regexp).first
+        def find_remote(regexp, default = 'origin')  # :nodoc:
+          remotes = run(:remote, '-v').split($/).grep(regexp)
+          remotes.map! { |x| x.split[0..1] }
+
+          if env_remote = ENV['HEN_REMOTE']
+            remotes.assoc(env_remote)
+          else
+            remotes.assoc(default) || remotes.first
+          end
         end
 
         def easy_clone(url, dir = '.', remote = 'origin')  # :nodoc:

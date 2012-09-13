@@ -1,5 +1,9 @@
 = Revision history for hen
 
+== 0.4.7 [unreleased]
+
+* Optionally specify Git remote with environment variable +HEN_REMOTE+.
+
 == 0.4.6 [2012-04-05]
 
 * Fixed `hen version`.

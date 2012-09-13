@@ -108,13 +108,13 @@ Hen :rdoc do
       pages_url = git.url_for_remote(git_remote)
       clone_dir = ".#{git_branch}"
     elsif git_remote = git.find_remote(/git@github\.com:/)
-      git_remote, clone_url = git_remote.split[0..1]
+      git_remote, clone_url = git_remote
       clone_dir = ".clone-#{$$}-#{rand(100)}"
     end
 
     if pages_url  # inside git repo and found gh-pages branch
 
-      desc "Publish RDoc to GitHub pages"
+      desc "Publish RDoc to GitHub pages on #{git_remote}"
       task 'doc:publish:github' => :doc do
         rm_rf clone_dir
 
