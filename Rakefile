@@ -3,11 +3,6 @@ $:.unshift(File.expand_path('../lib', __FILE__))
 require 'hen'
 
 Hen.lay! {{
-  :rubyforge => {
-    :project => %q{prometheus},
-    :package => %q{hen}
-  },
-
   :gem => {
     :version      => Hen::VERSION,
     :summary      => "Hoe or Echoe? No, thanks! Just a Rake " <<
