@@ -26,7 +26,20 @@ Hen :spec do
 
     if spec_helper && File.readable?(spec_helper)
       spec_files.delete(spec_helper)
-      spec_files.unshift(spec_helper)
+
+      begin
+        require 'rspec/core/version'
+
+        # RSpec began sorting test files in version 2.12.0 (c76c1e6)
+        curr_version = Gem::Version.new(RSpec::Core::Version::STRING)
+        sort_version = Gem::Version.new('2.12.0')
+
+        raise LoadError if curr_version < sort_version
+
+        (spec_options[:require] ||= []) << File.basename(spec_helper, '.rb')
+      rescue LoadError, NameError
+        spec_files.unshift(spec_helper)
+      end
     end
 
     opts_file = spec_options.delete(:options)
