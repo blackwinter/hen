@@ -66,13 +66,15 @@ RubyGem::           <http://rubygems.org/gems/hen>
 
 == AUTHORS
 
-* Jens Wille <mailto:jens.wille@uni-koeln.de>
+* Jens Wille <mailto:jens.wille@gmail.com>
 
 
 == LICENSE AND COPYRIGHT
 
 Copyright (C) 2007-2012 University of Cologne,
 Albertus-Magnus-Platz, 50923 Cologne, Germany
+
+Copyright (C) 2013 Jens Wille
 
 hen is free software: you can redistribute it and/or modify it under the
 terms of the GNU Affero General Public License as published by the Free
