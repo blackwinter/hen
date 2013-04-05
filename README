@@ -58,10 +58,9 @@ You can even extend Hen with your own tasks. More on that later. (TODO)
 == LINKS
 
 <b></b>
-Documentation::     <http://prometheus.rubyforge.org/hen>
-Source code::       <http://github.com/blackwinter/hen>
-RubyForge project:: <http://rubyforge.org/projects/prometheus>
-RubyGem::           <http://rubygems.org/gems/hen>
+Documentation:: <http://blackwinter.github.com/hen>
+Source code::   <http://github.com/blackwinter/hen>
+RubyGem::       <http://rubygems.org/gems/hen>
 
 
 == AUTHORS
