@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Hen::CLI - hen Application documentation (v0.4.6)</title>
+<title>module Hen::CLI - hen Application documentation (v0.4.7)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -58,35 +60,36 @@
     
     
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-i-_hen_original_ask">#_hen_original_ask</a>
+    <li ><a href="#method-i-_hen_original_ask">#_hen_original_ask</a>
     
-    <li><a href="#method-i-ask">#ask</a>
+    <li ><a href="#method-i-ask">#ask</a>
     
-    <li><a href="#method-i-ask-21">#ask!</a>
+    <li ><a href="#method-i-ask-21">#ask!</a>
     
-    <li><a href="#method-i-classname">#classname</a>
+    <li ><a href="#method-i-classname">#classname</a>
     
-    <li><a href="#method-i-default_classname">#default_classname</a>
+    <li ><a href="#method-i-default_classname">#default_classname</a>
     
-    <li><a href="#method-i-default_emailaddress">#default_emailaddress</a>
+    <li ><a href="#method-i-default_emailaddress">#default_emailaddress</a>
     
-    <li><a href="#method-i-default_fullname">#default_fullname</a>
+    <li ><a href="#method-i-default_fullname">#default_fullname</a>
     
-    <li><a href="#method-i-emailaddress">#emailaddress</a>
+    <li ><a href="#method-i-emailaddress">#emailaddress</a>
     
-    <li><a href="#method-i-fullname">#fullname</a>
+    <li ><a href="#method-i-fullname">#fullname</a>
     
-    <li><a href="#method-i-progdesc">#progdesc</a>
+    <li ><a href="#method-i-progdesc">#progdesc</a>
     
-    <li><a href="#method-i-progname">#progname</a>
+    <li ><a href="#method-i-progname">#progname</a>
     
-    <li><a href="#method-i-render">#render</a>
+    <li ><a href="#method-i-render">#render</a>
     
   </ul>
 </nav>
@@ -118,6 +121,8 @@
     <li><a href="../Hen/CLI.html">Hen::CLI</a>
   
     <li><a href="../Hen/DSL.html">Hen::DSL</a>
+  
+    <li><a href="../Hen/File.html">Hen::File</a>
   
     <li><a href="../Hen/Version.html">Hen::Version</a>
   
@@ -163,7 +168,7 @@ Also available for use in custom project skeletons.</p>
 
         <div class="method-description">
         
-        <p>Collect user’s answers by key, so we don’t have to ask again.</p>
+        <p>Collect user&#39;s answers by key, so we don&#39;t have to ask again.</p>
         
         </div>
       </div>
@@ -182,22 +187,25 @@ Also available for use in custom project skeletons.</p>
         <div class="method-heading">
           <span class="method-name">classname</span><span
             class="method-args">(default = default_classname)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>The project’s namespace. (Required)</p>
+          <p>The project&#39;s namespace. (Required)</p>
 
 <p>Namespaces SHOULD match the project name in SnakeCase.</p>
+          
           
 
           
           <div class="method-source-code" id="classname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 83</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">classname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_classname</span>)
-  <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Module's/Class's name&quot;</span>, <span class="ruby-identifier">default</span>)
+  <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Module&#39;s/Class&#39;s name&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- classname-source -->
           
@@ -214,20 +222,23 @@ Also available for use in custom project skeletons.</p>
         <div class="method-heading">
           <span class="method-name">emailaddress</span><span
             class="method-args">(default = default_emailaddress)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>The author’s e-mail address. (Optional, but highly recommended)</p>
+          <p>The author&#39;s e-mail address. (Optional, but highly recommended)</p>
+          
           
 
           
           <div class="method-source-code" id="emailaddress-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 93</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emailaddress</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_emailaddress</span>)
-  <span class="ruby-identifier">ask</span>(<span class="ruby-string">'E-mail address'</span>, <span class="ruby-identifier">default</span>)
+  <span class="ruby-identifier">ask</span>(<span class="ruby-string">&#39;E-mail address&#39;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- emailaddress-source -->
           
@@ -244,20 +255,23 @@ Also available for use in custom project skeletons.</p>
         <div class="method-heading">
           <span class="method-name">fullname</span><span
             class="method-args">(default = default_fullname)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>The author’s full name. (Required)</p>
+          <p>The author&#39;s full name. (Required)</p>
+          
           
 
           
           <div class="method-source-code" id="fullname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 88</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fullname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_fullname</span>)
-  <span class="ruby-identifier">ask!</span>(<span class="ruby-string">'Full name'</span>, <span class="ruby-identifier">default</span>)
+  <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&#39;Full name&#39;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- fullname-source -->
           
@@ -274,20 +288,23 @@ Also available for use in custom project skeletons.</p>
         <div class="method-heading">
           <span class="method-name">progdesc</span><span
             class="method-args">(default = nil)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
           
-          <p>A short one-line summary of the project’s description. (Required)</p>
+          <p>A short one-line summary of the project&#39;s description. (Required)</p>
+          
           
 
           
           <div class="method-source-code" id="progdesc-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 98</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">progdesc</span>(<span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Program's description summary&quot;</span>, <span class="ruby-identifier">default</span>)
+  <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Program&#39;s description summary&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- progdesc-source -->
           
@@ -304,7 +321,9 @@ Also available for use in custom project skeletons.</p>
         <div class="method-heading">
           <span class="method-name">progname</span><span
             class="method-args">(default = nil)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -319,14 +338,15 @@ Standard</a>:</p>
 
 <p>If a project is an enhancement, plugin, extension, etc. for some other
 project it SHOULD contain a dash in the name between the original name and
-the project’s name.</p>
+the project&#39;s name.</p>
+          
           
 
           
           <div class="method-source-code" id="progname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 76</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">progname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Project's name&quot;</span>, <span class="ruby-identifier">default</span>)
+  <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Project&#39;s name&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- progname-source -->
           
@@ -343,7 +363,9 @@ the project’s name.</p>
         <div class="method-heading">
           <span class="method-name">render</span><span
             class="method-args">(sample, target)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -352,10 +374,11 @@ the project’s name.</p>
           <p>Renders the contents of <code>sample</code> as an ERb template, storing the
 result in <code>target</code>. Returns the content.</p>
           
+          
 
           
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 51</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">sample</span>, <span class="ruby-identifier">target</span>)
   <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Sample file not found: #{sample}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">sample</span>)
 
@@ -366,7 +389,7 @@ result in <code>target</code>. Returns the content.</p>
 
   <span class="ruby-identifier">content</span> = <span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">sample</span>)).<span class="ruby-identifier">result</span>(<span class="ruby-identifier">binding</span>)
 
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">target</span>, <span class="ruby-string">'w'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">content</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">content</span>.<span class="ruby-identifier">empty?</span> }
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">target</span>, <span class="ruby-string">&#39;w&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">content</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">content</span>.<span class="ruby-identifier">empty?</span> }
 
   <span class="ruby-identifier">content</span>
 <span class="ruby-keyword">end</span></pre>
@@ -391,11 +414,12 @@ result in <code>target</code>. Returns the content.</p>
         <div class="method-heading">
           <span class="method-name">_hen_original_ask</span><span
             class="method-args">(key, default = nil, cached = true)</span>
-          <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
         <div class="method-description">
+          
           
           
           
@@ -418,7 +442,9 @@ result in <code>target</code>. Returns the content.</p>
         <div class="method-heading">
           <span class="method-name">ask</span><span
             class="method-args">(key, default = nil, cached = true)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -427,10 +453,11 @@ result in <code>target</code>. Returns the content.</p>
           <p>Ask the user to enter an appropriate value for <code>key</code>. Uses
 already stored answer if present, unless <code>cached</code> is false.</p>
           
+          
 
           
           <div class="method-source-code" id="ask-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 132</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">cached</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-constant">CLI</span>.<span class="ruby-identifier">answers</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cached</span>
 
@@ -438,7 +465,7 @@ already stored answer if present, unless <code>cached</code> is false.</p>
     <span class="ruby-identifier">q</span>.<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">default</span>
   }
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Interrupt</span>
-  <span class="ruby-identifier">abort</span> <span class="ruby-string">''</span>
+  <span class="ruby-identifier">abort</span> <span class="ruby-string">&#39;&#39;</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- ask-source -->
           
@@ -459,7 +486,9 @@ already stored answer if present, unless <code>cached</code> is false.</p>
         <div class="method-heading">
           <span class="method-name">ask!</span><span
             class="method-args">(key, default = nil, max = 3)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -468,10 +497,11 @@ already stored answer if present, unless <code>cached</code> is false.</p>
           <p>Same as <a href="CLI.html#method-i-ask">ask</a>, but requires a non-empty
 value to be entered.</p>
           
+          
 
           
           <div class="method-source-code" id="ask-21-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 143</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ask!</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span> = <span class="ruby-value">3</span>)
   <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;#{key} is required! Please enter a non-empty value.&quot;</span>
 
@@ -483,7 +513,7 @@ value to be entered.</p>
   }
 
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;You had #{max} tries now -- giving up...&quot;</span>
-  <span class="ruby-string">''</span>  <span class="ruby-comment"># default value</span>
+  <span class="ruby-string">&#39;&#39;</span>  <span class="ruby-comment"># default value</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- ask-21-source -->
           
@@ -500,7 +530,9 @@ value to be entered.</p>
         <div class="method-heading">
           <span class="method-name">default_classname</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -508,13 +540,14 @@ value to be entered.</p>
           
           <p>Determine a suitable default namespace from the project name.</p>
           
+          
 
           
           <div class="method-source-code" id="default_classname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 105</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_classname</span>
   <span class="ruby-identifier">pname</span> = <span class="ruby-identifier">progname</span>
-  <span class="ruby-identifier">pname</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r(?:\A|_)(.)/</span>) { <span class="ruby-node">$1</span>.<span class="ruby-identifier">upcase</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">pname</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pname</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">pname</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/(?:\A|_)(.)/</span>) { <span class="ruby-node">$1</span>.<span class="ruby-identifier">upcase</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">pname</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pname</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- default_classname-source -->
           
@@ -531,7 +564,9 @@ value to be entered.</p>
         <div class="method-heading">
           <span class="method-name">default_emailaddress</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -539,12 +574,13 @@ value to be entered.</p>
           
           <p>Determine a default e-mail address from the global config.</p>
           
+          
 
           
           <div class="method-source-code" id="default_emailaddress-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 123</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_emailaddress</span>
-  <span class="ruby-identifier">email</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-string">'gem/email'</span>)
+  <span class="ruby-identifier">email</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-string">&#39;gem/email&#39;</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">email</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">email</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- default_emailaddress-source -->
@@ -562,7 +598,9 @@ value to be entered.</p>
         <div class="method-heading">
           <span class="method-name">default_fullname</span><span
             class="method-args">()</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -572,17 +610,18 @@ value to be entered.</p>
 <a href="http://en.wikipedia.org/wiki/Gecos_field">GECOS field</a> in the
 <code>/etc/passwd</code> file.</p>
           
+          
 
           
           <div class="method-source-code" id="default_fullname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 113</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_fullname</span>
-  <span class="ruby-identifier">author</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-string">'gem/author'</span>)
+  <span class="ruby-identifier">author</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-string">&#39;gem/author&#39;</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">author</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">author</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">author</span>.<span class="ruby-identifier">empty?</span>
 
   <span class="ruby-identifier">pwent</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getpwuid</span>(<span class="ruby-constant">Process</span>.<span class="ruby-identifier">euid</span>)
   <span class="ruby-identifier">gecos</span> = <span class="ruby-identifier">pwent</span>.<span class="ruby-identifier">gecos</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pwent</span>
-  <span class="ruby-identifier">gecos</span>[<span class="ruby-regexp">%r[^,]*/</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">gecos</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">gecos</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">gecos</span>[<span class="ruby-regexp">/[^,]*/</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">gecos</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">gecos</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- default_fullname-source -->
           
@@ -603,7 +642,7 @@ value to be entered.</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 
