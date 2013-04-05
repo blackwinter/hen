@@ -126,6 +126,19 @@ class Hen
       }
     end
 
+    # Map +options+ hash to array of command line arguments.
+    def map_options(options)
+      options.map { |option, value|
+        option = '--' << option.to_s.tr('_', '-')
+
+        case value
+          when Array  then value.map { |_value| [option, _value] }
+          when String then [option, value]
+          else value ? option : nil
+        end
+      }.compact.flatten
+    end
+
     # Encapsulates tasks targeting at RubyForge, skipping those if no
     # RubyForge project is defined. Yields the RubyForge configuration
     # hash and, optionally, a proc to obtain RubyForge objects from (via

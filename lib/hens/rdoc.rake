@@ -58,23 +58,20 @@ Hen :rdoc do
 
   ### rdoc_options
 
-  rdoc_options = rdoc_options.map { |option, value|
-    option = '--' << option.to_s.tr('_', '-')
-    value.is_a?(String) ? [option, value] : value ? option : nil
-  }.compact.flatten
+  rdoc_opts = map_options(rdoc_options)
 
   # Make settings available to other hens
   RDOC_OPTIONS = {
     :rdoc_dir   => rdoc_dir,
     :rdoc_files => rdoc_files,
-    :options    => rdoc_options
+    :options    => rdoc_opts
   }
 
   unless rdoc_files.empty?
     rdoc_task = rdoc_klass.new(:doc) { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir
       rdoc.rdoc_files = rdoc_files
-      rdoc.options    = rdoc_options
+      rdoc.options    = rdoc_opts
     }
   else
     task :doc do
@@ -86,7 +83,7 @@ Hen :rdoc do
     rdoc_klass.new('doc:local') { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir + '.local'
       rdoc.rdoc_files = rdoc_files_local
-      rdoc.options    = rdoc_options
+      rdoc.options    = rdoc_opts
 
       extend_object(rdoc) {
         def local_description(desc); "#{desc} (including unmanaged files)"; end

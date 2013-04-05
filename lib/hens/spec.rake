@@ -30,11 +30,7 @@ Hen :spec do
     end
 
     opts_file = spec_options.delete(:options)
-
-    spec_opts = spec_options.map { |option, value|
-      option = '--' << option.to_s.tr('_', '-')
-      value.is_a?(String) ? [option, value] : value ? option : nil
-    }.compact.flatten
+    spec_opts = map_options(spec_options)
 
     if opts_file && File.readable?(opts_file)
       File.readlines(opts_file).each { |l| spec_opts << l.chomp }
