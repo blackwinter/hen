@@ -1,8 +1,10 @@
 = Revision history for hen
 
-== 0.4.7 [unreleased]
+== 0.4.7 [2013-04-05]
 
 * Optionally specify Git remote with environment variable +HEN_REMOTE+.
+* Work around helper file not being the first to load because of RSpec sorting
+  the test files.
 
 == 0.4.6 [2012-04-05]
 
