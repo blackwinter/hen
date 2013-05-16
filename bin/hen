@@ -36,8 +36,6 @@ require 'fileutils'
 require 'nuggets/enumerable/minmax'
 
 require 'hen/cli'
-require 'hen/version'
-
 include Hen::CLI
 
 ACTIONS = {

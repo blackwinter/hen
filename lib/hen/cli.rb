@@ -32,6 +32,8 @@ require 'etc'
 require 'erb'
 require 'highline/import'
 
+require 'hen'
+
 class Hen
 
   # Some helper methods used by the Hen executable. Also available

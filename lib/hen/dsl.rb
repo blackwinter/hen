@@ -31,6 +31,8 @@
 require 'nuggets/file/which'
 require 'nuggets/object/singleton_class'
 
+require 'hen'
+
 class Hen
 
   # Some helper methods for use inside of a Hen definition.
