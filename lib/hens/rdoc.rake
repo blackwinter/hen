@@ -50,11 +50,11 @@ Hen :rdoc do
   if mangle_files!(rdoc_files)
     mangle_files!(rdoc_files_local, :managed => false)
   else
-    rdoc_files_local = nil
+    rdoc_files_local = []
   end
 
   rdoc_options.delete(:main) unless rdoc_files.include?(rdoc_options[:main])
-  rdoc_options[:main] ||= rdoc_files.first
+  rdoc_options[:main] ||= rdoc_files.first || rdoc_files_local.first
 
   ### rdoc_options
 
@@ -79,7 +79,7 @@ Hen :rdoc do
     end
   end
 
-  unless rdoc_files_local.nil? || rdoc_files_local.empty?
+  unless rdoc_files_local.empty?
     rdoc_klass.new('doc:local') { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir + '.local'
       rdoc.rdoc_files = rdoc_files_local
