@@ -2,6 +2,12 @@
 
 = Revision history for hen
 
+== 0.4.8 [2013-07-15]
+
+* Fall back to first local RDoc file for initial page.
+* Specify project and template license in GemSpec.
+* Housekeeping.
+
 == 0.4.7 [2013-04-05]
 
 * Optionally specify Git remote with environment variable +HEN_REMOTE+.
