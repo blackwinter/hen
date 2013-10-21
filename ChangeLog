@@ -4,7 +4,7 @@
 
 == 0.4.9 [unreleased]
 
-* Added post install message to spec task.
+* Added post install message to gem spec.
 
 == 0.4.8 [2013-07-15]
 
