@@ -63,9 +63,27 @@ Hen :gem => :rdoc do
 
     warn 'Gem author(s) missing' if authors.empty?
 
-    ### description
+    ### description, post_install_message
 
     gem_options[:description] ||= gem_options[:summary]
+
+    gem_options[:post_install_message] ||= begin
+      msg, ver = [], gem_options[:version].sub(/\.?[^\d.].*/, '')
+
+      heading, found = /\A== (#{Regexp.escape(ver)}\D.*)/o, false
+
+      File.foreach(ENV['HEN_CHANGELOG'] || 'ChangeLog') { |line|
+        line.chomp!
+
+        case line
+          when heading then msg << "#{gem_name}-#{found = $1}:"
+          when /\A== / then break if found
+          else msg << line if found
+        end
+      }
+
+      "\n#{msg.join("\n").strip}\n\n" unless msg.empty?
+    end
 
     ### rubyforge project, homepage
 

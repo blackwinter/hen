@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.4.9 [unreleased]
+
+* Added post install message to spec task.
+
 == 0.4.8 [2013-07-15]
 
 * Fall back to first local RDoc file for initial page.
