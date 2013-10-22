@@ -5,6 +5,7 @@
 == 0.4.9 [unreleased]
 
 * Added post install message to gem spec.
+* Refactored +hen+ executable into Hen::Command module.
 
 == 0.4.8 [2013-07-15]
 
