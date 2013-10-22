@@ -67,22 +67,27 @@ Hen :gem => :rdoc do
 
     gem_options[:description] ||= gem_options[:summary]
 
-    gem_options[:post_install_message] ||= begin
-      msg, ver = [], gem_options[:version].sub(/\.?[^\d.].*/, '')
+    post_install_message = gem_options[:post_install_message]
 
-      heading, found = /\A== (#{Regexp.escape(ver)}\D.*)/o, false
+    gem_options[:post_install_message] = case post_install_message
+      when nil, true
+        msg, ver = [], gem_options[:version].sub(/\.?[^\d.].*/, '')
 
-      File.foreach(ENV['HEN_CHANGELOG'] || 'ChangeLog') { |line|
-        line.chomp!
+        heading, found = /\A== (#{Regexp.escape(ver)}\D.*)/o, false
 
-        case line
-          when heading then msg << "#{gem_name}-#{found = $1}:"
-          when /\A== / then break if found
-          else msg << line if found
-        end
-      }
+        File.foreach(ENV['HEN_CHANGELOG'] || 'ChangeLog') { |line|
+          line.chomp!
 
-      "\n#{msg.join("\n").strip}\n\n" unless msg.empty?
+          case line
+            when heading then msg << "#{gem_name}-#{found = $1}:"
+            when /\A== / then break if found
+            else msg << line if found
+          end
+        }
+
+        "\n#{msg.join("\n").strip}\n\n" unless msg.empty?
+      when false
+      else post_install_message
     end
 
     ### rubyforge project, homepage
