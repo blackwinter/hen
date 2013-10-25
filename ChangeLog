@@ -2,7 +2,7 @@
 
 = Revision history for hen
 
-== 0.4.9 [unreleased]
+== 0.4.9 [2013-10-25]
 
 * Added post install message to gem spec.
 * Refactored +hen+ executable into Hen::Command module.
