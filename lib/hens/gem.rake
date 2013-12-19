@@ -248,11 +248,7 @@ Hen :gem => :rdoc do
     pkg.need_zip    = true
 
     if defined?(ZIP_COMMANDS)
-      pkg.zip_command = begin
-        require 'nuggets/file/which'
-        File.which_command(ZIP_COMMANDS)
-      rescue LoadError
-      end || ZIP_COMMANDS.first
+      pkg.zip_command = File.which_command(ZIP_COMMANDS) || ZIP_COMMANDS.first
     end
   }
 
@@ -296,7 +292,7 @@ Hen :gem => :rdoc do
     extension_options[:lib_dir] ||= File.join(['lib', ext_name, ENV['FAT_DIR']].compact)
     extension_options[:ext_dir] ||= File.join(['ext', ext_name])
 
-    unless extension_options.has_key?(:cross_compile)
+    unless extension_options.key?(:cross_compile)
       extension_options[:cross_compile] = true
     end
 

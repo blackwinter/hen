@@ -63,14 +63,14 @@ class Hen
 
     # Define task +t+, but overwrite any existing task of that name!
     # (Rake usually just adds them up.)
-    def task!(t, *args)
+    def task!(t, *args, &block)
       Rake.application.instance_variable_get(:@tasks).delete(t.to_s)
-      task(t, *args, &block_given? ? Proc.new : nil)
+      task(t, *args, &block)
     end
 
     # Return true if task +t+ is defined, false otherwise.
     def have_task?(t)
-      Rake.application.instance_variable_get(:@tasks).has_key?(t.to_s)
+      Rake.application.instance_variable_get(:@tasks).key?(t.to_s)
     end
 
     # Find a command that is executable and run it. Intended for
@@ -102,10 +102,10 @@ class Hen
       managed_files = [:git, :svn].find { |scm|
         res = send(scm) { |scm_obj| scm_obj.managed_files }
         break res if res
-      } if !options.has_key?(:managed) || options[:managed]
+      } if !options.key?(:managed) || options[:managed]
 
-      args.each { |files|
-        files ? files.uniq! : next
+      args.compact.each { |files|
+        files.uniq!
 
         if managed_files
           files.replace(files & managed_files)
@@ -147,14 +147,14 @@ class Hen
     # RubyForge project is defined. Yields the RubyForge configuration
     # hash and, optionally, a proc to obtain RubyForge objects from (via
     # +call+; reaching out to #init_rubyforge).
-    def rubyforge
+    def rubyforge(&block)
       rf_config  = config[:rubyforge]
       rf_project = rf_config[:project]
 
       if rf_project && !rf_project.empty? && have_rubyforge?
         rf_config[:package] ||= rf_project
 
-        call_block(Proc.new, rf_config) { |*args|
+        call_block(block, rf_config) { |*args|
           init_rubyforge(args.empty? || args.first)
         }
       else
@@ -166,28 +166,28 @@ class Hen
     # RubyGem's 'push' command is not available. Yields an optional
     # proc to obtain RubyGems (pseudo-)objects from (via +call+;
     # reaching out to #init_rubygems).
-    def rubygems
+    def rubygems(&block)
       if have_rubygems?
-        call_block(Proc.new) { |*args| init_rubygems }
+        call_block(block) { |*args| init_rubygems }
       else
         skipping 'RubyGems'
       end
     end
 
     # DEPRECATED: Use #rubygems instead.
-    def gemcutter
+    def gemcutter(&block)
       warn "#{self}#gemcutter is deprecated; use `rubygems' instead."
-      rubygems(&block_given? ? Proc.new : nil)
+      rubygems(&block)
     end
 
     # Encapsulates tasks targeting at Git, skipping those if the current
-    # project us not controlled by Git. Yields a Git object via #init_git.
+    # project is not controlled by Git. Yields a Git object via #init_git.
     def git
       have_git? ? yield(init_git) : skipping('Git')
     end
 
     # Encapsulates tasks targeting at SVN, skipping those if the current
-    # project us not controlled by SVN. Yields an SVN object via #init_svn.
+    # project is not controlled by SVN. Yields an SVN object via #init_svn.
     def svn
       have_svn? ? yield(init_svn) : skipping('SVN')
     end
@@ -229,7 +229,7 @@ class Hen
 
       Gem::Commands::PushCommand
     rescue LoadError, NameError
-      missing_lib 'gemcutter'
+      missing_lib 'rubygems (gemcutter)'
     end
 
     # Checks whether the current project is managed by Git.
@@ -256,6 +256,8 @@ class Hen
     # Prepare the use of RubyGems.org. Returns the RubyGems
     # (pseudo-)object.
     def init_rubygems
+      return unless have_rubygems?
+
       pseudo_object {
         def method_missing(cmd, *args)  # :nodoc:
           run(cmd, *args)
@@ -264,15 +266,17 @@ class Hen
         def run(cmd, *args)  # :nodoc:
           Gem::CommandManager.instance.run([cmd.to_s.tr('_', '-'), *args])
         end
-      } if have_rubygems?
+      }
     end
 
     # Prepare the use of Git. Returns the Git (pseudo-)object.
     def init_git
+      return unless have_git?
+
       pseudo_object {
         def method_missing(cmd, *args)  # :nodoc:
           options = args.last.is_a?(Hash) ? args.pop : {}
-          options[:verbose] = Hen.verbose unless options.has_key?(:verbose)
+          options[:verbose] = Hen.verbose unless options.key?(:verbose)
 
           DSL.send(:sh, 'git', cmd.to_s.tr('_', '-'), *args << options)
         end
@@ -323,15 +327,17 @@ class Hen
         def managed_files  # :nodoc:
           run(:ls_files).split($/)
         end
-      } if have_git?
+      }
     end
 
     # Prepare the use of SVN. Returns the SVN (pseudo-)object.
     def init_svn
+      return unless have_svn?
+
       pseudo_object {
         def method_missing(cmd, *args)  # :nodoc:
           options = args.last.is_a?(Hash) ? args.pop : {}
-          options[:verbose] = Hen.verbose unless options.has_key?(:verbose)
+          options[:verbose] = Hen.verbose unless options.key?(:verbose)
 
           DSL.send(:sh, 'svn', cmd.to_s.tr('_', '-'), *args << options)
         end
@@ -347,16 +353,14 @@ class Hen
         def managed_files  # :nodoc:
           run(:list, '--recursive').split($/)
         end
-      } if have_svn?
+      }
     end
 
     # Extend +object+ with given +blocks+.
-    def extend_object(object, *blocks)
-      blocks << Proc.new if block_given?
-
+    def extend_object(object, *blocks, &block2)
       singleton_class = object.singleton_class
 
-      blocks.compact.reverse_each { |block|
+      blocks.push(block2).compact.reverse_each { |block|
         singleton_class.class_eval(&block)
       }
 
@@ -364,8 +368,8 @@ class Hen
     end
 
     # Create a (pseudo-)object.
-    def pseudo_object
-      extend_object(Object.new, block_given? ? Proc.new : nil) {
+    def pseudo_object(&block)
+      extend_object(Object.new, block) {
         instance_methods.each { |method|
           undef_method(method) unless method =~ /\A__|\Aobject_id\z/
         }
@@ -374,8 +378,8 @@ class Hen
 
     # Calls block +block+ with +args+, appending an
     # optional passed block if requested by +block+.
-    def call_block(block, *args)
-      args << Proc.new if block.arity > args.size
+    def call_block(block, *args, &block2)
+      args << block2 if block.arity > args.size
       block[*args]
     end
 

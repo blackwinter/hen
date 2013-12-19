@@ -46,7 +46,7 @@ Hen :spec do
     spec_opts = map_options(spec_options)
 
     if opts_file && File.readable?(opts_file)
-      File.readlines(opts_file).each { |l| spec_opts << l.chomp }
+      File.readlines(opts_file).each { |line| spec_opts << line.chomp }
     end
 
     spec_block = lambda { |t|
@@ -69,12 +69,12 @@ Hen :spec do
     end
 
     #desc "Run specs with RCov"
-    spec_klass.new('spec:rcov') do |t|
+    spec_klass.new('spec:rcov') { |t|
       spec_block[t]
 
       t.rcov = true
       t.rcov_opts = rcov_opts
-    end
+    }
   end
 
 end

@@ -87,13 +87,13 @@ class Hen
       # Extract potential options hash
       options = args.last.is_a?(Hash) ? args.pop : {}
 
-      @verbose = options[:verbose] if options.has_key?(:verbose)
+      @verbose = options[:verbose] if options.key?(:verbose)
 
       yield.each { |key, value| config[key].update(value) } if block_given?
 
       # Handle include/exclude requirements
       excl = options[:exclude]
-      args, default = args.empty? ? [excl ? [*excl] : [], true] : [args, false]
+      args, default = args.empty? ? [Array(excl), true] : [args, false]
 
       inclexcl = Hash.new(default)
       args.each { |arg| inclexcl[arg.to_s] = !default }
@@ -242,12 +242,12 @@ class Hen
   def initialize(args, overwrite = false, &block)
     @name, @dependencies = resolve_args(args)
 
+    @laid = false
+
     unless @block = block
       raise LocalJumpError, "#{@name}: no block given" if verbose
       return
     end
-
-    @laid = false
 
     self.class.add_hen(self, overwrite)
   end
@@ -258,6 +258,8 @@ class Hen
   # Runs the definition block, exposing helper methods from the DSL.
   def lay!
     return if laid?
+
+    @laid = true
 
     # Call dependencies first
     dependencies.each { |hen| self.class[hen].lay!  }
@@ -306,10 +308,7 @@ class Hen
   #
   # Keeps track of whether the block has already been executed.
   def laid?
-    return @laid if @laid
-
-    @laid = true
-    false
+    @laid
   end
 
 end
