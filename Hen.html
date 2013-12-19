@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class Hen - hen Application documentation (v0.4.9)</title>
+<title>class Hen - hen Application documentation (v0.5.0)</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -530,13 +530,13 @@ the <code>:exclude</code> option.</p>
   <span class="ruby-comment"># Extract potential options hash</span>
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
 
-  <span class="ruby-ivar">@verbose</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:verbose</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:verbose</span>)
+  <span class="ruby-ivar">@verbose</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:verbose</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:verbose</span>)
 
   <span class="ruby-keyword">yield</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> <span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">update</span>(<span class="ruby-identifier">value</span>) } <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
 
   <span class="ruby-comment"># Handle include/exclude requirements</span>
   <span class="ruby-identifier">excl</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:exclude</span>]
-  <span class="ruby-identifier">args</span>, <span class="ruby-identifier">default</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">excl</span> <span class="ruby-operator">?</span> [<span class="ruby-operator">*</span><span class="ruby-identifier">excl</span>] <span class="ruby-operator">:</span> [], <span class="ruby-keyword">true</span>] <span class="ruby-operator">:</span> [<span class="ruby-identifier">args</span>, <span class="ruby-keyword">false</span>]
+  <span class="ruby-identifier">args</span>, <span class="ruby-identifier">default</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> [<span class="ruby-constant">Array</span>(<span class="ruby-identifier">excl</span>), <span class="ruby-keyword">true</span>] <span class="ruby-operator">:</span> [<span class="ruby-identifier">args</span>, <span class="ruby-keyword">false</span>]
 
   <span class="ruby-identifier">inclexcl</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">default</span>)
   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-identifier">inclexcl</span>[<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-operator">!</span><span class="ruby-identifier">default</span> }
@@ -601,12 +601,12 @@ href="Hen.html#method-i-lay-21">lay!</a> for details.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">overwrite</span> = <span class="ruby-keyword">false</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@name</span>, <span class="ruby-ivar">@dependencies</span> = <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
 
+  <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword">false</span>
+
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@block</span> = <span class="ruby-identifier">block</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">LocalJumpError</span>, <span class="ruby-node">&quot;#{@name}: no block given&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">verbose</span>
     <span class="ruby-keyword">return</span>
   <span class="ruby-keyword">end</span>
-
-  <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword">false</span>
 
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">add_hen</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">overwrite</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -796,6 +796,8 @@ href="Hen/DSL.html">DSL</a>.</p>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">lay!</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">laid?</span>
 
+  <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword">true</span>
+
   <span class="ruby-comment"># Call dependencies first</span>
   <span class="ruby-identifier">dependencies</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">hen</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>[<span class="ruby-identifier">hen</span>].<span class="ruby-identifier">lay!</span>  }
 
@@ -842,12 +844,9 @@ href="Hen/DSL.html">DSL</a>.</p>
 
           
           <div class="method-source-code" id="laid-3F-source">
-            <pre><span class="ruby-comment"># File lib/hen.rb, line 308</span>
+            <pre><span class="ruby-comment"># File lib/hen.rb, line 310</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">laid?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@laid</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@laid</span>
-
-  <span class="ruby-ivar">@laid</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@laid</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- laid-3F-source -->
           
@@ -883,7 +882,7 @@ of hens this one depends upon.</p>
 
           
           <div class="method-source-code" id="resolve_args-source">
-            <pre><span class="ruby-comment"># File lib/hen.rb, line 287</span>
+            <pre><span class="ruby-comment"># File lib/hen.rb, line 289</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resolve_args</span>(<span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">name</span>, <span class="ruby-identifier">dependencies</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">args</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
@@ -932,7 +931,7 @@ of hens this one depends upon.</p>
 
           
           <div class="method-source-code" id="verbose-source">
-            <pre><span class="ruby-comment"># File lib/hen.rb, line 277</span>
+            <pre><span class="ruby-comment"># File lib/hen.rb, line 279</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">verbose</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">verbose</span>
 <span class="ruby-keyword">end</span></pre>
