@@ -10,7 +10,7 @@ begin
       :summary      => %q{<%= progdesc %>},
       :author       => %q{<%= fullname %>},
       :email        => %q{<%= emailaddress %>},
-      :license      => %q{AGPL},
+      :license      => %q{AGPL-3.0},
       :dependencies => %w[]
     }
   }}
