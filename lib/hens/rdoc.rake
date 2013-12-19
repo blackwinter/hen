@@ -3,6 +3,7 @@ Hen :rdoc do
   rdoc_options = {
     :rdoc_dir       => 'doc',
     :rdoc_files     => %w[README COPYING ChangeLog lib/**/*.rb ext/**/*.c],
+    :title          => '{name:%s }Application documentation{version: (v%s)}',
     :charset        => 'UTF-8',
     :inline_source  => true,
     :line_numbers   => true,
@@ -21,19 +22,13 @@ Hen :rdoc do
     Rake::RDocTask
   end
 
-  rdoc_options[:title] ||= begin
-    title = 'Application documentation'
+  info = {
+    'name'    => project_name(*config.values_at(:rubyforge, :gem)),
+    'version' => config[:gem][:version],
+    'date'    => Date.today.to_s
+  }
 
-    if name = project_name(*config.values_at(:rubyforge, :gem))
-      title.insert(0, "#{name} ")
-    end
-
-    if version = config[:gem][:version]
-      title << " (v#{version})"
-    end
-
-    title
-  end
+  rdoc_options[:title].gsub!(/\{(\w+):(.*?)\}/) { i = info[$1] and $2 % i }
 
   ### rdoc_dir
 
@@ -95,7 +90,7 @@ Hen :rdoc do
     }
   end
 
-  publish_desc = "Publish RDoc documentation"
+  publish_desc = 'Publish RDoc documentation'
 
   git do |git|
 
