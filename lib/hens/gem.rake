@@ -298,18 +298,18 @@ Hen :gem => :rdoc do
 
     if extension_options[:cross_compile]
       extension_options[:cross_platform] ||= %w[x86-mswin32-60 x86-mingw32]
-    end
 
-    if ruby_versions = extension_options.delete(:ruby_versions)
-      ENV['RUBY_CC_VERSION'] ||= Array(ruby_versions).join(':')
+      if ruby_versions = extension_options.delete(:ruby_versions)
+        ENV['RUBY_CC_VERSION'] ||= Array(ruby_versions).join(':')
+      end
+
+      desc 'Build native gems'
+      task 'gem:native' => %w[cross compile native gem]
     end
 
     extension_task = Rake::ExtensionTask.new(nil, gem_spec) { |ext|
       set_options(ext, extension_options, 'Extension')
     }
-
-    desc 'Build native gems'
-    task 'gem:native' => %w[cross compile native gem]
 
     %w[spec test].each { |t| task t => :compile }
   else
@@ -352,7 +352,7 @@ Hen :gem => :rdoc do
       task 'gem:push' => 'gem:push:meta'
     end
 
-    if extension_task
+    if have_task?('gem:native')
       platforms = Array(extension_task.cross_platform).join(',')
       gems_glob = gem_path.sub(/(?=\.gem\z)/, "-{#{platforms}}")
 
