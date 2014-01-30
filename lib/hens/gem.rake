@@ -284,13 +284,22 @@ Hen :gem => :rdoc do
   end
 
   if Rake.const_defined?(:ExtensionTask)
-    extension_options[:name] ||= gem_name.include?('-') ?
-      gem_name.tr('-', '_') : "#{gem_name}_native"
+    # gem_name    | extension name | ext_name
+    # ---------------------------------------
+    # libcdb-ruby | libcdb_ruby    | libcdb
+    # rb-gsl      | gsl_native     | gsl
+    # unicode     | unicode_native | unicode
 
-    ext_name = gem_name.include?('-') ? gem_name.split('-').first : gem_name
+    gem_name_parts = gem_name.split('-')
+    gem_name_parts.shift if gem_name_parts.first == 'rb'
+    gem_name_parts << 'native' if gem_name_parts.size == 1
+
+    extension_options[:name] ||= gem_name_parts.join('_')
+
+    ext_name = extension_options.delete(:ext_name) { gem_name_parts.first }
 
     extension_options[:lib_dir] ||= File.join(['lib', ext_name, ENV['FAT_DIR']].compact)
-    extension_options[:ext_dir] ||= File.join(['ext', ext_name])
+    extension_options[:ext_dir] ||= File.join(['ext', ext_name].compact)
 
     unless extension_options.key?(:cross_compile)
       extension_options[:cross_compile] = true
