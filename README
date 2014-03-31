@@ -2,7 +2,7 @@
 
 == VERSION
 
-This documentation refers to hen version 0.5.0
+This documentation refers to hen version 0.5.1
 
 
 == DESCRIPTION
@@ -57,7 +57,6 @@ You can even extend Hen with your own tasks. More on that later. (TODO)
 
 == LINKS
 
-<b></b>
 Documentation:: http://blackwinter.github.com/hen
 Source code::   http://github.com/blackwinter/hen
 RubyGem::       http://rubygems.org/gems/hen
