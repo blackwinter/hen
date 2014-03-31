@@ -2,59 +2,58 @@
 
 <html>
 <head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta charset="UTF-8">
 
-<title>module Hen::CLI - hen Application documentation (v0.5.0)</title>
+<title>module Hen::CLI - hen Application documentation (v0.5.1)</title>
 
-<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
 </script>
 
-<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
-<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
 
 
-<body id="top" class="module">
-<nav id="metadata">
-  <nav id="home-section" class="section">
-  <h3 class="section-header">
-    <a href="../index.html">Home</a>
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
     <a href="../table_of_contents.html#classes">Classes</a>
     <a href="../table_of_contents.html#methods">Methods</a>
-  </h3>
-</nav>
+  </div>
+</div>
 
-
-  <nav id="search-section" class="section project-section" class="initially-hidden">
+    <div id="search-section" role="search" class="project-section initially-hidden">
   <form action="#" method="get" accept-charset="utf-8">
-    <h3 class="section-header">
-      <input type="text" name="search" placeholder="Search" id="search-field"
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
              title="Type to search, Up and Down to navigate, Enter to load">
-    </h3>
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
   </form>
+</div>
 
-  <ul id="search-results" class="initially-hidden"></ul>
-</nav>
-
+  </div>
 
   
-
-  <div id="file-metadata">
-    <nav id="file-list-section" class="section">
-  <h3 class="section-header">Defined In</h3>
-  <ul>
-    <li>lib/hen/cli.rb
-  </ul>
-</nav>
-
-    
-  </div>
 
   <div id="class-metadata">
     
@@ -62,10 +61,10 @@
     
     
     <!-- Method Quickref -->
-<nav id="method-list-section" class="section">
-  <h3 class="section-header">Methods</h3>
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
 
-  <ul class="link-list">
+  <ul class="link-list" role="directory">
     
     <li ><a href="#method-i-_hen_original_ask">#_hen_original_ask</a>
     
@@ -92,59 +91,22 @@
     <li ><a href="#method-i-render">#render</a>
     
   </ul>
-</nav>
-
-  </div>
-
-  <div id="project-metadata">
-    <nav id="fileindex-section" class="section project-section">
-  <h3 class="section-header">Pages</h3>
-
-  <ul>
-  
-    <li class="file"><a href="../COPYING.html">COPYING</a>
-  
-    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
-  
-    <li class="file"><a href="../README.html">README</a>
-  
-  </ul>
-</nav>
-
-    <nav id="classindex-section" class="section project-section">
-  <h3 class="section-header">Class and Module Index</h3>
-
-  <ul class="link-list">
-  
-    <li><a href="../Hen.html">Hen</a>
-  
-    <li><a href="../Hen/CLI.html">Hen::CLI</a>
-  
-    <li><a href="../Hen/Commands.html">Hen::Commands</a>
-  
-    <li><a href="../Hen/DSL.html">Hen::DSL</a>
-  
-    <li><a href="../Hen/File.html">Hen::File</a>
-  
-    <li><a href="../Hen/Version.html">Hen::Version</a>
-  
-    <li><a href="../Object.html">Object</a>
-  
-  </ul>
-</nav>
+</div>
 
   </div>
 </nav>
 
-<div id="documentation">
-  <h1 class="module">module Hen::CLI</h1>
+<main role="main" aria-labelledby="module-Hen::CLI">
+  <h1 id="module-Hen::CLI" class="module">
+    module Hen::CLI
+  </h1>
 
-  <div id="description" class="description">
+  <section class="description">
     
 <p>Some helper methods used by the <a href="../Hen.html">Hen</a> executable.
 Also available for use in custom project skeletons.</p>
 
-  </div><!-- description -->
+  </section>
 
   
   
@@ -157,9 +119,10 @@ Also available for use in custom project skeletons.</p>
     
 
     
-    <!-- Attributes -->
-    <section id="attribute-method-details" class="method-section section">
-      <h3 class="section-header">Attributes</h3>
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
 
       
       <div id="attribute-c-answers" class="method-detail">
@@ -175,13 +138,14 @@ Also available for use in custom project skeletons.</p>
         </div>
       </div>
       
-    </section><!-- attribute-method-details -->
+    </section>
     
 
-    <!-- Methods -->
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Instance Methods</h3>
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
 
     
       <div id="method-i-classname" class="method-detail ">
@@ -205,18 +169,18 @@ Also available for use in custom project skeletons.</p>
 
           
           <div class="method-source-code" id="classname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 87</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">classname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_classname</span>)
   <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Module&#39;s/Class&#39;s name&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- classname-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- classname-method -->
+      </div>
 
     
       <div id="method-i-emailaddress" class="method-detail ">
@@ -238,18 +202,18 @@ Also available for use in custom project skeletons.</p>
 
           
           <div class="method-source-code" id="emailaddress-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 97</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emailaddress</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_emailaddress</span>)
   <span class="ruby-identifier">ask</span>(<span class="ruby-string">&#39;E-mail address&#39;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- emailaddress-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- emailaddress-method -->
+      </div>
 
     
       <div id="method-i-fullname" class="method-detail ">
@@ -271,18 +235,18 @@ Also available for use in custom project skeletons.</p>
 
           
           <div class="method-source-code" id="fullname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 92</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fullname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_fullname</span>)
   <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&#39;Full name&#39;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- fullname-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- fullname-method -->
+      </div>
 
     
       <div id="method-i-progdesc" class="method-detail ">
@@ -304,18 +268,18 @@ Also available for use in custom project skeletons.</p>
 
           
           <div class="method-source-code" id="progdesc-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 102</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">progdesc</span>(<span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Program&#39;s description summary&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- progdesc-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- progdesc-method -->
+      </div>
 
     
       <div id="method-i-progname" class="method-detail ">
@@ -346,18 +310,18 @@ the project&#39;s name.</p>
 
           
           <div class="method-source-code" id="progname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 80</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">progname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">ask!</span>(<span class="ruby-string">&quot;Project&#39;s name&quot;</span>, <span class="ruby-identifier">default</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- progname-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- progname-method -->
+      </div>
 
     
       <div id="method-i-render" class="method-detail ">
@@ -380,7 +344,7 @@ result in <code>target</code>. Returns the content.</p>
 
           
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 53</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">sample</span>, <span class="ruby-identifier">target</span>)
   <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Sample file not found: #{sample}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">sample</span>)
 
@@ -395,20 +359,22 @@ result in <code>target</code>. Returns the content.</p>
 
   <span class="ruby-identifier">content</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- render-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- render-method -->
+      </div>
 
     
-    </section><!-- public-instance-method-details -->
+    </section>
   
-     <section id="private-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Private Instance Methods</h3>
+     <section id="private-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Private Instance Methods</h3>
+       </header>
 
     
       <div id="method-i-_hen_original_ask" class="method-detail method-alias">
@@ -436,7 +402,7 @@ result in <code>target</code>. Returns the content.</p>
           Alias for: <a href="CLI.html#method-i-ask">ask</a>
         </div>
         
-      </div><!-- _hen_original_ask-method -->
+      </div>
 
     
       <div id="method-i-ask" class="method-detail ">
@@ -459,7 +425,7 @@ already stored answer if present, unless <code>cached</code> is false.</p>
 
           
           <div class="method-source-code" id="ask-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 136</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 134</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">cached</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-constant">CLI</span>.<span class="ruby-identifier">answers</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cached</span>
 
@@ -469,7 +435,7 @@ already stored answer if present, unless <code>cached</code> is false.</p>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Interrupt</span>
   <span class="ruby-identifier">abort</span> <span class="ruby-string">&#39;&#39;</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- ask-source -->
+          </div>
           
         </div>
 
@@ -480,7 +446,7 @@ already stored answer if present, unless <code>cached</code> is false.</p>
         
 
         
-      </div><!-- ask-method -->
+      </div>
 
     
       <div id="method-i-ask-21" class="method-detail ">
@@ -503,7 +469,7 @@ value to be entered.</p>
 
           
           <div class="method-source-code" id="ask-21-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 147</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">ask!</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">max</span> = <span class="ruby-value">3</span>)
   <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;#{key} is required! Please enter a non-empty value.&quot;</span>
 
@@ -517,14 +483,14 @@ value to be entered.</p>
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;You had #{max} tries now -- giving up...&quot;</span>
   <span class="ruby-string">&#39;&#39;</span>  <span class="ruby-comment"># default value</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- ask-21-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- ask-21-method -->
+      </div>
 
     
       <div id="method-i-default_classname" class="method-detail ">
@@ -546,19 +512,19 @@ value to be entered.</p>
 
           
           <div class="method-source-code" id="default_classname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 109</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_classname</span>
   <span class="ruby-identifier">pname</span> = <span class="ruby-identifier">progname</span>
   <span class="ruby-identifier">pname</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/(?:\A|_)(.)/</span>) { <span class="ruby-node">$1</span>.<span class="ruby-identifier">upcase</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">pname</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pname</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- default_classname-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- default_classname-method -->
+      </div>
 
     
       <div id="method-i-default_emailaddress" class="method-detail ">
@@ -580,19 +546,19 @@ value to be entered.</p>
 
           
           <div class="method-source-code" id="default_emailaddress-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 127</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 125</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_emailaddress</span>
   <span class="ruby-identifier">email</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-string">&#39;gem/email&#39;</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">email</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">email</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- default_emailaddress-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- default_emailaddress-method -->
+      </div>
 
     
       <div id="method-i-default_fullname" class="method-detail ">
@@ -616,7 +582,7 @@ value to be entered.</p>
 
           
           <div class="method-source-code" id="default_fullname-source">
-            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 117</span>
+            <pre><span class="ruby-comment"># File lib/hen/cli.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">default_fullname</span>
   <span class="ruby-identifier">author</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-string">&#39;gem/author&#39;</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">author</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">author</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">author</span>.<span class="ruby-identifier">empty?</span>
@@ -625,26 +591,25 @@ value to be entered.</p>
   <span class="ruby-identifier">gecos</span> = <span class="ruby-identifier">pwent</span>.<span class="ruby-identifier">gecos</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pwent</span>
   <span class="ruby-identifier">gecos</span>[<span class="ruby-regexp">/[^,]*/</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">gecos</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">gecos</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- default_fullname-source -->
+          </div>
           
         </div>
 
         
 
         
-      </div><!-- default_fullname-method -->
+      </div>
 
     
-    </section><!-- private-instance-method-details -->
+    </section>
   
-  </section><!-- 5Buntitled-5D -->
+  </section>
+</main>
 
-</div><!-- documentation -->
 
-
-<footer id="validator-badges">
-  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
-  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -2,43 +2,44 @@
 
 <html>
 <head>
-<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta charset="UTF-8">
 
-<title>Table of Contents - hen Application documentation (v0.5.0)</title>
+<title>Table of Contents - hen Application documentation (v0.5.1)</title>
 
-<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+<link href="./fonts.css" rel="stylesheet">
+<link href="./rdoc.css" rel="stylesheet">
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
 </script>
 
-<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
-<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/navigation.js"></script>
+<script src="./js/search_index.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/searcher.js"></script>
+<script src="./js/darkfish.js"></script>
 
 
-<body class="indexpage">
-<h1>Table of Contents - hen Application documentation (v0.5.0)</h1>
+<body id="top" class="table-of-contents">
+<main role="main">
+<h1 class="class">Table of Contents - hen Application documentation (v0.5.1)</h1>
 
-<h2>Pages</h2>
+<h2 id="pages">Pages</h2>
 <ul>
   <li class="file">
     <a href="COPYING.html">COPYING</a>
 
-    <img class="toc-toggle" src="images/transparent.png" alt="" title="toggle headings">
-    <ul class="initially-hidden">
+    <ul>
       <li><a href="COPYING.html#label-License+for+hen">License for hen</a>
     </ul>
   </li>
     <li class="file">
     <a href="ChangeLog.html">ChangeLog</a>
 
-    <img class="toc-toggle" src="images/transparent.png" alt="" title="toggle headings">
-    <ul class="initially-hidden">
+    <ul>
       <li><a href="ChangeLog.html#label-Revision+history+for+hen">Revision history for hen</a>
+      <li><a href="ChangeLog.html#label-0.5.1+%5B2014-03-31%5D">0.5.1 [2014-03-31]</a>
       <li><a href="ChangeLog.html#label-0.5.0+%5B2013-12-19%5D">0.5.0 [2013-12-19]</a>
       <li><a href="ChangeLog.html#label-0.4.9+%5B2013-10-25%5D">0.4.9 [2013-10-25]</a>
       <li><a href="ChangeLog.html#label-0.4.8+%5B2013-07-15%5D">0.4.8 [2013-07-15]</a>
@@ -92,8 +93,7 @@
     <li class="file">
     <a href="README.html">README</a>
 
-    <img class="toc-toggle" src="images/transparent.png" alt="" title="toggle headings">
-    <ul class="initially-hidden">
+    <ul>
       <li><a href="README.html#label-hen+-+Just+a+Rake+helper">hen - Just a Rake helper</a>
       <li><a href="README.html#label-VERSION">VERSION</a>
       <li><a href="README.html#label-DESCRIPTION">DESCRIPTION</a>
@@ -108,177 +108,372 @@
   
 </ul>
 
-<h2 id="classes">Classes/Modules</h2>
+<h2 id="classes">Classes and Modules</h2>
 <ul>
   <li class="class">
     <a href="Hen.html">Hen</a>
   </li>
-    <li class="module">
+  <li class="module">
     <a href="Hen/CLI.html">Hen::CLI</a>
   </li>
-    <li class="module">
+  <li class="module">
     <a href="Hen/Commands.html">Hen::Commands</a>
   </li>
-    <li class="module">
+  <li class="module">
     <a href="Hen/DSL.html">Hen::DSL</a>
   </li>
-    <li class="module">
-    <a href="Hen/File.html">Hen::File</a>
-  </li>
-    <li class="module">
+  <li class="module">
     <a href="Hen/Version.html">Hen::Version</a>
   </li>
-    <li class="class">
+  <li class="class">
     <a href="Object.html">Object</a>
   </li>
-  
 </ul>
 
 <h2 id="methods">Methods</h2>
 <ul>
-  
-    <li class="method"><a href="Hen.html#method-c-5B-5D">::[] &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-add_hen">::add_hen &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-config">::config &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-default_henrc">::default_henrc &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-find_henrc">::find_henrc &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-henrc">::henrc &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-lay-21">::lay! &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-load_config">::load_config &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-load_hens">::load_hens &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-c-new">::new &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen/Version.html#method-c-to_a">::to_a &mdash; Hen::Version</a>
-  
-    <li class="method"><a href="Hen/Version.html#method-c-to_s">::to_s &mdash; Hen::Version</a>
-  
-    <li class="method"><a href="Object.html#method-i-Hen">#Hen &mdash; Object</a>
-  
-    <li class="method"><a href="Object.html#method-i-Hen-21">#Hen! &mdash; Object</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-5B-5D">#[] &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-_hen_original_ask">#_hen_original_ask &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-ask">#ask &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-ask-21">#ask! &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-call_block">#call_block &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-classname">#classname &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-config">#config &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-config">#config &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-create">#create &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-create_git">#create_git &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-create_path">#create_path &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-create_skel">#create_skel &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-default_classname">#default_classname &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-default_emailaddress">#default_emailaddress &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-default_fullname">#default_fullname &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-emailaddress">#emailaddress &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-execute">#execute &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-extend_object">#extend_object &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-fullname">#fullname &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-gemcutter">#gemcutter &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-git">#git &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-h">#h &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-have_git-3F">#have_git? &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-have_rubyforge-3F">#have_rubyforge? &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-have_rubygems-3F">#have_rubygems? &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-have_svn-3F">#have_svn? &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-have_task-3F">#have_task? &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-help">#help &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-init_git">#init_git &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-init_rubyforge">#init_rubyforge &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-init_rubygems">#init_rubygems &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-init_svn">#init_svn &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen.html#method-i-laid-3F">#laid? &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen.html#method-i-lay-21">#lay! &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-list">#list &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-mangle_files-21">#mangle_files! &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-map_options">#map_options &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-method_missing">#method_missing &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-missing_lib">#missing_lib &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-progdesc">#progdesc &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-progname">#progname &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-project_name">#project_name &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-pseudo_object">#pseudo_object &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/CLI.html#method-i-render">#render &mdash; Hen::CLI</a>
-  
-    <li class="method"><a href="Hen.html#method-i-resolve_args">#resolve_args &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-rubyforge">#rubyforge &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-rubygems">#rubygems &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-set_options">#set_options &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-skipping">#skipping &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-svn">#svn &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/DSL.html#method-i-task-21">#task! &mdash; Hen::DSL</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-usage">#usage &mdash; Hen::Commands</a>
-  
-    <li class="method"><a href="Hen.html#method-i-verbose">#verbose &mdash; Hen</a>
-  
-    <li class="method"><a href="Hen/Commands.html#method-i-version">#version &mdash; Hen::Commands</a>
-  
+
+  <li class="method">
+    <a href="Hen.html#method-c-new">::new</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Object.html#method-i-Hen">#Hen</a>
+    &mdash;
+    <span class="container">Object</span>
+
+  <li class="method">
+    <a href="Object.html#method-i-Hen-21">#Hen!</a>
+    &mdash;
+    <span class="container">Object</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-5B-5D">#[]</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-5B-5D">#[]</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-_hen_original_ask">#_hen_original_ask</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-add_hen">#add_hen</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-ask">#ask</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-ask-21">#ask!</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-call_block">#call_block</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-classname">#classname</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-config">#config</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-config">#config</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-config">#config</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-create">#create</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-create_git">#create_git</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-create_path">#create_path</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-create_skel">#create_skel</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-default_classname">#default_classname</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-default_emailaddress">#default_emailaddress</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-default_fullname">#default_fullname</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-default_henrc">#default_henrc</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-emailaddress">#emailaddress</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-execute">#execute</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-extend_object">#extend_object</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-find_henrc">#find_henrc</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-fullname">#fullname</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-gemcutter">#gemcutter</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-git">#git</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-h">#h</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-have_git-3F">#have_git?</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-have_rubyforge-3F">#have_rubyforge?</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-have_rubygems-3F">#have_rubygems?</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-have_svn-3F">#have_svn?</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-have_task-3F">#have_task?</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-help">#help</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-henrc">#henrc</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-init_git">#init_git</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-init_rubyforge">#init_rubyforge</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-init_rubygems">#init_rubygems</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-init_svn">#init_svn</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-laid-3F">#laid?</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-lay-21">#lay!</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-list">#list</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-load_config">#load_config</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-load_hens">#load_hens</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-mangle_files-21">#mangle_files!</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-map_options">#map_options</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-method_missing">#method_missing</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-missing_lib">#missing_lib</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-progdesc">#progdesc</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-progname">#progname</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-project_name">#project_name</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-pseudo_object">#pseudo_object</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/CLI.html#method-i-render">#render</a>
+    &mdash;
+    <span class="container">Hen::CLI</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-resolve_args">#resolve_args</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-rubyforge">#rubyforge</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-rubygems">#rubygems</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-set_options">#set_options</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-skipping">#skipping</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-svn">#svn</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/DSL.html#method-i-task-21">#task!</a>
+    &mdash;
+    <span class="container">Hen::DSL</span>
+
+  <li class="method">
+    <a href="Hen/Version.html#method-i-to_a">#to_a</a>
+    &mdash;
+    <span class="container">Hen::Version</span>
+
+  <li class="method">
+    <a href="Hen/Version.html#method-i-to_s">#to_s</a>
+    &mdash;
+    <span class="container">Hen::Version</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-usage">#usage</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
+
+  <li class="method">
+    <a href="Hen.html#method-i-verbose">#verbose</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/Commands.html#method-i-version">#version</a>
+    &mdash;
+    <span class="container">Hen::Commands</span>
 </ul>
+</main>
 
 
-<footer id="validator-badges">
-  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
-  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
