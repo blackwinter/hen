@@ -26,6 +26,7 @@
 
 # TODO: Implement 'list' command -- List available hens with their tasks (?)
 
+require 'fileutils'
 require 'nuggets/argv/option'
 require 'nuggets/enumerable/minmax'
 
@@ -57,8 +58,6 @@ Usage: #{$0} {#{COMMANDS.keys.sort.join('|')}} [arguments] [options]
     EOT
 
     SKELETON = File.expand_path('../../../example', __FILE__)
-
-    GIT_RE = %r{(\A|/)[._](git[^/]+)\z}
 
     def [](arg)
       arg = arg.sub(/\A-+/, '')
@@ -141,14 +140,15 @@ Usage: #{$0} {#{COMMANDS.keys.sort.join('|')}} [arguments] [options]
 
       Dir.chdir(skel) {
         Dir['**/*'].each { |sample|
-          target = File.join(path, sample.gsub(/__progname__/, progname))
+          dir, name = File.split(sample.gsub('__progname__', progname))
+          name.sub!(/\A_/, '.')
 
-          unless target.sub!(GIT_RE, '\1.\2') && !git
-            created << target
+          next if name.start_with?('.git') unless git
 
-            File.directory?(sample) ? FileUtils.mkdir_p(target) :
-              replace[target] = render(sample, target).scan(/### .+ ###/)
-          end
+          created << target = File.join(path, dir, name)
+
+          File.directory?(sample) ? FileUtils.mkdir_p(target) :
+            replace[target] = render(sample, target).scan(/### .+ ###/)
         }
       }
 
