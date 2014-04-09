@@ -12,7 +12,9 @@ This documentation refers to <%= progname %> version 0.0.1
 
 == LINKS
 
-LABEL:: <### PLACE YOUR LINK(S) HERE ###>
+Documentation:: https://<%= githubuser %>.github.io/<%= progname %>/
+Source code::   https://github.com/<%= githubuser %>/<%= progname %>
+RubyGem::       https://rubygems.org/gems/<%= progname %>
 
 
 == AUTHORS
