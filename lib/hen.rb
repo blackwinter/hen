@@ -7,7 +7,7 @@
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
-# Copyright (C) 2013 Jens Wille                                               #
+# Copyright (C) 2013-2014 Jens Wille                                          #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@gmail.com>                                       #
@@ -29,7 +29,7 @@
 #++
 
 require 'rake'
-require 'yaml'
+require 'safe_yaml/load'
 require 'nuggets/env/user_home'
 require 'nuggets/hash/deep_merge'
 require 'nuggets/proc/bind'
@@ -182,7 +182,7 @@ class Hen
       hash = Hash.new { |h, k| h[k] = {} }
 
       henrc.each { |path|
-        yaml = YAML.load_file(path)
+        yaml = SafeYAML.load_file(path, :deserialize_symbols => true)
         hash.deep_update(yaml) if yaml.is_a?(Hash)
       }
 
