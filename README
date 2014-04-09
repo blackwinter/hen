@@ -57,9 +57,9 @@ You can even extend Hen with your own tasks. More on that later. (TODO)
 
 == LINKS
 
-Documentation:: http://blackwinter.github.com/hen
-Source code::   http://github.com/blackwinter/hen
-RubyGem::       http://rubygems.org/gems/hen
+Documentation:: https://blackwinter.github.io/hen/
+Source code::   https://github.com/blackwinter/hen
+RubyGem::       https://rubygems.org/gems/hen
 
 
 == AUTHORS
@@ -72,7 +72,7 @@ RubyGem::       http://rubygems.org/gems/hen
 Copyright (C) 2007-2012 University of Cologne,
 Albertus-Magnus-Platz, 50923 Cologne, Germany
 
-Copyright (C) 2013 Jens Wille
+Copyright (C) 2013-2014 Jens Wille
 
 hen is free software: you can redistribute it and/or modify it under the
 terms of the GNU Affero General Public License as published by the Free
