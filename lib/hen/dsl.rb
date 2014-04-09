@@ -53,12 +53,6 @@ class Hen
       }
     end
 
-    # Determine the project name from +gem_config+'s <tt>:name</tt>,
-    # or +rf_config+'s <tt>:package</tt> or <tt>:project</tt>.
-    def project_name(rf_config = {}, gem_config = {})
-      gem_config[:name] || rf_config[:package] || rf_config[:project]
-    end
-
     # Define task +t+, but overwrite any existing task of that name!
     # (Rake usually just adds them up.)
     def task!(t, *args, &block)
@@ -141,25 +135,6 @@ class Hen
       }.compact.flatten
     end
 
-    # Encapsulates tasks targeting at RubyForge, skipping those if no
-    # RubyForge project is defined. Yields the RubyForge configuration
-    # hash and, optionally, a proc to obtain RubyForge objects from (via
-    # +call+; reaching out to #init_rubyforge).
-    def rubyforge(&block)
-      rf_config  = config[:rubyforge]
-      rf_project = rf_config[:project]
-
-      if rf_project && !rf_project.empty? && have_rubyforge?
-        rf_config[:package] ||= rf_project
-
-        call_block(block, rf_config) { |*args|
-          init_rubyforge(args.empty? || args.first)
-        }
-      else
-        skipping 'RubyForge'
-      end
-    end
-
     # Encapsulates tasks targeting at RubyGems.org, skipping those if
     # RubyGem's 'push' command is not available. Yields an optional
     # proc to obtain RubyGems (pseudo-)objects from (via +call+;
@@ -204,15 +179,6 @@ class Hen
       false
     end
 
-    # Loads the RubyForge library, giving a
-    # nicer error message if it's not found.
-    def have_rubyforge?
-      require 'rubyforge'
-      true
-    rescue LoadError
-      missing_lib 'rubyforge'
-    end
-
     # Loads the RubyGems +push+ command, giving
     # a nicer error message if it's not found.
     def have_rubygems?
@@ -238,17 +204,6 @@ class Hen
     # Checks whether the current project is managed by SVN.
     def have_svn?
       File.directory?('.svn')
-    end
-
-    # Prepare the use of RubyForge, optionally logging
-    # in right away. Returns the RubyForge object.
-    def init_rubyforge(login = true)
-      return unless have_rubyforge?
-
-      rf = RubyForge.new.configure
-      rf.login if login
-
-      rf
     end
 
     # Prepare the use of RubyGems.org. Returns the RubyGems

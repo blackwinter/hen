@@ -30,8 +30,6 @@ Hen :gem => :rdoc do
     Rake::GemPackageTask
   end
 
-  rf_config = config[:rubyforge]
-
   if Object.const_defined?(:RDOC_OPTIONS)
     rdoc_files = RDOC_OPTIONS[:rdoc_files]
     gem_options[:has_rdoc] = !rdoc_files.empty? if Gem::VERSION < '1.7'
@@ -43,8 +41,7 @@ Hen :gem => :rdoc do
 
   meta_gems, meta_gem_specs = Array(gem_options.delete(:meta)), []
 
-  gem_name = gem_options[:name] ||= project_name(rf_config)
-  abort 'Gem name missing' unless gem_name
+  abort 'Gem name missing' unless gem_name = gem_options[:name]
 
   gem_spec = Gem::Specification.new { |spec|
 
@@ -90,14 +87,7 @@ Hen :gem => :rdoc do
       else post_install_message
     end
 
-    ### rubyforge project, homepage
-
-    gem_options[:rubyforge_project] ||= rf_config[:project]
-
-    if rf_project = gem_options[:rubyforge_project] and !rf_project.empty?
-      rf_rdoc_dir = RDOC_OPTIONS[:rf_rdoc_dir] if Object.const_defined?(:RDOC_OPTIONS)
-      gem_options[:homepage] ||= "#{rf_project}.rubyforge.org/#{rf_rdoc_dir}"
-    end
+    ### homepage
 
     if homepage = gem_options[:homepage]
       homepage = "github.com/#{homepage}/#{gem_name}" if homepage.is_a?(Symbol)
@@ -193,8 +183,8 @@ Hen :gem => :rdoc do
       ### inherit from original spec
 
       %w[
-        name version authors email summary description
-        rubyforge_project homepage
+        name version summary description
+        authors email license homepage
       ].each { |key|
         meta_gem_options[key = key.to_sym] ||= gem_options[key]
       }
@@ -376,32 +366,6 @@ Hen :gem => :rdoc do
 
     desc release_desc; release_desc = nil
     task :release => 'gem:push'
-
-  end
-
-  rubyforge do |_, rf_pool|
-
-    desc 'Package and upload the release to RubyForge'
-    task 'release:rubyforge' => [:package, 'doc:publish:rubyforge'] do
-      files = Dir[File.join(pkg_task.package_dir, "#{pkg_task.package_name}.*")]
-      abort 'Nothing to release!' if files.empty?
-
-      # shorten to (at most) three digits
-      version = gem_spec.version.to_s.split(/([.])/)[0..4].join
-
-      rf = rf_pool.call
-
-      # TODO: Add release notes and changes.
-      #uc = rf.userconfig
-      #uc['release_notes']   = description if description
-      #uc['release_changes'] = changes if changes
-      #uc['preformatted']    = true
-
-      rf.add_release(rf_config[:project], gem_name, version, *files)
-    end
-
-    desc release_desc
-    task :release => 'release:rubyforge'
 
   end
 

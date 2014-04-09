@@ -23,7 +23,7 @@ Hen :rdoc do
   end
 
   info = {
-    'name'    => project_name(*config.values_at(:rubyforge, :gem)),
+    'name'    => config[:gem][:name],
     'version' => config[:gem][:version],
     'date'    => Date.today.to_s
   }
@@ -149,38 +149,6 @@ Hen :rdoc do
       end
 
     end
-
-  end
-
-  rubyforge do |rf_config|
-
-    rf_project = rf_config[:project]
-
-    rf_rdoc_dir, rf_package = rf_config.values_at(:rdoc_dir, :package)
-    rf_rdoc_dir ||= :package if rf_package && rf_package != rf_project
-    rf_rdoc_dir = rf_package if rf_package && rf_rdoc_dir == :package
-
-    RDOC_OPTIONS[:rf_rdoc_dir] = rf_rdoc_dir
-
-    desc 'Publish RDoc to RubyForge'
-    task 'doc:publish:rubyforge' => :doc do
-      rf_user = rf_config[:username]
-      abort 'RubyForge user name missing' unless rf_user
-
-      rf_host = "#{rf_user}@rubyforge.org"
-
-      local_dir  = rdoc_task.rdoc_dir
-      remote_dir = "/var/www/gforge-projects/#{rf_project}"
-      remote_dir = File.join(remote_dir, rf_rdoc_dir) if rf_rdoc_dir
-
-      execute(
-        "rsync -av --delete #{local_dir}/ #{rf_host}:#{remote_dir}/",
-        "scp -r #{local_dir}/ #{rf_host}:#{remote_dir}/"
-      )
-    end
-
-    desc publish_desc
-    task 'doc:publish' => 'doc:publish:rubyforge'
 
   end
 
