@@ -122,11 +122,34 @@ Hen :gem => :rdoc do
 
     ### dependencies
 
-    (gem_options.delete(:dependencies) || []).each { |dependency|
+    dependencies             = Array(gem_options.delete(:dependencies))
+    development_dependencies = Array(gem_options.delete(:development_dependencies))
+
+    default_dependencies = %w[hen rake]
+
+    unless (test_files = gem_options[:files].grep(/\A(?:test|spec)s?\//)).empty?
+      test_dependency = case test_files.first.split(File::SEPARATOR).first
+        when 'test' then 'test-unit'
+        when 'spec' then 'rspec'
+        else if helper_file = test_files.grep(/_helper\.rb\z/).first
+          File.read(helper_file)[/^\s*require\s+(['"])(.*?)\1/, 2]
+        end
+      end
+
+      default_dependencies << test_dependency.tr('/', '-') if test_dependency
+    end
+
+    default_dependencies -= dependencies + development_dependencies + [gem_name]
+
+    dependencies.each { |dependency|
       spec.add_dependency(*dependency)
     }
 
-    (gem_options.delete(:development_dependencies) || []).each { |dependency|
+    development_dependencies.each { |dependency|
+      spec.add_development_dependency(*dependency)
+    }
+
+    default_dependencies.each { |dependency|
       spec.add_development_dependency(*dependency)
     }
 
