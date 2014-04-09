@@ -55,7 +55,7 @@ class Hen
 
       if File.readable?(target)
         abort unless agree("Target file already exists: #{target}. Overwrite? ")
-        FileUtils.cp(target, "#{target}.bak-#{Time.now.to_i}")
+        File.rename(target, "#{target}.bak-#{Time.now.to_i}")
       end
 
       content = ERB.new(File.read(sample)).result(binding)
@@ -79,6 +79,11 @@ class Hen
       ask!("Project's name", default)
     end
 
+    # A short one-line summary of the project's description. (Required)
+    def progdesc(default = nil)
+      ask!("Program's description summary", default)
+    end
+
     # The project's namespace. (Required)
     #
     # Namespaces SHOULD match the project name in SnakeCase.
@@ -96,35 +101,38 @@ class Hen
       ask('E-mail address', default)
     end
 
-    # A short one-line summary of the project's description. (Required)
-    def progdesc(default = nil)
-      ask!("Program's description summary", default)
-    end
-
     private
 
     # Determine a suitable default namespace from the project name.
     def default_classname
-      pname = progname
-      pname.gsub(/(?:\A|_)(.)/) { $1.upcase } if pname && !pname.empty?
+      name = progname
+      name.gsub(/(?:\A|_)(.)/) { $1.upcase } if name && !name.empty?
     end
 
-    # Determine a default name from the global config or, if available,
-    # from the {GECOS field}[http://en.wikipedia.org/wiki/Gecos_field]
+    # Determine a default name from the global config or from the Git config or,
+    # if available, from the {GECOS field}[http://en.wikipedia.org/wiki/Gecos_field]
     # in the <tt>/etc/passwd</tt> file.
     def default_fullname
-      author = Hen.config('gem/author')
-      return author if author && !author.empty?
-
-      pwent = Etc.getpwuid(Process.euid)
-      gecos = pwent.gecos if pwent
-      gecos[/[^,]*/] if gecos && !gecos.empty?
+      henconfig(:gem, :author) || gitconfig(:user, :name) ||
+        (pwent = Etc.getpwuid(Process.euid) and pwent.gecos.to_s[/[^,]+/])
     end
 
-    # Determine a default e-mail address from the global config.
+    # Determine a default e-mail address from the global config or from the Git
+    # config.
     def default_emailaddress
-      email = Hen.config('gem/email')
-      return email if email && !email.empty?
+      henconfig(:gem, :email) || gitconfig(:user, :email)
+    end
+
+    # Find +key+ in the global config and return its non-empty value.
+    def henconfig(*key)
+      value = Hen.config(key.join('/'))
+      value if value && !value.empty?
+    end
+
+    # Find +key+ in the Git config and return its non-empty value.
+    def gitconfig(*key)
+      value = IO.popen(['git', 'config', key.join('.')]) { |io| io.read.chomp }
+      value if value && !value.empty?
     end
 
     alias_method :_hen_original_ask, :ask
