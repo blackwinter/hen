@@ -7,9 +7,9 @@ This documentation refers to hen version 0.5.1
 
 == DESCRIPTION
 
-Hen is a Rake helper framework, similar to Hoe[http://seattlerb.rubyforge.org/hoe/]
-or Echoe[http://fauna.github.com/fauna/echoe/]. It provides you with a set of
-common Rake tasks by placing a little snippet like the following in your Rakefile:
+Hen is a Rake helper framework, similar to Hoe[http://docs.seattlerb.org/hoe/]
+or Echoe[https://github.com/evan/echoe]. It provides you with a set of common
+Rake tasks by placing a little snippet like the following in your Rakefile:
 
   require 'hen'
   require 'your/lib/version'
