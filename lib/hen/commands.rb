@@ -134,9 +134,9 @@ Usage: #{$0} {#{COMMANDS.keys.sort.join('|')}} [arguments] [options]
     end
 
     def create_skel(path, skel, created, replace)
-      git = create_git(path, created)
-
       progname = progname(File.basename(path))
+
+      git = create_git(path, created)
 
       Dir.chdir(skel) {
         Dir['**/*'].each { |sample|
@@ -171,7 +171,11 @@ Usage: #{$0} {#{COMMANDS.keys.sort.join('|')}} [arguments] [options]
           if system('git', 'init')
             created << File.join(path, '.git')
 
-            if remote
+            if remote.nil? && githubuser
+              remote = "git@github.com:#{githubuser}/#{progname}"
+            end
+
+            unless remote.nil? || remote.empty?
               url, label = remote.split('=', 2).reverse
               system('git', 'remote', 'add', label ||= 'origin', url)
 

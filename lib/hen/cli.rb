@@ -101,6 +101,11 @@ class Hen
       ask('E-mail address', default)
     end
 
+    # The author's GitHub user name. (Optional)
+    def githubuser(default = default_githubuser)
+      ask('GitHub user name', default)
+    end
+
     private
 
     # Determine a suitable default namespace from the project name.
@@ -121,6 +126,12 @@ class Hen
     # config.
     def default_emailaddress
       henconfig(:gem, :email) || gitconfig(:user, :email)
+    end
+
+    # Determine a default GitHub user name from the global config or from the
+    # Git config.
+    def default_githubuser
+      henconfig(:github, :user) || gitconfig(:github, :user)
     end
 
     # Find +key+ in the global config and return its non-empty value.
