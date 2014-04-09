@@ -323,6 +323,13 @@ Hen :gem => :rdoc do
     gem_base = pkg_task.package_dir
     gem_path = File.join(gem_base, gem_spec.file_name)
 
+    desc 'Install the gem dependencies'
+    task 'gem:dependencies:install' do
+      gem_spec.dependencies.each { |dependency|
+        rg_pool.call.install(dependency.name, '-v', dependency.requirement.to_s)
+      }
+    end
+
     desc 'Create the gem and install it'
     task 'gem:install' => :gem do
       rg_pool.call.install(gem_path)
