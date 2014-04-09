@@ -4,14 +4,17 @@ begin
   require 'hen'
 
   Hen.lay! {{
-    :gem => {
-      :name         => %q{<%= progname %>},
-      :version      => <%= classname %>::VERSION,
-      :summary      => %q{<%= progdesc %>},
-      :author       => %q{<%= fullname %>},
-      :email        => %q{<%= emailaddress %>},
-      :license      => %q{AGPL-3.0},
-      :dependencies => %w[]
+    gem: {
+      name:         %q{<%= progname %>},
+      version:      <%= classname %>::VERSION,
+      summary:      %q{<%= progdesc %>},
+      author:       %q{<%= fullname %>},
+      email:        %q{<%= emailaddress %>},
+      license:      %q{AGPL-3.0},
+      homepage:     :<%= githubuser %>,
+      dependencies: %w[],
+
+      required_ruby_version: '>= 1.9.3'
     }
   }}
 rescue LoadError => err
