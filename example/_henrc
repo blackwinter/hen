@@ -4,4 +4,7 @@
   :author: <%= fullname %>
   :email:  <%= emailaddress %>
 
+:github:
+  :user: <%= githubuser %>
+
 # vim: syntax=yaml
