@@ -2,6 +2,16 @@
 
 = Revision history for hen
 
+== 0.6.0 [2014-04-14]
+
+* Essential development dependencies are added automatically.
+* New task 'gem:dependencies:install'.
+* Dropped support for RubyForge (EOL on May 15th).
+* New projects to require at least Ruby 1.9.3.
+* Added .travis.yml to project skeleton.
+* Use GitHub as default remote when creating a Git-backed project.
+* Use SafeYAML when loading configuration files.
+
 == 0.5.1 [2014-03-31]
 
 * Improved extension name handling.
