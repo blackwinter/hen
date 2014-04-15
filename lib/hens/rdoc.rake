@@ -18,8 +18,12 @@ Hen :rdoc do
     rdoc_options.delete(:inline_source)  # deprecated
     RDoc::Task
   rescue LoadError
-    require 'rake/rdoctask'
-    Rake::RDocTask
+    begin
+      require 'rake/rdoctask'
+      Rake::RDocTask
+    rescue LoadError => err
+      load_error = err
+    end
   end
 
   info = {
@@ -63,6 +67,8 @@ Hen :rdoc do
   }
 
   unless rdoc_files.empty?
+    raise load_error if load_error
+
     rdoc_task = rdoc_klass.new(:doc) { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir
       rdoc.rdoc_files = rdoc_files
@@ -75,6 +81,8 @@ Hen :rdoc do
   end
 
   unless rdoc_files_local.empty?
+    raise load_error if load_error
+
     rdoc_klass.new('doc:local') { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir + '.local'
       rdoc.rdoc_files = rdoc_files_local

@@ -12,8 +12,12 @@ Hen :spec do
     require 'rspec/core/rake_task'
     RSpec::Core::RakeTask
   rescue LoadError
-    require 'spec/rake/spectask'
-    Spec::Rake::SpecTask
+    begin
+      require 'spec/rake/spectask'
+      Spec::Rake::SpecTask
+    rescue LoadError => err
+      load_error = err
+    end
   end
 
   spec_files = spec_options.delete(:files) ||
@@ -22,6 +26,8 @@ Hen :spec do
   mangle_files!(spec_files, :managed => false)
 
   unless spec_files.empty?
+    raise load_error if load_error
+
     spec_helper = spec_options.delete(:helper)
 
     if spec_helper && File.readable?(spec_helper)
