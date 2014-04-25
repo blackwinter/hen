@@ -53,16 +53,21 @@ class Hen
       }
     end
 
+    # Get a handle on the currently defined tasks.
+    def tasks
+      Rake.application.instance_variable_get(:@tasks)
+    end
+
     # Define task +t+, but overwrite any existing task of that name!
     # (Rake usually just adds them up.)
     def task!(t, *args, &block)
-      Rake.application.instance_variable_get(:@tasks).delete(t.to_s)
+      tasks.delete(t.to_s)
       task(t, *args, &block)
     end
 
     # Return true if task +t+ is defined, false otherwise.
     def have_task?(t)
-      Rake.application.instance_variable_get(:@tasks).key?(t.to_s)
+      tasks.key?(t.to_s)
     end
 
     # Find a command that is executable and run it. Intended for
