@@ -326,7 +326,7 @@ Hen :gem => :rdoc do
       end
 
       desc 'Build native gems'
-      task 'gem:native' => %w[cross compile native gem]
+      task 'gem:native' => %w[cross compile rake:native gem]
     end
 
     extension_task = Rake::ExtensionTask.new(nil, gem_spec) { |ext|

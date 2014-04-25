@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.6.2 [unreleased]
+
+* Avoid circular dependency for 'gem:native' task.
+
 == 0.6.1 [2014-04-24]
 
 * Defer load errors.
