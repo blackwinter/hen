@@ -1,4 +1,4 @@
-= <%= progname %> - <%= progdesc %>
+= <%= progname %> - <%= progsumm %>
 
 == VERSION
 
@@ -6,6 +6,8 @@ This documentation refers to <%= progname %> version 0.0.0
 
 
 == DESCRIPTION
+
+<%= progdesc %>
 
 ### PLACE YOUR DESCRIPTION HERE ###
 

@@ -79,9 +79,14 @@ class Hen
       ask!("Project's name", default)
     end
 
-    # A short one-line summary of the project's description. (Required)
-    def progdesc(default = nil)
+    # A short summary of the project's description. (Required)
+    def progsumm(default = nil)
       ask!("Program's description summary", default)
+    end
+
+    # A long description of the project. (Optional)
+    def progdesc(default = nil)
+      ask("Program's full description", default)
     end
 
     # The project's namespace. (Required)
