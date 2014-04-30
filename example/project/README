@@ -24,7 +24,7 @@ RubyGem::       https://rubygems.org/gems/<%= progname %>
 
 == LICENSE AND COPYRIGHT
 
-### PLACE YOUR COPYRIGHT NOTICE HERE ###
+Copyright (C) <%= Date.today.year %> <%= fullname %>
 
 <%= progname %> is free software: you can redistribute it and/or modify it
 under the terms of the GNU Affero General Public License as published by
