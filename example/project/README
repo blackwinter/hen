@@ -2,12 +2,12 @@
 
 == VERSION
 
-This documentation refers to <%= progname %> version 0.0.0
+This documentation refers to <%= progname %> version 0.0.0.
 
 
 == DESCRIPTION
 
-<%= progdesc %>
+<%= progdesc %>.
 
 ### PLACE YOUR DESCRIPTION HERE ###
 
