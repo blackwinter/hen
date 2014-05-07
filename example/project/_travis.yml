@@ -23,7 +23,7 @@ script:
   rake spec
 
 install:
-  gem install --development <%= progname %>
+  gem install --prerelease --development <%= progname %>
 
 ### PLACE YOUR EXTERNAL DEPENDENCIES HERE ###
 #before_install:
