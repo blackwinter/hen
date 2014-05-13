@@ -126,6 +126,7 @@ Hen :gem => :rdoc do
     development_dependencies = Array(gem_options.delete(:development_dependencies))
 
     default_dependencies = %w[hen rake]
+    default_dependencies << 'rake-compiler' unless gem_options[:extensions].empty?
 
     unless (test_files = gem_options[:files].grep(/\A(?:test|spec)s?\//)).empty?
       test_dependency = case test_files.first.split(File::SEPARATOR).first
