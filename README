@@ -2,7 +2,7 @@
 
 == VERSION
 
-This documentation refers to hen version 0.6.1
+This documentation refers to hen version 0.6.2
 
 
 == DESCRIPTION
@@ -15,12 +15,12 @@ Rake tasks by placing a little snippet like the following in your Rakefile:
   require 'your/lib/version'
 
   Hen.lay! {{
-    :gem => {
-      :name    => 'gem_name',
-      :version => Your::Lib::VERSION,
-      :summary => 'Project summary',
-      :author  => 'Your Name',
-      :email   => 'you@e.mail'
+    gem: {
+      name:    'gem_name',
+      version: Your::Lib::VERSION,
+      summary: 'Project summary',
+      author:  'Your Name',
+      email:   'you@e.mail'
     }
   }}
 

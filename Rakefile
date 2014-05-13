@@ -6,8 +6,8 @@ Hen.lay! {{
   :gem => {
     :name         => %q{hen},
     :version      => Hen::VERSION,
-    :summary      => "Hoe or Echoe? No, thanks! Just a Rake " <<
-                     "helper that fits my own personal style.",
+    :summary      => %q{Just another project helper that integrates with Rake.},
+    :description  => %q{A Rake helper framework, similar to Hoe or Echoe.},
     :author       => %q{Jens Wille},
     :email        => %q{jens.wille@gmail.com},
     :license      => %q{AGPL-3.0},
