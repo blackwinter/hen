@@ -13,6 +13,6 @@ Hen.lay! {{
     :license      => %q{AGPL-3.0},
     :homepage     => :blackwinter,
     :extra_files  => FileList['lib/hens/*.rake'].to_a,
-    :dependencies => %w[highline safe_yaml] << ['ruby-nuggets', '>= 0.8.4']
+    :dependencies => %w[highline nuggets safe_yaml]
   }
 }}
