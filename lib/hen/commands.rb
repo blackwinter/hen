@@ -134,18 +134,15 @@ Usage: #{$0} {#{COMMANDS.keys.sort.join('|')}} [arguments] [options]
     end
 
     def create_skel(path, skel, created, replace)
-      progname = progname(File.basename(path))
+      progname(File.basename(path))  # pre-fill
 
       git = create_git(path, created)
 
       Dir.chdir(skel) {
         Dir['**/*'].each { |sample|
-          dir, name = File.split(sample.gsub('__progname__', progname))
-          name.sub!(/\A_/, '.')
+          next unless target = mangle_target(path, sample, git)
 
-          next if name.start_with?('.git') unless git
-
-          created << target = File.join(path, dir, name)
+          created << target
 
           File.directory?(sample) ? FileUtils.mkdir_p(target) :
             replace[target] = render(sample, target).scan(/### .+ ###/)
@@ -187,6 +184,15 @@ Usage: #{$0} {#{COMMANDS.keys.sort.join('|')}} [arguments] [options]
 
         true
       }
+    end
+
+    def mangle_target(path, sample, git)
+      target = sample.gsub(/__(.+?)__/) { send($1) }
+
+      dir, name = File.split(target)
+      name.sub!(/\A_/, '.')
+
+      File.join(path, dir, name) if git || !name.start_with?('.git')
     end
 
   end
