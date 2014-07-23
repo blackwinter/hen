@@ -68,21 +68,25 @@ Hen :gem => :rdoc do
 
     gem_options[:post_install_message] = case post_install_message
       when nil, true
-        msg, ver = [], gem_options[:version].sub(/\.?[^\d.].*/, '')
+        if File.readable?(log = ENV['HEN_CHANGELOG'] || 'ChangeLog')
+          msg, ver = [], gem_options[:version].sub(/\.?[^\d.].*/, '')
 
-        heading, found = /\A== (#{Regexp.escape(ver)}\D.*)/o, false
+          heading, found = /\A== (#{Regexp.escape(ver)}\D.*)/o, false
 
-        File.foreach(ENV['HEN_CHANGELOG'] || 'ChangeLog') { |line|
-          line.chomp!
+          File.foreach(log) { |line|
+            line.chomp!
 
-          case line
-            when heading then msg << "#{gem_name}-#{found = $1}:"
-            when /\A== / then break if found
-            else msg << line if found
-          end
-        }
+            case line
+              when heading then msg << "#{gem_name}-#{found = $1}:"
+              when /\A== / then break if found
+              else msg << line if found
+            end
+          }
 
-        "\n#{msg.join("\n").strip}\n\n" unless msg.empty?
+          "\n#{msg.join("\n").strip}\n\n" unless msg.empty?
+        elsif post_install_message
+          warn "File not found: #{log}. Skipping post_install_message." if Hen.verbose
+        end
       when false
       else post_install_message
     end
