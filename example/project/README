@@ -14,7 +14,7 @@ This documentation refers to <%= progname %> version 0.0.0.
 
 == LINKS
 
-Documentation:: https://<%= githubuser %>.github.io/<%= progname %>/
+Documentation:: https://<%= githubuser %>.github.com/<%= progname %>
 Source code::   https://github.com/<%= githubuser %>/<%= progname %>
 RubyGem::       https://rubygems.org/gems/<%= progname %>
 
