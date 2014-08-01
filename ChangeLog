@@ -2,6 +2,12 @@
 
 = Revision history for hen
 
+== 0.6.3 [2014-08-01]
+
+* Added general support for other variables in skeleton paths.
+* Ignore missing ChangeLog for post_install_message.
+* Housekeeping.
+
 == 0.6.2 [2014-05-13]
 
 * Avoid circular dependency for 'gem:native' task.
