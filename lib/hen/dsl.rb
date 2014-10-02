@@ -273,8 +273,17 @@ class Hen
           clone '-n', '-o', remote, url, dir
         end
 
+        def local_clone(dir, src = '.')  # :nodoc:
+          clone '-n', src, dir
+        end
+
         def checkout_remote_branch(remote, branch = 'master')  # :nodoc:
           checkout '-b', branch, "#{remote}/#{branch}"
+        end
+
+        def checkout_fetched_branch(url, branch = 'master')  # :nodoc:
+          fetch '--depth', '1', url, branch
+          checkout '-b', branch, 'FETCH_HEAD'
         end
 
         def add_and_commit(msg)  # :nodoc:

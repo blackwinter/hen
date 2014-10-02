@@ -118,10 +118,10 @@ Hen :rdoc do
       task 'doc:publish:github' => :doc do
         rm_rf clone_dir
 
-        git.easy_clone pages_url, clone_dir, git_remote
+        git.local_clone clone_dir
 
         Dir.chdir(clone_dir) {
-          git.checkout_remote_branch git_remote, git_branch
+          git.checkout_fetched_branch pages_url, git_branch
 
           rm_r Dir['*']
           cp_r Dir["../#{rdoc_task.rdoc_dir}/*"], '.'
