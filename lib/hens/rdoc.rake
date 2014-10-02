@@ -123,6 +123,7 @@ Hen :rdoc do
         Dir.chdir(clone_dir) {
           git.checkout_remote_branch git_remote, git_branch
 
+          rm_r Dir['*']
           cp_r Dir["../#{rdoc_task.rdoc_dir}/*"], '.'
 
           git.add_and_commit 'Updated documentation.'
