@@ -2,18 +2,27 @@
 
 = Revision history for hen
 
+== 0.6.4 [unreleased]
+
+* Require at least Ruby 1.9.3.
+* Task <tt>doc:publish:github</tt> cleans up before adding new files.
+* Task <tt>doc:publish:github</tt> performs local clone and shallow checkout
+  instead of fetching the full history.
+* When setting +post_install_message+, gem files are searched for log file;
+  specify +HEN_CHANGELOG+ to override.
+
 == 0.6.3 [2014-08-01]
 
 * Added general support for other variables in skeleton paths.
-* Ignore missing ChangeLog for post_install_message.
+* Ignore missing ChangeLog for +post_install_message+.
 * Housekeeping.
 
 == 0.6.2 [2014-05-13]
 
-* Avoid circular dependency for 'gem:native' task.
+* Avoid circular dependency for <tt>gem:native</tt> task.
 * Added default dependency for rake-compiler.
 * Updated sample project skeleton.
-* New DSL method 'tasks'.
+* New DSL method +tasks+.
 
 == 0.6.1 [2014-04-24]
 
@@ -22,17 +31,17 @@
 == 0.6.0 [2014-04-14]
 
 * Essential development dependencies are added automatically.
-* New task 'gem:dependencies:install'.
+* New task <tt>gem:dependencies:install</tt>.
 * Dropped support for RubyForge (EOL on May 15th).
 * New projects to require at least Ruby 1.9.3.
-* Added .travis.yml to project skeleton.
+* Added +.travis.yml+ to project skeleton.
 * Use GitHub as default remote when creating a Git-backed project.
 * Use SafeYAML when loading configuration files.
 
 == 0.5.1 [2014-03-31]
 
 * Improved extension name handling.
-* Only define 'gem:native' task when cross-compiling.
+* Only define <tt>gem:native</tt> task when cross-compiling.
 * Avoid circular require.
 
 == 0.5.0 [2013-12-19]
@@ -59,14 +68,14 @@
 
 == 0.4.6 [2012-04-05]
 
-* Fixed `hen version`.
+* Fixed <tt>hen version</tt>.
 * Added debug info for extension tasks.
 
 == 0.4.5 [2012-01-20]
 
 * Publish native Gems.
 * Build and publish Meta-Gems.
-* Renamed Meta-Gem option 'extras' to 'dependencies'.
+* Renamed Meta-Gem option +extras+ to +dependencies+.
 * Fixed Ruby warnings.
 
 == 0.4.4 [2012-01-18]
@@ -81,17 +90,17 @@
 
 == 0.4.2 [2012-01-09]
 
-* New option 'meta' to build meta-gems.
+* New option +meta+ to build meta-gems.
 
 == 0.4.1 [2012-01-02]
 
-* Make 'release' depend on 'doc:publish'.
+* Make +release+ depend on <tt>doc:publish</tt>.
 
 == 0.4.0 [2011-09-21]
 
 * Use env ruby.
-* New task 'gem:dependencies'.
-* Don't undefine `object_id' for (pseudo-)objects.
+* New task <tt>gem:dependencies</tt>.
+* Don't undefine +object_id+ for (pseudo-)objects.
 
 == 0.3.9 [2011-05-24]
 
@@ -130,11 +139,11 @@
 == 0.3.1 [2011-02-11]
 
 * Fixed the RubyForge release task name in the prerequisite list for the
-  <tt>:release</tt> task.
+  <tt>release</tt> task.
 
 == 0.3.0 [2011-02-11]
 
-* Implementations for <tt>doc:publish</tt> and <tt>:release</tt> are
+* Implementations for <tt>doc:publish</tt> and <tt>release</tt> are
   now cumulative.
 * The configuration (through the user's <tt>.henrc</tt> files) is now
   cumulative.
@@ -143,13 +152,13 @@
 * Ignoring untracked files when building the official documentation and
   when building the Gem.
   * Added new task <tt>doc:local</tt> for the previous +doc+ behaviour.
-* Renamed <tt>:gemspec</tt> -> <tt>gem:spec</tt>, <tt>gemspec:update</tt>
+* Renamed <tt>gemspec</tt> -> <tt>gem:spec</tt>, <tt>gemspec:update</tt>
   -> <tt>gem:spec:update</tt>.
 * New task <tt>gem:install</tt> to install the current Gem locally.
 * Added support for RDoc 2/3.
-* Recognize <tt>:legacy</tt> option in <tt>:spec</tt> options to force
+* Recognize <tt>legacy</tt> option in <tt>spec</tt> options to force
   RSpec 1 even when RSpec 2 is available. Same for RDoc 2 vs. 3.
-* Added support for easy GitHub homepage by setting <tt>:homepage</tt>
+* Added support for easy GitHub homepage by setting <tt>homepage</tt>
   option to a symbol that identifies the GitHub user name.
 * Better defaults for <tt>hen create/config</tt>.
 * Hen::CLI#render makes a backup before overwriting an existing file.
@@ -157,7 +166,7 @@
 * The +gemcutter+ helper has been deprecated; use +rubygems+ instead.
 * Some defaults are set in Hen files rather than relying on <tt>.henrc</tt>
   file.
-* No longer messing with RubyGems/$LOAD_PATH.
+* No longer messing with RubyGems/<tt>$LOAD_PATH</tt>.
 
 == 0.2.7 [2011-01-24]
 
@@ -170,7 +179,7 @@
 
 == 0.2.5 [2011-01-07]
 
-* Handle rcov.opts file for RSpec 2
+* Handle +rcov.opts+ file for RSpec 2
 * Optionally set custom zip command for package task
 
 == 0.2.4 [2011-01-06]
@@ -211,7 +220,7 @@
 
 == 0.1.6 [2009-01-26]
 
-* Ignore nonexistent spec.opts file
+* Ignore nonexistent +spec.opts+ file
 
 == 0.1.5 [2009-01-22]
 
@@ -232,7 +241,7 @@
 == 0.1.1 [2008-07-29]
 
 * Added task to run specs with RCov
-* Added option to specify spec_helper which will be loaded first
+* Added option to specify +spec_helper+ which will be loaded first
 
 == 0.1.0 [2008-05-21]
 
@@ -248,31 +257,31 @@
 
 == 0.0.7 [2008-02-01]
 
-* Search HENPATH for available hens, allowing to easily add custom hens
-* Added sample custom hen file ('example/hens/sample.rake')
-* Refined 'gem' and 'rdoc' hens
-* Added 'hen version' command
+* Search +HENPATH+ for available hens, allowing to easily add custom hens
+* Added sample custom hen file (+example/hens/sample.rake+)
+* Refined +gem+ and +rdoc+ hens
+* Added <tt>hen version</tt> command
 
 == 0.0.6 [2008-01-09]
 
-* Added basic sample project tree (skeleton for 'hen create')
-* Lazily find and load .henrc
+* Added basic sample project tree (skeleton for <tt>hen create</tt>)
+* Lazily find and load +.henrc+
 * Some polishing and fixes
 
 == 0.0.5 [2008-01-08]
 
-* Replaced 'hen' executable stub with something actually useful
+* Replaced +hen+ executable stub with something actually useful
 * Added Hen::CLI helper module
 
 == 0.0.4 [2008-01-07]
 
-* Added Test::Unit and RSpec hens (tasks 'test' and 'spec')
+* Added Test::Unit and RSpec hens (tasks +test+ and +spec+)
 * Removed HenError stuff
 
 == 0.0.3 [2008-01-04]
 
 * More cleanup and maturing
-* New tasks 'release' (formerly 'upload_gem'), 'publish_docs', and 'debug_gem'
+* New tasks +release+ (formerly +upload_gem+), +publish_docs+, and +debug_gem+
 * All in all: Pretty much inspired by Hoe ;-)
 
 == 0.0.2 [2007-12-21]
