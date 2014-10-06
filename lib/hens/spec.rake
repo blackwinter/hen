@@ -1,9 +1,9 @@
 Hen :spec do
 
   spec_options = {
-    :pattern => 'spec/**/*_spec.rb',
-    :helper  => 'spec/spec_helper.rb',
-    :options => 'spec/spec.opts'
+    pattern: 'spec/**/*_spec.rb',
+    helper:  'spec/spec_helper.rb',
+    options: 'spec/spec.opts'
   }.update(config[:spec])
 
   spec_klass = begin
@@ -23,7 +23,7 @@ Hen :spec do
   spec_files = spec_options.delete(:files) ||
       FileList[spec_options.delete(:pattern)].to_a
 
-  mangle_files!(spec_files, :managed => false)
+  mangle_files!(spec_files, managed: false)
 
   unless spec_files.empty?
     raise load_error if load_error

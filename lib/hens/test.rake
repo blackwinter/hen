@@ -3,13 +3,13 @@ Hen :test do
   require 'rake/testtask'
 
   test_options = {
-    :pattern => 'test/**/*_test.rb'
+    pattern: 'test/**/*_test.rb'
   }.update(config[:test])
 
   test_files = test_options.delete(:files) ||
       FileList[test_options.delete(:pattern)].to_a
 
-  mangle_files!(test_files, :managed => false)
+  mangle_files!(test_files, managed: false)
 
   unless test_files.empty?
     Rake::TestTask.new { |t|

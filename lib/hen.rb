@@ -34,8 +34,8 @@ require 'nuggets/env/user_home'
 require 'nuggets/hash/deep_merge'
 require 'nuggets/proc/bind'
 
-require 'hen/dsl'
-require 'hen/version'
+require_relative 'hen/dsl'
+require_relative 'hen/version'
 
 # The class handling the program logic. This is what you use in your Rakefile.
 # See the README for more information.
@@ -78,7 +78,7 @@ class Hen
     # call-seq:
     #   lay!
     #   lay!(:some_hen, :some_other_hen)
-    #   lay!(:exclude => [:some_hen, :some_other_hen])
+    #   lay!(exclude: [:some_hen, :some_other_hen])
     #
     # Loads the hens, causing them to lay their eggs^H^H^Htasks. Either all,
     # if no restrictions are specified, or the given hens, or all but those
@@ -182,7 +182,7 @@ class Hen
       hash = Hash.new { |h, k| h[k] = {} }
 
       henrc.each { |path|
-        yaml = SafeYAML.load_file(path, :deserialize_symbols => true)
+        yaml = SafeYAML.load_file(path, deserialize_symbols: true)
         hash.deep_update(yaml) if yaml.is_a?(Hash)
       }
 

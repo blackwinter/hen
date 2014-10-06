@@ -1,23 +1,23 @@
-Hen :gem => :rdoc do
+Hen gem: :rdoc do
   # Dependencies:
   # * rdoc -- Uses RDOC_OPTIONS and 'doc:publish' task
 
   gem_options = {
-    :files => FileList[
+    files: FileList[
       'lib/**/*.rb',
       'bin/*'
     ].to_a,
-    :default_extra_files => FileList[
+    default_extra_files: FileList[
       '[A-Z]*',
       'example/**/*',
       'ext/**/*',
       'spec/**/*', '.rspec',
       'test/**/*', '.autotest'
     ].to_a,
-    :extensions => FileList[
+    extensions: FileList[
       'ext/**/extconf.rb'
     ].to_a,
-    :require_path => 'lib'
+    require_path: 'lib'
   }.update(config[:gem])
 
   gem_klass = begin
@@ -405,7 +405,7 @@ Hen :gem => :rdoc do
     end
 
     desc release_desc; release_desc = nil
-    task :release => 'gem:push'
+    task release: 'gem:push'
 
   end
 
@@ -427,13 +427,13 @@ Hen :gem => :rdoc do
 
   end
 
-  %w[doc:publish release:tag].each { |t| task :release => t if have_task?(t) }
+  %w[doc:publish release:tag].each { |t| task release: t if have_task?(t) }
 
   def write_gemspec(gem_spec)
     file = "#{gem_spec.name}.gemspec"
     action = File.exists?(file) ? 'Updated' : 'Created'
 
-    File.open(file, 'w') { |f| f.puts gem_spec.to_ruby }
+    File.write(file, gem_spec.to_ruby)
 
     puts "#{action} #{file}"
   end

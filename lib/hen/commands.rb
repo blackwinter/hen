@@ -30,7 +30,7 @@ require 'fileutils'
 require 'nuggets/argv/option'
 require 'nuggets/enumerable/minmax'
 
-require 'hen/cli'
+require_relative 'cli'
 
 class Hen
 

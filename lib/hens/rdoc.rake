@@ -1,13 +1,13 @@
 Hen :rdoc do
 
   rdoc_options = {
-    :rdoc_dir       => 'doc',
-    :rdoc_files     => %w[README COPYING ChangeLog lib/**/*.rb ext/**/*.c],
-    :title          => '{name:%s }Application documentation{version: (v%s)}',
-    :charset        => 'UTF-8',
-    :inline_source  => true,
-    :line_numbers   => true,
-    :all            => true
+    rdoc_dir:       'doc',
+    rdoc_files:     %w[README COPYING ChangeLog lib/**/*.rb ext/**/*.c],
+    title:          '{name:%s }Application documentation{version: (v%s)}',
+    charset:        'UTF-8',
+    inline_source:  true,
+    line_numbers:   true,
+    all:            true
   }.update(config[:rdoc])
 
   rdoc_klass = begin
@@ -47,7 +47,7 @@ Hen :rdoc do
   rdoc_files_local = rdoc_files.dup
 
   if mangle_files!(rdoc_files)
-    mangle_files!(rdoc_files_local, :managed => false)
+    mangle_files!(rdoc_files_local, managed: false)
   else
     rdoc_files_local = []
   end
@@ -61,9 +61,9 @@ Hen :rdoc do
 
   # Make settings available to other hens
   RDOC_OPTIONS = {
-    :rdoc_dir   => rdoc_dir,
-    :rdoc_files => rdoc_files,
-    :options    => rdoc_opts
+    rdoc_dir:   rdoc_dir,
+    rdoc_files: rdoc_files,
+    options:    rdoc_opts
   }
 
   unless rdoc_files.empty?
