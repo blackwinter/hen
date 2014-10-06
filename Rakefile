@@ -1,6 +1,4 @@
-$:.unshift(File.expand_path('../lib', __FILE__))
-
-require 'hen'
+require_relative 'lib/hen'
 
 Hen.lay! {{
   :gem => {
