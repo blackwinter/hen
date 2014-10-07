@@ -2,7 +2,7 @@
 
 = Revision history for hen
 
-== 0.6.4 [unreleased]
+== 0.7.0 [2014-10-07]
 
 * Require at least Ruby 1.9.3.
 * Task <tt>doc:publish:github</tt> cleans up before adding new files.
