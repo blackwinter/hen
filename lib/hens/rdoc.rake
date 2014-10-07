@@ -127,7 +127,7 @@ Hen :rdoc do
           cp_r Dir["../#{rdoc_task.rdoc_dir}/*"], '.'
 
           git.add_and_commit 'Updated documentation.'
-          git.push git_remote, git_branch
+          git.push pages_url, git_branch
         }
       end
 
