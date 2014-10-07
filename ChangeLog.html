@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>ChangeLog - hen Application documentation (v0.6.3)</title>
+<title>ChangeLog - hen Application documentation (v0.7.0)</title>
 
 <link href="./fonts.css" rel="stylesheet">
 <link href="./rdoc.css" rel="stylesheet">
@@ -59,6 +59,7 @@
 
   <ul class="link-list" role="directory">
     <li><a href="#label-Revision+history+for+hen">Revision history for hen</a>
+    <li><a href="#label-0.7.0+%5B2014-10-07%5D">0.7.0 [2014-10-07]</a>
     <li><a href="#label-0.6.3+%5B2014-08-01%5D">0.6.3 [2014-08-01]</a>
     <li><a href="#label-0.6.2+%5B2014-05-13%5D">0.6.2 [2014-05-13]</a>
     <li><a href="#label-0.6.1+%5B2014-04-24%5D">0.6.1 [2014-04-24]</a>
@@ -138,25 +139,38 @@
 
 <h1 id="label-Revision+history+for+hen">Revision history for hen<span><a href="#label-Revision+history+for+hen">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
 
+<h2 id="label-0.7.0+%5B2014-10-07%5D">0.7.0 [2014-10-07]<span><a href="#label-0.7.0+%5B2014-10-07%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<ul><li>
+<p>Require at least Ruby 1.9.3.</p>
+</li><li>
+<p>Task <code>doc:publish:github</code> cleans up before adding new files.</p>
+</li><li>
+<p>Task <code>doc:publish:github</code> performs local clone and shallow
+checkout    instead of fetching the full history.</p>
+</li><li>
+<p>When setting <code>post_install_message</code>, gem files are searched for
+log file;    specify <code>HEN_CHANGELOG</code> to override.</p>
+</li></ul>
+
 <h2 id="label-0.6.3+%5B2014-08-01%5D">0.6.3 [2014-08-01]<span><a href="#label-0.6.3+%5B2014-08-01%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
 <p>Added general support for other variables in skeleton paths.</p>
 </li><li>
 <p>Ignore missing <a href="ChangeLog.html">ChangeLog</a> for
-post_install_message.</p>
+<code>post_install_message</code>.</p>
 </li><li>
 <p>Housekeeping.</p>
 </li></ul>
 
 <h2 id="label-0.6.2+%5B2014-05-13%5D">0.6.2 [2014-05-13]<span><a href="#label-0.6.2+%5B2014-05-13%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Avoid circular dependency for &#39;gem:native&#39; task.</p>
+<p>Avoid circular dependency for <code>gem:native</code> task.</p>
 </li><li>
 <p>Added default dependency for rake-compiler.</p>
 </li><li>
 <p>Updated sample project skeleton.</p>
 </li><li>
-<p>New DSL method &#39;tasks&#39;.</p>
+<p>New DSL method <code>tasks</code>.</p>
 </li></ul>
 
 <h2 id="label-0.6.1+%5B2014-04-24%5D">0.6.1 [2014-04-24]<span><a href="#label-0.6.1+%5B2014-04-24%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -168,13 +182,13 @@ post_install_message.</p>
 <ul><li>
 <p>Essential development dependencies are added automatically.</p>
 </li><li>
-<p>New task &#39;gem:dependencies:install&#39;.</p>
+<p>New task <code>gem:dependencies:install</code>.</p>
 </li><li>
 <p>Dropped support for RubyForge (EOL on May 15th).</p>
 </li><li>
 <p>New projects to require at least Ruby 1.9.3.</p>
 </li><li>
-<p>Added .travis.yml to project skeleton.</p>
+<p>Added <code>.travis.yml</code> to project skeleton.</p>
 </li><li>
 <p>Use GitHub as default remote when creating a Git-backed project.</p>
 </li><li>
@@ -185,7 +199,7 @@ post_install_message.</p>
 <ul><li>
 <p>Improved extension name handling.</p>
 </li><li>
-<p>Only define &#39;gem:native&#39; task when cross-compiling.</p>
+<p>Only define <code>gem:native</code> task when cross-compiling.</p>
 </li><li>
 <p>Avoid circular require.</p>
 </li></ul>
@@ -224,7 +238,7 @@ sorting    the test files.</p>
 
 <h2 id="label-0.4.6+%5B2012-04-05%5D">0.4.6 [2012-04-05]<span><a href="#label-0.4.6+%5B2012-04-05%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Fixed `hen version`.</p>
+<p>Fixed <code>hen version</code>.</p>
 </li><li>
 <p>Added debug info for extension tasks.</p>
 </li></ul>
@@ -235,7 +249,7 @@ sorting    the test files.</p>
 </li><li>
 <p>Build and publish Meta-Gems.</p>
 </li><li>
-<p>Renamed Meta-Gem option &#39;extras&#39; to &#39;dependencies&#39;.</p>
+<p>Renamed Meta-Gem option <code>extras</code> to <code>dependencies</code>.</p>
 </li><li>
 <p>Fixed Ruby warnings.</p>
 </li></ul>
@@ -256,21 +270,21 @@ sorting    the test files.</p>
 
 <h2 id="label-0.4.2+%5B2012-01-09%5D">0.4.2 [2012-01-09]<span><a href="#label-0.4.2+%5B2012-01-09%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>New option &#39;meta&#39; to build meta-gems.</p>
+<p>New option <code>meta</code> to build meta-gems.</p>
 </li></ul>
 
 <h2 id="label-0.4.1+%5B2012-01-02%5D">0.4.1 [2012-01-02]<span><a href="#label-0.4.1+%5B2012-01-02%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Make &#39;release&#39; depend on &#39;doc:publish&#39;.</p>
+<p>Make <code>release</code> depend on <code>doc:publish</code>.</p>
 </li></ul>
 
 <h2 id="label-0.4.0+%5B2011-09-21%5D">0.4.0 [2011-09-21]<span><a href="#label-0.4.0+%5B2011-09-21%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
 <p>Use env ruby.</p>
 </li><li>
-<p>New task &#39;gem:dependencies&#39;.</p>
+<p>New task <code>gem:dependencies</code>.</p>
 </li><li>
-<p>Don&#39;t undefine `object_id&#39; for (pseudo-)objects.</p>
+<p>Don&#39;t undefine <code>object_id</code> for (pseudo-)objects.</p>
 </li></ul>
 
 <h2 id="label-0.3.9+%5B2011-05-24%5D">0.3.9 [2011-05-24]<span><a href="#label-0.3.9+%5B2011-05-24%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -319,12 +333,12 @@ working release… <strong>fingerscrossed</strong></p>
 <h2 id="label-0.3.1+%5B2011-02-11%5D">0.3.1 [2011-02-11]<span><a href="#label-0.3.1+%5B2011-02-11%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
 <p>Fixed the RubyForge release task name in the prerequisite list for the   
-<code>:release</code> task.</p>
+<code>release</code> task.</p>
 </li></ul>
 
 <h2 id="label-0.3.0+%5B2011-02-11%5D">0.3.0 [2011-02-11]<span><a href="#label-0.3.0+%5B2011-02-11%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Implementations for <code>doc:publish</code> and <code>:release</code> are 
+<p>Implementations for <code>doc:publish</code> and <code>release</code> are  
 now cumulative.</p>
 </li><li>
 <p>The configuration (through the user&#39;s <code>.henrc</code> files) is now
@@ -341,17 +355,17 @@ when building the Gem.</p>
 behaviour.</p>
 </li></ul>
 </li><li>
-<p>Renamed <code>:gemspec</code> -&gt; <code>gem:spec</code>,
+<p>Renamed <code>gemspec</code> -&gt; <code>gem:spec</code>,
 <code>gemspec:update</code>    -&gt; <code>gem:spec:update</code>.</p>
 </li><li>
 <p>New task <code>gem:install</code> to install the current Gem locally.</p>
 </li><li>
 <p>Added support for RDoc 2/3.</p>
 </li><li>
-<p>Recognize <code>:legacy</code> option in <code>:spec</code> options to
-force    RSpec 1 even when RSpec 2 is available. Same for RDoc 2 vs. 3.</p>
+<p>Recognize <code>legacy</code> option in <code>spec</code> options to force 
+RSpec 1 even when RSpec 2 is available. Same for RDoc 2 vs. 3.</p>
 </li><li>
-<p>Added support for easy GitHub homepage by setting <code>:homepage</code>   
+<p>Added support for easy GitHub homepage by setting <code>homepage</code>   
 option to a symbol that identifies the GitHub user name.</p>
 </li><li>
 <p>Better defaults for <code>hen create/config</code>.</p>
@@ -367,7 +381,7 @@ before overwriting an existing file.</p>
 <p>Some defaults are set in <a href="Hen.html">Hen</a> files rather than
 relying on <code>.henrc</code>    file.</p>
 </li><li>
-<p>No longer messing with RubyGems/$LOAD_PATH.</p>
+<p>No longer messing with RubyGems/<code>$LOAD_PATH</code>.</p>
 </li></ul>
 
 <h2 id="label-0.2.7+%5B2011-01-24%5D">0.2.7 [2011-01-24]<span><a href="#label-0.2.7+%5B2011-01-24%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -384,7 +398,7 @@ relying on <code>.henrc</code>    file.</p>
 
 <h2 id="label-0.2.5+%5B2011-01-07%5D">0.2.5 [2011-01-07]<span><a href="#label-0.2.5+%5B2011-01-07%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Handle rcov.opts file for RSpec 2</p>
+<p>Handle <code>rcov.opts</code> file for RSpec 2</p>
 </li><li>
 <p>Optionally set custom zip command for package task</p>
 </li></ul>
@@ -438,7 +452,7 @@ out</p>
 
 <h2 id="label-0.1.6+%5B2009-01-26%5D">0.1.6 [2009-01-26]<span><a href="#label-0.1.6+%5B2009-01-26%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Ignore nonexistent spec.opts file</p>
+<p>Ignore nonexistent <code>spec.opts</code> file</p>
 </li></ul>
 
 <h2 id="label-0.1.5+%5B2009-01-22%5D">0.1.5 [2009-01-22]<span><a href="#label-0.1.5+%5B2009-01-22%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -465,7 +479,7 @@ out</p>
 <ul><li>
 <p>Added task to run specs with RCov</p>
 </li><li>
-<p>Added option to specify spec_helper which will be loaded first</p>
+<p>Added option to specify <code>spec_helper</code> which will be loaded first</p>
 </li></ul>
 
 <h2 id="label-0.1.0+%5B2008-05-21%5D">0.1.0 [2008-05-21]<span><a href="#label-0.1.0+%5B2008-05-21%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -485,34 +499,36 @@ out</p>
 
 <h2 id="label-0.0.7+%5B2008-02-01%5D">0.0.7 [2008-02-01]<span><a href="#label-0.0.7+%5B2008-02-01%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Search HENPATH for available hens, allowing to easily add custom hens</p>
+<p>Search <code>HENPATH</code> for available hens, allowing to easily add
+custom hens</p>
 </li><li>
-<p>Added sample custom hen file (&#39;example/hens/sample.rake&#39;)</p>
+<p>Added sample custom hen file (<code>example/hens/sample.rake</code>)</p>
 </li><li>
-<p>Refined &#39;gem&#39; and &#39;rdoc&#39; hens</p>
+<p>Refined <code>gem</code> and <code>rdoc</code> hens</p>
 </li><li>
-<p>Added &#39;hen version&#39; command</p>
+<p>Added <code>hen version</code> command</p>
 </li></ul>
 
 <h2 id="label-0.0.6+%5B2008-01-09%5D">0.0.6 [2008-01-09]<span><a href="#label-0.0.6+%5B2008-01-09%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Added basic sample project tree (skeleton for &#39;hen create&#39;)</p>
+<p>Added basic sample project tree (skeleton for <code>hen create</code>)</p>
 </li><li>
-<p>Lazily find and load .henrc</p>
+<p>Lazily find and load <code>.henrc</code></p>
 </li><li>
 <p>Some polishing and fixes</p>
 </li></ul>
 
 <h2 id="label-0.0.5+%5B2008-01-08%5D">0.0.5 [2008-01-08]<span><a href="#label-0.0.5+%5B2008-01-08%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Replaced &#39;hen&#39; executable stub with something actually useful</p>
+<p>Replaced <code>hen</code> executable stub with something actually useful</p>
 </li><li>
 <p>Added <a href="Hen/CLI.html">Hen::CLI</a> helper module</p>
 </li></ul>
 
 <h2 id="label-0.0.4+%5B2008-01-07%5D">0.0.4 [2008-01-07]<span><a href="#label-0.0.4+%5B2008-01-07%5D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
-<p>Added Test::Unit and RSpec hens (tasks &#39;test&#39; and &#39;spec&#39;)</p>
+<p>Added Test::Unit and RSpec hens (tasks <code>test</code> and
+<code>spec</code>)</p>
 </li><li>
 <p>Removed HenError stuff</p>
 </li></ul>
@@ -521,8 +537,8 @@ out</p>
 <ul><li>
 <p>More cleanup and maturing</p>
 </li><li>
-<p>New tasks &#39;release&#39; (formerly &#39;upload_gem&#39;),
-&#39;publish_docs&#39;, and &#39;debug_gem&#39;</p>
+<p>New tasks <code>release</code> (formerly <code>upload_gem</code>),
+<code>publish_docs</code>, and <code>debug_gem</code></p>
 </li><li>
 <p>All in all: Pretty much inspired by Hoe ;-)</p>
 </li></ul>
@@ -542,7 +558,7 @@ out</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Hen::DSL - hen Application documentation (v0.6.3)</title>
+<title>module Hen::DSL - hen Application documentation (v0.7.0)</title>
 
 <link href="../fonts.css" rel="stylesheet">
 <link href="../rdoc.css" rel="stylesheet">
@@ -660,7 +660,7 @@ optional passed block if requested by <code>block</code>.</p>
 
           
           <div class="method-source-code" id="call_block-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 339</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 348</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">call_block</span>(<span class="ruby-identifier">block</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block2</span>)
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block2</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span>
   <span class="ruby-identifier">block</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>]
@@ -694,7 +694,7 @@ optional passed block if requested by <code>block</code>.</p>
 
           
           <div class="method-source-code" id="extend_object-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 318</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 327</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">extend_object</span>(<span class="ruby-identifier">object</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">blocks</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block2</span>)
   <span class="ruby-identifier">singleton_class</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">singleton_class</span>
 
@@ -890,8 +890,17 @@ if it&#39;s not found.</p>
       <span class="ruby-identifier">clone</span> <span class="ruby-string">&#39;-n&#39;</span>, <span class="ruby-string">&#39;-o&#39;</span>, <span class="ruby-identifier">remote</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">dir</span>
     <span class="ruby-keyword">end</span>
 
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">local_clone</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">src</span> = <span class="ruby-string">&#39;.&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
+      <span class="ruby-identifier">clone</span> <span class="ruby-string">&#39;-n&#39;</span>, <span class="ruby-identifier">src</span>, <span class="ruby-identifier">dir</span>
+    <span class="ruby-keyword">end</span>
+
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkout_remote_branch</span>(<span class="ruby-identifier">remote</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39;master&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">checkout</span> <span class="ruby-string">&#39;-b&#39;</span>, <span class="ruby-identifier">branch</span>, <span class="ruby-node">&quot;#{remote}/#{branch}&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkout_fetched_branch</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39;master&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
+      <span class="ruby-identifier">fetch</span> <span class="ruby-string">&#39;--depth&#39;</span>, <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">branch</span>
+      <span class="ruby-identifier">checkout</span> <span class="ruby-string">&#39;-b&#39;</span>, <span class="ruby-identifier">branch</span>, <span class="ruby-string">&#39;FETCH_HEAD&#39;</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_and_commit</span>(<span class="ruby-identifier">msg</span>)  <span class="ruby-comment"># :nodoc:</span>
@@ -976,7 +985,7 @@ if it&#39;s not found.</p>
 
           
           <div class="method-source-code" id="init_svn-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 292</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 301</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_svn</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">have_svn?</span>
 
@@ -1065,7 +1074,7 @@ true) and return false.</p>
 
           
           <div class="method-source-code" id="pseudo_object-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 329</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 338</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pseudo_object</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">extend_object</span>(<span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>, <span class="ruby-identifier">block</span>) {
     <span class="ruby-identifier">instance_methods</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">method</span><span class="ruby-operator">|</span>
@@ -1126,7 +1135,7 @@ true) and return nil.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
