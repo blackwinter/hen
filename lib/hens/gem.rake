@@ -134,7 +134,7 @@ Hen gem: :rdoc do
     dependencies             = Array(gem_options.delete(:dependencies))
     development_dependencies = Array(gem_options.delete(:development_dependencies))
 
-    default_dependencies = %w[hen rake]
+    default_dependencies = [['hen', *Hen::Version.pessimistic_requirement], 'rake']
     default_dependencies << 'rake-compiler' unless gem_options[:extensions].empty?
 
     unless (test_files = gem_options[:files].grep(/\A(?:test|spec)s?\//)).empty?
@@ -149,18 +149,21 @@ Hen gem: :rdoc do
       default_dependencies << test_dependency.tr('/', '-') if test_dependency
     end
 
-    default_dependencies -= dependencies + development_dependencies + [gem_name]
+    exclude_default_dependencies = [gem_name]
 
-    dependencies.each { |dependency|
-      spec.add_dependency(*dependency)
+    dependencies.each { |name, *requirements|
+      exclude_default_dependencies << name
+      spec.add_runtime_dependency(name, *requirements)
     }
 
-    development_dependencies.each { |dependency|
-      spec.add_development_dependency(*dependency)
+    development_dependencies.each { |name, *requirements|
+      exclude_default_dependencies << name
+      spec.add_development_dependency(name, *requirements)
     }
 
-    default_dependencies.each { |dependency|
-      spec.add_development_dependency(*dependency)
+    default_dependencies.each { |name, *requirements|
+      next if exclude_default_dependencies.include?(name)
+      spec.add_development_dependency(name, *requirements)
     }
 
     ### => set options!

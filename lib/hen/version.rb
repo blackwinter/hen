@@ -18,6 +18,11 @@ class Hen
         to_a.join('.')
       end
 
+      # Pessimistic version constraint.
+      def pessimistic_requirement
+        ["~> #{MAJOR}.#{MINOR}", ">= #{to_s}"]
+      end
+
     end
 
   end

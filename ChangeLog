@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.7.1 [unreleased]
+
+* Specify default dependency for hen with pessimistic version constraint.
+
 == 0.7.0 [2014-10-07]
 
 * Require at least Ruby 1.9.3.
