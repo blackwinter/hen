@@ -52,7 +52,9 @@ Hen :rdoc do
     rdoc_files_local = []
   end
 
-  rdoc_options.delete(:main) unless rdoc_files.include?(rdoc_options[:main])
+  rdoc_options.delete(:main) unless rdoc_files.include?(
+    File.join(rdoc_options.values_at(:root, :main).compact))
+
   rdoc_options[:main] ||= rdoc_files.first || rdoc_files_local.first
 
   ### rdoc_options

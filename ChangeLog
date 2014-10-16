@@ -5,6 +5,7 @@
 == 0.7.1 [unreleased]
 
 * Specify default dependency for hen with pessimistic version constraint.
+* Respect RDoc option +root+ when looking for +main+ file.
 
 == 0.7.0 [2014-10-07]
 
