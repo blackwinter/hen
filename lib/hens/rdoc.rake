@@ -40,7 +40,10 @@ Hen :rdoc do
 
   ### rdoc_files, main
 
-  rdoc_files = FileList[rdoc_options.delete(:rdoc_files)].sort_by { |file|
+  rdoc_files = FileList[[
+    rdoc_options.delete(:rdoc_files),
+    rdoc_options.delete(:extra_files)
+  ].compact.flatten].sort_by { |file|
     [file.length, file]
   }
 

@@ -5,6 +5,7 @@
 == 0.7.1 [unreleased]
 
 * Specify default dependency for hen with pessimistic version constraint.
+* Recognize +extra_files+ option for RDoc task.
 * Respect RDoc option +root+ when looking for +main+ file.
 * Prefer +README+ as +main+ file.
 
