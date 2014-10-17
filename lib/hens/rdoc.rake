@@ -55,7 +55,10 @@ Hen :rdoc do
   rdoc_options.delete(:main) unless rdoc_files.include?(
     File.join(rdoc_options.values_at(:root, :main).compact))
 
-  rdoc_options[:main] ||= rdoc_files.first || rdoc_files_local.first
+  rdoc_options[:main] ||= begin
+    main_candidates = rdoc_files.empty? ? rdoc_files_local : rdoc_files
+    main_candidates.grep(%r{\Areadme[^/]*\z}i).first || main_candidates.first
+  end
 
   ### rdoc_options
 
