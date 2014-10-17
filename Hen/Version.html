@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Hen::Version - hen Application documentation (v0.7.0)</title>
+<title>module Hen::Version - hen Application documentation (v0.7.1)</title>
 
 <link href="../fonts.css" rel="stylesheet">
 <link href="../rdoc.css" rel="stylesheet">
@@ -66,6 +66,8 @@
 
   <ul class="link-list" role="directory">
     
+    <li ><a href="#method-i-pessimistic_requirement">#pessimistic_requirement</a>
+    
     <li ><a href="#method-i-to_a">#to_a</a>
     
     <li ><a href="#method-i-to_s">#to_s</a>
@@ -126,6 +128,39 @@
        <header>
          <h3>Public Instance Methods</h3>
        </header>
+
+    
+      <div id="method-i-pessimistic_requirement" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pessimistic_requirement</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pessimistic version constraint.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="pessimistic_requirement-source">
+            <pre><span class="ruby-comment"># File lib/hen/version.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pessimistic_requirement</span>
+  [<span class="ruby-node">&quot;~&gt; #{MAJOR}.#{MINOR}&quot;</span>, <span class="ruby-node">&quot;&gt;= #{to_s}&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
 
     
       <div id="method-i-to_a" class="method-detail ">
