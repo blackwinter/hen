@@ -2,7 +2,7 @@
 
 = Revision history for hen
 
-== 0.7.1 [unreleased]
+== 0.7.1 [2014-10-17]
 
 * Specify default dependency for hen with pessimistic version constraint.
 * Recognize +extra_files+ option for RDoc task.
