@@ -26,6 +26,16 @@ Hen :rdoc do
     end
   end
 
+  class RDoc::Markup::ToLabel
+
+    alias_method :_hen_original_convert, :convert
+
+    def convert(*args)
+      _hen_original_convert(*args).gsub('%', '-').sub(/^-/, '')
+    end
+
+  end if defined?(RDoc::Markup::ToLabel)
+
   info = {
     'name'    => config[:gem][:name],
     'version' => config[:gem][:version],
