@@ -1,40 +1,13 @@
 Hen :rdoc do
 
   rdoc_options = {
-    rdoc_dir:       'doc',
-    rdoc_files:     %w[README COPYING ChangeLog lib/**/*.rb ext/**/*.c],
-    title:          '{name:%s }Application documentation{version: (v%s)}',
-    charset:        'UTF-8',
-    inline_source:  true,
-    line_numbers:   true,
-    all:            true
+    rdoc_dir:     'doc',
+    rdoc_files:   %w[README COPYING ChangeLog lib/**/*.rb ext/**/*.c],
+    title:        '{name:%s }Application documentation{version: (v%s)}',
+    charset:      'UTF-8',
+    line_numbers: true,
+    all:          true
   }.update(config[:rdoc])
-
-  rdoc_klass = begin
-    raise LoadError if rdoc_options.delete(:legacy)
-
-    require 'rdoc/task'
-
-    rdoc_options.delete(:inline_source)  # deprecated
-    RDoc::Task
-  rescue LoadError
-    begin
-      require 'rake/rdoctask'
-      Rake::RDocTask
-    rescue LoadError => err
-      load_error = err
-    end
-  end
-
-  class RDoc::Markup::ToLabel
-
-    alias_method :_hen_original_convert, :convert
-
-    def convert(*args)
-      _hen_original_convert(*args).gsub('%', '-').sub(/^-/, '')
-    end
-
-  end if defined?(RDoc::Markup::ToLabel)
 
   info = {
     'name'    => config[:gem][:name],
@@ -42,13 +15,11 @@ Hen :rdoc do
     'date'    => Date.today.to_s
   }
 
-  rdoc_options[:title].gsub!(/\{(\w+):(.*?)\}/) { i = info[$1] and $2 % i }
-
   ### rdoc_dir
 
   rdoc_dir = rdoc_options.delete(:rdoc_dir)
 
-  ### rdoc_files, main
+  ### rdoc_files
 
   rdoc_files = FileList[[
     rdoc_options.delete(:rdoc_files),
@@ -65,6 +36,8 @@ Hen :rdoc do
     rdoc_files_local = []
   end
 
+  ### main
+
   rdoc_options.delete(:main) unless rdoc_files.include?(
     File.join(rdoc_options.values_at(:root, :main).compact))
 
@@ -72,6 +45,10 @@ Hen :rdoc do
     main_candidates = rdoc_files.empty? ? rdoc_files_local : rdoc_files
     main_candidates.grep(%r{\Areadme[^/]*\z}i).first || main_candidates.first
   end
+
+  ### title
+
+  rdoc_options[:title].gsub!(/\{(\w+):(.*?)\}/) { i = info[$1] and $2 % i }
 
   ### rdoc_options
 
@@ -84,24 +61,34 @@ Hen :rdoc do
     options:    rdoc_opts
   }
 
-  unless rdoc_files.empty?
-    raise load_error if load_error
+  unless rdoc_files.empty? && rdoc_files_local.empty?
+    require 'rdoc/task'
 
-    rdoc_task = rdoc_klass.new(:doc) { |rdoc|
+    class RDoc::Markup::ToLabel
+
+      alias_method :_hen_original_convert, :convert
+
+      def convert(*args)
+        _hen_original_convert(*args).gsub('%', '-').sub(/^-/, '')
+      end
+
+    end if defined?(RDoc::Markup::ToLabel)
+  end
+
+  unless rdoc_files.empty?
+    RDoc::Task.new(:doc) { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir
       rdoc.rdoc_files = rdoc_files
       rdoc.options    = rdoc_opts
     }
   else
     task :doc do
-      warn 'No files to generate documentation for!'
+      warn 'No files to generate documentation for...'
     end
   end
 
   unless rdoc_files_local.empty?
-    raise load_error if load_error
-
-    rdoc_klass.new('doc:local') { |rdoc|
+    RDoc::Task.new('doc:local') { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir + '.local'
       rdoc.rdoc_files = rdoc_files_local
       rdoc.options    = rdoc_opts
@@ -114,9 +101,11 @@ Hen :rdoc do
         def rerdoc_task_description;  local_description(super); end
       }
     }
+  else
+    task 'doc:local' do
+      warn 'No files to generate documentation for...'
+    end
   end
-
-  publish_desc = 'Publish RDoc documentation'
 
   git do |git|
 
@@ -142,14 +131,14 @@ Hen :rdoc do
           git.checkout_fetched_branch pages_url, git_branch
 
           rm_r Dir['*']
-          cp_r Dir["../#{rdoc_task.rdoc_dir}/*"], '.'
+          cp_r Dir["../#{rdoc_dir}/*"], '.'
 
           git.add_and_commit 'Updated documentation.'
           git.push pages_url, git_branch
         }
       end
 
-      desc publish_desc; publish_desc = nil
+      desc 'Publish RDoc documentation'
       task 'doc:publish' => 'doc:publish:github'
 
     elsif clone_url  # still git repo, but no gh-pages branch

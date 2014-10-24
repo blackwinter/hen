@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.8.0 [unreleased]
+
+* Removed support for legacy versions of RDoc, RSpec and RubyGems.
+
 == 0.7.1 [2014-10-17]
 
 * Specify default dependency for hen with pessimistic version constraint.

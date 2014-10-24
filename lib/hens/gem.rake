@@ -20,20 +20,10 @@ Hen gem: :rdoc do
     require_path: 'lib'
   }.update(config[:gem])
 
-  gem_klass = begin
-    raise LoadError if gem_options.delete(:legacy)
-
-    require 'rubygems/package_task'
-    Gem::PackageTask
-  rescue LoadError
-    require 'rake/gempackagetask'
-    Rake::GemPackageTask
-  end
+  require 'rubygems/package_task'
 
   if Object.const_defined?(:RDOC_OPTIONS)
     rdoc_files = RDOC_OPTIONS[:rdoc_files]
-    gem_options[:has_rdoc] = !rdoc_files.empty? if Gem::VERSION < '1.7'
-
     gem_options[:rdoc_options] ||= RDOC_OPTIONS[:options]
   end
 
@@ -269,7 +259,7 @@ Hen gem: :rdoc do
 
   }
 
-  pkg_task = gem_klass.new(gem_spec) { |pkg|
+  pkg_task = Gem::PackageTask.new(gem_spec) { |pkg|
     pkg.need_tar_gz = true
     pkg.need_zip    = true
 
@@ -280,7 +270,7 @@ Hen gem: :rdoc do
 
   meta_gem_specs.each { |meta_gem_spec|
 
-    meta_pkg_task = gem_klass.new(meta_gem_spec)
+    meta_pkg_task = Gem::PackageTask.new(meta_gem_spec)
 
     taskname = meta_gem_spec.taskname
 

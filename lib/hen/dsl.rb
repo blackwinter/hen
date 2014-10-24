@@ -152,12 +152,6 @@ class Hen
       end
     end
 
-    # DEPRECATED: Use #rubygems instead.
-    def gemcutter(&block)
-      warn "#{self}#gemcutter is deprecated; use `rubygems' instead."
-      rubygems(&block)
-    end
-
     # Encapsulates tasks targeting at Git, skipping those if the current
     # project is not controlled by Git. Yields a Git object via #init_git.
     def git
@@ -187,14 +181,8 @@ class Hen
     # Loads the RubyGems +push+ command, giving
     # a nicer error message if it's not found.
     def have_rubygems?
-      begin
-        require 'rubygems/command_manager'
-        require 'rubygems/commands/push_command'
-      rescue LoadError
-        # rubygems < 1.3.6, gemcutter < 0.4.0
-        require 'commands/abstract_command'
-        require 'commands/push'
-      end
+      require 'rubygems/command_manager'
+      require 'rubygems/commands/push_command'
 
       Gem::Commands::PushCommand
     rescue LoadError, NameError

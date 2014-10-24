@@ -1,7 +1,5 @@
 Hen :test do
 
-  require 'rake/testtask'
-
   test_options = {
     pattern: 'test/**/*_test.rb'
   }.update(config[:test])
@@ -12,6 +10,8 @@ Hen :test do
   mangle_files!(test_files, managed: false)
 
   unless test_files.empty?
+    require 'rake/testtask'
+
     Rake::TestTask.new { |t|
       t.test_files = test_files
       set_options(t, test_options, 'Test')
