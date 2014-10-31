@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Hen::DSL - hen Application documentation (v0.7.1)</title>
+<title>module Hen::DSL - hen Application documentation (v0.8.0)</title>
 
 <link href="../fonts.css" rel="stylesheet">
 <link href="../rdoc.css" rel="stylesheet">
@@ -84,8 +84,6 @@
     <li ><a href="#method-i-execute">#execute</a>
     
     <li ><a href="#method-i-extend_object">#extend_object</a>
-    
-    <li ><a href="#method-i-gemcutter">#gemcutter</a>
     
     <li ><a href="#method-i-git">#git</a>
     
@@ -243,40 +241,6 @@ instead).</p>
       </div>
 
     
-      <div id="method-i-gemcutter" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">gemcutter</span><span
-            class="method-args">(&block)</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>DEPRECATED: Use <a href="DSL.html#method-i-rubygems">rubygems</a> instead.</p>
-          
-          
-
-          
-          <div class="method-source-code" id="gemcutter-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 156</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">gemcutter</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{self}#gemcutter is deprecated; use `rubygems&#39; instead.&quot;</span>
-  <span class="ruby-identifier">rubygems</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div>
-          
-        </div>
-
-        
-
-        
-      </div>
-
-    
       <div id="method-i-git" class="method-detail ">
         
         <div class="method-heading">
@@ -298,7 +262,7 @@ href="DSL.html#method-i-init_git">init_git</a>.</p>
 
           
           <div class="method-source-code" id="git-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 163</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 157</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">git</span>
   <span class="ruby-identifier">have_git?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">init_git</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-string">&#39;Git&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -550,7 +514,7 @@ href="DSL.html#method-i-init_svn">init_svn</a>.</p>
 
           
           <div class="method-source-code" id="svn-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 169</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">svn</span>
   <span class="ruby-identifier">have_svn?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">init_svn</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-string">&#39;SVN&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -660,7 +624,7 @@ optional passed block if requested by <code>block</code>.</p>
 
           
           <div class="method-source-code" id="call_block-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 348</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 336</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">call_block</span>(<span class="ruby-identifier">block</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block2</span>)
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block2</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span>
   <span class="ruby-identifier">block</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>]
@@ -694,7 +658,7 @@ optional passed block if requested by <code>block</code>.</p>
 
           
           <div class="method-source-code" id="extend_object-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 327</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 315</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">extend_object</span>(<span class="ruby-identifier">object</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">blocks</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block2</span>)
   <span class="ruby-identifier">singleton_class</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">singleton_class</span>
 
@@ -733,7 +697,7 @@ optional passed block if requested by <code>block</code>.</p>
 
           
           <div class="method-source-code" id="have_git-3F-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 205</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">have_git?</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-string">&#39;.git&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -767,16 +731,10 @@ if it&#39;s not found.</p>
 
           
           <div class="method-source-code" id="have_rubygems-3F-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 189</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">have_rubygems?</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;rubygems/command_manager&#39;</span>
-    <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;rubygems/commands/push_command&#39;</span>
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
-    <span class="ruby-comment"># rubygems &lt; 1.3.6, gemcutter &lt; 0.4.0</span>
-    <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;commands/abstract_command&#39;</span>
-    <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;commands/push&#39;</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;rubygems/command_manager&#39;</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;rubygems/commands/push_command&#39;</span>
 
   <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Commands</span><span class="ruby-operator">::</span><span class="ruby-constant">PushCommand</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>, <span class="ruby-constant">NameError</span>
@@ -811,7 +769,7 @@ if it&#39;s not found.</p>
 
           
           <div class="method-source-code" id="have_svn-3F-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 210</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 198</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">have_svn?</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-string">&#39;.svn&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -844,7 +802,7 @@ if it&#39;s not found.</p>
 
           
           <div class="method-source-code" id="init_git-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 231</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 219</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_git</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">have_git?</span>
 
@@ -942,7 +900,7 @@ if it&#39;s not found.</p>
 
           
           <div class="method-source-code" id="init_rubygems-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 216</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_rubygems</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">have_rubygems?</span>
 
@@ -985,7 +943,7 @@ if it&#39;s not found.</p>
 
           
           <div class="method-source-code" id="init_svn-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 301</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 289</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">init_svn</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">have_svn?</span>
 
@@ -1040,7 +998,7 @@ true) and return false.</p>
 
           
           <div class="method-source-code" id="missing_lib-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 182</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">missing_lib</span>(<span class="ruby-identifier">lib</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-identifier">$DEBUG</span>)
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Please install the `#{lib}&#39; library for additional tasks.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">do_warn</span>
   <span class="ruby-keyword">false</span>
@@ -1074,7 +1032,7 @@ true) and return false.</p>
 
           
           <div class="method-source-code" id="pseudo_object-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 338</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 326</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pseudo_object</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">extend_object</span>(<span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>, <span class="ruby-identifier">block</span>) {
     <span class="ruby-identifier">instance_methods</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">method</span><span class="ruby-operator">|</span>
@@ -1112,7 +1070,7 @@ true) and return nil.</p>
 
           
           <div class="method-source-code" id="skipping-source">
-            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 176</span>
+            <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">verbose</span>)
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Skipping #{name} tasks.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">do_warn</span>
   <span class="ruby-keyword">nil</span>
