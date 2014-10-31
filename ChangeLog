@@ -2,9 +2,11 @@
 
 = Revision history for hen
 
-== 0.8.0 [unreleased]
+== 0.8.0 [2014-10-31]
 
 * Removed support for legacy versions of RDoc, RSpec and RubyGems.
+* Included workaround to make RDoc labels cross-browser compatible (issue
+  330[https://github.com/rdoc/rdoc/pull/330]).
 
 == 0.7.1 [2014-10-17]
 
