@@ -61,21 +61,9 @@ Hen :rdoc do
     options:    rdoc_opts
   }
 
-  unless rdoc_files.empty? && rdoc_files_local.empty?
+  unless rdoc_files.empty?
     require 'rdoc/task'
 
-    class RDoc::Markup::ToLabel
-
-      alias_method :_hen_original_convert, :convert
-
-      def convert(*args)
-        _hen_original_convert(*args).gsub('%', '-').sub(/^-/, '')
-      end
-
-    end if defined?(RDoc::Markup::ToLabel)
-  end
-
-  unless rdoc_files.empty?
     RDoc::Task.new(:doc) { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir
       rdoc.rdoc_files = rdoc_files
@@ -88,6 +76,8 @@ Hen :rdoc do
   end
 
   unless rdoc_files_local.empty?
+    require 'rdoc/task'
+
     RDoc::Task.new('doc:local') { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir + '.local'
       rdoc.rdoc_files = rdoc_files_local

@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.8.1 [unreleased]
+
+* Removed workaround for RDoc issue 330. Implemented in RDoc 4.2.0.
+
 == 0.8.0 [2014-10-31]
 
 * Removed support for legacy versions of RDoc, RSpec and RubyGems.
