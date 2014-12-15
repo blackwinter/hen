@@ -324,7 +324,7 @@ Hen gem: :rdoc do
     if extension_options[:cross_compile]
       extension_options[:cross_platform] ||= %w[x86-mswin32-60 x86-mingw32]
 
-      if ruby_versions = extension_options.delete(:ruby_versions)
+      if ruby_versions = extension_options.delete(:cross_ruby_versions)
         ENV['RUBY_CC_VERSION'] ||= Array(ruby_versions).join(':')
       end
 
