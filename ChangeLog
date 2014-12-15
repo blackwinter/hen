@@ -5,7 +5,8 @@
 == 0.8.1 [unreleased]
 
 * Removed workaround for RDoc issue 330. Implemented in RDoc 4.2.0.
-* Renamed cross compile option +ruby_versions+ to +cross_ruby_versions+.
+* Renamed cross compile option +ruby_versions+ to +cross_ruby_versions+;
+  defaults to all versions defined in rake-compiler's <tt>config.yml</tt>.
 
 == 0.8.0 [2014-10-31]
 

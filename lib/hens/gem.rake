@@ -328,6 +328,11 @@ Hen gem: :rdoc do
         ENV['RUBY_CC_VERSION'] ||= Array(ruby_versions).join(':')
       end
 
+      if File.exist?(rc_config = File.expand_path('~/.rake-compiler/config.yml'))
+        ENV['RUBY_CC_VERSION'] ||= SafeYAML.load_file(rc_config).keys.
+                                     map { |k| k.split('-').last }.uniq.join(':')
+      end
+
       desc 'Build native gems'
       task 'gem:native' => %w[cross compile rake:native gem]
     end
