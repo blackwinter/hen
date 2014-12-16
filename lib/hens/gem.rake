@@ -309,11 +309,12 @@ Hen gem: :rdoc do
   end
 
   if Rake.const_defined?(:ExtensionTask)
-    # gem_name    | extension name | ext_name
+    # gem_name       | ext_name  | extension name
     # ---------------------------------------
-    # libcdb-ruby | libcdb_ruby    | libcdb
-    # rb-gsl      | gsl_native     | gsl
-    # unicode     | unicode_native | unicode
+    # unicode        | unicode   | unicode_native
+    # libcdb-ruby    | libcdb    | libcdb_ruby
+    # ruby-filemagic | filemagic | ruby_filemagic
+    # rb-gsl         | gsl       | gsl_native
 
     gem_name_parts = gem_name.split('-')
     gem_name_parts.shift if gem_name_parts.first == 'rb'
@@ -321,7 +322,8 @@ Hen gem: :rdoc do
 
     extension_options[:name] ||= gem_name_parts.join('_')
 
-    ext_name = extension_options.delete(:ext_name) { gem_name_parts.first }
+    ext_name = extension_options.delete(:ext_name) {
+      gem_name_parts.find { |part| part != 'ruby' } }
 
     extension_options[:lib_dir] ||= File.join(['lib', ext_name, ENV['FAT_DIR']].compact)
     extension_options[:ext_dir] ||= File.join(['ext', ext_name].compact)
