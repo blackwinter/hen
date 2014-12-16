@@ -317,6 +317,30 @@ Hen gem: :rdoc do
     extension_options[:lib_dir] ||= File.join(['lib', ext_name, ENV['FAT_DIR']].compact)
     extension_options[:ext_dir] ||= File.join(['ext', ext_name].compact)
 
+    cross_config_options = nil
+
+    extension_options.delete_if { |key, val|
+      key =~ /\Awith_cross_(\w+)\z/ or next false
+      dir = ENV[key.to_s.upcase] or next true
+
+      cross_config_options ||= []
+
+      case res = val[dir]
+        when Array
+          inc, lib = res; lib = inc if res.size == 1
+
+          cross_config_options << "--with-#{$1}-include=#{inc}" if inc
+          cross_config_options << "--with-#{$1}-lib=#{lib}" if lib
+        when String
+          cross_config_options << "--with-#{$1}-dir=#{res}"
+      end
+    }
+
+    if cross_config_options
+      extension_options[:cross_config_options] ||= []
+      extension_options[:cross_config_options].concat(cross_config_options)
+    end
+
     unless extension_options.key?(:cross_compile)
       extension_options[:cross_compile] =
         extension_options[:cross_config_options].is_a?(Array) ?

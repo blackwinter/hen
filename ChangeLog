@@ -10,6 +10,11 @@
 * When +cross_config_options+ given, cross compilation is implicitly disabled
   when they are empty or enabled when they are non-empty; override by setting
   +cross_compile+ explicitly.
+* Added support for <tt>with_cross_<library></tt> options; specify a proc that
+  accepts the <tt>WITH_CROSS_<LIBRARY></tt> environment variable, if set, and
+  returns a single directory for <tt>--with-<library>-dir</tt> or an array for
+  <tt>--with-<library>-include</tt> and <tt>--with-<library>-lib</tt> to be
+  added to +cross_config_options+.
 
 == 0.8.0 [2014-10-31]
 
