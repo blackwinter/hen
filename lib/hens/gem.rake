@@ -318,7 +318,9 @@ Hen gem: :rdoc do
     extension_options[:ext_dir] ||= File.join(['ext', ext_name].compact)
 
     unless extension_options.key?(:cross_compile)
-      extension_options[:cross_compile] = true
+      extension_options[:cross_compile] =
+        extension_options[:cross_config_options].is_a?(Array) ?
+          !extension_options[:cross_config_options].empty? : true
     end
 
     if extension_options[:cross_compile]
