@@ -266,8 +266,10 @@ class Hen
 
     block.bind(DSL).call
   rescue => err
-    warn "#{name}: #{err} (#{err.class})" if $DEBUG || verbose
-    warn err.backtrace.join("\n  ") if $DEBUG
+    trace = $DEBUG || Rake.application.options.trace
+
+    warn "#{name}: #{err} (#{err.class})" if trace || verbose
+    warn err.backtrace.join("\n  ") if trace
   end
 
   private
