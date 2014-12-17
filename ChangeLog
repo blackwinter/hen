@@ -15,6 +15,7 @@
   returns a single directory for <tt>--with-<library>-dir</tt> or an array for
   <tt>--with-<library>-include</tt> and <tt>--with-<library>-lib</tt> to be
   added to +cross_config_options+.
+* Added support for +cross_compiling+ option.
 
 == 0.8.0 [2014-10-31]
 

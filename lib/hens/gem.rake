@@ -364,6 +364,8 @@ Hen gem: :rdoc do
     end
 
     extension_task = Rake::ExtensionTask.new(nil, gem_spec) { |ext|
+      ext.cross_compiling(&extension_options.delete(:cross_compiling))
+
       set_options(ext, extension_options, 'Extension')
     }
 
