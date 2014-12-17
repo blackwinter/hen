@@ -82,6 +82,15 @@ Hen gem: :rdoc do
       :extra_rdoc_files, :files, :executables, :extensions
     ))
 
+    unless (local_files = Array(gem_options.delete(:local_files))).empty?
+      gem_options[:files].concat(local_files)
+
+      task :pkg     => local_files
+      task :compile => local_files
+
+      CLOBBER.include(*local_files)
+    end
+
     unless gem_options[:executables].empty?
       gem_options[:bindir] ||= File.dirname(gem_options[:executables].first)
       gem_options[:executables].map! { |executable| File.basename(executable) }

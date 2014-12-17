@@ -16,6 +16,8 @@
   <tt>--with-<library>-include</tt> and <tt>--with-<library>-lib</tt> to be
   added to +cross_config_options+.
 * Added support for +cross_compiling+ option.
+* Added support for +local_files+ option, i.e., generated files that should be
+  included in the package but not under version control.
 
 == 0.8.0 [2014-10-31]
 
