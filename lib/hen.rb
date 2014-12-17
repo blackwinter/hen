@@ -29,6 +29,7 @@
 #++
 
 require 'rake'
+require 'rake/clean'
 require 'safe_yaml/load'
 require 'nuggets/env/user_home'
 require 'nuggets/hash/deep_merge'
