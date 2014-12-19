@@ -4,21 +4,18 @@
 <head>
 <meta charset="UTF-8">
 
-<title>hen Application documentation (v0.8.0)</title>
-
-<link href="./fonts.css" rel="stylesheet">
-<link href="./rdoc.css" rel="stylesheet">
+<title>hen Application documentation (v0.8.1)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
 </script>
 
 <script src="./js/jquery.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/search_index.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/searcher.js"></script>
 <script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" role="document" class="file">
@@ -82,6 +79,8 @@
   
     <li><a href="./Hen/DSL.html">Hen::DSL</a>
   
+    <li><a href="./Hen/File.html">Hen::File</a>
+  
     <li><a href="./Hen/Version.html">Hen::Version</a>
   
     <li><a href="./Object.html">Object</a>
@@ -95,13 +94,13 @@
 <main role="main">
 
 
-<h1 id="label-hen+-+Just+a+Rake+helper">hen - Just a Rake helper<span><a href="#label-hen+-+Just+a+Rake+helper">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+<h1 id="label-hen+-+Just+a+Rake+helper">hen - Just a Rake helper<span><a href="#label-hen+-+Just+a+Rake+helper">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<h2 id="label-VERSION">VERSION<span><a href="#label-VERSION">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-VERSION">VERSION<span><a href="#label-VERSION">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>This documentation refers to hen version 0.8.0</p>
+<p>This documentation refers to hen version 0.8.1</p>
 
-<h2 id="label-DESCRIPTION">DESCRIPTION<span><a href="#label-DESCRIPTION">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-DESCRIPTION">DESCRIPTION<span><a href="#label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p><a href="Hen.html">Hen</a> is a Rake helper framework, similar to <a
 href="http://docs.seattlerb.org/hoe/">Hoe</a> or <a
@@ -123,23 +122,25 @@ Rakefile:</p>
 }}
 </pre>
 
-<h3 id="label-Generate+a+global+configuration+file">Generate a global configuration file<span><a href="#label-Generate+a+global+configuration+file">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="label-Generate+a+global+configuration+file">Generate a global configuration file<span><a href="#label-Generate+a+global+configuration+file">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p><a href="Hen.html">Hen</a> will read configuration options from your global
 configuration file if it&#39;s present. You can generate a minimal
 <code>.henrc</code> with the <code>hen</code> script:</p>
 
-<pre>hen config</pre>
+<pre class="ruby"><span class="ruby-identifier">hen</span> <span class="ruby-identifier">config</span>
+</pre>
 
 <p>This will create a new <code>.henrc</code> file in your home directory.</p>
 
-<h3 id="label-Create+a+new+project">Create a new project<span><a href="#label-Create+a+new+project">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="label-Create+a+new+project">Create a new project<span><a href="#label-Create+a+new+project">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p>For new projects, you can also use the <code>hen</code> script to create an
 initial project directory for you that comes with default files and
 configuration:</p>
 
-<pre>hen create path/to/your/lib</pre>
+<pre class="ruby"><span class="ruby-identifier">hen</span> <span class="ruby-identifier">create</span> <span class="ruby-identifier">path</span><span class="ruby-operator">/</span><span class="ruby-identifier">to</span><span class="ruby-operator">/</span><span class="ruby-identifier">your</span><span class="ruby-operator">/</span><span class="ruby-identifier">lib</span>
+</pre>
 
 <p>You can even provide a project template of your own:</p>
 
@@ -152,12 +153,12 @@ support:</p>
 
 <p>See <code>hen help</code> for further information.</p>
 
-<h3 id="label-Extending+Hen">Extending <a href="Hen.html">Hen</a><span><a href="#label-Extending+Hen">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+<h3 id="label-Extending+Hen">Extending <a href="Hen.html">Hen</a><span><a href="#label-Extending+Hen">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p>You can even extend <a href="Hen.html">Hen</a> with your own tasks. More on
 that later. (TODO)</p>
 
-<h2 id="label-LINKS">LINKS<span><a href="#label-LINKS">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-LINKS">LINKS<span><a href="#label-LINKS">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <dl class="rdoc-list note-list"><dt>Documentation
 <dd>
 <p><a href="https://blackwinter.github.com/hen">blackwinter.github.com/hen</a></p>
@@ -169,13 +170,13 @@ that later. (TODO)</p>
 <p><a href="https://rubygems.org/gems/hen">rubygems.org/gems/hen</a></p>
 </dd></dl>
 
-<h2 id="label-AUTHORS">AUTHORS<span><a href="#label-AUTHORS">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-AUTHORS">AUTHORS<span><a href="#label-AUTHORS">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
 <p>Jens Wille &lt;<a
 href="mailto:jens.wille@gmail.com">jens.wille@gmail.com</a>&gt;</p>
 </li></ul>
 
-<h2 id="label-LICENSE+AND+COPYRIGHT">LICENSE AND COPYRIGHT<span><a href="#label-LICENSE+AND+COPYRIGHT">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<h2 id="label-LICENSE+AND+COPYRIGHT">LICENSE AND COPYRIGHT<span><a href="#label-LICENSE+AND+COPYRIGHT">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>Copyright (C) 2007-2012 University of Cologne, Albertus-Magnus-Platz, 50923
 Cologne, Germany</p>
@@ -201,7 +202,7 @@ href="http://www.gnu.org/licenses">www.gnu.org/licenses</a>/&gt;.</p>
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

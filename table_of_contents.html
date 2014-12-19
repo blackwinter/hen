@@ -4,26 +4,23 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Table of Contents - hen Application documentation (v0.8.0)</title>
-
-<link href="./fonts.css" rel="stylesheet">
-<link href="./rdoc.css" rel="stylesheet">
+<title>Table of Contents - hen Application documentation (v0.8.1)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "./";
 </script>
 
 <script src="./js/jquery.js"></script>
-<script src="./js/navigation.js"></script>
-<script src="./js/search_index.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/searcher.js"></script>
 <script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 <body id="top" class="table-of-contents">
 <main role="main">
-<h1 class="class">Table of Contents - hen Application documentation (v0.8.0)</h1>
+<h1 class="class">Table of Contents - hen Application documentation (v0.8.1)</h1>
 
 <h2 id="pages">Pages</h2>
 <ul>
@@ -39,6 +36,7 @@
 
     <ul>
       <li><a href="ChangeLog.html#label-Revision+history+for+hen">Revision history for hen</a>
+      <li><a href="ChangeLog.html#label-0.8.1+-5B2014-12-19-5D">0.8.1 [2014-12-19]</a>
       <li><a href="ChangeLog.html#label-0.8.0+-5B2014-10-31-5D">0.8.0 [2014-10-31]</a>
       <li><a href="ChangeLog.html#label-0.7.1+-5B2014-10-17-5D">0.7.1 [2014-10-17]</a>
       <li><a href="ChangeLog.html#label-0.7.0+-5B2014-10-07-5D">0.7.0 [2014-10-07]</a>
@@ -130,6 +128,9 @@
     <a href="Hen/DSL.html">Hen::DSL</a>
   </li>
   <li class="module">
+    <a href="Hen/File.html">Hen::File</a>
+  </li>
+  <li class="module">
     <a href="Hen/Version.html">Hen::Version</a>
   </li>
   <li class="class">
@@ -141,9 +142,69 @@
 <ul>
 
   <li class="method">
+    <a href="Hen.html#method-c-5B-5D">::[]</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-c-add_hen">::add_hen</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-c-config">::config</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-c-default_henrc">::default_henrc</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-c-find_henrc">::find_henrc</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-c-henrc">::henrc</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-c-lay-21">::lay!</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-c-load_config">::load_config</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen.html#method-c-load_hens">::load_hens</a>
+    &mdash;
+    <span class="container">Hen</span>
+
+  <li class="method">
     <a href="Hen.html#method-c-new">::new</a>
     &mdash;
     <span class="container">Hen</span>
+
+  <li class="method">
+    <a href="Hen/Version.html#method-c-pessimistic_requirement">::pessimistic_requirement</a>
+    &mdash;
+    <span class="container">Hen::Version</span>
+
+  <li class="method">
+    <a href="Hen/Version.html#method-c-to_a">::to_a</a>
+    &mdash;
+    <span class="container">Hen::Version</span>
+
+  <li class="method">
+    <a href="Hen/Version.html#method-c-to_s">::to_s</a>
+    &mdash;
+    <span class="container">Hen::Version</span>
 
   <li class="method">
     <a href="Object.html#method-i-Hen">#Hen</a>
@@ -161,19 +222,9 @@
     <span class="container">Hen::Commands</span>
 
   <li class="method">
-    <a href="Hen.html#method-i-5B-5D">#[]</a>
-    &mdash;
-    <span class="container">Hen</span>
-
-  <li class="method">
     <a href="Hen/CLI.html#method-i-_hen_original_ask">#_hen_original_ask</a>
     &mdash;
     <span class="container">Hen::CLI</span>
-
-  <li class="method">
-    <a href="Hen.html#method-i-add_hen">#add_hen</a>
-    &mdash;
-    <span class="container">Hen</span>
 
   <li class="method">
     <a href="Hen/CLI.html#method-i-ask">#ask</a>
@@ -194,11 +245,6 @@
     <a href="Hen/CLI.html#method-i-classname">#classname</a>
     &mdash;
     <span class="container">Hen::CLI</span>
-
-  <li class="method">
-    <a href="Hen.html#method-i-config">#config</a>
-    &mdash;
-    <span class="container">Hen</span>
 
   <li class="method">
     <a href="Hen/Commands.html#method-i-config">#config</a>
@@ -251,11 +297,6 @@
     <span class="container">Hen::CLI</span>
 
   <li class="method">
-    <a href="Hen.html#method-i-default_henrc">#default_henrc</a>
-    &mdash;
-    <span class="container">Hen</span>
-
-  <li class="method">
     <a href="Hen/CLI.html#method-i-emailaddress">#emailaddress</a>
     &mdash;
     <span class="container">Hen::CLI</span>
@@ -269,11 +310,6 @@
     <a href="Hen/DSL.html#method-i-extend_object">#extend_object</a>
     &mdash;
     <span class="container">Hen::DSL</span>
-
-  <li class="method">
-    <a href="Hen.html#method-i-find_henrc">#find_henrc</a>
-    &mdash;
-    <span class="container">Hen</span>
 
   <li class="method">
     <a href="Hen/CLI.html#method-i-fullname">#fullname</a>
@@ -331,11 +367,6 @@
     <span class="container">Hen::CLI</span>
 
   <li class="method">
-    <a href="Hen.html#method-i-henrc">#henrc</a>
-    &mdash;
-    <span class="container">Hen</span>
-
-  <li class="method">
     <a href="Hen/DSL.html#method-i-init_git">#init_git</a>
     &mdash;
     <span class="container">Hen::DSL</span>
@@ -366,16 +397,6 @@
     <span class="container">Hen::Commands</span>
 
   <li class="method">
-    <a href="Hen.html#method-i-load_config">#load_config</a>
-    &mdash;
-    <span class="container">Hen</span>
-
-  <li class="method">
-    <a href="Hen.html#method-i-load_hens">#load_hens</a>
-    &mdash;
-    <span class="container">Hen</span>
-
-  <li class="method">
     <a href="Hen/DSL.html#method-i-mangle_files-21">#mangle_files!</a>
     &mdash;
     <span class="container">Hen::DSL</span>
@@ -399,11 +420,6 @@
     <a href="Hen/DSL.html#method-i-missing_lib">#missing_lib</a>
     &mdash;
     <span class="container">Hen::DSL</span>
-
-  <li class="method">
-    <a href="Hen/Version.html#method-i-pessimistic_requirement">#pessimistic_requirement</a>
-    &mdash;
-    <span class="container">Hen::Version</span>
 
   <li class="method">
     <a href="Hen/CLI.html#method-i-progdesc">#progdesc</a>
@@ -466,16 +482,6 @@
     <span class="container">Hen::DSL</span>
 
   <li class="method">
-    <a href="Hen/Version.html#method-i-to_a">#to_a</a>
-    &mdash;
-    <span class="container">Hen::Version</span>
-
-  <li class="method">
-    <a href="Hen/Version.html#method-i-to_s">#to_s</a>
-    &mdash;
-    <span class="container">Hen::Version</span>
-
-  <li class="method">
     <a href="Hen/Commands.html#method-i-usage">#usage</a>
     &mdash;
     <span class="container">Hen::Commands</span>
@@ -495,7 +501,7 @@
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.2.
-  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
