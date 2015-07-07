@@ -199,6 +199,24 @@ Hen gem: :rdoc do
     exit 1 unless errors.empty?
   end
 
+  desc "List gem dependencies' current versions"
+  task 'gem:dependencies:current' do
+    gem_spec.dependencies.each { |dependency|
+      print '%s (%s, %s): ' % [
+        dependency.name, dependency.type, req = dependency.requirement
+      ]
+
+      begin
+        ver = dependency.to_spec.version
+        rec = ver.approximate_recommendation
+
+        puts "#{ver}#{" (#{rec})" if req.to_s != rec}"
+      rescue Exception => err
+        puts "#{err.class} (#{err})"
+      end
+    }
+  end
+
   desc 'Display the gem specification'
   task 'gem:spec' do
     puts gem_spec.to_ruby

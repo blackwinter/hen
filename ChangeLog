@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.8.2 [unreleased]
+
+* New task <tt>gem:dependencies:current</tt>.
+
 == 0.8.1 [2014-12-19]
 
 * Removed workaround for RDoc issue 330. Implemented in RDoc 4.2.0.
