@@ -2,9 +2,11 @@
 
 = Revision history for hen
 
-== 0.8.2 [unreleased]
+== 0.8.2 [2015-07-28]
 
 * New task <tt>gem:dependencies:current</tt>.
+* Added Travis CI link to skeleton +README+.
+* Added Ruby 2.2 to skeleton +.travis.yml+.
 
 == 0.8.1 [2014-12-19]
 
