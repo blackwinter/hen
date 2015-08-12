@@ -202,15 +202,17 @@ Hen gem: :rdoc do
   desc "List gem dependencies' current versions"
   task 'gem:dependencies:current' do
     gem_spec.dependencies.each { |dependency|
-      print '%s (%s, %s): ' % [
-        dependency.name, dependency.type, req = dependency.requirement
+      req = dependency.requirement.as_list.map(&:to_s)
+
+      print '%s (%s: %s): ' % [
+        dependency.name, dependency.type, req.join(', ')
       ]
 
       begin
         ver = dependency.to_spec.version
         rec = ver.approximate_recommendation
 
-        puts "#{ver}#{" (#{rec})" if req.to_s != rec}"
+        puts "#{ver}#{" (#{rec})" unless req.include?(rec)}"
       rescue Exception => err
         puts "#{err.class} (#{err})"
       end

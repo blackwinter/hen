@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.8.3 [unreleased]
+
+* Handle multivalued requirements in <tt>gem:dependencies:current</tt>.
+
 == 0.8.2 [2015-07-28]
 
 * New task <tt>gem:dependencies:current</tt>.
