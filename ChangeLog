@@ -2,7 +2,7 @@
 
 = Revision history for hen
 
-== 0.8.3 [unreleased]
+== 0.8.3 [2015-08-14]
 
 * Handle multivalued requirements in <tt>gem:dependencies:current</tt>.
 * Warn about prerelease dependencies.
