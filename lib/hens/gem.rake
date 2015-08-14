@@ -165,6 +165,10 @@ Hen gem: :rdoc do
       spec.add_development_dependency(name, *requirements)
     }
 
+    spec.dependencies.each { |dependency|
+      warn "WARNING: Prerelease dependency: #{dependency}" if dependency.prerelease?
+    }
+
     ### => set options!
 
     set_options(spec, gem_options, 'Gem')

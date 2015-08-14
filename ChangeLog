@@ -5,6 +5,7 @@
 == 0.8.3 [unreleased]
 
 * Handle multivalued requirements in <tt>gem:dependencies:current</tt>.
+* Warn about prerelease dependencies.
 
 == 0.8.2 [2015-07-28]
 
