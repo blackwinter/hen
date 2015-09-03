@@ -2,7 +2,7 @@ Hen :rdoc do
 
   rdoc_options = {
     rdoc_dir:     'doc',
-    rdoc_files:   %w[README COPYING ChangeLog lib/**/*.rb ext/**/*.c],
+    rdoc_files:   %w[README CONDUCT COPYING ChangeLog lib/**/*.rb ext/**/*.c],
     title:        '{name:%s }Application documentation{version: (v%s)}',
     charset:      'UTF-8',
     line_numbers: true,
