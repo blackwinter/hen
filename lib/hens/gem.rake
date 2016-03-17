@@ -57,8 +57,24 @@ Hen gem: :rdoc do
     ### homepage
 
     if homepage = gem_options[:homepage]
-      homepage = "github.com/#{homepage}/#{gem_name}" if homepage.is_a?(Symbol)
-      homepage.insert(0, 'http://') unless homepage.empty? || homepage =~ %r{://}
+      if homepage.is_a?(Symbol)
+        host = git { |git|
+          case git.url_for_remote
+            when /github/    then 'github.com'
+            when /gitlab/    then 'gitlab.com/u'
+            when /bitbucket/ then 'bitbucket.org'
+          end
+        }
+
+        homepage = host ?
+          "#{host}/#{homepage}/#{gem_name}" :
+          (warn 'Homepage not supported'; '')
+      end
+
+      unless homepage.empty? || homepage.include?('://')
+        homepage.insert(0, 'http://')
+      end
+
       gem_options[:homepage] = homepage
     end
 

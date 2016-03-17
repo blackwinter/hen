@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.8.4 [unreleased]
+
+* Added support for GitLab and Bitbucket homepage URLs.
+
 == 0.8.3 [2015-08-14]
 
 * Handle multivalued requirements in <tt>gem:dependencies:current</tt>.

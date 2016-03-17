@@ -7,7 +7,7 @@
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
-# Copyright (C) 2013-2014 Jens Wille                                          #
+# Copyright (C) 2013-2016 Jens Wille                                          #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@gmail.com>                                       #
@@ -231,7 +231,7 @@ class Hen
           %x{git #{args.unshift(cmd.to_s.tr('_', '-')).join(' ')}}
         end
 
-        def remote_for_branch(branch, default = 'origin')  # :nodoc:
+        def remote_for_branch(branch = 'master', default = 'origin')  # :nodoc:
           remotes = run(:branch, '-r').scan(%r{(\S+)/#{Regexp.escape(branch)}$})
           remotes.flatten!
 
@@ -242,7 +242,7 @@ class Hen
           end
         end
 
-        def url_for_remote(remote)  # :nodoc:
+        def url_for_remote(remote = remote_for_branch)  # :nodoc:
           run(:remote, '-v')[%r{^#{Regexp.escape(remote)}\s+(\S+)}, 1]
         end
 
