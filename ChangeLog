@@ -5,6 +5,7 @@
 == 0.8.4 [unreleased]
 
 * Added support for GitLab and Bitbucket homepage URLs.
+* Added Ruby 2.3 to skeleton +.travis.yml+.
 
 == 0.8.3 [2015-08-14]
 
