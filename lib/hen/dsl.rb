@@ -178,6 +178,12 @@ class Hen
       false
     end
 
+    def require_lib(lib, do_warn = true)
+      require lib
+    rescue LoadError
+      missing_lib(lib, do_warn)
+    end
+
     # Loads the RubyGems +push+ command, giving
     # a nicer error message if it's not found.
     def have_rubygems?

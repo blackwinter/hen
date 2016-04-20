@@ -10,7 +10,7 @@ Hen :test do
   mangle_files!(test_files, managed: false)
 
   unless test_files.empty?
-    require 'rake/testtask'
+    require_lib 'rake/testtask' or next
 
     Rake::TestTask.new { |t|
       t.test_files = test_files

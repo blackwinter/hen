@@ -4,6 +4,7 @@
 
 == 0.8.4 [unreleased]
 
+* Warn about missing libraries instead of aborting.
 * Added support for GitLab and Bitbucket homepage URLs.
 * Added Ruby 2.3 to skeleton +.travis.yml+.
 

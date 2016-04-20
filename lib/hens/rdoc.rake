@@ -62,7 +62,7 @@ Hen :rdoc do
   }
 
   unless rdoc_files.empty?
-    require 'rdoc/task'
+    require_lib 'rdoc/task' or next
 
     RDoc::Task.new(:doc) { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir
@@ -76,7 +76,7 @@ Hen :rdoc do
   end
 
   unless rdoc_files_local.empty?
-    require 'rdoc/task'
+    require_lib 'rdoc/task' or next
 
     RDoc::Task.new('doc:local') { |rdoc|
       rdoc.rdoc_dir   = rdoc_dir + '.local'

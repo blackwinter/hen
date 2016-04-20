@@ -12,7 +12,7 @@ Hen :spec do
   mangle_files!(spec_files, managed: false)
 
   unless spec_files.empty?
-    require 'rspec/core/rake_task'
+    require_lib 'rspec/core/rake_task' or next
 
     spec_helper = spec_options.delete(:helper)
 

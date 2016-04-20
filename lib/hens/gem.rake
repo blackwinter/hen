@@ -20,7 +20,7 @@ Hen gem: :rdoc do
     require_path: 'lib'
   }.update(config[:gem])
 
-  require 'rubygems/package_task'
+  require_lib 'rubygems/package_task' or next
 
   if Object.const_defined?(:RDOC_OPTIONS)
     rdoc_files = RDOC_OPTIONS[:rdoc_files]
@@ -342,11 +342,7 @@ Hen gem: :rdoc do
 
   }
 
-  begin
-    require 'rake/extensiontask' unless gem_spec.extensions.empty?
-  rescue LoadError
-    missing_lib 'rake/extensiontask'
-  end
+  require_lib 'rake/extensiontask' unless gem_spec.extensions.empty?
 
   if Rake.const_defined?(:ExtensionTask)
     # gem_name       | ext_name  | extension name
