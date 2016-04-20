@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.8.5 [2016-04-20]
+
+* Install all dependencies in <tt>gem:dependencies:install</tt>.
+
 == 0.8.4 [2016-04-20]
 
 * Warn about missing libraries instead of aborting.

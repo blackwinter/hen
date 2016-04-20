@@ -431,9 +431,12 @@ Hen gem: :rdoc do
 
     desc 'Install the gem dependencies'
     task 'gem:dependencies:install' do
-      gem_spec.dependencies.each { |dependency|
-        rg_pool.call.install(dependency.name, '-v', dependency.requirement.to_s)
-      }
+      rg, system_exit = rg_pool.call, Gem.const_defined?(
+        :SystemExitException) ? Gem::SystemExitException : SystemExit
+
+      gem_spec.dependencies.each { |dependency| begin
+        rg.install(dependency.name, '-v', dependency.requirement.to_s)
+      rescue system_exit; end }
     end
 
     desc 'Create the gem and install it'
