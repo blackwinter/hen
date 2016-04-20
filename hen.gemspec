@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-# stub: hen 0.8.4 ruby lib
+# stub: hen 0.8.5 ruby lib
 
 Gem::Specification.new do |s|
   s.name = "hen".freeze
-  s.version = "0.8.4"
+  s.version = "0.8.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
@@ -16,8 +16,8 @@ Gem::Specification.new do |s|
   s.files = ["CONDUCT".freeze, "COPYING".freeze, "ChangeLog".freeze, "README".freeze, "Rakefile".freeze, "bin/hen".freeze, "example/_henrc".freeze, "example/hens/sample.rake".freeze, "example/project/CONDUCT".freeze, "example/project/COPYING".freeze, "example/project/ChangeLog".freeze, "example/project/README".freeze, "example/project/Rakefile".freeze, "example/project/_gitignore".freeze, "example/project/_travis.yml".freeze, "example/project/lib/__progname__.rb".freeze, "example/project/lib/__progname__/version.rb".freeze, "lib/hen.rb".freeze, "lib/hen/cli.rb".freeze, "lib/hen/commands.rb".freeze, "lib/hen/dsl.rb".freeze, "lib/hen/version.rb".freeze, "lib/hens/gem.rake".freeze, "lib/hens/rdoc.rake".freeze, "lib/hens/spec.rake".freeze, "lib/hens/test.rake".freeze]
   s.homepage = "http://github.com/blackwinter/hen".freeze
   s.licenses = ["AGPL-3.0".freeze]
-  s.post_install_message = "\nhen-0.8.4 [2016-04-20]:\n\n* Warn about missing libraries instead of aborting.\n* Added support for GitLab and Bitbucket homepage URLs.\n* Added Ruby 2.3 to skeleton +.travis.yml+.\n\n".freeze
-  s.rdoc_options = ["--title".freeze, "hen Application documentation (v0.8.4)".freeze, "--charset".freeze, "UTF-8".freeze, "--line-numbers".freeze, "--all".freeze, "--main".freeze, "README".freeze]
+  s.post_install_message = "\nhen-0.8.5 [2016-04-20]:\n\n* Install all dependencies in <tt>gem:dependencies:install</tt>.\n\n".freeze
+  s.rdoc_options = ["--title".freeze, "hen Application documentation (v0.8.5)".freeze, "--charset".freeze, "UTF-8".freeze, "--line-numbers".freeze, "--all".freeze, "--main".freeze, "README".freeze]
   s.required_ruby_version = Gem::Requirement.new(">= 1.9.3".freeze)
   s.rubygems_version = "2.6.3".freeze
   s.summary = "Just another project helper that integrates with Rake.".freeze
