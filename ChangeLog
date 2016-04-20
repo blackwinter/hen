@@ -2,7 +2,7 @@
 
 = Revision history for hen
 
-== 0.8.4 [unreleased]
+== 0.8.4 [2016-04-20]
 
 * Warn about missing libraries instead of aborting.
 * Added support for GitLab and Bitbucket homepage URLs.

@@ -12,8 +12,8 @@ Hen.lay! {{
     homepage:     :blackwinter,
     extra_files:  FileList['lib/hens/*.rake'].to_a,
     dependencies: {
-      highline:  '~> 1.6',
-      nuggets:   '~> 1.0',
+      highline:  '~> 1.7',
+      nuggets:   '~> 1.5',
       safe_yaml: '~> 1.0'
     },
 
