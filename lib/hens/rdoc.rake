@@ -62,12 +62,12 @@ Hen :rdoc do
   }
 
   unless rdoc_files.empty?
-    require_lib 'rdoc/task' or next
-
-    RDoc::Task.new(:doc) { |rdoc|
-      rdoc.rdoc_dir   = rdoc_dir
-      rdoc.rdoc_files = rdoc_files
-      rdoc.options    = rdoc_opts
+    require_lib('rdoc/task') {
+      RDoc::Task.new(:doc) { |rdoc|
+        rdoc.rdoc_dir   = rdoc_dir
+        rdoc.rdoc_files = rdoc_files
+        rdoc.options    = rdoc_opts
+      }
     }
   else
     task :doc do
@@ -76,19 +76,19 @@ Hen :rdoc do
   end
 
   unless rdoc_files_local.empty?
-    require_lib 'rdoc/task' or next
+    require_lib('rdoc/task') {
+      RDoc::Task.new('doc:local') { |rdoc|
+        rdoc.rdoc_dir   = rdoc_dir + '.local'
+        rdoc.rdoc_files = rdoc_files_local
+        rdoc.options    = rdoc_opts
 
-    RDoc::Task.new('doc:local') { |rdoc|
-      rdoc.rdoc_dir   = rdoc_dir + '.local'
-      rdoc.rdoc_files = rdoc_files_local
-      rdoc.options    = rdoc_opts
+        extend_object(rdoc) {
+          def local_description(desc); "#{desc} (including unmanaged files)"; end
 
-      extend_object(rdoc) {
-        def local_description(desc); "#{desc} (including unmanaged files)"; end
-
-        def clobber_task_description; local_description(super); end
-        def rdoc_task_description;    local_description(super); end
-        def rerdoc_task_description;  local_description(super); end
+          def clobber_task_description; local_description(super); end
+          def rdoc_task_description;    local_description(super); end
+          def rerdoc_task_description;  local_description(super); end
+        }
       }
     }
   else

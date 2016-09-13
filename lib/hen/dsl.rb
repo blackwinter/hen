@@ -182,6 +182,8 @@ class Hen
       require lib
     rescue LoadError
       missing_lib(lib, do_warn)
+    else
+      yield if block_given?
     end
 
     # Loads the RubyGems +push+ command, giving
