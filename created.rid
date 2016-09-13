@@ -1,9 +1,10 @@
-Fri, 14 Aug 2015 14:26:45 +0200
-README	Fri, 14 Aug 2015 14:24:42 +0200
+Tue, 13 Sep 2016 18:15:46 +0200
+README	Tue, 13 Sep 2016 18:11:27 +0200
+CONDUCT	Thu, 03 Sep 2015 14:51:55 +0200
 COPYING	Fri, 05 Apr 2013 14:59:46 +0200
-ChangeLog	Fri, 14 Aug 2015 14:24:31 +0200
+ChangeLog	Tue, 13 Sep 2016 18:09:59 +0200
 lib/hen.rb	Wed, 17 Dec 2014 17:51:03 +0100
 lib/hen/cli.rb	Wed, 30 Apr 2014 14:45:15 +0200
-lib/hen/dsl.rb	Fri, 24 Oct 2014 11:32:08 +0200
-lib/hen/version.rb	Fri, 14 Aug 2015 14:25:44 +0200
+lib/hen/dsl.rb	Tue, 13 Sep 2016 18:12:50 +0200
+lib/hen/version.rb	Tue, 13 Sep 2016 18:11:37 +0200
 lib/hen/commands.rb	Mon, 20 Apr 2015 14:14:46 +0200
