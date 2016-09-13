@@ -180,6 +180,7 @@ class Hen
 
     def require_lib(lib, do_warn = true)
       require lib
+      true
     rescue LoadError
       missing_lib(lib, do_warn)
     end
