@@ -4,7 +4,7 @@ class Hen
 
     MAJOR = 0
     MINOR = 8
-    TINY  = 5
+    TINY  = 6
 
     class << self
 
