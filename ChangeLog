@@ -2,6 +2,10 @@
 
 = Revision history for hen
 
+== 0.8.7 [2016-10-12]
+
+* Gracefully handle newly initialized repository.
+
 == 0.8.6 [2016-09-13]
 
 * Fixed regression introduced in 0.8.4.
