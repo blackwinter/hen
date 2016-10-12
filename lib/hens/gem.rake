@@ -406,6 +406,9 @@ Hen gem: :rdoc do
                                      map { |k| k.split('-').last }.uniq.join(':')
       end
 
+      # TODO: Include RUBY_CC_VERSION in required_ruby_version
+      # https://github.com/sparklemotion/nokogiri/commit/fb00790
+
       desc 'Build native gems'
       task 'gem:native' => %w[cross compile rake:native gem]
     end
