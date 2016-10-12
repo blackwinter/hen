@@ -112,38 +112,6 @@ Hen gem: :rdoc do
       gem_options[:executables].map! { |executable| File.basename(executable) }
     end
 
-    ## post_install_message
-
-    post_install_message = gem_options[:post_install_message]
-
-    gem_options[:post_install_message] = case post_install_message
-      when nil, true
-        log = ENV['HEN_CHANGELOG'] || gem_options[:files].grep(
-          %r{\A(?:change(?:s|log)|history)[^/]*\z}i).first || 'ChangeLog'
-
-        if File.readable?(log)
-          msg, ver = [], gem_options[:version].sub(/\.?[^\d.].*/, '')
-
-          heading, found = /\A== (#{Regexp.escape(ver)}\D.*)/o, false
-
-          File.foreach(log) { |line|
-            line.chomp!
-
-            case line
-              when heading then msg << "#{gem_name}-#{found = $1}:"
-              when /\A== / then break if found
-              else msg << line if found
-            end
-          }
-
-          "\n#{msg.join("\n").strip}\n\n" unless msg.empty?
-        elsif post_install_message
-          warn "File not found: #{log}. Skipping post_install_message." if Hen.verbose
-        end
-      when false
-      else post_install_message
-    end
-
     ### dependencies
 
     dependencies             = Array(gem_options.delete(:dependencies))
