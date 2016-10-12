@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Hen::DSL - hen Application documentation (v0.8.6)</title>
+<title>module Hen::DSL - hen Application documentation (v0.8.7)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -829,7 +829,7 @@ if it&#39;s not found.</p>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">url_for_remote</span>(<span class="ruby-identifier">remote</span> = <span class="ruby-identifier">remote_for_branch</span>)  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">&#39;-v&#39;</span>)[<span class="ruby-node">%r{^#{Regexp.escape(remote)}\s+(\S+)}</span>, <span class="ruby-value">1</span>]
+      <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">&#39;-v&#39;</span>)[<span class="ruby-node">%r{^#{Regexp.escape(remote)}\s+(\S+)}</span>, <span class="ruby-value">1</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">remote</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_remote</span>(<span class="ruby-identifier">regexp</span>, <span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;origin&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
