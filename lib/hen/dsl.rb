@@ -250,7 +250,7 @@ class Hen
         end
 
         def url_for_remote(remote = remote_for_branch)  # :nodoc:
-          run(:remote, '-v')[%r{^#{Regexp.escape(remote)}\s+(\S+)}, 1]
+          run(:remote, '-v')[%r{^#{Regexp.escape(remote)}\s+(\S+)}, 1] if remote
         end
 
         def find_remote(regexp, default = 'origin')  # :nodoc:
