@@ -2,6 +2,11 @@
 
 = Revision history for hen
 
+== 0.9.0 [2018-06-16]
+
+* <b>Dropped support for Ruby 2.0.</b>
+* Dropped +safe_yaml+ dependency in favour of standard library.
+
 == 0.8.7 [2016-10-12]
 
 * Gracefully handle newly initialized repository.
