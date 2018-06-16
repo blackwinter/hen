@@ -28,7 +28,6 @@
 
 require 'fileutils'
 require 'nuggets/argv/option'
-require 'nuggets/enumerable/minmax'
 
 require_relative 'cli'
 
@@ -73,7 +72,7 @@ Usage: #{$0} {#{COMMANDS.keys.sort.join('|')}} [arguments] [options]
       puts
       puts 'Commands:'
 
-      max = COMMANDS.keys.max(:length)
+      max = COMMANDS.keys.map(&:length).max
 
       COMMANDS.sort.each { |cmd, desc|
         puts "  %-#{max}s - %s" % [cmd, (desc = [*desc]).shift]

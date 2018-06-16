@@ -7,7 +7,7 @@
 #                         Albertus-Magnus-Platz,                              #
 #                         50923 Cologne, Germany                              #
 #                                                                             #
-# Copyright (C) 2013-2014 Jens Wille                                          #
+# Copyright (C) 2013-2018 Jens Wille                                          #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@gmail.com>                                       #
@@ -28,12 +28,12 @@
 ###############################################################################
 #++
 
-require 'rake'
-require 'rake/clean'
-require 'safe_yaml/load'
 require 'nuggets/env/user_home'
 require 'nuggets/hash/deep_merge'
 require 'nuggets/proc/bind'
+require 'psych'
+require 'rake'
+require 'rake/clean'
 
 require_relative 'hen/dsl'
 require_relative 'hen/version'
@@ -183,7 +183,7 @@ class Hen
       hash = Hash.new { |h, k| h[k] = {} }
 
       henrc.each { |path|
-        yaml = SafeYAML.load_file(path, deserialize_symbols: true)
+        yaml = Psych.safe_load(File.read(path), symbolize_names: true)
         hash.deep_update(yaml) if yaml.is_a?(Hash)
       }
 

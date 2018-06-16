@@ -402,7 +402,7 @@ Hen gem: :rdoc do
       end
 
       if File.exist?(rc_config = File.expand_path('~/.rake-compiler/config.yml'))
-        ENV['RUBY_CC_VERSION'] ||= SafeYAML.load_file(rc_config).keys.
+        ENV['RUBY_CC_VERSION'] ||= Psych.safe_load(File.read(rc_config)).keys.
                                      map { |k| k.split('-').last }.uniq.join(':')
       end
 
