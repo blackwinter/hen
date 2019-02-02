@@ -1,3 +1,5 @@
+require 'date'
+
 Hen :rdoc do
 
   rdoc_options = {
