@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Hen::DSL - hen Application documentation (v0.8.7)</title>
+<title>module Hen::DSL - hen Application documentation (v0.9.1)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
@@ -139,8 +140,6 @@ definition.</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -177,11 +176,11 @@ definition.</p>
           
           <div class="method-source-code" id="config-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">config</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config</span>
   <span class="ruby-identifier">extend_object</span>(<span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">dup</span>) {
     <span class="ruby-comment"># Always return a duplicate for a value,</span>
     <span class="ruby-comment"># hence making the configuration immutable</span>
-    <span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">key</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">key</span>).<span class="ruby-identifier">dup</span>
     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">IndexError</span>
       {}
@@ -220,7 +219,7 @@ instead).</p>
           
           <div class="method-source-code" id="execute-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 76</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">execute</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">commands</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">execute</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">commands</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">command</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">which_command</span>(<span class="ruby-identifier">commands</span>)
     <span class="ruby-identifier">sh</span>(<span class="ruby-identifier">command</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">ok</span>, <span class="ruby-identifier">res</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Error while executing command: #{command} &quot;</span> <span class="ruby-operator">&lt;&lt;</span>
@@ -262,7 +261,7 @@ href="DSL.html#method-i-init_git">init_git</a>.</p>
           
           <div class="method-source-code" id="git-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 157</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">git</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">git</span>
   <span class="ruby-identifier">have_git?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">init_git</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-string">&#39;Git&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -295,7 +294,7 @@ href="DSL.html#method-i-init_git">init_git</a>.</p>
           
           <div class="method-source-code" id="have_task-3F-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">have_task?</span>(<span class="ruby-identifier">t</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">have_task?</span>(<span class="ruby-identifier">t</span>)
   <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">t</span>.<span class="ruby-identifier">to_s</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -338,7 +337,7 @@ href="http://subversion.tigris.org">SVN</a>.</p>
           
           <div class="method-source-code" id="mangle_files-21-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 96</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">mangle_files!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mangle_files!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
   <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
 
   <span class="ruby-identifier">managed_files</span> = [<span class="ruby-value">:git</span>, <span class="ruby-value">:svn</span>].<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">scm</span><span class="ruby-operator">|</span>
@@ -388,7 +387,7 @@ href="http://subversion.tigris.org">SVN</a>.</p>
           
           <div class="method-source-code" id="map_options-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">map_options</span>(<span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">map_options</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">option</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">option</span> = <span class="ruby-string">&#39;--&#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">option</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;-&#39;</span>)
 
@@ -413,7 +412,7 @@ href="http://subversion.tigris.org">SVN</a>.</p>
         
         <div class="method-heading">
           <span class="method-name">rubygems</span><span
-            class="method-args">(&block)</span>
+            class="method-args">(&amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -433,7 +432,7 @@ href="DSL.html#method-i-init_rubygems">init_rubygems</a>).</p>
           
           <div class="method-source-code" id="rubygems-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 147</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">rubygems</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rubygems</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">have_rubygems?</span>
     <span class="ruby-identifier">call_block</span>(<span class="ruby-identifier">block</span>) { <span class="ruby-operator">|</span><span class="ruby-operator">*</span><span class="ruby-identifier">args</span><span class="ruby-operator">|</span> <span class="ruby-identifier">init_rubygems</span> }
   <span class="ruby-keyword">else</span>
@@ -473,7 +472,7 @@ to its class).</p>
           
           <div class="method-source-code" id="set_options-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 120</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_options</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">type</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">class</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_options</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">type</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">class</span>)
   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">option</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">setter</span> = <span class="ruby-node">&quot;#{option}=&quot;</span>)
       <span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">setter</span>, <span class="ruby-identifier">value</span>)
@@ -514,7 +513,7 @@ href="DSL.html#method-i-init_svn">init_svn</a>.</p>
           
           <div class="method-source-code" id="svn-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 163</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">svn</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">svn</span>
   <span class="ruby-identifier">have_svn?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">init_svn</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-string">&#39;SVN&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -531,7 +530,7 @@ href="DSL.html#method-i-init_svn">init_svn</a>.</p>
         
         <div class="method-heading">
           <span class="method-name">task!</span><span
-            class="method-args">(t, *args, &block)</span>
+            class="method-args">(t, *args, &amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -548,7 +547,7 @@ href="DSL.html#method-i-init_svn">init_svn</a>.</p>
           
           <div class="method-source-code" id="task-21-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">task!</span>(<span class="ruby-identifier">t</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">task!</span>(<span class="ruby-identifier">t</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">t</span>.<span class="ruby-identifier">to_s</span>)
   <span class="ruby-identifier">task</span>(<span class="ruby-identifier">t</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -582,7 +581,7 @@ href="DSL.html#method-i-init_svn">init_svn</a>.</p>
           
           <div class="method-source-code" id="tasks-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tasks</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tasks</span>
   <span class="ruby-constant">Rake</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">instance_variable_get</span>(<span class="ruby-value">:@tasks</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -607,7 +606,7 @@ href="DSL.html#method-i-init_svn">init_svn</a>.</p>
         
         <div class="method-heading">
           <span class="method-name">call_block</span><span
-            class="method-args">(block, *args, &block2)</span>
+            class="method-args">(block, *args, &amp;block2)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -624,7 +623,7 @@ optional passed block if requested by <code>block</code>.</p>
           
           <div class="method-source-code" id="call_block-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 343</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">call_block</span>(<span class="ruby-identifier">block</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block2</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call_block</span>(<span class="ruby-identifier">block</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block2</span>)
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block2</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">size</span>
   <span class="ruby-identifier">block</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -642,7 +641,7 @@ optional passed block if requested by <code>block</code>.</p>
         
         <div class="method-heading">
           <span class="method-name">extend_object</span><span
-            class="method-args">(object, *blocks, &block2)</span>
+            class="method-args">(object, *blocks, &amp;block2)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -658,7 +657,7 @@ optional passed block if requested by <code>block</code>.</p>
           
           <div class="method-source-code" id="extend_object-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 322</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">extend_object</span>(<span class="ruby-identifier">object</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">blocks</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block2</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extend_object</span>(<span class="ruby-identifier">object</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">blocks</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block2</span>)
   <span class="ruby-identifier">singleton_class</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">singleton_class</span>
 
   <span class="ruby-identifier">blocks</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">block2</span>).<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">reverse_each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">block</span><span class="ruby-operator">|</span>
@@ -697,7 +696,7 @@ optional passed block if requested by <code>block</code>.</p>
           
           <div class="method-source-code" id="have_git-3F-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 200</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">have_git?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">have_git?</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-string">&#39;.git&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -731,7 +730,7 @@ if it&#39;s not found.</p>
           
           <div class="method-source-code" id="have_rubygems-3F-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 190</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">have_rubygems?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">have_rubygems?</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;rubygems/command_manager&#39;</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;rubygems/commands/push_command&#39;</span>
 
@@ -769,7 +768,7 @@ if it&#39;s not found.</p>
           
           <div class="method-source-code" id="have_svn-3F-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 205</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">have_svn?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">have_svn?</span>
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-string">&#39;.svn&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -802,23 +801,23 @@ if it&#39;s not found.</p>
           
           <div class="method-source-code" id="init_git-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 226</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init_git</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init_git</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">have_git?</span>
 
   <span class="ruby-identifier">pseudo_object</span> {
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
       <span class="ruby-identifier">options</span>[<span class="ruby-value">:verbose</span>] = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">verbose</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:verbose</span>)
 
       <span class="ruby-constant">DSL</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:sh</span>, <span class="ruby-string">&#39;git&#39;</span>, <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;-&#39;</span>), <span class="ruby-operator">*</span><span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>)
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-node">%x{git #{args.unshift(cmd.to_s.tr(&#39;_&#39;, &#39;-&#39;)).join(&#39; &#39;)}}</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">remote_for_branch</span>(<span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39;master&#39;</span>, <span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;origin&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-identifier">remotes</span> = <span class="ruby-identifier">run</span>(<span class="ruby-value">:branch</span>, <span class="ruby-string">&#39;-r&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-node">%r{(\S+)/#{Regexp.escape(branch)}$}</span>)
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remote_for_branch</span>(<span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39;master&#39;</span>, <span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;origin&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
+      <span class="ruby-identifier">remotes</span> = <span class="ruby-identifier">run</span>(<span class="ruby-value">:branch</span>, <span class="ruby-string">&#39;-r&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%r{(\S+)/#{Regexp.escape(branch)}$}</span>)
       <span class="ruby-identifier">remotes</span>.<span class="ruby-identifier">flatten!</span>
 
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">env_remote</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;HEN_REMOTE&#39;</span>]
@@ -828,11 +827,11 @@ if it&#39;s not found.</p>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">url_for_remote</span>(<span class="ruby-identifier">remote</span> = <span class="ruby-identifier">remote_for_branch</span>)  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">&#39;-v&#39;</span>)[<span class="ruby-node">%r{^#{Regexp.escape(remote)}\s+(\S+)}</span>, <span class="ruby-value">1</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">remote</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">url_for_remote</span>(<span class="ruby-identifier">remote</span> = <span class="ruby-identifier">remote_for_branch</span>)  <span class="ruby-comment"># :nodoc:</span>
+      <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">&#39;-v&#39;</span>)[<span class="ruby-regexp">%r{^#{Regexp.escape(remote)}\s+(\S+)}</span>, <span class="ruby-value">1</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">remote</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">find_remote</span>(<span class="ruby-identifier">regexp</span>, <span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;origin&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_remote</span>(<span class="ruby-identifier">regexp</span>, <span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;origin&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">remotes</span> = <span class="ruby-identifier">run</span>(<span class="ruby-value">:remote</span>, <span class="ruby-string">&#39;-v&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-identifier">$/</span>).<span class="ruby-identifier">grep</span>(<span class="ruby-identifier">regexp</span>)
       <span class="ruby-identifier">remotes</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>] }
 
@@ -843,29 +842,29 @@ if it&#39;s not found.</p>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">easy_clone</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">dir</span> = <span class="ruby-string">&#39;.&#39;</span>, <span class="ruby-identifier">remote</span> = <span class="ruby-string">&#39;origin&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">easy_clone</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">dir</span> = <span class="ruby-string">&#39;.&#39;</span>, <span class="ruby-identifier">remote</span> = <span class="ruby-string">&#39;origin&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">clone</span> <span class="ruby-string">&#39;-n&#39;</span>, <span class="ruby-string">&#39;-o&#39;</span>, <span class="ruby-identifier">remote</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">dir</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">local_clone</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">src</span> = <span class="ruby-string">&#39;.&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">local_clone</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">src</span> = <span class="ruby-string">&#39;.&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">clone</span> <span class="ruby-string">&#39;-n&#39;</span>, <span class="ruby-identifier">src</span>, <span class="ruby-identifier">dir</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkout_remote_branch</span>(<span class="ruby-identifier">remote</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39;master&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">checkout_remote_branch</span>(<span class="ruby-identifier">remote</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39;master&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">checkout</span> <span class="ruby-string">&#39;-b&#39;</span>, <span class="ruby-identifier">branch</span>, <span class="ruby-node">&quot;#{remote}/#{branch}&quot;</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">checkout_fetched_branch</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39;master&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">checkout_fetched_branch</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">branch</span> = <span class="ruby-string">&#39;master&#39;</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">fetch</span> <span class="ruby-string">&#39;--depth&#39;</span>, <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">branch</span>
       <span class="ruby-identifier">checkout</span> <span class="ruby-string">&#39;-b&#39;</span>, <span class="ruby-identifier">branch</span>, <span class="ruby-string">&#39;FETCH_HEAD&#39;</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_and_commit</span>(<span class="ruby-identifier">msg</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_and_commit</span>(<span class="ruby-identifier">msg</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">add</span> <span class="ruby-string">&#39;.&#39;</span>
       <span class="ruby-identifier">commit</span> <span class="ruby-string">&#39;-m&#39;</span>, <span class="ruby-identifier">msg</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_files</span>  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">managed_files</span>  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">run</span>(<span class="ruby-value">:ls_files</span>).<span class="ruby-identifier">split</span>(<span class="ruby-identifier">$/</span>)
     <span class="ruby-keyword">end</span>
   }
@@ -900,15 +899,15 @@ if it&#39;s not found.</p>
           
           <div class="method-source-code" id="init_rubygems-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 211</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init_rubygems</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init_rubygems</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">have_rubygems?</span>
 
   <span class="ruby-identifier">pseudo_object</span> {
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">run</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">CommandManager</span>.<span class="ruby-identifier">instance</span>.<span class="ruby-identifier">run</span>([<span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;-&#39;</span>), <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>])
     <span class="ruby-keyword">end</span>
   }
@@ -943,26 +942,26 @@ if it&#39;s not found.</p>
           
           <div class="method-source-code" id="init_svn-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 296</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">init_svn</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init_svn</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">have_svn?</span>
 
   <span class="ruby-identifier">pseudo_object</span> {
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">:</span> {}
       <span class="ruby-identifier">options</span>[<span class="ruby-value">:verbose</span>] = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">verbose</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:verbose</span>)
 
       <span class="ruby-constant">DSL</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:sh</span>, <span class="ruby-string">&#39;svn&#39;</span>, <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;_&#39;</span>, <span class="ruby-string">&#39;-&#39;</span>), <span class="ruby-operator">*</span><span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>)
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-node">%x{svn #{args.unshift(cmd.to_s.tr(&#39;_&#39;, &#39;-&#39;)).join(&#39; &#39;)}}</span>
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span>  <span class="ruby-comment"># :nodoc:</span>
-      <span class="ruby-value">%x{svnversion}</span>[<span class="ruby-regexp">/\d+/</span>]
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>  <span class="ruby-comment"># :nodoc:</span>
+      <span class="ruby-string">%x{svnversion}</span>[<span class="ruby-regexp">/\d+/</span>]
     <span class="ruby-keyword">end</span>
 
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier">managed_files</span>  <span class="ruby-comment"># :nodoc:</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">managed_files</span>  <span class="ruby-comment"># :nodoc:</span>
       <span class="ruby-identifier">run</span>(<span class="ruby-value">:list</span>, <span class="ruby-string">&#39;--recursive&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-identifier">$/</span>)
     <span class="ruby-keyword">end</span>
   }
@@ -998,7 +997,7 @@ true) and return false.</p>
           
           <div class="method-source-code" id="missing_lib-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 176</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">missing_lib</span>(<span class="ruby-identifier">lib</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-identifier">$DEBUG</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">missing_lib</span>(<span class="ruby-identifier">lib</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-identifier">$DEBUG</span>)
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Please install the `#{lib}&#39; library for additional tasks.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">do_warn</span>
   <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1016,7 +1015,7 @@ true) and return false.</p>
         
         <div class="method-heading">
           <span class="method-name">pseudo_object</span><span
-            class="method-args">(&block)</span>
+            class="method-args">(&amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -1032,7 +1031,7 @@ true) and return false.</p>
           
           <div class="method-source-code" id="pseudo_object-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 333</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">pseudo_object</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pseudo_object</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">extend_object</span>(<span class="ruby-constant">Object</span>.<span class="ruby-identifier">new</span>, <span class="ruby-identifier">block</span>) {
     <span class="ruby-identifier">instance_methods</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">method</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">undef_method</span>(<span class="ruby-identifier">method</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">method</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A__|\Aobject_id\z/</span>
@@ -1069,7 +1068,7 @@ true) and return false.</p>
           
           <div class="method-source-code" id="require_lib-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 181</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">require_lib</span>(<span class="ruby-identifier">lib</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_lib</span>(<span class="ruby-identifier">lib</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">require</span> <span class="ruby-identifier">lib</span>
   <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
@@ -1106,7 +1105,7 @@ true) and return nil.</p>
           
           <div class="method-source-code" id="skipping-source">
             <pre><span class="ruby-comment"># File lib/hen/dsl.rb, line 170</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">skipping</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">verbose</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skipping</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">do_warn</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">verbose</span>)
   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Skipping #{name} tasks.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">do_warn</span>
   <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1127,8 +1126,8 @@ true) and return nil.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

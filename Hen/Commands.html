@@ -4,10 +4,11 @@
 <head>
 <meta charset="UTF-8">
 
-<title>module Hen::Commands - hen Application documentation (v0.8.7)</title>
+<title>module Hen::Commands - hen Application documentation (v0.9.1)</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
+  var index_rel_prefix = "../";
 </script>
 
 <script src="../js/jquery.js"></script>
@@ -116,8 +117,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -177,8 +176,8 @@
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">arg</span>)
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">arg</span>)
   <span class="ruby-identifier">arg</span> = <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\A-+/</span>, <span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-identifier">arg</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/\W/</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">public_method_defined?</span>(<span class="ruby-identifier">arg</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">send</span>(<span class="ruby-identifier">arg</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">arg</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -211,8 +210,8 @@
 
           
           <div class="method-source-code" id="config-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 97</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">config</span>
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config</span>
   <span class="ruby-identifier">render</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">SKELETON</span>, <span class="ruby-string">&#39;_henrc&#39;</span>), <span class="ruby-identifier">henrc</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">default_henrc</span>)
 
   <span class="ruby-identifier">puts</span>
@@ -247,8 +246,8 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 104</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
   <span class="ruby-identifier">abort</span> <span class="ruby-string">&#39;Path argument missing!&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">path</span> = <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">shift</span>
 
   <span class="ruby-identifier">skel</span> = <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/^-/</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">shift</span> <span class="ruby-operator">||</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">SKELETON</span>, <span class="ruby-string">&#39;project&#39;</span>)
@@ -321,13 +320,13 @@
 
           
           <div class="method-source-code" id="help-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 71</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">help</span>
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">help</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-constant">USAGE</span>
   <span class="ruby-identifier">puts</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Commands:&#39;</span>
 
-  <span class="ruby-identifier">max</span> = <span class="ruby-constant">COMMANDS</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">max</span>(<span class="ruby-value">:length</span>)
+  <span class="ruby-identifier">max</span> = <span class="ruby-constant">COMMANDS</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:length</span>).<span class="ruby-identifier">max</span>
 
   <span class="ruby-constant">COMMANDS</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">desc</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  %-#{max}s - %s&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">cmd</span>, (<span class="ruby-identifier">desc</span> = [<span class="ruby-operator">*</span><span class="ruby-identifier">desc</span>]).<span class="ruby-identifier">shift</span>]
@@ -367,8 +366,8 @@
 
           
           <div class="method-source-code" id="list-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 86</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">list</span>
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list</span>
   <span class="ruby-comment"># How to achieve? Has to list *all* hens and tasks made available therein,</span>
   <span class="ruby-comment"># *regardless* of any missing prerequisites (preferably indicating whether</span>
   <span class="ruby-comment"># a particular hen/task is currently available).</span>
@@ -403,8 +402,8 @@
 
           
           <div class="method-source-code" id="usage-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 67</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">usage</span>
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">usage</span>
   <span class="ruby-identifier">abort</span> <span class="ruby-constant">USAGE</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -436,8 +435,8 @@
 
           
           <div class="method-source-code" id="version-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 93</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span>
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>
   <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;hen v#{VERSION}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -477,8 +476,8 @@
 
           
           <div class="method-source-code" id="create_git-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 165</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_git</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">created</span>)
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_git</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">created</span>)
   <span class="ruby-constant">ARGV</span>.<span class="ruby-identifier">option!</span>(<span class="ruby-value">:g</span>, <span class="ruby-value">:git</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">remote</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">chdir</span>(<span class="ruby-identifier">path</span>) {
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">system</span>(<span class="ruby-string">&#39;git&#39;</span>, <span class="ruby-string">&#39;init&#39;</span>)
@@ -530,8 +529,8 @@
 
           
           <div class="method-source-code" id="create_path-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 127</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">created</span>)
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_path</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">created</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>)
     <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Target directory already exists: #{path}. Won&#39;t touch.&quot;</span>
   <span class="ruby-keyword">else</span>
@@ -568,8 +567,8 @@
 
           
           <div class="method-source-code" id="create_skel-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 136</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_skel</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">skel</span>, <span class="ruby-identifier">created</span>, <span class="ruby-identifier">replace</span>)
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_skel</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">skel</span>, <span class="ruby-identifier">created</span>, <span class="ruby-identifier">replace</span>)
   <span class="ruby-identifier">progname</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>))  <span class="ruby-comment"># pre-fill</span>
 
   <span class="ruby-identifier">git</span> = <span class="ruby-identifier">create_git</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">created</span>)
@@ -581,7 +580,7 @@
       <span class="ruby-identifier">created</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">target</span>
 
       <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">sample</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">target</span>) <span class="ruby-operator">:</span>
-        <span class="ruby-identifier">replace</span>[<span class="ruby-identifier">target</span>] = <span class="ruby-identifier">render</span>(<span class="ruby-identifier">sample</span>, <span class="ruby-identifier">target</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-node">/### .+ ###/</span>)
+        <span class="ruby-identifier">replace</span>[<span class="ruby-identifier">target</span>] = <span class="ruby-identifier">render</span>(<span class="ruby-identifier">sample</span>, <span class="ruby-identifier">target</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/### .+ ###/</span>)
     }
   }
 
@@ -626,8 +625,8 @@
 
           
           <div class="method-source-code" id="mangle_target-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 189</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">mangle_target</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">sample</span>, <span class="ruby-identifier">git</span>)
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mangle_target</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">sample</span>, <span class="ruby-identifier">git</span>)
   <span class="ruby-identifier">target</span> = <span class="ruby-identifier">sample</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/__(.+?)__/</span>) { <span class="ruby-identifier">send</span>(<span class="ruby-node">$1</span>) }
 
   <span class="ruby-identifier">dir</span>, <span class="ruby-identifier">name</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">target</span>)
@@ -664,8 +663,8 @@
 
           
           <div class="method-source-code" id="method_missing-source">
-            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 123</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span>)
+            <pre><span class="ruby-comment"># File lib/hen/commands.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">method</span>, <span class="ruby-operator">*</span>)
   <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Illegal command: #{method}\n#{USAGE}&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -685,8 +684,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.2.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.4.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

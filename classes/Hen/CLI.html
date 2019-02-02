@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: Hen::CLI</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">Hen::CLI</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/lib/hen/cli_rb.html">
+                lib/hen/cli.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Some helper methods used by the <a href="../Hen.html">Hen</a> executable.
+Also available for use in custom project skeletons.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000026">ask</a>&nbsp;&nbsp;
+      <a href="#M000027">ask!</a>&nbsp;&nbsp;
+      <a href="#M000019">classname</a>&nbsp;&nbsp;
+      <a href="#M000023">default_classname</a>&nbsp;&nbsp;
+      <a href="#M000025">default_emailaddress</a>&nbsp;&nbsp;
+      <a href="#M000024">default_fullname</a>&nbsp;&nbsp;
+      <a href="#M000021">emailaddress</a>&nbsp;&nbsp;
+      <a href="#M000020">fullname</a>&nbsp;&nbsp;
+      <a href="#M000022">progdesc</a>&nbsp;&nbsp;
+      <a href="#M000018">progname</a>&nbsp;&nbsp;
+      <a href="#M000017">render</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+    <div id="aliases-list">
+      <h3 class="section-bar">External Aliases</h3>
+
+      <div class="name-list">
+                        <table summary="aliases">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">ask</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">_hen_original_ask</td>
+        </tr>
+                        </table>
+      </div>
+    </div>
+
+
+    <div id="attribute-list">
+      <h3 class="section-bar">Attributes</h3>
+
+      <div class="name-list">
+        <table>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">answers</td>
+          <td class="context-item-value">&nbsp;[R]&nbsp;</td>
+          <td class="context-item-desc">
+Collect user&#8216;s answers by key, so we don&#8216;t have to <a
+href="CLI.html#M000026">ask</a> again.
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000019" class="method-detail">
+        <a name="M000019"></a>
+
+        <div class="method-heading">
+          <a href="#M000019" class="method-signature">
+          <span class="method-name">classname</span><span class="method-args">(default = default_classname)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The project&#8216;s namespace. (Required)
+</p>
+<p>
+Namespaces SHOULD match the project name in SnakeCase.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000019-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000019-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 84</span>
+84:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">classname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_classname</span>)
+85:       <span class="ruby-identifier">ask!</span>(<span class="ruby-value str">&quot;Module's/Class's name&quot;</span>, <span class="ruby-identifier">default</span>)
+86:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000021" class="method-detail">
+        <a name="M000021"></a>
+
+        <div class="method-heading">
+          <a href="#M000021" class="method-signature">
+          <span class="method-name">emailaddress</span><span class="method-args">(default = default_emailaddress)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The author&#8216;s e-mail address. (Optional, but highly recommended)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000021-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000021-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 94</span>
+94:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">emailaddress</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_emailaddress</span>)
+95:       <span class="ruby-identifier">ask</span>(<span class="ruby-value str">'E-mail address'</span>, <span class="ruby-identifier">default</span>)
+96:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000020" class="method-detail">
+        <a name="M000020"></a>
+
+        <div class="method-heading">
+          <a href="#M000020" class="method-signature">
+          <span class="method-name">fullname</span><span class="method-args">(default = default_fullname)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The author&#8216;s full name. (Required)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000020-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000020-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 89</span>
+89:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fullname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default_fullname</span>)
+90:       <span class="ruby-identifier">ask!</span>(<span class="ruby-value str">'Full name'</span>, <span class="ruby-identifier">default</span>)
+91:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000022" class="method-detail">
+        <a name="M000022"></a>
+
+        <div class="method-heading">
+          <a href="#M000022" class="method-signature">
+          <span class="method-name">progdesc</span><span class="method-args">(default = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+A short one-line summary of the project&#8216;s description. (Required)
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000022-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000022-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 99</span>
+ 99:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">progdesc</span>(<span class="ruby-identifier">default</span> = <span class="ruby-keyword kw">nil</span>)
+100:       <span class="ruby-identifier">ask!</span>(<span class="ruby-value str">&quot;Program's description summary&quot;</span>, <span class="ruby-identifier">default</span>)
+101:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000018" class="method-detail">
+        <a name="M000018"></a>
+
+        <div class="method-heading">
+          <a href="#M000018" class="method-signature">
+          <span class="method-name">progname</span><span class="method-args">(default = nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The project name. (Required)
+</p>
+<p>
+Quoting the <a href="http://chneukirchen.github.com/rps/">Ruby Packaging
+Standard</a>:
+</p>
+<p>
+Project names SHOULD only contain underscores as separators in their names.
+</p>
+<p>
+If a project is an enhancement, plugin, extension, etc. for some other
+project it SHOULD contain a dash in the name between the original name and
+the project&#8216;s name.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000018-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000018-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 77</span>
+77:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">progname</span>(<span class="ruby-identifier">default</span> = <span class="ruby-keyword kw">nil</span>)
+78:       <span class="ruby-identifier">ask!</span>(<span class="ruby-value str">&quot;Project's name&quot;</span>, <span class="ruby-identifier">default</span>)
+79:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000017" class="method-detail">
+        <a name="M000017"></a>
+
+        <div class="method-heading">
+          <a href="#M000017" class="method-signature">
+          <span class="method-name">render</span><span class="method-args">(sample, target)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Renders the contents of <tt>sample</tt> as an ERb template, storing the
+result in <tt>target</tt>. Returns the content.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000017-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000017-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 52</span>
+52:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">render</span>(<span class="ruby-identifier">sample</span>, <span class="ruby-identifier">target</span>)
+53:       <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Sample file not found: #{sample}&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">sample</span>)
+54: 
+55:       <span class="ruby-keyword kw">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">target</span>)
+56:         <span class="ruby-identifier">abort</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">agree</span>(<span class="ruby-node">&quot;Target file already exists: #{target}. Overwrite? &quot;</span>)
+57:         <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">cp</span>(<span class="ruby-identifier">target</span>, <span class="ruby-node">&quot;#{target}.bak-#{Time.now.to_i}&quot;</span>)
+58:       <span class="ruby-keyword kw">end</span>
+59: 
+60:       <span class="ruby-identifier">content</span> = <span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">sample</span>)).<span class="ruby-identifier">result</span>(<span class="ruby-identifier">binding</span>)
+61: 
+62:       <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">target</span>, <span class="ruby-value str">'w'</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-identifier">content</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">content</span>.<span class="ruby-identifier">empty?</span> }
+63: 
+64:       <span class="ruby-identifier">content</span>
+65:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Private Instance methods</h3>
+
+      <div id="method-M000026" class="method-detail">
+        <a name="M000026"></a>
+
+        <div class="method-heading">
+          <a href="#M000026" class="method-signature">
+          <span class="method-name">ask</span><span class="method-args">(key, default = nil, cached = true)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Ask the user to enter an appropriate value for <tt>key</tt>. Uses already
+stored answer if present, unless <tt>cached</tt> is false.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000026-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000026-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 133</span>
+133:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">cached</span> = <span class="ruby-keyword kw">true</span>)
+134:       <span class="ruby-constant">CLI</span>.<span class="ruby-identifier">answers</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">cached</span>
+135: 
+136:       <span class="ruby-constant">CLI</span>.<span class="ruby-identifier">answers</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">_hen_original_ask</span>(<span class="ruby-node">&quot;Please enter your #{key}: &quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+137:         <span class="ruby-identifier">q</span>.<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">default</span>
+138:       }
+139:     <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Interrupt</span>
+140:       <span class="ruby-identifier">abort</span> <span class="ruby-value str">''</span>
+141:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000027" class="method-detail">
+        <a name="M000027"></a>
+
+        <div class="method-heading">
+          <a href="#M000027" class="method-signature">
+          <span class="method-name">ask!</span><span class="method-args">(key, default = nil, max = 3)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Same as <a href="CLI.html#M000026">ask</a>, but requires a non-empty value
+to be entered.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000027-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000027-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 144</span>
+144:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">ask!</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">max</span> = <span class="ruby-value">3</span>)
+145:       <span class="ruby-identifier">msg</span> = <span class="ruby-node">&quot;#{key} is required! Please enter a non-empty value.&quot;</span>
+146: 
+147:       <span class="ruby-identifier">max</span>.<span class="ruby-identifier">times</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+148:         <span class="ruby-identifier">value</span> = <span class="ruby-identifier">ask</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>, <span class="ruby-identifier">i</span>.<span class="ruby-identifier">zero?</span>)
+149:         <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">value</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">empty?</span>
+150: 
+151:         <span class="ruby-identifier">puts</span> <span class="ruby-identifier">msg</span>
+152:       }
+153: 
+154:       <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;You had #{max} tries now -- giving up...&quot;</span>
+155:       <span class="ruby-value str">''</span>  <span class="ruby-comment cmt"># default value</span>
+156:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000023" class="method-detail">
+        <a name="M000023"></a>
+
+        <div class="method-heading">
+          <a href="#M000023" class="method-signature">
+          <span class="method-name">default_classname</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Determine a suitable default namespace from the project name.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000023-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000023-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 106</span>
+106:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_classname</span>
+107:       <span class="ruby-identifier">pname</span> = <span class="ruby-identifier">progname</span>
+108:       <span class="ruby-identifier">pname</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp re">/(?:\A|_)(.)/</span>) { <span class="ruby-identifier">$1</span>.<span class="ruby-identifier">upcase</span> } <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pname</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pname</span>.<span class="ruby-identifier">empty?</span>
+109:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000025" class="method-detail">
+        <a name="M000025"></a>
+
+        <div class="method-heading">
+          <a href="#M000025" class="method-signature">
+          <span class="method-name">default_emailaddress</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Determine a default e-mail address from the global config.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000025-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000025-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 124</span>
+124:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_emailaddress</span>
+125:       <span class="ruby-identifier">email</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-value str">'gem/email'</span>)
+126:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">email</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">email</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">email</span>.<span class="ruby-identifier">empty?</span>
+127:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000024" class="method-detail">
+        <a name="M000024"></a>
+
+        <div class="method-heading">
+          <a href="#M000024" class="method-signature">
+          <span class="method-name">default_fullname</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Determine a default name from the global config or, if available, from the
+<a href="http://en.wikipedia.org/wiki/Gecos_field">GECOS field</a> in the
+<tt>/etc/passwd</tt> file.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000024-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000024-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/hen/cli.rb, line 114</span>
+114:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">default_fullname</span>
+115:       <span class="ruby-identifier">author</span> = <span class="ruby-constant">Hen</span>.<span class="ruby-identifier">config</span>(<span class="ruby-value str">'gem/author'</span>)
+116:       <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">author</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">author</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">author</span>.<span class="ruby-identifier">empty?</span>
+117: 
+118:       <span class="ruby-identifier">pwent</span> = <span class="ruby-constant">Etc</span>.<span class="ruby-identifier">getpwuid</span>(<span class="ruby-constant">Process</span>.<span class="ruby-identifier">euid</span>)
+119:       <span class="ruby-identifier">gecos</span> = <span class="ruby-identifier">pwent</span>.<span class="ruby-identifier">gecos</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pwent</span>
+120:       <span class="ruby-identifier">gecos</span>[<span class="ruby-regexp re">/[^,]*/</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">gecos</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">gecos</span>.<span class="ruby-identifier">empty?</span>
+121:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
