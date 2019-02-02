@@ -13,7 +13,7 @@ Hen.lay! {{
     extra_files:  FileList['lib/hens/*.rake'].to_a,
     dependencies: {
       highline:  '~> 1.7',
-      nuggets:   '~> 1.5'
+      nuggets:   '~> 1.6'
     },
 
     required_ruby_version: '>= 2.1'
